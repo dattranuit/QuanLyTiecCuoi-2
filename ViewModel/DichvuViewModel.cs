@@ -60,7 +60,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     DonGia = DonGia,
                     MoTa = MoTa,
                     GhiChu = GhiChu
-            };
+                };
                 DataProvider.Ins.DataBase.DICHVUs.Add(DichVu);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Add(DichVu);

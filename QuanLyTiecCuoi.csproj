@@ -175,8 +175,11 @@
     <Compile Include="UserControls\usc_Tiec.xaml.cs">
       <DependentUpon>usc_Tiec.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\BaoCaoNgayViewModel.cs" />
+    <Compile Include="ViewModel\BaoCaoThangViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\DichvuViewModel.cs" />
+    <Compile Include="ViewModel\HoaDonViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PhieuDatBanViewModel.cs" />
     <Compile Include="ViewModel\TiecViewModel.cs" />

@@ -4,4 +4,7 @@
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:DichvuViewModel x:Key="DichVuVM"></viewmodel:DichvuViewModel>
     <viewmodel:TiecViewModel x:Key="TiecVM"></viewmodel:TiecViewModel>
+    <viewmodel:HoaDonViewModel x:Key="HoaDonVM"></viewmodel:HoaDonViewModel>
+    <viewmodel:BaoCaoNgayViewModel x:Key="BaoCaoNgayVM"></viewmodel:BaoCaoNgayViewModel>
+    <viewmodel:BaoCaoThangViewModel x:Key="BaoCaoThangVM"></viewmodel:BaoCaoThangViewModel>
 </ResourceDictionary>
