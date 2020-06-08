@@ -55,7 +55,8 @@
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
                                    Margin="0,5,0,0"
                                    DockPanel.Dock="Top"/>
-                        <Grid DockPanel.Dock="Top">
+                    <materialDesign:Card DockPanel.Dock="Top" Margin="10,10,10,5">
+                        <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
@@ -74,11 +75,10 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Content="Tên chú rể"/>
-                                        <Label Grid.Row="1" Content="Tên cô dâu"/>
-                                        <Label Grid.Row="2" Content="Ngày đặt tiệc"/>
-                                        <Label Grid.Row="3" Content="Điện thoại"/>
-                                        <Label Grid.Row="4" Content="Ngày đãi tiệc"/>
+                                        <Label Grid.Row="0" Content="Tên chú rể" FontWeight="SemiBold"/>
+                                        <Label Grid.Row="1" Content="Tên cô dâu" FontWeight="SemiBold"/>
+                                        <Label Grid.Row="2" Content="Ngày đặt tiệc" FontWeight="SemiBold"/>
+                                        <Label Grid.Row="3" Content="Điện thoại" FontWeight="SemiBold"/>
                                     </Grid>
                                     <Grid Grid.Column="1">
                                         <Grid.RowDefinitions>
@@ -92,7 +92,6 @@
                                         <TextBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                         <DatePicker Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                         <TextBox Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                        <DatePicker Grid.Row="4" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                     </Grid>
                                 </Grid>
                             </GroupBox>
@@ -108,13 +107,11 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                             <RowDefinition/>
-                                            <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Content="Số lượng bàn"/>
-                                        <Label Grid.Row="1" Content="Số bàn dự trữ"/>
-                                        <Label Grid.Row="2" Content="Ca"/>
-                                        <Label Grid.Row="3" Content="Sảnh"/>
-                                        <Label Grid.Row="4" Content="Tiền đặt cọc"/>
+                                        <Label Grid.Row="0" Content="Ngày đãi tiệc" FontWeight="SemiBold"/>
+                                        <Label Grid.Row="1" Content="Ca"/>
+                                        <Label Grid.Row="2" Content="Sảnh"/>
+                                        <Label Grid.Row="3" Content="Tiền đặt cọc"/>
                                     </Grid>
                                     <Grid Grid.Column="1">
                                         <Grid.RowDefinitions>
@@ -122,19 +119,18 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                             <RowDefinition/>
-                                            <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <TextBox Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                        <TextBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                        <DatePicker Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                        <ComboBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                         <ComboBox Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                        <ComboBox Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                        <TextBox Grid.Row="4" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                        <controls:NumericUpDown Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="100000"/>
                                     </Grid>
                                 </Grid>
                             </GroupBox>
                         </Grid>
-
-                        <Grid DockPanel.Dock="Bottom">
+                    </materialDesign:Card>
+                    <materialDesign:Card  DockPanel.Dock="Bottom" Margin="10,5,10,10">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="0.25*"/>
@@ -154,10 +150,6 @@
                                     </DataGrid>
                                 </ScrollViewer>
                             </GroupBox>
-                            <!-- <GroupBox Header="Thông tin đặt bàn" Margin="10,0" 
-                                      DockPanel.Dock="Bottom" Grid.ColumnSpan="5"
-                                      Grid.Row="0">
-                            </GroupBox> -->
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
@@ -206,7 +198,8 @@
                                 </Button>
                             </Grid>
                         </Grid>
-                    </DockPanel>
+                    </materialDesign:Card>
+                </DockPanel>
                 </controls:MetroTabItem>
                 <controls:MetroTabItem Header="Quản lý thông tin Tiệc" >
                     <Grid></Grid>

@@ -181,6 +181,7 @@
     <Compile Include="ViewModel\DichvuViewModel.cs" />
     <Compile Include="ViewModel\HoaDonViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MonanViewModel.cs" />
     <Compile Include="ViewModel\PhieuDatBanViewModel.cs" />
     <Compile Include="ViewModel\TiecViewModel.cs" />
     <Page Include="Login.xaml">
