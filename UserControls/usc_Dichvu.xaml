@@ -22,7 +22,7 @@
             </Grid.ColumnDefinitions>
             <Ellipse Width="60" Grid.Column="0" Margin="6,0,0,0">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/ic_wdc.png" Stretch="Uniform" />
+                    <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/ic_ws.png" Stretch="Uniform" />
                 </Ellipse.Fill>
             </Ellipse>
             <Ellipse Grid.Column="1" Margin="294,20,370,10" Width="40" >
@@ -56,7 +56,7 @@
             <Grid x:Name="grd_iconDichVu" Grid.Column="0" Margin="10,61">
                 <Ellipse Stroke="#FFE8D4D4" StrokeThickness="6">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/wedding_hall.jpg"/>
+                        <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/service_img.jpg"/>
                     </Ellipse.Fill>
                 </Ellipse>
             </Grid>
@@ -73,7 +73,7 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Mã dịch vụ" Background="#FF144C85" Focusable="True" />
+            materialDesign:HintAssist.Hint="Mã dịch vụ" Background="#FF144C85" Focusable="True" Foreground="#FF0C0C0C" FontSize="15" />
 
                     <TextBox x:Name="txb_TenDichVu" Grid.Row="1" Margin="15"
             Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
@@ -81,14 +81,14 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Tên dịch vụ" Background="#FF144C85" Focusable="True" />
+            materialDesign:HintAssist.Hint="Tên dịch vụ" Background="#FF144C85" Focusable="True" Foreground="Black" FontSize="15" />
                     <TextBox x:Name="txb_DonGiaDV" Grid.Row="2" Margin="15"
             Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
             Height="auto"
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Đơn giá Dịch vụ" Background="#FF144C85" Focusable="True"/>
+            materialDesign:HintAssist.Hint="Đơn giá Dịch vụ" Background="#FF144C85" Focusable="True" Foreground="Black" FontSize="15"/>
                 </Grid>
             </Grid>
             <Grid x:Name="grd_NutXuLyDichVu" Grid.Column="2">
@@ -129,7 +129,7 @@
     materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
     materialDesign:ButtonProgressAssist.IsIndeterminate="True"
     Content="OK"
-    Margin="-6,10,10,10" Height="Auto" />
+    Margin="-6,10,0,27" Height="Auto" />
                     </Grid>
                     <Grid Grid.Column="1" Margin="26,0,10,24">
                         <Grid.RowDefinitions>
@@ -142,7 +142,7 @@
     materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
     materialDesign:ButtonProgressAssist.IsIndeterminate="True"
     Content="Hủy"
-    Margin="0,10" Height="Auto" Grid.RowSpan="2" />
+    Margin="0,10,0,27" Height="Auto" Grid.RowSpan="2" />
                     </Grid>
                 </Grid>
             </Grid>

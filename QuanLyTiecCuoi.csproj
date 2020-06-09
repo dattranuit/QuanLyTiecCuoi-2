@@ -314,6 +314,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="photos\service_img.jpg" />
     <Resource Include="photos\ic_bill.png" />
     <Resource Include="photos\ic_rule.png" />
     <Resource Include="photos\search_sanh_icon.png" />

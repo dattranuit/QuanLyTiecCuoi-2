@@ -52,13 +52,13 @@
         </controls:MetroAnimatedTabControl.Resources>
         <!--///////-->
         <controls:MetroTabItem Header="Quản lý Sảnh">
-          <Grid Margin="0" Background="LightCoral">
+          <Grid Margin="0" Background="LightBlue">
             <Grid.RowDefinitions>
               <RowDefinition Height="70"/>
               <RowDefinition Height="230"/>
               <RowDefinition/>
             </Grid.RowDefinitions>
-            <Rectangle Fill="#D9556D" Width="auto" Margin="10,8" />
+            <Rectangle Fill="#FF1E81D4" Width="auto" Margin="10,8" />
             <Grid Grid.Row="0">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -96,7 +96,7 @@
                 <ColumnDefinition Width="9*"></ColumnDefinition>
                 <ColumnDefinition Width="7*"></ColumnDefinition>
               </Grid.ColumnDefinitions>
-              <Grid x:Name="grd_Nhap" Grid.Column="0" Background="#F29BAB" Height="auto" Margin="12,12,12,12" RenderTransformOrigin="0.495,0.489">
+              <Grid x:Name="grd_Nhap" Grid.Column="0" Background="#FF4DB5E6" Height="auto" Margin="12,12,12,12" RenderTransformOrigin="0.495,0.489">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="227"/>
                   <RowDefinition/>
@@ -113,7 +113,7 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Mã Sảnh" Background="#FFA6464E" Margin="10,10,10,0" />
+            materialDesign:HintAssist.Hint="Mã Sảnh" Background="#FF144C85" Margin="10,10,10,0" />
 
                   <TextBox x:Name="txb_TenSanh" Grid.Column="0"
             Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
@@ -122,12 +122,12 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Tên Sảnh" Background="#FFA6464E" Margin="10,78,10,0" />
+            materialDesign:HintAssist.Hint="Tên Sảnh" Background="#FF144C85" Margin="10,78,10,0" />
 
                   <ComboBox Grid.Column="1"
             Style="{StaticResource MaterialDesignFilledComboBox}"
             x:Name="cbb_LoaiSanh"
-            materialDesign:HintAssist.Hint="Loại Sảnh" Background="#FFA6464E" Margin="10,10,10,162" >
+            materialDesign:HintAssist.Hint="Loại Sảnh" Background="#FF144C85" Margin="10,10,10,162" >
                     <ComboBoxItem
                 Content="Item 1" />
                     <ComboBoxItem
@@ -143,7 +143,7 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Số lượng bàn tối đa" Background="#FFA6464E" Margin="10,148,10,0" />
+            materialDesign:HintAssist.Hint="Số lượng bàn tối đa" Background="#FF144C85" Margin="10,148,10,0" />
 
                   <TextBox x:Name="txb_MaLoaiSanh"
             Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
@@ -152,7 +152,7 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Mã Loại Sảnh" Background="#FFA6464E" Focusable="False" Margin="10,78,10,0" Grid.Column="1" />
+            materialDesign:HintAssist.Hint="Mã Loại Sảnh" Background="#FF144C85" Focusable="False" Margin="10,78,10,0" Grid.Column="1" />
 
                   <TextBox x:Name="txb_DGBanTT"
             Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
@@ -161,7 +161,7 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Đơn giá bàn tối thiểu" Background="#FFA6464E" Focusable="False" Margin="10,148,10,0" Grid.Column="1" />
+            materialDesign:HintAssist.Hint="Đơn giá bàn tối thiểu" Background="#FF144C85" Focusable="False" Margin="10,148,10,0" Grid.Column="1" />
                 </Grid>
                 <Grid Grid.Row="1">
                   <TextBox x:Name="txb_GhiChu"
@@ -170,7 +170,7 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Ghi chú" Margin="10,-12,10,10" Background="#FFA6464E" />
+            materialDesign:HintAssist.Hint="Ghi chú" Margin="10,-12,10,10" Background="#FF144C85" />
                 </Grid>
 
               </Grid>
@@ -184,20 +184,20 @@
                 <Button x:Name="btn_Them"
             Style="{StaticResource MaterialDesignRaisedAccentButton}"
             ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="#FFDE5B66" BorderBrush="#FF181916" Margin="22,2,23,12" Grid.Row="0">
+            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="White" BorderBrush="#FF181916" Margin="22,2,23,12" Grid.Row="0">
                   Thêm
                 </Button>
                 <Button x:Name="btn_Sua"
             Style="{StaticResource MaterialDesignRaisedAccentButton}"
             ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="#FFDE5B66" BorderBrush="#FF181916" Margin="22,2,23,12" Grid.Row="1">
+            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="White" BorderBrush="#FF181916" Margin="22,2,23,12" Grid.Row="1">
                   Sửa
                 </Button>
 
                 <Button x:Name="btn_Xoa" Grid.Row="2"
             Style="{StaticResource MaterialDesignRaisedAccentButton}"
             ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="#FFDE5B66" BorderBrush="#FF111110" Margin="22,2,23,12">
+            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="White" BorderBrush="#FF111110" Margin="22,2,23,12">
                   Xóa
                 </Button>
                 <Grid Grid.Row="3" Margin="0,0,0,-19" >
@@ -234,13 +234,13 @@
         </controls:MetroTabItem>
         <!--////////-->
         <controls:MetroTabItem Header="Quản lý loại Sảnh" >
-          <Grid Margin="0" Background="LightCoral">
+          <Grid Margin="0" Background="LightBlue">
             <Grid.RowDefinitions>
               <RowDefinition Height="70"/>
               <RowDefinition Height="230"/>
               <RowDefinition/>
             </Grid.RowDefinitions>
-            <Rectangle Fill="#D9556D" Width="auto" Margin="10,8" />
+            <Rectangle Fill="#FF1E81D4" Width="auto" Margin="10,8" />
             <Grid Grid.Row="0">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -287,7 +287,7 @@
                 </Ellipse>
               </Grid>
               <Grid x:Name="grd_NhapLieuLoaiSanh" Grid.Column="1">
-                <Grid Background="#FFF29BAB" Margin="12,12,12,12">
+                <Grid Background="#FF4DB5E6" Margin="12,12,12,12">
                   <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -296,7 +296,7 @@
                   <ComboBox Grid.Row="0" Margin="15"
             Style="{StaticResource MaterialDesignFilledComboBox}"
             x:Name="cbb_LoaiSanh2"
-            materialDesign:HintAssist.Hint="Loại Sảnh" Background="#FFA6464E" >
+            materialDesign:HintAssist.Hint="Loại Sảnh" Background="#FF144C85" >
                     <ComboBoxItem
                 Content="Item 1" />
                     <ComboBoxItem
@@ -310,14 +310,14 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Mã Loại Sảnh" Background="#FFA6464E" Focusable="True" />
+            materialDesign:HintAssist.Hint="Mã Loại Sảnh" Background="#FF144C85" Focusable="True" />
                   <TextBox x:Name="txb_DGBanTT2" Grid.Row="2" Margin="15"
             Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
             Height="auto"
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"
-            materialDesign:HintAssist.Hint="Đơn giá bàn tối thiểu" Background="#FFA6464E" Focusable="True"/>
+            materialDesign:HintAssist.Hint="Đơn giá bàn tối thiểu" Background="#FF144C85" Focusable="True"/>
                 </Grid>
               </Grid>
               <Grid x:Name="grd_NutXuLyLoaiSanh" Grid.Column="2">
@@ -330,20 +330,20 @@
                 <Button x:Name="btn_Them2"
             Style="{StaticResource MaterialDesignRaisedAccentButton}"
             ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="#FFDE5B66" BorderBrush="#FF181916" Margin="12" Grid.Row="0">
+            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="White" BorderBrush="#FF181916" Margin="12" Grid.Row="0">
                   Thêm
                 </Button>
                 <Button x:Name="btn_Sua2"
             Style="{StaticResource MaterialDesignRaisedAccentButton}"
             ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="#FFDE5B66" BorderBrush="#FF181916" Margin="12" Grid.Row="1">
+            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="White" BorderBrush="#FF181916" Margin="12" Grid.Row="1">
                   Sửa
                 </Button>
 
                 <Button x:Name="btn_Xoa2" Grid.Row="2"
             Style="{StaticResource MaterialDesignRaisedAccentButton}"
             ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="#FFDE5B66" BorderBrush="#FF111110" Margin="12">
+            materialDesign:RippleAssist.Feedback="#DD000000" Height="auto" FontSize="20" Background="White" BorderBrush="#FF111110" Margin="12">
                   Xóa
                 </Button>
                 <Grid Grid.Row="3" Margin="0,0,0,-19" >
