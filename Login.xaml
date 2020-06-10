@@ -8,7 +8,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="Login" Height="450" Width="650" WindowStyle="None" 
-        ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         AllowsTransparency="True" Background="{x:Null}">
     <Window.Resources>
         <ImageBrush x:Key="close_icon" ImageSource="photos/sdg.png" Stretch="None"/>
@@ -99,91 +99,91 @@
             <Grid Grid.Column="0"/>
             <Grid Grid.Column="1" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.75*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="0.80*"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="0.75*"></RowDefinition>
+                    <RowDefinition Height="0.5*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock 
                     FontFamily="Dancing Script" FontSize="36"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Center" FontWeight="Bold" LineHeight="24" 
-                    Margin="99,0,72.8,21">
+                    Margin="99,0,72.8,34.8">
                 Đăng Nhập
                 </TextBlock>
-                <Border Grid.RowSpan="2" Margin="20,0,20,0" BorderThickness="2"
-                        BorderBrush="#FF0D407F" Background="White" CornerRadius="10" Grid.Row="1"/>
-                <materialDesign:PackIcon Kind="Account" Grid.Row="1" Margin="25,38.6,0,0" 
-                                         Height="30" Width="30" VerticalAlignment="Top"/>
-                <TextBox
-                    x:Name="tbx_TenDangNhap"
-                    Grid.Row="1"
-                    Background="#FFF2F2F2"
-                    BorderBrush="#FF080F5D"
-                    BorderThickness="1"
-                    FontSize="20"
-                    Foreground="Black"
-                    mah:TextBoxHelper.Watermark="Tên Đăng Nhập"
-                    mah:TextBoxHelper.UseFloatingWatermark="True"
-                    mah:TextBoxHelper.ClearTextButton="{Binding RelativeSource = {RelativeSource Self},
-                    Path=(mah:TextBoxHelper.HasText), Mode=OneWay}"
-                    VerticalAlignment="Center"
-                    Margin="60,0,34.8,0"
-                    Style="{StaticResource MahApps.Styles.TextBox}"
-                    mah:ControlsHelper.FocusBorderBrush="#FFF71111" 
-                    mah:ControlsHelper.MouseOverBorderBrush="#FF830D0D" 
-                    mah:TextBoxHelper.WatermarkWrapping="Wrap">
-                </TextBox>
-                <materialDesign:PackIcon Kind="Key" Grid.Row="2" Margin="26,0,0,101.2" 
-                                         Height="30" Width="24" VerticalAlignment="Bottom"/>
-                <PasswordBox
-                    x:Name="pwb_MatKhau"
-                    Grid.Row="2"
-                    FontSize="20"
-                    Background="#FFF2F2F2"
-                    BorderBrush="#FF080F5D"
-                    VerticalAlignment="Top"
-                    Foreground="Black"
-                    BorderThickness="1"
-                    mah:TextBoxHelper.Watermark="Mật Khẩu"
-                    mah:TextBoxHelper.UseFloatingWatermark="True"
-                    mah:TextBoxHelper.ClearTextButton="{Binding RelativeSource = {RelativeSource Self},
-                    Path=(mah:TextBoxHelper.HasText), Mode=OneWay}"
-                    Style="{StaticResource MahApps.Styles.PasswordBox.Win8}"
-                    Margin="60,0,34.8,-20" SelectionBrush="#FF086F9E" Grid.RowSpan="1" 
-                    mah:ControlsHelper.FocusBorderBrush="#FFF71111" 
-                    mah:ControlsHelper.MouseOverBorderBrush="#FF830D0D" 
-                    mah:TextBoxHelper.WatermarkWrapping="Wrap">
-                </PasswordBox>
-                <Grid
-                    Grid.Row="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Width="200" Margin="70,109.8,54.8,0" Grid.RowSpan="2">
-                    <Button
+                <materialDesign:Card Grid.RowSpan="3" Margin="20,124,19.8,25" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.7*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <materialDesign:PackIcon Kind="Account" Grid.Row="0" Margin="8,29,0,25"
+                                         Height="30" Width="30" VerticalAlignment="Center"/>
+                        <TextBox
+                            x:Name="tbx_TenDangNhap"
+                            Grid.Row="0"
+                            Background="#FFF2F2F2"
+                            BorderBrush="#FF080F5D"
+                            BorderThickness="1"
+                            FontSize="20"
+                            Foreground="Black"
+                            mah:TextBoxHelper.Watermark="Tên Đăng Nhập"
+                            mah:TextBoxHelper.UseFloatingWatermark="True"
+                            mah:TextBoxHelper.ClearTextButton="{Binding RelativeSource = {RelativeSource Self},
+                            Path=(mah:TextBoxHelper.HasText), Mode=OneWay}"
+                            VerticalAlignment="Center"
+                            Margin="55,27,39.8,21"
+                            Style="{StaticResource MahApps.Styles.TextBox}"
+                            mah:ControlsHelper.FocusBorderBrush="#FFF71111" 
+                            mah:ControlsHelper.MouseOverBorderBrush="#FF830D0D" 
+                            mah:TextBoxHelper.WatermarkWrapping="Wrap">
+                        </TextBox>
+                        <materialDesign:PackIcon Kind="Key"  
+                                                 Height="30" Width="24" VerticalAlignment="Top" Grid.Row="1" Margin="14,10,0,0"/>
+                        <PasswordBox
+                            x:Name="pwb_MatKhau"
+                            Grid.Row="1"
+                            FontSize="20"
+                            Background="#FFF2F2F2"
+                            BorderBrush="#FF080F5D"
+                            VerticalAlignment="Top"
+                            Foreground="Black"
+                            BorderThickness="1"
+                            mah:TextBoxHelper.Watermark="Mật Khẩu"
+                            mah:TextBoxHelper.UseFloatingWatermark="True"
+                            mah:TextBoxHelper.ClearTextButton="{Binding RelativeSource = {RelativeSource Self},
+                            Path=(mah:TextBoxHelper.HasText), Mode=OneWay}"
+                            Style="{StaticResource MahApps.Styles.PasswordBox.Win8}"
+                            Margin="55,5,39.8,0" SelectionBrush="#FF086F9E" Grid.RowSpan="1" 
+                            mah:ControlsHelper.FocusBorderBrush="#FFF71111" 
+                            mah:ControlsHelper.MouseOverBorderBrush="#FF830D0D" 
+                            mah:TextBoxHelper.WatermarkWrapping="Wrap">
+                        </PasswordBox>
+                        <CheckBox
+                            HorizontalAlignment="Center"
+                            Grid.Row="1"
+                            Name="cbx_NhoMatKhau"
+                            mah:CheckBoxHelper.CheckBackgroundFillChecked="#FFFF6425"
+                            mah:CheckBoxHelper.CheckBackgroundFillUncheckedMouseOver="Transparent"
+                            mah:CheckBoxHelper.CheckBackgroundFillCheckedMouseOver="#FFFF6425"
+                            Margin="17,48,73.8,33.8"
+                            FontSize="17"
+                            Content="       Nhớ mật khẩu" Width="194" FontWeight="Normal" FontFamily="Times New Roman" 
+                            Checked="cbx_NhoMatKhau_Checked"
+                            Unchecked="cbx_NhoMatKhau_Unchecked" 
+                            mah:CheckBoxHelper.CheckGlyphForegroundChecked="Black" 
+                            mah:CheckBoxHelper.CheckGlyphForegroundCheckedMouseOver="Black" 
+                            mah:CheckBoxHelper.CheckGlyphForegroundCheckedPressed="Black"/>
+                    </Grid>
+                </materialDesign:Card>
+                <Button Grid.Row="2"
                         Background="#FF5161BE"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Foreground="White"
                         FontSize="16"
                         Content="Đăng Nhập"
-                        Height="50"
-                        Margin="2,0,2,-0.4" Grid.RowSpan="2" Grid.ColumnSpan="2" />
-                </Grid>
-                <CheckBox
-                    HorizontalAlignment="Center"
-                    Grid.Row="2"
-                    Name="cbx_NhoMatKhau"
-                    mah:CheckBoxHelper.CheckBackgroundFillChecked="#FFFF6425"
-                    mah:CheckBoxHelper.CheckBackgroundFillUncheckedMouseOver="Transparent"
-                    mah:CheckBoxHelper.CheckBackgroundFillCheckedMouseOver="#FFFF6425"
-                    Margin="29,46.8,101.8,35.2"
-                    FontSize="17"
-                    Content="    Nhớ mật khẩu" Width="194" FontWeight="Normal" FontFamily="Times New Roman" 
-                    Checked="cbx_NhoMatKhau_Checked"
-                    Unchecked="cbx_NhoMatKhau_Unchecked" 
-                    mah:CheckBoxHelper.CheckGlyphForegroundChecked="Black" 
-                    mah:CheckBoxHelper.CheckGlyphForegroundCheckedMouseOver="Black" 
-                    mah:CheckBoxHelper.CheckGlyphForegroundCheckedPressed="Black"/>
+                        Width="175"
+                        Height="55" Margin="84,83.4,65.8,65.6" Grid.RowSpan="2" />
             </Grid>
             <Button 
                 Style="{StaticResource closeBtnStyle}"
@@ -193,7 +193,7 @@
                 BorderThickness="0"
                 Click="btn_Close_Click"
                 Grid.Column="1" mah:ControlsHelper.FocusBorderBrush="{x:Null}" 
-                mah:ControlsHelper.RecognizesAccessKey="False" Margin="0,5,5,0" Height="26" Width="26">
+                Margin="0,5,5,0" Height="26" Width="26">
                 <Button.Background>
                     <ImageBrush ImageSource="photos/sdg.png" Stretch="None"/>
                 </Button.Background>
