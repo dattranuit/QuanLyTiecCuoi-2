@@ -55,6 +55,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand LapHoaDonCommand { get; set; }
 
         public HoaDonViewModel()
         {
@@ -96,6 +97,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.SaveChanges();
                 SelectedItem.TongTienBan = TongTienBan;
             });
+
+            LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
         }
     }
 }

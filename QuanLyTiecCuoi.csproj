@@ -84,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HoaDon.xaml.cs">
+      <DependentUpon>HoaDon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\BAOCAONGAY.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -184,6 +187,10 @@
     <Compile Include="ViewModel\MonanViewModel.cs" />
     <Compile Include="ViewModel\PhieuDatBanViewModel.cs" />
     <Compile Include="ViewModel\TiecViewModel.cs" />
+    <Page Include="HoaDon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
