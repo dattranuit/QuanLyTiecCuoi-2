@@ -154,6 +154,9 @@
     <Compile Include="PhieuDatBanWindow.xaml.cs">
       <DependentUpon>PhieuDatBanWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\PropertiesFood.xaml.cs">
+      <DependentUpon>PropertiesFood.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\usc_Dichvu.xaml.cs">
       <DependentUpon>usc_Dichvu.xaml</DependentUpon>
     </Compile>
@@ -215,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PropertiesFood.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
