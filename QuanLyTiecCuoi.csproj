@@ -84,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HoaDon.xaml.cs">
+      <DependentUpon>HoaDon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\BAOCAONGAY.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -151,6 +154,9 @@
     <Compile Include="PhieuDatBanWindow.xaml.cs">
       <DependentUpon>PhieuDatBanWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\PropertiesFood.xaml.cs">
+      <DependentUpon>PropertiesFood.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\usc_Dichvu.xaml.cs">
       <DependentUpon>usc_Dichvu.xaml</DependentUpon>
     </Compile>
@@ -184,6 +190,10 @@
     <Compile Include="ViewModel\MonanViewModel.cs" />
     <Compile Include="ViewModel\PhieuDatBanViewModel.cs" />
     <Compile Include="ViewModel\TiecViewModel.cs" />
+    <Page Include="HoaDon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -208,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PropertiesFood.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,9 +4,98 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyTiecCuoi.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="AntiqueWhite">
-            
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49*" />
+            <RowDefinition Height="176*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="110*"/>
+                <ColumnDefinition Width="110*"/>
+                <ColumnDefinition Width="110*"/>
+                <ColumnDefinition Width="200*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Column="0" Grid.ColumnSpan="5" Header="Thông tin món ăn" BorderBrush="#CC000000" Margin="2,1" FontFamily="Calibri" FontSize="12"/>
+            <Grid Grid.Column="0">
+                <TextBox x:Name="tbx_TKMonAn" materialDesign:HintAssist.Hint="Tìm kiếm món ăn"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" CaretBrush="White" Foreground="Black" Margin="10,0,10,10" VerticalAlignment="Bottom" />
+            </Grid>
+            <Grid Grid.Column="1">
+                <Button x:Name="btn_ThemMonAn" Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                            Height="60"
+                            materialDesign:ButtonAssist.CornerRadius="25 25 0 0"
+                            ToolTip="MaterialDesignRaisedAccentButton with Round Top Corners" Background="#FF262525" FontWeight="Bold" Foreground="#DDFFFFFF" FontSize="14" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="16,4" Grid.IsSharedSizeScope="True" BorderBrush="#FF6B6C69" Click="btn_ThemMonAn_Click">
+                    <TextBlock Text="THÊM" />
+                </Button>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Button x:Name="btn_SuaMonAn" Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                            Height="60"
+                            materialDesign:ButtonAssist.CornerRadius="25 25 0 0"
+                            ToolTip="MaterialDesignRaisedAccentButton with Round Top Corners" Background="#FF262525" FontWeight="Bold" Foreground="#DDFFFFFF" FontSize="14" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="16,4" Grid.IsSharedSizeScope="True" BorderBrush="#FF6B6C69" Margin="5,20,5,0">
+                    <TextBlock Text="SỬA" />
+                </Button>
+            </Grid>
+            <Grid Grid.Column="3">
+                <Button x:Name="btn_XoaMonAn" Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                            Height="60"
+                            materialDesign:ButtonAssist.CornerRadius="25 25 0 0"
+                            ToolTip="MaterialDesignRaisedAccentButton with Round Top Corners" Background="#FF262525" FontWeight="Bold" Foreground="#DDFFFFFF" FontSize="14" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="16,4" Grid.IsSharedSizeScope="True" BorderBrush="#FF6B6C69" Margin="5,20,5,0">
+                    <TextBlock Text="XÓA" />
+                </Button>
+            </Grid>
+            <ComboBox x:Name="cbb_LoaiMonAn" Grid.Column="4" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      materialDesign:HintAssist.Hint="Loại món ăn"  
+                      materialDesign:HintAssist.HintOpacity=".5"
+                      IsEditable="True" VerticalAlignment="Bottom" Margin="10,0,10,10" FontSize="16">
+                <ComboBoxItem>Khai vị</ComboBoxItem>
+                <ComboBoxItem>Hải sản</ComboBoxItem>
+                <ComboBoxItem>Món chính</ComboBoxItem>
+                <ComboBoxItem>Tráng miệng</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="1" Background="White" x:Name="gridContainer">
+            <Grid>
+                <local:PropertiesFood x:Name="pptFood" Visibility="Collapsed"></local:PropertiesFood>
+            </Grid>
+            <GroupBox x:Name="grb_ListMenu" Header="Danh sách món ăn" Margin="2,1" FontFamily="Calibri" FontSize="12">
+                <ListView Name="lv_ThucDon" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" ScrollViewer.CanContentScroll="True" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" Background="White" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã món ăn" DisplayMemberBinding="{Binding MaMonAn}" />
+                            <GridViewColumn Header="Tên món ăn" DisplayMemberBinding="{Binding TenMonAn}"  />
+                            <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding DonGia}" />
+                            <GridViewColumn Header="Mô tả" DisplayMemberBinding="{Binding MoTa}" />
+                            <GridViewColumn Header="Ghi chú" DisplayMemberBinding="{Binding GhiChu}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </GroupBox>
+
+        </Grid>
+        <!--<Grid Height="50" VerticalAlignment="Top">
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+                <materialDesign:PopupBox  Margin="1"  PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Foreground="#FF262525" Background="White">
+                    <StackPanel Width="200">
+                        <Button Content="Thêm món ăn"/>
+                        <Separator/>
+                        <Button Content="Thông tin món ăn" />
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
+        </Grid>-->
     </Grid>
 </UserControl>

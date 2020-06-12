@@ -153,9 +153,9 @@
                             <Grid>
                                 <DockPanel LastChildFill="True">
                                     <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
-                                        <DockPanel DockPanel.Dock="Right" Width="150" Margin="8,0">
+                                        <DockPanel DockPanel.Dock="Right" Width="200" Margin="8,0" HorizontalAlignment="Right">
                                             <TextBlock Text="Tháng:" FontSize="14" VerticalAlignment="Center" Foreground="#000000" Padding="8,0"/>
-                                            <ComboBox x:Name="month_thang" VerticalAlignment="Center" BorderBrush="Black" MinHeight="0" Height="25">
+                                            <ComboBox x:Name="month_thang" VerticalAlignment="Center" BorderBrush="Black" MinHeight="0" Height="25" Width="110" HorizontalAlignment="Right">
                                                 <ComboBoxItem Content="Tháng 1" Tag="1"/>
                                                 <ComboBoxItem Content="Tháng 2" Tag="2"/>
                                                 <ComboBoxItem Content="Tháng 3" Tag="3"/>
@@ -180,16 +180,15 @@
                                                 <materialDesign:Card Margin="2">
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition></ColumnDefinition>
-                                                            <ColumnDefinition></ColumnDefinition>
-                                                            <ColumnDefinition></ColumnDefinition>
+                                                            <ColumnDefinition Width="3*"></ColumnDefinition>
                                                             <ColumnDefinition></ColumnDefinition>
                                                             <ColumnDefinition></ColumnDefinition>
                                                             <ColumnDefinition></ColumnDefinition>
                                                             <ColumnDefinition></ColumnDefinition>
                                                             <ColumnDefinition></ColumnDefinition>
                                                         </Grid.ColumnDefinitions>
-                                                        <Grid Grid.Column="4">
+                                                     
+                                                        <Grid Grid.Column="2">
                                                             <Button
                                                     Margin="2"
     Style="{StaticResource MaterialDesignRaisedButton}"
@@ -197,7 +196,7 @@
     ToolTip="Thêm">
                                                             </Button>
                                                         </Grid>
-                                                        <Grid Grid.Column="5">
+                                                        <Grid Grid.Column="3">
                                                             <Button
                                                     Margin="2"
                                                     Content="Sửa"
@@ -205,7 +204,7 @@
     ToolTip="Sửa">
                                                             </Button>
                                                         </Grid>
-                                                        <Grid Grid.Column="6">
+                                                        <Grid Grid.Column="4">
                                                             <Button
                                                     Margin="2"
                                                     Content="Xóa"
