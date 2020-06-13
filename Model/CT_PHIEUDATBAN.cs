@@ -12,14 +12,15 @@ namespace QuanLyTiecCuoi.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class PHIEUDATDICHVU
+    public partial class CT_PHIEUDATBAN
     {
-        public int MaTiecCuoi { get; set; }
-        public int MaDichVu { get; set; }
+        public int MaPhieuDatBan { get; set; }
+        public int MaMonAn { get; set; }
         public int SoLuong { get; set; }
         public decimal DonGia { get; set; }
+        public string GhiChu { get; set; }
     
-        public virtual DICHVU DICHVU { get; set; }
-        public virtual TIECCUOI TIECCUOI { get; set; }
+        public virtual MONAN MONAN { get; set; }
+        public virtual PHIEUDATBAN PHIEUDATBAN { get; set; }
     }
 }

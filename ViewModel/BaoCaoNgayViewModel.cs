@@ -37,16 +37,16 @@ namespace QuanLyTiecCuoi.ViewModel
         public int Ngay { get => _Ngay; set { _Ngay = value; OnPropertyChanged(); } }
 
 
-        private int? _SoLuongTiecCuoi;
-        public int? SoLuongTiecCuoi { get => _SoLuongTiecCuoi; set { _SoLuongTiecCuoi = value; OnPropertyChanged(); } }
+        private int _SoLuongTiecCuoi;
+        public int SoLuongTiecCuoi { get => _SoLuongTiecCuoi; set { _SoLuongTiecCuoi = value; OnPropertyChanged(); } }
 
 
-        private decimal? _DoanhThu;
-        public decimal? DoanhThu { get => _DoanhThu; set { _DoanhThu = value; OnPropertyChanged(); } }
+        private decimal _DoanhThu;
+        public decimal DoanhThu { get => _DoanhThu; set { _DoanhThu = value; OnPropertyChanged(); } }
 
 
-        private double? _TiLe;
-        public double? TiLe { get => _TiLe; set { _TiLe = value; OnPropertyChanged(); } }
+        private double _TiLe;
+        public double TiLe { get => _TiLe; set { _TiLe = value; OnPropertyChanged(); } }
 
 
         public ICommand AddCommand { get; set; }

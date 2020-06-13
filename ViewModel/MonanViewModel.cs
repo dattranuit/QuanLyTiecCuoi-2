@@ -32,12 +32,12 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
-        private string _MaMonAn { get; set; }
-        public string MaMonAn { get; set; }
+        private int _MaMonAn { get; set; }
+        public int MaMonAn { get; set; }
         private string _TenMonAn { get; set; }
         public string TenMonAn { get; set; }
-        private decimal? _DonGia { get; set; }
-        public decimal? DonGia { get; set; }
+        private decimal _DonGia { get; set; }
+        public decimal DonGia { get; set; }
         private string _MoTa { get; set; }
         public string MoTa { get; set; }
         private string _GhiChu { get; set; }

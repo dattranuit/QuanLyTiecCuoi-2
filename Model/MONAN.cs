@@ -14,10 +14,22 @@ namespace QuanLyTiecCuoi.Model
     
     public partial class MONAN
     {
-        public string MaMonAn { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MONAN()
+        {
+            this.CT_PHIEUDATBAN = new HashSet<CT_PHIEUDATBAN>();
+        }
+    
+        public int MaMonAn { get; set; }
         public string TenMonAn { get; set; }
-        public Nullable<decimal> DonGia { get; set; }
+        public decimal DonGia { get; set; }
         public string MoTa { get; set; }
+        public string HinhAnh { get; set; }
         public string GhiChu { get; set; }
+        public int MaLoaiMonAn { get; set; }
+    
+        public virtual LOAIMONAN LOAIMONAN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CT_PHIEUDATBAN> CT_PHIEUDATBAN { get; set; }
     }
 }

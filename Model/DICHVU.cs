@@ -20,10 +20,11 @@ namespace QuanLyTiecCuoi.Model
             this.PHIEUDATDICHVUs = new HashSet<PHIEUDATDICHVU>();
         }
     
-        public string MaDichVu { get; set; }
+        public int MaDichVu { get; set; }
         public string TenDichVu { get; set; }
-        public Nullable<decimal> DonGia { get; set; }
+        public decimal DonGia { get; set; }
         public string MoTa { get; set; }
+        public string HinhAnh { get; set; }
         public string GhiChu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

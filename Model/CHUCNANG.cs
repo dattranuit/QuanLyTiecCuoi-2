@@ -20,7 +20,7 @@ namespace QuanLyTiecCuoi.Model
             this.NHOMNGUOIDUNGs = new HashSet<NHOMNGUOIDUNG>();
         }
     
-        public string MaChucNang { get; set; }
+        public int MaChucNang { get; set; }
         public string TenChucNang { get; set; }
         public string TenManHinhDuocLoad { get; set; }
     

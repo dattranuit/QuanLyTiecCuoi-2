@@ -22,16 +22,16 @@ namespace QuanLyTiecCuoi.Model
             this.PHIEUDATDICHVUs = new HashSet<PHIEUDATDICHVU>();
         }
     
-        public string MaTiecCuoi { get; set; }
+        public int MaTiecCuoi { get; set; }
         public string TenChuRe { get; set; }
         public string TenCoDau { get; set; }
         public string SoDienThoai { get; set; }
-        public Nullable<System.DateTime> NgayDatTiec { get; set; }
-        public Nullable<System.DateTime> NgayDaiTiec { get; set; }
-        public Nullable<decimal> TienDatCoc { get; set; }
+        public System.DateTime NgayDatTiec { get; set; }
+        public System.DateTime NgayDaiTiec { get; set; }
+        public decimal TienDatCoc { get; set; }
         public string GhiChu { get; set; }
-        public string MaSanh { get; set; }
-        public string MaCa { get; set; }
+        public int MaSanh { get; set; }
+        public int MaCa { get; set; }
     
         public virtual CA CA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

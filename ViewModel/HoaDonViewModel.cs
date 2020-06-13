@@ -33,24 +33,24 @@ namespace QuanLyTiecCuoi.ViewModel
             }
         }
 
-        private decimal? _TongTienBan;
-        public decimal? TongTienBan { get => _TongTienBan; set { _TongTienBan = value; OnPropertyChanged(); } }
+        private decimal _TongTienBan;
+        public decimal TongTienBan { get => _TongTienBan; set { _TongTienBan = value; OnPropertyChanged(); } }
 
 
-        private decimal? _TongTienDichVu;
-        public decimal? TongTienDichVu { get => _TongTienDichVu; set { _TongTienDichVu = value; OnPropertyChanged(); } }
+        private decimal _TongTienDichVu;
+        public decimal TongTienDichVu { get => _TongTienDichVu; set { _TongTienDichVu = value; OnPropertyChanged(); } }
 
 
-        private decimal? _TongTienHoaDon;
-        public decimal? TongTienHoaDon { get => _TongTienHoaDon; set { _TongTienHoaDon = value; OnPropertyChanged(); } }
+        private decimal _TongTienHoaDon;
+        public decimal TongTienHoaDon { get => _TongTienHoaDon; set { _TongTienHoaDon = value; OnPropertyChanged(); } }
 
 
-        private decimal? _ConLai;
-        public decimal? ConLai { get => _ConLai; set { _ConLai = value; OnPropertyChanged(); } }
+        private decimal _ConLai;
+        public decimal ConLai { get => _ConLai; set { _ConLai = value; OnPropertyChanged(); } }
 
 
-        private DateTime? _NgayThanhToan;
-        public DateTime? NgayThanhToan { get => _NgayThanhToan; set { _NgayThanhToan = value; OnPropertyChanged(); } }
+        private DateTime _NgayThanhToan;
+        public DateTime NgayThanhToan { get => _NgayThanhToan; set { _NgayThanhToan = value; OnPropertyChanged(); } }
 
 
         public ICommand AddCommand { get; set; }

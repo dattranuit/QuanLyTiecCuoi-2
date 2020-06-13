@@ -20,10 +20,10 @@ namespace QuanLyTiecCuoi.Model
             this.BAOCAONGAYs = new HashSet<BAOCAONGAY>();
         }
     
-        public string MaBaoCaoThang { get; set; }
-        public Nullable<int> Thang { get; set; }
-        public Nullable<int> Nam { get; set; }
-        public Nullable<decimal> TongDoanhThu { get; set; }
+        public int MaBaoCaoThang { get; set; }
+        public int Thang { get; set; }
+        public int Nam { get; set; }
+        public decimal TongDoanhThu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BAOCAONGAY> BAOCAONGAYs { get; set; }

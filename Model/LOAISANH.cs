@@ -20,9 +20,9 @@ namespace QuanLyTiecCuoi.Model
             this.SANHs = new HashSet<SANH>();
         }
     
-        public string MaLoaiSanh { get; set; }
+        public int MaLoaiSanh { get; set; }
         public string TenLoaiSanh { get; set; }
-        public Nullable<decimal> DonGiaBanToiThieu { get; set; }
+        public decimal DonGiaBanToiThieu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SANH> SANHs { get; set; }

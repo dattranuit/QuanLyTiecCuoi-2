@@ -12,18 +12,18 @@ namespace QuanLyTiecCuoi.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class LOAIBAN
+    public partial class LOAIMONAN
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LOAIBAN()
+        public LOAIMONAN()
         {
-            this.PHIEUDATBANs = new HashSet<PHIEUDATBAN>();
+            this.MONANs = new HashSet<MONAN>();
         }
     
-        public string MaLoaiBan { get; set; }
-        public string TenLoaiBan { get; set; }
+        public int MaLoaiMonAn { get; set; }
+        public string TenLoaiMonAn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUDATBAN> PHIEUDATBANs { get; set; }
+        public virtual ICollection<MONAN> MONANs { get; set; }
     }
 }

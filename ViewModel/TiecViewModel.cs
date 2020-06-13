@@ -37,26 +37,26 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
-        private string _MaTiecCuoi { get; set; }
-        public string MaTiecCuoi { get; set; }
+        private int _MaTiecCuoi { get; set; }
+        public int MaTiecCuoi { get; set; }
         private string _TenChuRe { get; set; }
         public string TenChuRe { get; set; }
         private string _TenCoDau { get; set; }
         public string TenCoDau { get; set; }
         private string _SoDienThoai { get; set; }
         public string SoDienThoai { get; set; }
-        private Nullable<System.DateTime> _NgayDatTiec { get; set; }
-        public Nullable<System.DateTime> NgayDatTiec { get; set; }
-        private Nullable<System.DateTime> _NgayDaiTiec { get; set; }
-        public Nullable<System.DateTime> NgayDaiTiec { get; set; }
-        private Nullable<decimal> _TienDatCoc { get; set; }
-        public Nullable<decimal> TienDatCoc { get; set; }
+        private System.DateTime _NgayDatTiec { get; set; }
+        public System.DateTime NgayDatTiec { get; set; }
+        private System.DateTime _NgayDaiTiec { get; set; }
+        public System.DateTime NgayDaiTiec { get; set; }
+        private decimal _TienDatCoc { get; set; }
+        public decimal TienDatCoc { get; set; }
         private string _GhiChu { get; set; }
         public string GhiChu { get; set; }
-        private string _MaSanh { get; set; }
-        public string MaSanh { get; set; }
-        private string _MaCa { get; set; }
-        public string MaCa { get; set; }
+        private int _MaSanh { get; set; }
+        public int MaSanh { get; set; }
+        private int _MaCa { get; set; }
+        public int MaCa { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand PhieuDatBanCommand { get; set; }

@@ -20,7 +20,7 @@ namespace QuanLyTiecCuoi.Model
             this.TIECCUOIs = new HashSet<TIECCUOI>();
         }
     
-        public string MaCa { get; set; }
+        public int MaCa { get; set; }
         public string TenCa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

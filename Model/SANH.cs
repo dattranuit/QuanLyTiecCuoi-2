@@ -20,11 +20,11 @@ namespace QuanLyTiecCuoi.Model
             this.TIECCUOIs = new HashSet<TIECCUOI>();
         }
     
-        public string MaSanh { get; set; }
+        public int MaSanh { get; set; }
         public string TenSanh { get; set; }
-        public Nullable<int> SoLuongBanToiDa { get; set; }
+        public int SoLuongBanToiDa { get; set; }
         public string GhiChu { get; set; }
-        public string MaLoaiSanh { get; set; }
+        public int MaLoaiSanh { get; set; }
     
         public virtual LOAISANH LOAISANH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

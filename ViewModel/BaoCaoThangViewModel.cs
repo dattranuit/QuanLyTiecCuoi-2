@@ -32,16 +32,16 @@ namespace QuanLyTiecCuoi.ViewModel
             }
         }
 
-        private int? _Thang;
-        public int? Thang { get => _Thang; set { _Thang = value; OnPropertyChanged(); } }
+        private int _Thang;
+        public int Thang { get => _Thang; set { _Thang = value; OnPropertyChanged(); } }
 
 
-        private int? _Nam;
-        public int? Nam { get => _Nam; set { _Nam = value; OnPropertyChanged(); } }
+        private int _Nam;
+        public int Nam { get => _Nam; set { _Nam = value; OnPropertyChanged(); } }
 
 
-        private decimal? _TongDoanhThu;
-        public decimal? TongDoanhThu { get => _TongDoanhThu; set { _TongDoanhThu = value; OnPropertyChanged(); } }
+        private decimal _TongDoanhThu;
+        public decimal TongDoanhThu { get => _TongDoanhThu; set { _TongDoanhThu = value; OnPropertyChanged(); } }
 
 
         public ICommand AddCommand { get; set; }

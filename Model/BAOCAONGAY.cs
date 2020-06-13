@@ -14,11 +14,11 @@ namespace QuanLyTiecCuoi.Model
     
     public partial class BAOCAONGAY
     {
-        public string MaBaoCaoThang { get; set; }
+        public int MaBaoCaoThang { get; set; }
         public int Ngay { get; set; }
-        public Nullable<int> SoLuongTiecCuoi { get; set; }
-        public Nullable<decimal> DoanhThu { get; set; }
-        public Nullable<double> TiLe { get; set; }
+        public int SoLuongTiecCuoi { get; set; }
+        public decimal DoanhThu { get; set; }
+        public double TiLe { get; set; }
     
         public virtual BAOCAOTHANG BAOCAOTHANG { get; set; }
     }

@@ -14,10 +14,10 @@ namespace QuanLyTiecCuoi.Model
     
     public partial class NGUOIDUNG
     {
-        public string UserName { get; set; }
-        public string PassWord { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         public string TenNguoiDung { get; set; }
-        public string MaNhomNguoiDung { get; set; }
+        public int MaNhomNguoiDung { get; set; }
     
         public virtual NHOMNGUOIDUNG NHOMNGUOIDUNG { get; set; }
     }

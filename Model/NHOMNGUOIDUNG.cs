@@ -21,7 +21,7 @@ namespace QuanLyTiecCuoi.Model
             this.CHUCNANGs = new HashSet<CHUCNANG>();
         }
     
-        public string MaNhomNguoiDung { get; set; }
+        public int MaNhomNguoiDung { get; set; }
         public string TenNhomNguoiDung { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

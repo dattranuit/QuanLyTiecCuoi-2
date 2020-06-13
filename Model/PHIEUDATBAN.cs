@@ -14,15 +14,22 @@ namespace QuanLyTiecCuoi.Model
     
     public partial class PHIEUDATBAN
     {
-        public string MaPhieuDatBan { get; set; }
-        public string MaTiecCuoi { get; set; }
-        public string MaLoaiBan { get; set; }
-        public Nullable<int> SoLuong { get; set; }
-        public Nullable<int> SoLuongDuTru { get; set; }
-        public Nullable<decimal> DonGiaBan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PHIEUDATBAN()
+        {
+            this.CT_PHIEUDATBAN = new HashSet<CT_PHIEUDATBAN>();
+        }
+    
+        public int MaPhieuDatBan { get; set; }
+        public int MaTiecCuoi { get; set; }
+        public string LoaiBan { get; set; }
+        public int SoLuong { get; set; }
+        public int SoLuongDuTru { get; set; }
+        public decimal DonGiaBan { get; set; }
         public string GhiChu { get; set; }
     
-        public virtual LOAIBAN LOAIBAN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CT_PHIEUDATBAN> CT_PHIEUDATBAN { get; set; }
         public virtual TIECCUOI TIECCUOI { get; set; }
     }
 }

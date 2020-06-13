@@ -14,13 +14,13 @@ namespace QuanLyTiecCuoi.Model
     
     public partial class HOADON
     {
-        public string MaHoaDon { get; set; }
-        public Nullable<decimal> TongTienBan { get; set; }
-        public Nullable<decimal> TongTienDichVu { get; set; }
-        public Nullable<decimal> TongTienHoaDon { get; set; }
-        public Nullable<decimal> ConLai { get; set; }
-        public Nullable<System.DateTime> NgayThanhToan { get; set; }
-        public string MaDatTiec { get; set; }
+        public int MaHoaDon { get; set; }
+        public decimal TongTienBan { get; set; }
+        public decimal TongTienDichVu { get; set; }
+        public decimal TongTienHoaDon { get; set; }
+        public decimal ConLai { get; set; }
+        public System.DateTime NgayThanhToan { get; set; }
+        public int MaTiecCuoi { get; set; }
     
         public virtual TIECCUOI TIECCUOI { get; set; }
     }
