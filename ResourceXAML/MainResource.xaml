@@ -9,4 +9,14 @@
     <viewmodel:BaoCaoNgayViewModel x:Key="BaoCaoNgayVM"></viewmodel:BaoCaoNgayViewModel>
     <viewmodel:BaoCaoThangViewModel x:Key="BaoCaoThangVM"></viewmodel:BaoCaoThangViewModel>
     <viewmodel:PhieuDatBanViewModel x:Key="PhieuDatBanVM"></viewmodel:PhieuDatBanViewModel>
+    <Style TargetType="GroupBox">
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="15" Foreground="#FF0E2291" FontWeight="SemiBold"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
