@@ -221,7 +221,7 @@
                                     <DataGrid ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" 
                                                   AutoGenerateColumns="False" CanUserAddRows="False" controls:DataGridHelper.ColumnHeaderPadding="10,0">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Loại bàn" Binding="{Binding MaMonAn}" IsReadOnly="True"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Loại bàn" Binding="{Binding MaMonAn, Mode=OneWayToSource}" IsReadOnly="True"></DataGridTextColumn>
                                             <DataGridTextColumn Header="Số lượng" Binding="{Binding TenMonAn}" IsReadOnly="True"></DataGridTextColumn>
                                             <DataGridTextColumn Header="Số lượng dự trữ" Binding="{Binding DonGia}" IsReadOnly="True"></DataGridTextColumn>
                                             <DataGridTextColumn Header="Đơn giá bàn" Binding="{Binding MoTa}" IsReadOnly="True"></DataGridTextColumn>

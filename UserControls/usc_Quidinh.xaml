@@ -4,9 +4,104 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyTiecCuoi.UserControls"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="662" d:DesignWidth="800">
+    <Grid Background="White">
+        <DockPanel LastChildFill="True">
+            <TextBlock Text="Quản lý Qui định" HorizontalAlignment="Center"
+                                   VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
+                                   Margin="0,5,0,0" FontWeight="SemiBold"
+                                   DockPanel.Dock="Top"/>
+            <materialDesign:Card  DockPanel.Dock="Bottom" Margin="10,5,10,10">
+                <DockPanel>
+                    <GroupBox Header="Quản lý qui định phạt" Margin="10" DockPanel.Dock="Top">
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontWeight="SemiBold" FontSize="15">Áp dụng qui định phạt</Label>
+                            <CheckBox Grid.Column="1" 
+                                      controls:CheckBoxHelper.CheckBackgroundFillChecked="#FFFF6425"
+                                      controls:CheckBoxHelper.CheckBackgroundFillUncheckedMouseOver="Transparent"
+                                      controls:CheckBoxHelper.CheckBackgroundFillCheckedMouseOver="#FFFF6425"
+                                      controls:CheckBoxHelper.CheckGlyphForegroundChecked="Black" 
+                                      controls:CheckBoxHelper.CheckGlyphForegroundCheckedMouseOver="Black" 
+                                      controls:CheckBoxHelper.CheckGlyphForegroundCheckedPressed="Black"/>
+                            <Label Grid.Column="2" FontWeight="SemiBold" FontSize="15">Tỉ lệ phạt (%)</Label>
+                            <controls:NumericUpDown Grid.Column="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="10"/>
+                        </Grid>
+                    </GroupBox>
+                </DockPanel>
+            </materialDesign:Card>
+            <materialDesign:Card DockPanel.Dock="Top" Margin="10,10,10,5">
+                <GroupBox Header="Quản lý loại ca" Margin="10,5,10,10">
+                    <DockPanel LastChildFill="True">
+                        <Grid DockPanel.Dock="Top">
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.6*"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="0.6*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" FontWeight="SemiBold" FontSize="15">Tên loại ca</Label>
+                                <TextBox Grid.Column="1" Margin="0,2,20,2" BorderBrush="Black" BorderThickness="1"/>
+                                <Label Grid.Column="2" FontWeight="SemiBold" FontSize="15" Margin="10,2,0,2">Bắt đầu</Label>
+                                <materialDesign:TimePicker
+                                    Grid.Column="3"
+                                    Margin="2,2,10,2" 
+                                    BorderThickness="1"
+                                    materialDesign:HintAssist.Hint=""
+                                    Is24Hours="True"
+                                    x:Name="tpk_BatDau"/>
+                                <Label Grid.Column="4" FontWeight="SemiBold" FontSize="15" Margin="20,2,0,2">Kết thúc</Label>
+                                <materialDesign:TimePicker
+                                    Margin="10,2,0,2"  
+                                    Grid.Column="5"
+                                    Is24Hours="True"
+                                    BorderThickness="1"
+                                    materialDesign:HintAssist.Hint=""
+                                    x:Name="tpk_KetThuc"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="1" DockPanel.Dock="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Thêm" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedButton}"                      
+                                    Margin="10" ToolTip="Thêm ca" Background="#FF0F5699" Foreground="White" Width="140"/>
+                            <Button Content="Sửa" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}"                      
+                                    Margin="10" ToolTip="Sửa thông tin loại ca" Background="#FF0F5699" Foreground="White" Width="140"/>
+                            <Button Content="Xóa" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}"                      
+                                    Margin="10" ToolTip="Xóa loại ca" Background="#FF0F5699" Foreground="White" Width="140"/>
+                            <Button Content="Quay lại" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}"                      
+                                    Margin="10" ToolTip="Xóa loại ca" Background="#FF0F5699" Foreground="White" Width="140" Visibility="Hidden"/>
+                            <Button Content="Lưu" Grid.Column="3" Style="{StaticResource MaterialDesignRaisedButton}"                      
+                                    Margin="10" ToolTip="Lưu thông tin loại ca" Background="#FF0F5699" Foreground="White" Width="140"/>
+                        </Grid>
+                        <GroupBox DockPanel.Dock="Bottom" Header="Danh sách loại ca" Margin="10,5,10,10">
+                            <DataGrid>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Tên loại ca"/>
+                                    <DataGridTextColumn Header="Giờ băt đầu"/>
+                                    <DataGridTextColumn Header="Giờ kết thúc"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+                    </DockPanel>
+                </GroupBox>
+            </materialDesign:Card>
+
+        </DockPanel>
     </Grid>
 </UserControl>
