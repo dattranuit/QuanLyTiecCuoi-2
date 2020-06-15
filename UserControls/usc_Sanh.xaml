@@ -59,27 +59,26 @@
                             <RowDefinition Height="280"/>
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
-                        <Rectangle Fill="#FF1E81D4" Width="auto" Margin="10,8" />
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*"></ColumnDefinition>
-                                <ColumnDefinition Width="22*"></ColumnDefinition>
+                                <ColumnDefinition Width="440*"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="297*"/>
                             </Grid.ColumnDefinitions>
-                            <Ellipse Width="60" Grid.Column="0" Margin="6,0,0,0">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/ic_hall1.png" Stretch="Uniform" />
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <Ellipse Grid.Column="1" Margin="294,20,370,10" Width="40" >
+                            <TextBlock Text="Quản lý Sảnh" Foreground="#FF0E2291" Margin="50,14,0,14" VerticalAlignment="Center" FontSize="32" Height="42" />
+                            <Ellipse Margin="10,11,10,10" Grid.Column="1" Height="auto" >
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/search_sanh_icon.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <TextBox x:Name="txb_TimKiem" Width="300" Height="40" Grid.Column="1"
-             materialDesign:HintAssist.Hint="Nhập tên Sảnh"
-             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-             VerticalAlignment="Center" Margin="349,10,55,20" FontSize="11" />
-
+                            <TextBox x:Name="tbx_TimKiemSanh"
+                                         
+                                         controls:TextBoxHelper.Watermark="Tìm kiếm Sảnh"
+                                         BorderThickness="0,0,0,1" Height="32"
+                                         BorderBrush="Black"
+                                         FontSize="15" Grid.Column="2"
+                                         VerticalAlignment="Center" Margin="0,19,25,19">
+                            </TextBox>
                         </Grid>
 
                         <Grid Grid.Row="1" Height="auto">
@@ -238,27 +237,26 @@
                             <RowDefinition Height="280"/>
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
-                        <Rectangle Fill="#FF1E81D4" Width="auto" Margin="10,8" />
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*"></ColumnDefinition>
-                                <ColumnDefinition Width="22*"></ColumnDefinition>
+                                <ColumnDefinition Width="440*"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="297*"/>
                             </Grid.ColumnDefinitions>
-                            <Ellipse Width="60" Grid.Column="0" Margin="6,0,0,0">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/ic_hall1.png" Stretch="Uniform" />
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <Ellipse Grid.Column="1" Margin="294,20,370,10" Width="40" >
+                            <TextBlock Text="Quản lý Loại Sảnh" Foreground="#FF0E2291" Margin="50,14,0,14" VerticalAlignment="Center" FontSize="32" Height="42" />
+                            <Ellipse Margin="10,11,10,10" Grid.Column="1" Height="auto" >
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/search_sanh_icon.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <TextBox x:Name="txb_TimKiemLoaiSanh" Width="300" Height="40" Grid.Column="1"
-             materialDesign:HintAssist.Hint="Nhập tên loại Sảnh"
-             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-             VerticalAlignment="Center" Margin="351,10,53,20" FontSize="11" />
-
+                            <TextBox x:Name="tbx_TimKiemLoaiSanh"
+                                         
+                                         controls:TextBoxHelper.Watermark="Tìm kiếm Loại Sảnh"
+                                         BorderThickness="0,0,0,1" Height="32"
+                                         BorderBrush="Black"
+                                         FontSize="15" Grid.Column="2"
+                                         VerticalAlignment="Center" Margin="0,19,25,19">
+                            </TextBox>
                         </Grid>
 
                         <Grid Grid.Row="1">
