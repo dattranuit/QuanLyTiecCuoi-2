@@ -47,11 +47,12 @@
                             <Label FontSize="25" Content="HÓA ĐƠN THANH TOÁN" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" Foreground="#FF0E2291" BorderThickness="0" VerticalContentAlignment="Center" Padding="8,0,0,0" OpacityMask="#FF999999" BorderBrush="{x:Null}" Background="{x:Null}"></Label>
                         </DockPanel>
 
-                        <DockPanel Height="180" DockPanel.Dock="Bottom" Background="#FFF1F1F1" Margin="0">
+                        <DockPanel Height="200" DockPanel.Dock="Bottom" Background="#FFF1F1F1" Margin="0">
                             <materialDesign:Card Margin="2">
                                 <GroupBox Header="Thanh toán">
                                     <Grid DataContext="{Binding SelectedBill,Mode=TwoWay}">
                                         <Grid.RowDefinitions>
+                                            <RowDefinition/>
                                             <RowDefinition/>
                                             <RowDefinition/>
                                             <RowDefinition/>
@@ -64,13 +65,15 @@
                                         <TextBlock Text="Tổng tiền dịch vụ : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,0,0" Grid.Column="0" FontSize="14"/>
                                         <TextBlock Text="Tổng tiền hóa đơn : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,0,0" Grid.Row="1" Grid.Column="0" FontSize="14"/>
                                         <TextBlock Text="Tổng tiền đặt cọc : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,0,0" Grid.Row="2" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock x:Name="text_HoanTien" Text="Còn lại : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,0,0" Grid.Row="3" Grid.Column="0" FontWeight="Bold" FontSize="14"/>
+                                        <TextBlock Text="Tổng tiền phạt :" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,0,0" Grid.Row="3" Grid.Column="0" FontSize="14"/>
+                                        <TextBlock x:Name="text_HoanTien" Text="Còn lại : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,0,0" Grid.Row="4" Grid.Column="0" FontWeight="Bold" FontSize="14"/>
 
-                                        <TextBlock x:Name="tblock_TotalMoney" Text="1000" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="0"  Grid.Column="0" FontSize="14"/>
-                                        <TextBlock x:Name="tblock_TotalMoney2" Text="1000" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="1" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock x:Name="tblock_ReturnMone" Text="1000"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="2" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock x:Name="tblock_ReturnMoney" Text="1000"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="3" Grid.Column="0" FontSize="14" FontWeight="Bold"/>
-                                        <Grid Grid.Column="1" Grid.Row="2">
+                                        <TextBlock x:Name="tblock_Tiendichvu" Text="1000" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="0"  Grid.Column="0" FontSize="14"/>
+                                        <TextBlock x:Name="tblock_Tienhoadon" Text="1000" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="1" Grid.Column="0" FontSize="14"/>
+                                        <TextBlock x:Name="tblock_Tiencoc" Text="1000"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="2" Grid.Column="0" FontSize="14"/>
+                                        <TextBlock x:Name="tblock_Tienphat" Text="1000"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="3" Grid.Column="0" FontSize="14"/>
+                                        <TextBlock x:Name="tblock_Tienconlai" Text="1000"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="4" Grid.Column="0" FontSize="14" FontWeight="Bold"/>
+                                        <Grid Grid.Column="1" Grid.Row="0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition></ColumnDefinition>
                                                 <ColumnDefinition></ColumnDefinition>
