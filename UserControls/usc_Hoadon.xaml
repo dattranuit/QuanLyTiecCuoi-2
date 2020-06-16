@@ -58,7 +58,8 @@
                         <DockPanel LastChildFill="True">
                             <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
                              <!--//-->
-                            </DockPanel>
+                                    <TextBlock Text="DANH SÁCH TIỆC CƯỚI" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="8,0,0,0" Foreground="#FF0E2291" />
+                                </DockPanel>
                             <Grid>
                                 <DockPanel LastChildFill="True">
                                     <materialDesign:Card Margin="2">
@@ -96,7 +97,7 @@
                                         </materialDesign:Card>
                                     </DockPanel>
                                     <materialDesign:Card Margin="2">
-                                        <DataGrid  ItemsSource="{Binding Data}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
+                                        <DataGrid  ItemsSource="{Binding Data}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding Ngay}">
                                                 </DataGridTextColumn>
@@ -152,8 +153,8 @@
                                             <ComboBoxItem Content="Tháng 12" Tag="12"/>
                                         </ComboBox>
                                     </DockPanel>
-                                    
-                                </DockPanel>
+                                        <TextBlock Text="DANH SÁCH HÓA ĐƠN" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="8,0,0,0" Foreground="#FF0E2291" />
+                                    </DockPanel>
                                 <Grid>
                                     <DockPanel LastChildFill="True">
                                         <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">

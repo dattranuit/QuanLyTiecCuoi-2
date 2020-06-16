@@ -60,6 +60,7 @@
                                         <TextBox x:Name="year" FontSize="14" VerticalAlignment="Center" BorderBrush="Black" ToolTip="Chọn năm..." OpacityMask="#FFB9B9B9"  Height="20"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Right" Width="300" Margin="8,0">
+                                        <TextBlock Text="BÁO CÁO DOANH THU THÁNG" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="8,0,0,0" Foreground="#FF0E2291" />
                                     </DockPanel>
                                 </DockPanel>
                                 <Grid>
