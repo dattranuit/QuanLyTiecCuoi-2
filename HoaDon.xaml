@@ -73,7 +73,7 @@
                                         <TextBlock x:Name="tblock_Tiencoc" Text="1000"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="2" Grid.Column="0" FontSize="14"/>
                                         <TextBlock x:Name="tblock_Tienphat" Text="1000"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="3" Grid.Column="0" FontSize="14"/>
                                         <TextBlock x:Name="tblock_Tienconlai" Text="1000"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="4" Grid.Column="0" FontSize="14" FontWeight="Bold"/>
-                                        <Grid Grid.Column="1" Grid.Row="0">
+                                        <Grid Grid.Column="1" Grid.Row="2">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition></ColumnDefinition>
                                                 <ColumnDefinition></ColumnDefinition>

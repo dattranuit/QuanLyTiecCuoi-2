@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
@@ -23,7 +24,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 _SelectedItem = value;
                 OnPropertyChanged();
                 if (SelectedItem != null)
-                {
+                {              
                     TongTienBan = SelectedItem.TongTienBan;
                     TongTienDichVu = SelectedItem.TongTienDichVu;
                     TongTienHoaDon = SelectedItem.TongTienHoaDon;
@@ -60,6 +61,8 @@ namespace QuanLyTiecCuoi.ViewModel
         public HoaDonViewModel()
         {
             List = new ObservableCollection<HOADON>(DataProvider.Ins.DataBase.HOADONs);
+
+            MessageBox.Show("âhahha");
 
             AddCommand = new RelayCommand<object>((p) =>
             {
