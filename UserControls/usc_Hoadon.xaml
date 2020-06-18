@@ -7,7 +7,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             DataContext="{StaticResource HoaDonVM}"
+             DataContext="{StaticResource TiecVM}"
              d:DesignHeight="450" d:DesignWidth="800"><Grid
     xmlns:wpf="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" Background="White">
@@ -97,15 +97,15 @@
                                         </materialDesign:Card>
                                     </DockPanel>
                                     <materialDesign:Card Margin="2">
-                                        <DataGrid  ItemsSource="{Binding Data}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
+                                        <DataGrid Margin="1" ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding Ngay}">
+                                                <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TenChuRe}">
                                                 </DataGridTextColumn>
-                                                <DataGridTextColumn Header="Tên cô dâu" FontSize="14" Binding="{Binding SoLuongTiecCuoi}">
+                                                <DataGridTextColumn Header="Tên cô dâu" FontSize="14" Binding="{Binding TenCoDau}">
                                                 </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding DoanhThu}">
+                                                    <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding SoDienThoai}">
                                                     </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Ngày đặt tiệc" FontSize="14" Binding="{Binding DoanhThu}">
+                                                    <DataGridTextColumn Header="Ngày đặt tiệc" FontSize="14" Binding="{Binding NgayDatTiec}" Width="*">
                                                 </DataGridTextColumn>
                                                 </DataGrid.Columns>
                                         </DataGrid>
