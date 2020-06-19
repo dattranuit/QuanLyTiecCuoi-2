@@ -10,6 +10,8 @@
     <viewmodel:BaoCaoNgayViewModel x:Key="BaoCaoNgayVM"></viewmodel:BaoCaoNgayViewModel>
     <viewmodel:BaoCaoThangViewModel x:Key="BaoCaoThangVM"></viewmodel:BaoCaoThangViewModel>
     <viewmodel:PhieuDatBanViewModel x:Key="PhieuDatBanVM"></viewmodel:PhieuDatBanViewModel>
+    <viewmodel:CaViewModel x:Key="CaVM"></viewmodel:CaViewModel>
+    <viewmodel:SanhViewModel x:Key="SanhVM"></viewmodel:SanhViewModel>
     <Style TargetType="GroupBox">
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="HeaderTemplate">

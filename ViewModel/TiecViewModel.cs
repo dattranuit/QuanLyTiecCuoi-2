@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Model;
 
@@ -12,64 +13,57 @@ namespace QuanLyTiecCuoi.ViewModel
     class TiecViewModel:BaseViewModel
     {
         private ObservableCollection<TIECCUOI> _List;
-        public ObservableCollection<TIECCUOI> List { get => _List; set { _List = value; OnPropertyChanged(); } }
-
-        private TIECCUOI _SelectedItem;
-        public TIECCUOI SelectedItem
+        public ObservableCollection<TIECCUOI> List { get => _List;  set { _List = value; OnPropertyChanged(); } }
+        private ObservableCollection<CA> _ListCa;
+        public ObservableCollection<CA> ListCa { get => _ListCa; set { _ListCa = value; OnPropertyChanged(); } }
+        private ObservableCollection<SANH> _ListSanh;
+        public ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value; OnPropertyChanged(); } }
+        private TIECCUOI _Record;
+        public TIECCUOI Record
         {
-            get => _SelectedItem;
+            get => _Record;
             set
             {
-                _SelectedItem = value;
+                _Record = value;
                 OnPropertyChanged();
-                if (SelectedItem != null)
-                {
-                    MaTiecCuoi = SelectedItem.MaTiecCuoi;
-                    TenChuRe = SelectedItem.TenChuRe;
-                    TenCoDau = SelectedItem.TenCoDau;
-                    SoDienThoai = SelectedItem.SoDienThoai;
-                    NgayDatTiec = SelectedItem.NgayDatTiec;
-                    NgayDaiTiec = SelectedItem.NgayDaiTiec;
-                    TienDatCoc = SelectedItem.TienDatCoc;
-                    GhiChu = SelectedItem.GhiChu;
-                    MaSanh = SelectedItem.MaSanh;
-                    MaCa = SelectedItem.MaCa;
-                }
             }
         }
-        private int _MaTiecCuoi { get; set; }
-        public int MaTiecCuoi { get; set; }
-        private string _TenChuRe { get; set; }
-        public string TenChuRe { get; set; }
-        private string _TenCoDau { get; set; }
-        public string TenCoDau { get; set; }
-        private string _SoDienThoai { get; set; }
-        public string SoDienThoai { get; set; }
-        private System.DateTime _NgayDatTiec { get; set; }
-        public System.DateTime NgayDatTiec { get; set; }
-        private System.DateTime _NgayDaiTiec { get; set; }
-        public System.DateTime NgayDaiTiec { get; set; }
-        private decimal _TienDatCoc { get; set; }
-        public decimal TienDatCoc { get; set; }
-        private string _GhiChu { get; set; }
-        public string GhiChu { get; set; }
-        private int _MaSanh { get; set; }
-        public int MaSanh { get; set; }
-        private int _MaCa { get; set; }
-        public int MaCa { get; set; }
+        private int _MaTiecCuoi;
+        public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
+        private int _TongSoBan;
+        public int TongSoBan{ get => _TongSoBan; set { _TongSoBan = value; OnPropertyChanged(); } }
+        private string _TenChuRe;
+        public string TenChuRe { get => _TenChuRe; set { _TenChuRe = value; OnPropertyChanged(); } }
+        private string _TenCoDau;
+        public string TenCoDau { get => _TenCoDau; set { _TenCoDau = value; OnPropertyChanged(); } }
+        private string _SoDienThoai;
+        public string SoDienThoai { get => _SoDienThoai; set { _SoDienThoai = value; OnPropertyChanged(); } }
+        private System.DateTime _NgayDatTiec = DateTime.Now;
+        public System.DateTime NgayDatTiec { get => _NgayDatTiec; set { _NgayDatTiec = value; OnPropertyChanged(); } }
+        private System.DateTime _NgayDaiTiec = DateTime.Now;
+        public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; set { _NgayDaiTiec = value; OnPropertyChanged(); } }
+        private decimal _TienDatCoc;
+        public decimal TienDatCoc { get => _TienDatCoc; set { _TienDatCoc = value; OnPropertyChanged(); } }
+        private string _GhiChu;
+        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+        private int _MaSanh;
+        public int MaSanh { get => _MaSanh; set { _MaSanh = value; OnPropertyChanged(); } }
+        private int _MaCa;
+        public int MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand PhieuDatBanCommand { get; set; }
         public TiecViewModel()
         {
             List = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
+            ListCa = new ObservableCollection<CA>(DataProvider.Ins.DataBase.CAs);
+            ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
-
             }, (p) =>
             {
-                var TiecCuoi = new TIECCUOI()
+                Record = new TIECCUOI()
                 {
                     TenChuRe = TenChuRe,
                     TenCoDau = TenCoDau,
@@ -78,35 +72,47 @@ namespace QuanLyTiecCuoi.ViewModel
                     NgayDaiTiec = NgayDaiTiec,
                     TienDatCoc = TienDatCoc,
                     GhiChu = GhiChu,
-                    MaSanh = MaSanh,
-                    MaCa = MaCa
+                    MaSanh = Convert.ToInt32(MaSanh),
+                    MaCa = Convert.ToInt32(MaCa)                    
                 };
-                DataProvider.Ins.DataBase.TIECCUOIs.Add(TiecCuoi);
-                DataProvider.Ins.DataBase.SaveChanges();
-                List.Add(TiecCuoi);
+                try
+                {
+                    //DataProvider.Ins.DataBase.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[TIECCUOI] ON");
+                    //DataProvider.Ins.DataBase.TIECCUOIs.Attach(Record);
+                    DataProvider.Ins.DataBase.TIECCUOIs.Add(Record);
+                    //DataProvider.Ins.DataBase.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[TIECCUOI] OFF");
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    List.Add(Record);
+                   // string test = DataProvider.Ins.DataBase.TIECCUOIs.ElementAt(1).ToString();
+                  //  MessageBox.Show(test);
+                }
+                catch(Exception e)
+                {
+                    throw e;
+                }
+
             });
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null)
+                if (Record == null)
                     return false;
-                var displayList = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedItem.MaTiecCuoi);
+                var displayList = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == Record.MaTiecCuoi);
                 if (displayList != null && displayList.Count() != 0)
                     return true;
                 return false;
             }, (p) =>
             {
-                var TiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedItem.MaTiecCuoi).SingleOrDefault();
-                TiecCuoi.MaTiecCuoi = SelectedItem.MaTiecCuoi;
-                TiecCuoi.TenChuRe = SelectedItem.TenChuRe;
-                TiecCuoi.TenCoDau = SelectedItem.TenCoDau;
-                TiecCuoi.SoDienThoai = SelectedItem.SoDienThoai;
-                TiecCuoi.NgayDatTiec = SelectedItem.NgayDatTiec;
-                TiecCuoi.NgayDaiTiec = SelectedItem.NgayDaiTiec;
-                TiecCuoi.TienDatCoc = SelectedItem.TienDatCoc;
-                TiecCuoi.GhiChu = SelectedItem.GhiChu;
-                TiecCuoi.MaSanh = SelectedItem.MaSanh;
-                TiecCuoi.MaCa = SelectedItem.MaCa;
+                var TiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == Record.MaTiecCuoi).SingleOrDefault();
+                TiecCuoi.TenChuRe = Record.TenChuRe;
+                TiecCuoi.TenCoDau = Record.TenCoDau;
+                TiecCuoi.SoDienThoai = Record.SoDienThoai;
+                TiecCuoi.NgayDatTiec = Record.NgayDatTiec;
+                TiecCuoi.NgayDaiTiec = Record.NgayDaiTiec;
+                TiecCuoi.TienDatCoc = Record.TienDatCoc;
+                TiecCuoi.GhiChu = Record.GhiChu;
+                TiecCuoi.MaSanh = Record.MaSanh;
+                TiecCuoi.MaCa = Record.MaCa;
                 DataProvider.Ins.DataBase.SaveChanges();
             });
             PhieuDatBanCommand = new RelayCommand<object>((p) => { return true; }, (p) => { PhieuDatBanWindow wd = new PhieuDatBanWindow(); wd.ShowDialog(); });
