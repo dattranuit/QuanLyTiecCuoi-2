@@ -77,7 +77,8 @@
                                                     </Grid.ColumnDefinitions>
                                                     <Grid Grid.Column="0">
                                                         <TextBox 
-                            controls:TextBoxHelper.Watermark="Tìm kiếm"
+                                                            Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
+                            controls:TextBoxHelper.Watermark="Tìm kiếm theo tên hoặc SDT"
                             BorderThickness="0,0,0,1" Height="32" Width="400"
                             BorderBrush="Black"
                             FontSize="15" Grid.Column="0"
@@ -98,14 +99,20 @@
                                     </DockPanel>
                                     <materialDesign:Card Margin="2">
                                         <DataGrid Margin="1" ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
-                                            <DataGrid.Columns>
+                                                <DataGrid.InputBindings>
+                                                    <MouseBinding
+            MouseAction="LeftDoubleClick"
+            Command="{Binding DoubleClickCommand}"
+            CommandParameter="{Binding List}"/>
+                                                </DataGrid.InputBindings>
+                                                <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TenChuRe}">
                                                 </DataGridTextColumn>
                                                 <DataGridTextColumn Header="Tên cô dâu" FontSize="14" Binding="{Binding TenCoDau}">
                                                 </DataGridTextColumn>
                                                     <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding SoDienThoai}">
                                                     </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Ngày đặt tiệc" FontSize="14" Binding="{Binding NgayDatTiec}" Width="*">
+                                                    <DataGridTextColumn Header="Ngày đặt tiệc" FontSize="14" Binding="{Binding NgayDatTiec, StringFormat='dd/MM/yyyy'}" Width="*">
                                                 </DataGridTextColumn>
                                                 </DataGrid.Columns>
                                         </DataGrid>
@@ -170,6 +177,7 @@
                                                     </Grid.ColumnDefinitions>
                                                         <Grid Grid.Column="0">
                                                             <TextBox x:Name="tbx_TimKiemBaoCaoNgay"
+                                                                     Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
                             controls:TextBoxHelper.Watermark="Tìm kiếm"
                             BorderThickness="0,0,0,1" Height="32" Width="400"
                             BorderBrush="Black"
@@ -214,15 +222,15 @@
                                             </materialDesign:Card>
                                         </DockPanel>
                                         <materialDesign:Card Margin="2">
-                                                <DataGrid  ItemsSource="{Binding Data}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
+                                                <DataGrid  ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
                                                     <DataGrid.Columns>
-                                                        <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding Ngay}">
+                                                        <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TenChuRe}">
                                                         </DataGridTextColumn>
-                                                        <DataGridTextColumn Header="Tên cô dâu" FontSize="14" Binding="{Binding SoLuongTiecCuoi}">
+                                                        <DataGridTextColumn Header="Tên cô dâu" FontSize="14" Binding="{Binding TenCoDau}">
                                                         </DataGridTextColumn>
-                                                        <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding DoanhThu}">
+                                                        <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding SoDienThoai}">
                                                         </DataGridTextColumn>
-                                                        <DataGridTextColumn Header="Ngày đặt tiệc" FontSize="14" Binding="{Binding DoanhThu}">
+                                                        <DataGridTextColumn Header="Ngày đặt tiệc" FontSize="14" Width="*" Binding="{Binding NgayDatTiec, StringFormat='dd/MM/yyyy'}">
                                                         </DataGridTextColumn>
                                                     </DataGrid.Columns>
                                                 </DataGrid>

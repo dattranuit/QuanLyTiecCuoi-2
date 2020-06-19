@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Model;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
-    class TiecViewModel:BaseViewModel
+    class TiecViewModel : BaseViewModel
     {
         private ObservableCollection<TIECCUOI> _List;
         public ObservableCollection<TIECCUOI> List { get => _List; set { _List = value; OnPropertyChanged(); } }
@@ -60,6 +62,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand PhieuDatBanCommand { get; set; }
+        public ICommand DoubleClickCommand { get; set; }
         public TiecViewModel()
         {
             List = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
@@ -110,7 +113,58 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.SaveChanges();
             });
             PhieuDatBanCommand = new RelayCommand<object>((p) => { return true; }, (p) => { PhieuDatBanWindow wd = new PhieuDatBanWindow(); wd.ShowDialog(); });
+            DoubleClickCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon hd = new HoaDon(); hd.ShowDialog(); });
+
+            DataGridCollection = CollectionViewSource.GetDefaultView(List);
+            DataGridCollection.Filter = new Predicate<object>(Filter);
+
         }
+        private ICollectionView _dataGridCollection;
+        private string _filterString;
+        public ICollectionView DataGridCollection
+        {
+            get { return _dataGridCollection; }
+            set { _dataGridCollection = value; NotifyPropertyChanged("DataGridCollection"); }
+        }
+        public string FilterString
+        {
+            get { return _filterString; }
+            set
+            {
+                _filterString = value;
+                NotifyPropertyChanged("FilterString");
+                FilterCollection();
+            }
+        }
+        private void FilterCollection()
+        {
+            if (_dataGridCollection != null)
+            {
+                _dataGridCollection.Refresh();
+            }
+        }
+        public bool Filter(object obj)
+        {
+            var data = obj as TIECCUOI;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(_filterString))
+                {
+                    return data.SoDienThoai.Contains(_filterString) || data.TenChuRe.Contains(_filterString) || data.TenCoDau.Contains(_filterString);
+                }
+                return true;
+            }
+            return false;
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
+
         
     }
 }
