@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyTiecCuoi.UserControls"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -28,16 +29,20 @@
                 <ColumnDefinition Width="110*"/>
                 <ColumnDefinition Width="200*"/>
             </Grid.ColumnDefinitions>
-            <GroupBox Grid.Column="0" Grid.ColumnSpan="5" Header="Thông tin món ăn" BorderBrush="#CC000000" Margin="2,1" FontFamily="Calibri" FontSize="12"/>
+            <GroupBox Grid.Column="0" Grid.ColumnSpan="5" Header="Thông tin món ăn" BorderBrush="Black" Margin="2,1" FontFamily="Calibri" FontSize="12"/>
             <Grid Grid.Column="0">
-                <TextBox x:Name="tbx_TKMonAn" materialDesign:HintAssist.Hint="Tìm kiếm món ăn"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="16" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" CaretBrush="White" Foreground="Black" Margin="10,0,10,10" VerticalAlignment="Bottom" />
+                <TextBox x:Name="tbx_TKMonAn"
+                            controls:TextBoxHelper.Watermark="Tìm kiếm"
+                            BorderThickness="0,0,0,1" Height="32"
+                            BorderBrush="Black"
+                            FontSize="15"
+                            VerticalAlignment="Center" Margin="5,56,5,9.6" />
             </Grid>
             <Grid Grid.Column="1">
                 <Button x:Name="btn_ThemMonAn" Style="{StaticResource MaterialDesignRaisedAccentButton}"
                             Height="60"
                             materialDesign:ButtonAssist.CornerRadius="25 25 0 0"
-                            ToolTip="MaterialDesignRaisedAccentButton with Round Top Corners" Background="#FF262525" FontWeight="Bold" Foreground="#DDFFFFFF" FontSize="14" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="16,4" Grid.IsSharedSizeScope="True" BorderBrush="#FF6B6C69" Click="btn_ThemMonAn_Click">
+                            ToolTip="MaterialDesignRaisedAccentButton with Round Top Corners" Background="#FF262525" FontWeight="Bold" Foreground="#DDFFFFFF" FontSize="15" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="16,4" Grid.IsSharedSizeScope="True" BorderBrush="#FF6B6C69" Click="btn_ThemMonAn_Click" FontFamily="Segoe UI, Lucida Sans Unicode, Verdana">
                     <TextBlock Text="THÊM" />
                 </Button>
             </Grid>
@@ -46,14 +51,14 @@
                             Height="60"
                             materialDesign:ButtonAssist.CornerRadius="25 25 0 0"
                             ToolTip="MaterialDesignRaisedAccentButton with Round Top Corners" Background="#FF262525" FontWeight="Bold" Foreground="#DDFFFFFF" FontSize="14" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="16,4" Grid.IsSharedSizeScope="True" BorderBrush="#FF6B6C69" Margin="5,20,5,0">
-                    <TextBlock Text="SỬA" />
+                    <TextBlock Text="SỬA" FontFamily="Segoe UI, Lucida Sans Unicode, Verdana" FontSize="15" />
                 </Button>
             </Grid>
             <Grid Grid.Column="3">
                 <Button x:Name="btn_XoaMonAn" Style="{StaticResource MaterialDesignRaisedAccentButton}"
                             Height="60"
                             materialDesign:ButtonAssist.CornerRadius="25 25 0 0"
-                            ToolTip="MaterialDesignRaisedAccentButton with Round Top Corners" Background="#FF262525" FontWeight="Bold" Foreground="#DDFFFFFF" FontSize="14" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="16,4" Grid.IsSharedSizeScope="True" BorderBrush="#FF6B6C69" Margin="5,20,5,0">
+                            ToolTip="MaterialDesignRaisedAccentButton with Round Top Corners" Background="#FF262525" FontWeight="Bold" Foreground="#DDFFFFFF" FontSize="15" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="16,4" Grid.IsSharedSizeScope="True" BorderBrush="#FF6B6C69" Margin="5,20,5,0" FontFamily="Segoe UI, Lucida Sans Unicode, Verdana">
                     <TextBlock Text="XÓA" />
                 </Button>
             </Grid>
@@ -67,12 +72,12 @@
                 <ComboBoxItem>Tráng miệng</ComboBoxItem>
             </ComboBox>
         </Grid>
-        <Grid Grid.Row="1" Background="White" x:Name="gridContainer">
+        <Grid Grid.Row="1" x:Name="gridContainer" Background="White">
             <Grid>
                 <local:PropertiesFood x:Name="pptFood" Visibility="Collapsed"></local:PropertiesFood>
             </Grid>
-            <GroupBox x:Name="grb_ListMenu" Header="Danh sách món ăn" Margin="2,1" FontFamily="Calibri" FontSize="12">
-                <ListView Name="lv_ThucDon" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" ScrollViewer.CanContentScroll="True" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" Background="White" >
+            <GroupBox x:Name="grb_ThucDon" Header="Danh sách món ăn" Margin="2,1" FontFamily="Calibri" FontSize="12">
+                <ListView Name="lv_ThucDon" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" ScrollViewer.CanContentScroll="True" FontSize="15" FontWeight="Bold" Grid.ColumnSpan="2" Background="{x:Null}" FontFamily="Segoe UI, Lucida Sans Unicode, Verdana" >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Mã món ăn" DisplayMemberBinding="{Binding MaMonAn}" />
