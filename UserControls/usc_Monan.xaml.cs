@@ -20,6 +20,8 @@ namespace QuanLyTiecCuoi.UserControls
     /// </summary>
     public partial class usc_Monan : UserControl
     {
+        
+       
         public usc_Monan()
         {
             InitializeComponent();
@@ -31,16 +33,17 @@ namespace QuanLyTiecCuoi.UserControls
             btn_XoaMonAn.IsEnabled = false;
             tbx_TKMonAn.IsEnabled = false;
             cbb_LoaiMonAn.IsEnabled = false;
-            SetActiveUserControl(pptFood);
+            //SetActiveUserControl(pptFood);
         }
-        public void SetActiveUserControl(UserControl control)
-        {
-            //Collapsed usercontrol
-            pptFood.Visibility = Visibility.Collapsed;
-            grb_ListMenu.Visibility = Visibility.Collapsed;
+        //public void SetActiveUserControl(UserControl control)
+        //{
+        //    //Collapsed usercontrol
+        //    pptFood.Visibility = Visibility.Hidden;
+        //    grb_ListMenu.Visibility = Visibility.Hidden;
 
-            //Show usercontrol
-            control.Visibility = Visibility.Visible;
-        }
+        //    //Show usercontrol
+        //    control.Visibility = Visibility.Visible;
+        //}
     }
+   
 }
