@@ -9,13 +9,15 @@ using System.Windows.Data;
 using System.Windows;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Model;
+using System.Windows.Controls;
+using System.Data;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
     class TiecViewModel : BaseViewModel
     {
         private ObservableCollection<TIECCUOI> _List;
-        public ObservableCollection<TIECCUOI> List { get => _List;  set { _List = value; OnPropertyChanged(); } }
+        public ObservableCollection<TIECCUOI> List { get => _List; set { _List = value; OnPropertyChanged(); } }
         private ObservableCollection<CA> _ListCa;
         public ObservableCollection<CA> ListCa { get => _ListCa; set { _ListCa = value; OnPropertyChanged(); } }
         private ObservableCollection<SANH> _ListSanh;
@@ -33,7 +35,7 @@ namespace QuanLyTiecCuoi.ViewModel
         private int _MaTiecCuoi;
         public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
         private int _TongSoBan;
-        public int TongSoBan{ get => _TongSoBan; set { _TongSoBan = value; OnPropertyChanged(); } }
+        public int TongSoBan { get => _TongSoBan; set { _TongSoBan = value; OnPropertyChanged(); } }
         private string _TenChuRe;
         public string TenChuRe { get => _TenChuRe; set { _TenChuRe = value; OnPropertyChanged(); } }
         private string _TenCoDau;
@@ -54,7 +56,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public int MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
-        public ICommand PhieuDatBanCommand { get; set; }
+        public ICommand DatBanvaDichVuCommand { get; set; }
         public ICommand DoubleClickCommand { get; set; }
         public TiecViewModel()
         {
@@ -76,7 +78,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     TienDatCoc = TienDatCoc,
                     GhiChu = GhiChu,
                     MaSanh = Convert.ToInt32(MaSanh),
-                    MaCa = Convert.ToInt32(MaCa)                    
+                    MaCa = Convert.ToInt32(MaCa)
                 };
                 try
                 {
@@ -86,10 +88,10 @@ namespace QuanLyTiecCuoi.ViewModel
                     //DataProvider.Ins.DataBase.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[TIECCUOI] OFF");
                     DataProvider.Ins.DataBase.SaveChanges();
                     List.Add(Record);
-                   // string test = DataProvider.Ins.DataBase.TIECCUOIs.ElementAt(1).ToString();
-                  //  MessageBox.Show(test);
+                    // string test = DataProvider.Ins.DataBase.TIECCUOIs.ElementAt(1).ToString();
+                    //  MessageBox.Show(test);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     throw e;
                 }
@@ -118,8 +120,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 TiecCuoi.MaCa = Record.MaCa;
                 DataProvider.Ins.DataBase.SaveChanges();
             });
-            PhieuDatBanCommand = new RelayCommand<object>((p) => { return true; }, (p) => { PhieuDatBanWindow wd = new PhieuDatBanWindow(); wd.ShowDialog(); });
-            DoubleClickCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon hd = new HoaDon(); hd.ShowDialog(); });
+            DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow(); wd.ShowDialog(); });
+            DoubleClickCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) => { InHoaDon a = new InHoaDon(); a.ShowDialog(); _getMaTiecCuoi(p); HoaDon hd = new HoaDon(); hd.ShowDialog(); });
 
             DataGridCollection = CollectionViewSource.GetDefaultView(List);
             DataGridCollection.Filter = new Predicate<object>(Filter);
@@ -171,6 +173,20 @@ namespace QuanLyTiecCuoi.ViewModel
             }
         }
 
-        
+        private string _getMaTiecCuoi(DataGrid dataGrid)
+        {
+            if (dataGrid.SelectedItem != null)
+            {
+                TIECCUOI IdTiecCuoi = dataGrid.SelectedItem as TIECCUOI;
+                return IdTiecCuoi.MaTiecCuoi.ToString();
+
+            }
+            else
+            {
+                MessageBox.Show("Lỗi");
+                return "";
+            }
+        }
+
     }
 }
