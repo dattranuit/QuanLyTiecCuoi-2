@@ -12,7 +12,9 @@ namespace QuanLyTiecCuoi.ViewModel
     class SanhViewModel:BaseViewModel
     {
         private ObservableCollection<SANH> _ListSanh;
+        private ObservableCollection<LOAISANH> _ListLoaiSanh;
         public ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value; OnPropertyChanged(); } }
+        public ObservableCollection<LOAISANH> ListLoaiSanh { get => _ListLoaiSanh; set { _ListLoaiSanh = value; OnPropertyChanged(); } }
 
         private SANH _SelectedItem;
         public SANH SelectedItem
@@ -48,6 +50,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public SanhViewModel()
         {
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
+            ListLoaiSanh = new ObservableCollection<LOAISANH>(DataProvider.Ins.DataBase.LOAISANHs);
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
