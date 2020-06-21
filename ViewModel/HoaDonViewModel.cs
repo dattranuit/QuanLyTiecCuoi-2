@@ -62,7 +62,6 @@ namespace QuanLyTiecCuoi.ViewModel
         {
             List = new ObservableCollection<HOADON>(DataProvider.Ins.DataBase.HOADONs);
 
-            MessageBox.Show("âhahha");
 
             AddCommand = new RelayCommand<object>((p) =>
             {

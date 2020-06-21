@@ -7,6 +7,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             DataContext="{StaticResource BaoCaoThangVM}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
         <Grid>
@@ -117,13 +118,13 @@
                                             </materialDesign:Card>
                                         </DockPanel>
                                         <materialDesign:Card Margin="2">
-                                            <DataGrid  ItemsSource="{Binding Data}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
+                                            <DataGrid  ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Tháng" FontSize="14" Binding="{Binding Ngay}">
+                                                    <DataGridTextColumn Header="Tháng" FontSize="14" Binding="{Binding Thang}">
                                                     </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Năm" FontSize="14" Binding="{Binding SoLuongTiecCuoi}">
+                                                    <DataGridTextColumn Header="Năm" FontSize="14" Binding="{Binding Nam}">
                                                     </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Tổng doanh Thu" FontSize="14" Binding="{Binding DoanhThu}">
+                                                    <DataGridTextColumn Header="Tổng doanh Thu" FontSize="14" Binding="{Binding TongDoanhThu}" Width="*">
                                                     </DataGridTextColumn>
                                                 </DataGrid.Columns>
                                             </DataGrid>
@@ -150,6 +151,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
+                            DataContext="{StaticResource BaoCaoNgayVM}"
              d:DesignHeight="600" d:DesignWidth="600" Grid.ColumnSpan="2">
                             <Grid>
                                 <DockPanel LastChildFill="True">
@@ -173,7 +175,7 @@
                                         </DockPanel>
                                         <TextBlock Text="Tổng doanh thu tháng:" FontSize="18" VerticalAlignment="Center" Padding="8,0,0,0" Foreground="#FF0E2291" >
                                         </TextBlock>
-                                        <TextBlock Text="100000" FontSize="18" VerticalAlignment="Center" Padding="8,0,0,0" Foreground="#FF0E2291" ></TextBlock>
+                                        <TextBlock Text="{Binding TongDoanhThu}" FontSize="18" VerticalAlignment="Center" Padding="8,0,0,0" Foreground="#FF0E2291" ></TextBlock>
                                     </DockPanel>
                                     <Grid>
                                         <DockPanel LastChildFill="True">
@@ -214,7 +216,10 @@
                                                             </Button>
                                                         </Grid>
                                                         <Grid Grid.Column="7">
-                                                            <Button
+                                                            <Button  
+                                                                
+                                                                Command="{Binding ExportToExcel}"
+                                                                CommandParameter="{Binding ElementName=dtgBaoCaoNgay}"
                                                     Margin="2"
                                                     Content="Xuất Excel"
     Style="{StaticResource MaterialDesignRaisedButton}"
@@ -225,9 +230,9 @@
                                                 </materialDesign:Card>
                                             </DockPanel>
                                             <materialDesign:Card Margin="2">
-                                                <DataGrid  ItemsSource="{Binding Data}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
+                                                <DataGrid Name="dtgBaoCaoNgay" ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
                                                     <DataGrid.Columns>
-                                                        <DataGridTextColumn Header="STT" FontSize="14" Binding="{Binding STT}"/>
+                                                        <!--<DataGridTextColumn Header="STT" FontSize="14" Binding="{Binding STT}"/>-->
                                                         <DataGridTextColumn Header="Ngày" FontSize="14" Binding="{Binding Ngay}">
 
                                                         </DataGridTextColumn>
