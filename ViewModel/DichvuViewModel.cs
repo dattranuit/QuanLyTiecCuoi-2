@@ -9,7 +9,7 @@ using QuanLyTiecCuoi.Model;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
-    class DichvuViewModel : BaseViewModel
+    class DichVuViewModel : BaseViewModel
     {
         private ObservableCollection<DICHVU> _List;
         public ObservableCollection<DICHVU> List { get => _List; set { _List = value; OnPropertyChanged(); } }
@@ -44,7 +44,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public string GhiChu { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
-        public DichvuViewModel()
+        public DichVuViewModel()
         {
             List = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
             AddCommand = new RelayCommand<object>((p) =>

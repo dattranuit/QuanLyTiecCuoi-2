@@ -9,10 +9,11 @@
 
 namespace QuanLyTiecCuoi.Model
 {
+    using QuanLyTiecCuoi.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class CT_PHIEUDATBAN
+    public partial class CT_PHIEUDATBAN:BaseViewModel
     {
         public int MaPhieuDatBan { get; set; }
         public int MaMonAn { get; set; }

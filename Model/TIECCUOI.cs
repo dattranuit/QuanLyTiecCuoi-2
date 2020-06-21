@@ -10,9 +10,10 @@
 namespace QuanLyTiecCuoi.Model
 {
     using System;
+    using QuanLyTiecCuoi.ViewModel;
     using System.Collections.Generic;
     
-    public partial class TIECCUOI
+    public partial class TIECCUOI: BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TIECCUOI()

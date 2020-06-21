@@ -9,16 +9,21 @@
 
 namespace QuanLyTiecCuoi.Model
 {
+    using QuanLyTiecCuoi.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class PHIEUDATDICHVU
+    public partial class PHIEUDATDICHVU: BaseViewModel
     {
-        public int MaTiecCuoi { get; set; }
-        public int MaDichVu { get; set; }
-        public int SoLuong { get; set; }
-        public decimal DonGia { get; set; }
-    
+        private int _MaTiecCuoi;
+        private int _MaDichVu;
+        private int _SoLuong;
+        private decimal _DonGia;
+        public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
+        public int MaDichVu { get => _MaDichVu; set { _MaDichVu = value; OnPropertyChanged(); } }
+        public int SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
+        public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
+
         public virtual DICHVU DICHVU { get; set; }
         public virtual TIECCUOI TIECCUOI { get; set; }
     }

@@ -169,8 +169,8 @@
     <Compile Include="Model\TIECCUOI.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
-    <Compile Include="PhieuDatBanWindow.xaml.cs">
-      <DependentUpon>PhieuDatBanWindow.xaml</DependentUpon>
+    <Compile Include="DatBanvaDichVuWindow.xaml.cs">
+      <DependentUpon>DatBanvaDichVuWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\PropertiesFood.xaml.cs">
       <DependentUpon>PropertiesFood.xaml</DependentUpon>
@@ -203,11 +203,12 @@
     <Compile Include="ViewModel\BaoCaoThangViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CaViewModel.cs" />
-    <Compile Include="ViewModel\DichvuViewModel.cs" />
+    <Compile Include="ViewModel\DichVuViewModel.cs" />
     <Compile Include="ViewModel\HoaDonViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MonanViewModel.cs" />
     <Compile Include="ViewModel\PhieuDatBanViewModel.cs" />
+    <Compile Include="ViewModel\PhieuDatDichVuViewModel.cs" />
     <Compile Include="ViewModel\SanhViewModel.cs" />
     <Compile Include="ViewModel\TiecViewModel.cs" />
     <Page Include="HoaDon.xaml">
@@ -233,7 +234,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PhieuDatBanWindow.xaml">
+    <Page Include="DatBanvaDichVuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -360,10 +361,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Database.mdf" />
-    <Content Include="bin\Debug\Database_log.ldf">
-      <DependentUpon>Database.mdf</DependentUpon>
-    </Content>
     <Content Include="Database.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

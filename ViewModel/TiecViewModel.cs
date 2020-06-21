@@ -52,7 +52,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public int MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
-        public ICommand PhieuDatBanCommand { get; set; }
+        public ICommand DatBanvaDichVuCommand { get; set; }
         public TiecViewModel()
         {
             List = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
@@ -115,7 +115,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 TiecCuoi.MaCa = Record.MaCa;
                 DataProvider.Ins.DataBase.SaveChanges();
             });
-            PhieuDatBanCommand = new RelayCommand<object>((p) => { return true; }, (p) => { PhieuDatBanWindow wd = new PhieuDatBanWindow(); wd.ShowDialog(); });
+            DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow(); wd.ShowDialog(); });
         }
         
     }
