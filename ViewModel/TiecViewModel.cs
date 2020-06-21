@@ -9,6 +9,8 @@ using System.Windows.Data;
 using System.Windows;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Model;
+using System.Windows.Controls;
+using System.Data;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
@@ -119,7 +121,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.SaveChanges();
             });
             PhieuDatBanCommand = new RelayCommand<object>((p) => { return true; }, (p) => { PhieuDatBanWindow wd = new PhieuDatBanWindow(); wd.ShowDialog(); });
-            DoubleClickCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon hd = new HoaDon(); hd.ShowDialog(); });
+            DoubleClickCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) => { InHoaDon a = new InHoaDon(); a.ShowDialog(); _getMaTiecCuoi(p); HoaDon hd = new HoaDon(); hd.ShowDialog(); });
 
             DataGridCollection = CollectionViewSource.GetDefaultView(List);
             DataGridCollection.Filter = new Predicate<object>(Filter);
@@ -171,6 +173,20 @@ namespace QuanLyTiecCuoi.ViewModel
             }
         }
 
+        private string _getMaTiecCuoi(DataGrid dataGrid)
+        {
+            if(dataGrid.SelectedItem != null)
+            {
+                TIECCUOI IdTiecCuoi = dataGrid.SelectedItem as TIECCUOI;
+                return IdTiecCuoi.MaTiecCuoi.ToString();
+                
+            }
+            else
+            {
+                MessageBox.Show("Lỗi");
+                return "";
+            }
+        }
         
     }
 }

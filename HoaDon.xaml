@@ -198,7 +198,7 @@
                                         <ColumnDefinition Width="403*"/>
                                         <ColumnDefinition Width="354*"/>
                                     </Grid.ColumnDefinitions>
-                                    <DataGrid  ItemsSource="{Binding Data}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
+                                    <DataGrid DataContext="{Binding }"  ItemsSource="{Binding Data}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="STT" FontSize="14" Binding="{Binding STT}"/>
                                             <DataGridTextColumn Header="Dịch vụ" FontSize="14" Binding="{Binding DichVu}">

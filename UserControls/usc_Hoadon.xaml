@@ -98,12 +98,12 @@
                                         </materialDesign:Card>
                                     </DockPanel>
                                     <materialDesign:Card Margin="2">
-                                        <DataGrid Margin="1" ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
+                                        <DataGrid Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
                                                 <DataGrid.InputBindings>
                                                     <MouseBinding
             MouseAction="LeftDoubleClick"
             Command="{Binding DoubleClickCommand}"
-            CommandParameter="{Binding List}"/>
+            CommandParameter="{Binding ElementName=dtgDSTiecCuoi}"/>
                                                 </DataGrid.InputBindings>
                                                 <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TenChuRe}">

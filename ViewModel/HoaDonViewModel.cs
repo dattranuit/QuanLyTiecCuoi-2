@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Web.UI.WebControls;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
@@ -100,7 +101,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 SelectedItem.TongTienBan = TongTienBan;
             });
 
-            LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
+            LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => {  HoaDon wd = new HoaDon(); wd.ShowDialog(); });
         }
     }
 }
