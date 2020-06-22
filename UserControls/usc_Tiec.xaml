@@ -16,7 +16,7 @@
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
                                    Margin="0,5,0,0"
                                    DockPanel.Dock="Top"/>
-                    <materialDesign:Card DockPanel.Dock="Top" Margin="10,10,10,5">
+                    <materialDesign:Card x:Name="mdc_ThongTinDatTiec" DockPanel.Dock="Top" Margin="10,10,10,5">
                         <Grid >
                             <GroupBox Header="Thông tin đặt tiệc" Margin="10,5,10,10">
                                 <Grid Margin="5,10,5,5">
@@ -51,11 +51,11 @@
                                                 <RowDefinition/>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
-                                            <TextBox Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenChuRe, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                            <TextBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenCoDau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                            <controls:NumericUpDown Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Value="{Binding SoDienThoai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HideUpDownButtons="True" TextAlignment="Left"/>
-                                            <DatePicker Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding NgayDatTiec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='mm/dd/yyyy'}"/>
-                                            <TextBox Grid.Row="4" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding GhiChu}"/>
+                                            <TextBox Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenChuRe, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                            <TextBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenCoDau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                            <TextBox Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SoDienThoai, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" PreviewTextInput="previewTextInput" DataObject.Pasting="TextBoxPasting"/>
+                                            <DatePicker Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding NgayDatTiec, UpdateSourceTrigger=PropertyChanged, StringFormat='mm/dd/yyyy', Mode=TwoWay}"/>
+                                            <TextBox Grid.Row="4" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                         </Grid>
                                     </Grid>
                                     <Grid Grid.Column="1" Margin="20,0,0,0">
@@ -86,9 +86,9 @@
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
                                             <DatePicker Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding NgayDaiTiec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='mm/dd/yyyy'}"/>
-                                            <ComboBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding MaCa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListCa, Mode=OneWay}" DisplayMemberPath="MaCa"/>
-                                            <ComboBox Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding MaSanh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListSanh, Mode=OneWay}" DisplayMemberPath="MaSanh"/>
-                                            <controls:NumericUpDown Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding TienDatCoc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <ComboBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding MaCa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding ListCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="MaCa"/>
+                                            <ComboBox Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding MaSanh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding ListSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="MaSanh"/>
+                                            <controls:NumericUpDown Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding TienDatCoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                             <Button Grid.Row="4"
                                                 Command="{Binding DatBanvaDichVuCommand}"
                                                 Style="{StaticResource MaterialDesignRaisedButton}"                      
@@ -102,7 +102,7 @@
                             </GroupBox>
                         </Grid>
                     </materialDesign:Card>
-                    <materialDesign:Card  DockPanel.Dock="Bottom" Margin="10,5,10,10">
+                    <materialDesign:Card x:Name="mdc_DanhSachTiecCuoi" DockPanel.Dock="Bottom" Margin="10,5,10,10">
                         <DockPanel>
                             <Grid DockPanel.Dock="Top" Margin="10,10,0,0">
                                 <Grid.ColumnDefinitions>
@@ -124,6 +124,9 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
+                                <Grid.Resources>
+                                    
+                                </Grid.Resources>
                                 <Button
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Grid.Column="0" Margin="10"
@@ -136,31 +139,28 @@
                                     ToolTip="In Hợp Đồng" Background="#FF0F5699" Foreground="White">
                                     In Hợp Đồng
                                 </Button>
-                                <Button x:Name="btn_Luu"
+                                <Button 
+                                    x:Name="btn_Them"
+                                    Command="{Binding AddCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="4" Margin="10"
-                                    Visibility="Hidden"
-                                    ToolTip="Lưu thông tin đặt Tiệc" Background="#FF0F5699" Foreground="White">
-                                    Lưu
+                                    Grid.Column="2" Margin="10"
+                                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White">
+                                    Thêm
                                 </Button>
                                 <Button
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="4" Margin="10"
-                                    Command="{Binding EditCommand}"
-                                    ToolTip="Sửa thông tin đặt Tiệc" Background="#FF0F5699" Foreground="White">
-                                    Sửa
-                                </Button>
-                                <Button
+                                    x:Name="btn_Xoa"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Grid.Column="3" Margin="10"
                                     ToolTip="Xóa thông tin đặt Tiệc" Background="#FF0F5699" Foreground="White">
                                     Xóa
                                 </Button>
                                 <Button
+                                    x:Name="btn_Sua"
+                                    Command="{Binding EditCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="2" Margin="10"
-                                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White">
-                                    Thêm
+                                    Grid.Column="4" Margin="10"
+                                    ToolTip="Sửa thông tin đặt Tiệc" Background="#FF0F5699" Foreground="White">
+                                    Sửa
                                 </Button>
                             </Grid>
                             <GroupBox Header="Danh sách tiệc cưới" Margin="10,0,0,10" Grid.Column="0">
@@ -169,10 +169,11 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Tên Chú Rể" Binding="{Binding TenChuRe}" IsReadOnly="True"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Tên Cô Dâu" Binding="{Binding TenCoDau}" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Điện thoại" Binding="{Binding SoDienThoai}" IsReadOnly="True"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Sảnh" Binding="{Binding MaSanh}" IsReadOnly="True"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Ngày Đãi Tiệc" Binding="{Binding NgayDaiTiec}" IsReadOnly="True"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Giờ" Binding="{Binding GhiChu}" IsReadOnly="True"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Số lượng bàn" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Ca" Binding="{Binding MaCa}" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True"></DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </GroupBox>
