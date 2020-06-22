@@ -16,24 +16,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value; OnPropertyChanged(); } }
         public ObservableCollection<LOAISANH> ListLoaiSanh { get => _ListLoaiSanh; set { _ListLoaiSanh = value; OnPropertyChanged(); } }
 
-        private SANH _SelectedItem;
-        public SANH SelectedItem
-        {
-            get => _SelectedItem;
-            set
-            {
-                _SelectedItem = value;
-                OnPropertyChanged();
-                if (SelectedItem != null)
-                {
-                    MaSanh = SelectedItem.MaSanh;
-                    TenSanh = SelectedItem.TenSanh;
-                    SoLuongBanToiDa = SelectedItem.SoLuongBanToiDa;
-                    GhiChu = SelectedItem.GhiChu;
-                    MaLoaiSanh = SelectedItem.MaLoaiSanh;
-                }
-            }
-        }
+        
         public int MaSanh { get => _MaSanh; set { _MaSanh = value; OnPropertyChanged(); } }
         public string TenSanh { get => _TenSanh; set { _TenSanh = value; OnPropertyChanged(); } }
         public int SoLuongBanToiDa { get => _SoLuongBanToiDa; set { _SoLuongBanToiDa = value; OnPropertyChanged(); } }
@@ -54,6 +37,26 @@ namespace QuanLyTiecCuoi.ViewModel
         //private string _TenLoaiSanh;
         //private int _DonGiaBanToiThieu;
         //private int _MaLoaiSanh2;
+
+        private SANH _SelectedItem;
+        public SANH SelectedItem
+        {
+            get => _SelectedItem;
+            set
+            {
+                _SelectedItem = value;
+                OnPropertyChanged();
+                if (SelectedItem != null)
+                {
+                    MaSanh = SelectedItem.MaSanh;
+                    TenSanh = SelectedItem.TenSanh;
+                    SoLuongBanToiDa = SelectedItem.SoLuongBanToiDa;
+                    GhiChu = SelectedItem.GhiChu;
+                    MaLoaiSanh = SelectedItem.MaLoaiSanh;
+                }
+            }
+        }
+
         public SanhViewModel()
         {
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
