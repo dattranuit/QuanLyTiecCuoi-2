@@ -7,13 +7,52 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             DataContext="{StaticResource TiecVM}"
+             DataContext="{StaticResource HoaDonVM}"
              d:DesignHeight="450" d:DesignWidth="800"><Grid
     xmlns:wpf="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" Background="White">
     <Grid>
-            <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
-                <controls:MetroTabItem Header="Tiệc cưới">
+        <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
+            <controls:MetroAnimatedTabControl.Resources>
+                <Style TargetType="controls:MetroTabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="controls:MetroTabItem">
+                                <Border Name="Border">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="20,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="BorderBrush" Value="#FF1585B5"/>
+                                        <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,3"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter Property="Foreground" Value="#FFAEAEBD" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FontWeight" Value="DemiBold"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="FontSize" Value="15"/>
+                </Style>
+                <Style TargetType="GroupBox">
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="HeaderTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" FontSize="15" Foreground="#FF0E2291"/>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </controls:MetroAnimatedTabControl.Resources>
+            <controls:MetroTabItem Header="Tiệc cưới">
                 <DockPanel LastChildFill="True">
                     <Grid>
                         <DockPanel LastChildFill="True">
@@ -59,12 +98,12 @@
                                         </materialDesign:Card>
                                     </DockPanel>
                                     <materialDesign:Card Margin="2">
-                                        <DataGrid Margin="1" ItemsSource="{Binding ListTiecCuoi}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
+                                        <DataGrid Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List2}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
                                                 <DataGrid.InputBindings>
                                                     <MouseBinding
             MouseAction="LeftDoubleClick"
             Command="{Binding DoubleClickCommand}"
-            CommandParameter="{Binding List}"/>
+            CommandParameter="{Binding ElementName=dtgDSTiecCuoi}"/>
                                                 </DataGrid.InputBindings>
                                                 <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TenChuRe}">
@@ -183,7 +222,7 @@
                                             </materialDesign:Card>
                                         </DockPanel>
                                         <materialDesign:Card Margin="2">
-                                                <DataGrid  ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
+                                                <DataGrid  ItemsSource="{Binding List2}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
                                                     <DataGrid.Columns>
                                                         <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TenChuRe}">
                                                         </DataGridTextColumn>

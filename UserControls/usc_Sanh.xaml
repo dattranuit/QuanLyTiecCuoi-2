@@ -88,9 +88,16 @@
                                     ItemsSource="{Binding ListSanh}"
                                     CanUserSortColumns="True"
                                     CanUserAddRows="False"
-                                    SelectionUnit="Cell"
+                                    AutoGenerateColumns="False"
+                                    SelectionUnit="FullRow"
                                     SelectionMode="Extended">
-                                    
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Mã Sảnh" Binding="{Binding MaSanh}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Tên Sảnh" Binding="{Binding TenSanh}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Số lượng bàn tối đa" Binding="{Binding SoLuongBanToiDa}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Mã loại Sảnh" Binding="{Binding MaLoaiSanh}"></DataGridTextColumn>
+                                    </DataGrid.Columns>
                                 </DataGrid>
                             </GroupBox>
                         </Grid>
@@ -237,7 +244,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="70"/>
                             <RowDefinition/>
-                            <RowDefinition Height="280"/>
+                            <RowDefinition Height="230"/>
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
@@ -268,8 +275,14 @@
                                     ItemsSource="{Binding ListLoaiSanh}"
                                     CanUserSortColumns="True"
                                     CanUserAddRows="False"
-                                    SelectionUnit="Cell"
+                                    SelectionUnit="FullRow"
+                                    AutoGenerateColumns="False"
                                     SelectionMode="Extended">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Mã loại Sảnh" Binding="{Binding MaLoaiSanh}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Tên loại Sảnh" Binding="{Binding TenLoaiSanh}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Đơn giá bàn tối thiểu" Binding="{Binding DonGiaBanToiThieu}"></DataGridTextColumn>
+                                    </DataGrid.Columns>
                                 </DataGrid>
                             </GroupBox>
                         </Grid>

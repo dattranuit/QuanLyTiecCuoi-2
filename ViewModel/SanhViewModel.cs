@@ -47,6 +47,13 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand PhieuDatBanCommand { get; set; }
+        //Loai sanh
+        //public string TenLoaiSanh { get => _TenLoaiSanh; set { _TenSanh = value; OnPropertyChanged(); } }
+        //public int DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
+        //public int MaLoaiSanh2 { get => _MaLoaiSanh2; set { _MaLoaiSanh2 = value; OnPropertyChanged(); } }
+        //private string _TenLoaiSanh;
+        //private int _DonGiaBanToiThieu;
+        //private int _MaLoaiSanh2;
         public SanhViewModel()
         {
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);

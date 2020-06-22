@@ -13,7 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition/>
-            <RowDefinition Height="280"/>
+            <RowDefinition Height="240"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -44,12 +44,23 @@
                 <ColumnDefinition Width="233*"/>
             </Grid.ColumnDefinitions>
             <GroupBox Header="Danh sách dịch vụ" Margin="22,0,22,0" Grid.Column="0">
-                <DataGrid x:Name="dtg_DichVu" Width="auto" 
+                <DataGrid  x:Name="dtg_DichVu" Width="auto" 
             ItemsSource="{Binding List}"
             CanUserSortColumns="True"
             CanUserAddRows="False"
-            SelectionUnit="Cell"
-            SelectionMode="Extended" />
+            SelectionUnit="FullRow"
+            AutoGenerateColumns="False"
+            SelectionMode="Extended" FontWeight="Bold">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã Dịch vụ" Binding="{Binding MaDichVu}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Tên Dịch vụ" Binding="{Binding TenDichVu}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Đơn giá " Binding="{Binding DonGia}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Mô tả" Binding="{Binding MoTa}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Hình ảnh" Binding="{Binding HinhAnh}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
             </GroupBox>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -59,7 +70,7 @@
                 <GroupBox Grid.Row="0" Header="Ảnh minh họa" Margin="0,0,10,0">
                     <Image x:Name="img_AnhDV" ></Image>
                 </GroupBox>
-                <Button x:Name="btn_FolderAnh" Grid.Row="1" Margin="85,5,85,0">
+                <Button x:Name="btn_FolderAnh" Grid.Row="1" Margin="85,5,85,0" BorderBrush="Black">
                     <Button.Background>
                         <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/icon_folder.jpg" Stretch="Uniform"/>
                     </Button.Background>
@@ -67,7 +78,7 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="2">
-            <GroupBox Header="Thông Tin Dịch Vụ">
+            <GroupBox Header="Thông Tin Dịch Vụ" OpacityMask="Black">
                 <materialDesign:Card Margin="12,12,12,12">
                     <Grid  >
                         <Grid.ColumnDefinitions>
