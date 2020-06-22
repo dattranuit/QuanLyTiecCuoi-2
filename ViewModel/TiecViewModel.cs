@@ -57,7 +57,9 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DatBanvaDichVuCommand { get; set; }
-        public ICommand DoubleClickCommand { get; set; }
+        
+
+        public ICommand LapHoaDonCommand { get; set; }
         public TiecViewModel()
         {
             List = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
@@ -121,72 +123,14 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.SaveChanges();
             });
             DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow(); wd.ShowDialog(); });
-            DoubleClickCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) => { InHoaDon a = new InHoaDon(); a.ShowDialog(); _getMaTiecCuoi(p); HoaDon hd = new HoaDon(); hd.ShowDialog(); });
+            
 
-            DataGridCollection = CollectionViewSource.GetDefaultView(List);
-            DataGridCollection.Filter = new Predicate<object>(Filter);
-
-        }
-        private ICollectionView _dataGridCollection;
-        private string _filterString;
-        public ICollectionView DataGridCollection
-        {
-            get { return _dataGridCollection; }
-            set { _dataGridCollection = value; NotifyPropertyChanged("DataGridCollection"); }
-        }
-        public string FilterString
-        {
-            get { return _filterString; }
-            set
-            {
-                _filterString = value;
-                NotifyPropertyChanged("FilterString");
-                FilterCollection();
-            }
-        }
-        private void FilterCollection()
-        {
-            if (_dataGridCollection != null)
-            {
-                _dataGridCollection.Refresh();
-            }
-        }
-        public bool Filter(object obj)
-        {
-            var data = obj as TIECCUOI;
-            if (data != null)
-            {
-                if (!string.IsNullOrEmpty(_filterString))
-                {
-                    return data.SoDienThoai.Contains(_filterString) || data.TenChuRe.Contains(_filterString) || data.TenCoDau.Contains(_filterString);
-                }
-                return true;
-            }
-            return false;
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            
+            LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
         }
 
-        private string _getMaTiecCuoi(DataGrid dataGrid)
-        {
-            if (dataGrid.SelectedItem != null)
-            {
-                TIECCUOI IdTiecCuoi = dataGrid.SelectedItem as TIECCUOI;
-                return IdTiecCuoi.MaTiecCuoi.ToString();
 
-            }
-            else
-            {
-                MessageBox.Show("Lỗi");
-                return "";
-            }
-        }
+        
 
     }
 }

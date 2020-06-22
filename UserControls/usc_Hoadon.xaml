@@ -7,7 +7,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             DataContext="{StaticResource TiecVM}"
+             DataContext="{StaticResource HoaDonVM}"
              d:DesignHeight="450" d:DesignWidth="800"><Grid
     xmlns:wpf="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" Background="White">
@@ -98,12 +98,12 @@
                                         </materialDesign:Card>
                                     </DockPanel>
                                     <materialDesign:Card Margin="2">
-                                        <DataGrid Margin="1" ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
+                                        <DataGrid Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List2}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
                                                 <DataGrid.InputBindings>
                                                     <MouseBinding
             MouseAction="LeftDoubleClick"
             Command="{Binding DoubleClickCommand}"
-            CommandParameter="{Binding List}"/>
+            CommandParameter="{Binding ElementName=dtgDSTiecCuoi}"/>
                                                 </DataGrid.InputBindings>
                                                 <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TenChuRe}">
@@ -222,7 +222,7 @@
                                             </materialDesign:Card>
                                         </DockPanel>
                                         <materialDesign:Card Margin="2">
-                                                <DataGrid  ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
+                                                <DataGrid  ItemsSource="{Binding List2}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
                                                     <DataGrid.Columns>
                                                         <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TenChuRe}">
                                                         </DataGridTextColumn>

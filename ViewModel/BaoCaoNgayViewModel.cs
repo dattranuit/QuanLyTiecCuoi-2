@@ -111,6 +111,7 @@ namespace QuanLyTiecCuoi.ViewModel
             });
             tongdoanhthu = TinhTongDoanhThu().ToString();
             ExportToExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) => { Ex2Excel(p); });
+
         }
         private decimal TinhTongDoanhThu()
         {
