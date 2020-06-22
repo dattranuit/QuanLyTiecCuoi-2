@@ -84,12 +84,14 @@
 
                         <Grid Grid.Row="1" Height="auto">
                             <GroupBox Header="Danh sách Sảnh" Margin="22,0,22,0">
-                                <DataGrid x:Name="dtg_Sanh" Width="auto"
-            ItemsSource="{Binding Items2}"
-            CanUserSortColumns="True"
-            CanUserAddRows="False"
-            SelectionUnit="Cell"
-            SelectionMode="Extended" />
+                                <DataGrid x:Name="dtg_Sanh" Width="auto" IsReadOnly="True"
+                                    ItemsSource="{Binding ListSanh}"
+                                    CanUserSortColumns="True"
+                                    CanUserAddRows="False"
+                                    SelectionUnit="Cell"
+                                    SelectionMode="Extended">
+                                    
+                                </DataGrid>
                             </GroupBox>
                         </Grid>
                         <Grid Grid.Row="2">
@@ -262,12 +264,13 @@
 
                         <Grid Grid.Row="1">
                             <GroupBox Header="Danh sách loại Sảnh" Margin="22,0,22,0">
-                                <DataGrid x:Name="dtg_LoaiSanh" Width="auto"
-            ItemsSource="{Binding Items2}"
-            CanUserSortColumns="True"
-            CanUserAddRows="False"
-            SelectionUnit="Cell"
-            SelectionMode="Extended" />
+                                <DataGrid x:Name="dtg_LoaiSanh" Width="auto" IsReadOnly="True"
+                                    ItemsSource="{Binding ListLoaiSanh}"
+                                    CanUserSortColumns="True"
+                                    CanUserAddRows="False"
+                                    SelectionUnit="Cell"
+                                    SelectionMode="Extended">
+                                </DataGrid>
                             </GroupBox>
                         </Grid>
                         <Grid Grid.Row="2">
