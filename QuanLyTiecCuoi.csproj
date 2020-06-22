@@ -108,6 +108,9 @@
     <Compile Include="HoaDon.xaml.cs">
       <DependentUpon>HoaDon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InHoaDon.xaml.cs">
+      <DependentUpon>InHoaDon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\BAOCAONGAY.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
@@ -220,6 +223,10 @@
     <Page Include="HoaDon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InHoaDon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
