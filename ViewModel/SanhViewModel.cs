@@ -31,12 +31,12 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand PhieuDatBanCommand { get; set; }
         //Loai sanh
-        //public string TenLoaiSanh { get => _TenLoaiSanh; set { _TenSanh = value; OnPropertyChanged(); } }
-        //public int DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
-        //public int MaLoaiSanh2 { get => _MaLoaiSanh2; set { _MaLoaiSanh2 = value; OnPropertyChanged(); } }
-        //private string _TenLoaiSanh;
-        //private int _DonGiaBanToiThieu;
-        //private int _MaLoaiSanh2;
+        public string TenLoaiSanh { get => _TenLoaiSanh; set { _TenLoaiSanh = value; OnPropertyChanged(); } }
+        public int DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
+        public int MaLoaiSanh2 { get => _MaLoaiSanh2; set { _MaLoaiSanh2 = value; OnPropertyChanged(); } }
+        private string _TenLoaiSanh;
+        private int _DonGiaBanToiThieu;
+        private int _MaLoaiSanh2;
 
         private SANH _SelectedItem;
         public SANH SelectedItem
@@ -57,6 +57,22 @@ namespace QuanLyTiecCuoi.ViewModel
             }
         }
 
+        private LOAISANH _SelectedItem2;
+        public LOAISANH SelectedItem2
+        {
+            get => _SelectedItem2;
+            set
+            {
+                _SelectedItem2 = value;
+                OnPropertyChanged();
+                if (SelectedItem2 != null)
+                {
+                    MaLoaiSanh2 = SelectedItem2.MaLoaiSanh;
+                    TenLoaiSanh = SelectedItem2.TenLoaiSanh;
+                    DonGiaBanToiThieu = Convert.ToInt32(SelectedItem2.DonGiaBanToiThieu);
+                }
+            }
+        }
         public SanhViewModel()
         {
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);

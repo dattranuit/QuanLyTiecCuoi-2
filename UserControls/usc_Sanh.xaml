@@ -62,12 +62,13 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="440*"/>
+                                <ColumnDefinition Width="153*"/>
+                                <ColumnDefinition Width="283*"/>
                                 <ColumnDefinition Width="70"/>
-                                <ColumnDefinition Width="297*"/>
+                                <ColumnDefinition Width="294*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Quản lý Sảnh" Foreground="#FF0E2291" Margin="50,14,0,14" VerticalAlignment="Center" FontSize="32" Height="42" />
-                            <Ellipse Margin="10,11,10,10" Grid.Column="1" Height="auto" >
+                            <TextBlock Text="Quản lý Sảnh" Foreground="#FF0E2291" Margin="50,14,0,14" VerticalAlignment="Center" FontSize="32" Height="42" Grid.ColumnSpan="2" />
+                            <Ellipse Margin="10,11,10,10" Grid.Column="2" Height="auto" >
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/search_sanh_icon.png"/>
                                 </Ellipse.Fill>
@@ -77,7 +78,7 @@
                                          controls:TextBoxHelper.Watermark="Tìm kiếm Sảnh"
                                          BorderThickness="0,0,0,1" Height="32"
                                          BorderBrush="Black"
-                                         FontSize="15" Grid.Column="2"
+                                         FontSize="15" Grid.Column="3"
                                          VerticalAlignment="Center" Margin="0,19,25,19">
                             </TextBox>
                         </Grid>
@@ -90,13 +91,13 @@
                                     CanUserAddRows="False"
                                     SelectionUnit="FullRow"
                                     AutoGenerateColumns="False"
-                                    SelectionMode="Extended">
+                                    SelectionMode="Extended" Margin="5,0,-5,0">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Mã Sảnh" Binding="{Binding MaSanh}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Tên Sảnh" Binding="{Binding TenSanh}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Số lượng bàn tối đa" Binding="{Binding SoLuongBanToiDa}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Mã loại Sảnh" Binding="{Binding MaLoaiSanh}"></DataGridTextColumn>
+                                        <DataGridTextColumn Width="*" Header="Mã loại Sảnh" Binding="{Binding MaLoaiSanh}"></DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </GroupBox>
@@ -244,7 +245,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="70"/>
                             <RowDefinition/>
-                            <RowDefinition Height="230"/>
+                            <RowDefinition Height="220"/>
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
@@ -271,7 +272,7 @@
 
                         <Grid Grid.Row="1">
                             <GroupBox Header="Danh sách loại Sảnh" Margin="22,0,22,0">
-                                <DataGrid x:Name="dtg_LoaiSanh" Width="auto" IsReadOnly="True"
+                                <DataGrid x:Name="dtg_LoaiSanh" Width="auto" IsReadOnly="True" SelectedItem="{Binding SelectedItem2}"
                                     ItemsSource="{Binding ListLoaiSanh}"
                                     CanUserSortColumns="True"
                                     CanUserAddRows="False"
@@ -281,7 +282,7 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Mã loại Sảnh" Binding="{Binding MaLoaiSanh}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Tên loại Sảnh" Binding="{Binding TenLoaiSanh}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Đơn giá bàn tối thiểu" Binding="{Binding DonGiaBanToiThieu}"></DataGridTextColumn>
+                                        <DataGridTextColumn Width="*" Header="Đơn giá bàn tối thiểu" Binding="{Binding DonGiaBanToiThieu}"></DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </GroupBox>
@@ -302,9 +303,9 @@
                                         <Label Content="Tên Loại Sảnh" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30"></Label>
                                         <Label Content="Mã Loại Sảnh" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30"></Label>
                                         <Label Content="Đơn giá bàn tối thiểu" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30"></Label>
-                                        <TextBox x:Name="txb_TenLoaiSanh2" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="0" FontSize="15"></TextBox>
-                                        <TextBox x:Name="txb_MaLoaiSanh2" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="1" FontSize="15"></TextBox>
-                                        <TextBox x:Name="txb_DGBTT2" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="2" FontSize="15"></TextBox>
+                                        <TextBox x:Name="txb_TenLoaiSanh2" Text="{Binding TenLoaiSanh}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="0" FontSize="15"></TextBox>
+                                        <TextBox x:Name="txb_MaLoaiSanh2" Text="{Binding MaLoaiSanh2}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="1" FontSize="15"></TextBox>
+                                        <TextBox x:Name="txb_DGBTT2" Text="{Binding DonGiaBanToiThieu}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="2" FontSize="15"></TextBox>
                                     </Grid>
                                 </materialDesign:Card>
                             </GroupBox>
