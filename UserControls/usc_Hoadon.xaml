@@ -112,7 +112,7 @@
                                                 </DataGridTextColumn>
                                                     <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding SoDienThoai}">
                                                     </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Ngày đặt tiệc" FontSize="14" Binding="{Binding NgayDatTiec, StringFormat='dd/MM/yyyy'}" Width="*">
+                                                    <DataGridTextColumn Header="Ngày đặt tiệc" FontSize="14" Binding="{Binding NgayDaiTiec, StringFormat='dd/MM/yyyy'}" Width="*">
                                                 </DataGridTextColumn>
                                                 </DataGrid.Columns>
                                         </DataGrid>

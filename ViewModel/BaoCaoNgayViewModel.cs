@@ -143,7 +143,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     myRange.Value2 = b.Text;
                 }
             }
-
+            
         }
 
         public dynamic Activate()
