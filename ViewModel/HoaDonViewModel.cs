@@ -59,17 +59,40 @@ namespace QuanLyTiecCuoi.ViewModel
         public DateTime NgayThanhToan { get => _NgayThanhToan; set { _NgayThanhToan = value; OnPropertyChanged(); } }
 
 
-        //public ICommand AddCommand { get; set; }
-        //public ICommand EditCommand { get; set; }
         public ICommand DoubleClickCommand { get; set; }
         private ObservableCollection<TIECCUOI> _List2;
         public ObservableCollection<TIECCUOI> List2 { get => _List2; set { _List2 = value; OnPropertyChanged(); } }
         public ObservableCollection<TIECCUOI> _List3;
         public ObservableCollection<TIECCUOI> List3 { get => _List3; set { _List3 = value; OnPropertyChanged(); } }
+
+        public ObservableCollection<PHIEUDATBAN> _List4;
+        public ObservableCollection<PHIEUDATBAN> List4 { get => _List4; set { _List4 = value; OnPropertyChanged(); } }
+
         public int idTiecCuoi = 0;
-        public string tenchure = "AAA";
+        public string TongSoBan = "";
+        //public decimal TongTienBan = 0;
+
         private string _TenChuRe;
         public string TenChuRe { get => _TenChuRe; set { _TenChuRe = value; OnPropertyChanged(); } }
+
+        private string _TenCoDau;
+        public string TenCoDau { get => _TenCoDau; set { _TenCoDau = value; OnPropertyChanged(); } }
+
+        private System.DateTime _NgayDaiTiec;//= DateTime.Now;
+        public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; set { _NgayDaiTiec = value; OnPropertyChanged(); } }
+
+
+        private int _SoLuong;
+        private int _SoLuongDuTru;
+        private decimal _DonGiaBan;
+    
+        public int SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
+        public int SoLuongDuTru { get => _SoLuongDuTru; set { _SoLuongDuTru = value; OnPropertyChanged(); } }
+        public decimal DonGiaBan { get => _DonGiaBan; set { _DonGiaBan = value; OnPropertyChanged(); } }
+
+        private string _TienDatCoc;
+        public string TienDatCoc { get => _TienDatCoc; set { _TienDatCoc = value; OnPropertyChanged(); } }
+
         public HoaDonViewModel()
         {
             List2 = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
@@ -82,7 +105,9 @@ namespace QuanLyTiecCuoi.ViewModel
                     idTiecCuoi = _getMaTiecCuoi(p);
                     HoaDon hd = new HoaDon();
                     data();
-                    hd.DataContext = List3; hd.ShowDialog();
+                    hd.DataContext = List3;
+                    hd.DataContext = List2;
+                    hd.ShowDialog();
                 });
         }
 
@@ -123,14 +148,14 @@ namespace QuanLyTiecCuoi.ViewModel
             }
             return false;
         }
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //private void NotifyPropertyChanged(string property)
-        //{
-        //    if (PropertyChanged != null)
-        //    {
-        //        PropertyChanged(this, new PropertyChangedEventArgs(property));
-        //    }
-        //}
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
         
         private void data()
         {
@@ -139,6 +164,17 @@ namespace QuanLyTiecCuoi.ViewModel
             if (List3 != null)
             {
                 TenChuRe = List3.SingleOrDefault().TenChuRe;
+                TenCoDau = List3.SingleOrDefault().TenCoDau;
+                NgayDaiTiec = List3.SingleOrDefault().NgayDaiTiec; //Ngay thanh toan trung ngay dai tiec, qua han tinh phat (Neu co)
+                TienDatCoc = Convert.ToString(List3.SingleOrDefault().TienDatCoc);
+            }
+            List4 = new ObservableCollection<PHIEUDATBAN>(DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == idTiecCuoi));
+            DataProvider.Ins.DataBase.SaveChanges();
+            if(List4 != null)
+            {
+                TongSoBan = Convert.ToString(List4.SingleOrDefault().SoLuong + List4.SingleOrDefault().SoLuongDuTru); // Tong so ban =  So luong ban + So luong du tru
+                TongTienBan = List4.SingleOrDefault().DonGiaBan * Convert.ToInt32(TongSoBan);
+                DonGiaBan = List4.SingleOrDefault().DonGiaBan;
             }
         }
         public int _getMaTiecCuoi(DataGrid dataGrid)
