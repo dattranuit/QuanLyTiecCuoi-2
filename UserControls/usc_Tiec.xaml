@@ -173,7 +173,7 @@
                                         <DataGridTextColumn Header="Sảnh" Binding="{Binding MaSanh}" IsReadOnly="True"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Ngày Đãi Tiệc" Binding="{Binding NgayDaiTiec}" IsReadOnly="True"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Ca" Binding="{Binding MaCa}" IsReadOnly="True"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True" Width="*"></DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </GroupBox>

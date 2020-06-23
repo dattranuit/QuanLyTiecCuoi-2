@@ -116,7 +116,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICollectionView DataGridCollection
         {
             get { return _dataGridCollection; }
-            set { _dataGridCollection = value; NotifyPropertyChanged("DataGridCollection"); }
+            set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
         }
         public string FilterString
         {
@@ -124,7 +124,7 @@ namespace QuanLyTiecCuoi.ViewModel
             set
             {
                 _filterString = value;
-                NotifyPropertyChanged("FilterString");
+                OnPropertyChanged("FilterString");
                 FilterCollection();
             }
         }
