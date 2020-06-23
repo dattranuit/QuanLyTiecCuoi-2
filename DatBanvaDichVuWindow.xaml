@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Phiếu đặt bàn" Height="662" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Đặt Bàn và Dịch vụ" Height="662" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
             <controls:MetroAnimatedTabControl.Resources>
@@ -49,7 +49,7 @@
                     </Setter>
                 </Style>
             </controls:MetroAnimatedTabControl.Resources>
-            <controls:MetroTabItem Header="Đặt bàn">
+            <controls:MetroTabItem Header="Phiếu đặt bàn">
                 <DockPanel LastChildFill="True">
                     <TextBlock Text="Phiếu Đặt Bàn" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
@@ -233,9 +233,9 @@
                     </materialDesign:Card>
                 </DockPanel>
             </controls:MetroTabItem>
-            <controls:MetroTabItem Header="Đặt dịch vụ">
+            <controls:MetroTabItem Header="Phiếu đặt dịch vụ">
                 <DockPanel LastChildFill="True">
-                    <TextBlock Text="Phiếu đặt dịch vụ" HorizontalAlignment="Center"
+                    <TextBlock Text="Phiếu Đặt Dịch Vụ" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
                                    Margin="0,5,0,0" FontWeight="SemiBold"
                                    DockPanel.Dock="Top"/>
@@ -247,7 +247,7 @@
                                     <ColumnDefinition Width="0.5*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBox x:Name="tbx_TimKiemDichVu"
-                                controls:TextBoxHelper.Watermark="Tìm kiếm loại bàn"
+                                controls:TextBoxHelper.Watermark="Tìm kiếm dịch vụ"
                                 BorderThickness="0,0,0,1" Height="32"
                                 BorderBrush="Black"
                                 FontSize="15" Grid.Column="0"
@@ -260,12 +260,6 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Button
-                                    Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Grid.Column="0" Margin="10"
-                                    ToolTip="Xem Hợp Đồng" Background="#FF0F5699" Foreground="White">
-                                    Chi tiết đặt bàn
-                                </Button>
                                 <Button
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Grid.Column="1" Margin="10"
@@ -285,19 +279,16 @@
                                     Thoát
                                 </Button>
                             </Grid>
-                            <GroupBox DockPanel.Dock="Top" Header="Danh sách đặt bàn" Margin="10" >
-                                <ScrollViewer VerticalScrollBarVisibility="Auto" DataContext="{StaticResource PhieuDatBanVM}">
-                                    <DataGrid ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" 
+                            <GroupBox DockPanel.Dock="Top" Header="Danh sách Dịch vụ" Margin="10" >
+                                <DataGrid DataContext="{StaticResource PhieuDatDichVuVM}" ItemsSource="{Binding ListDichVu}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" 
                                                   AutoGenerateColumns="False" CanUserAddRows="False" controls:DataGridHelper.ColumnHeaderPadding="10,0">
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Loại bàn" Binding="{Binding MaMonAn, Mode=OneWayToSource}" IsReadOnly="True"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Số lượng" Binding="{Binding TenMonAn}" IsReadOnly="True"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Số lượng dự trữ" Binding="{Binding DonGia}" IsReadOnly="True"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Đơn giá bàn" Binding="{Binding MoTa}" IsReadOnly="True"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True"></DataGridTextColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </ScrollViewer>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Tên dịch vụ" Binding="{Binding TenDichVu}" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGia}" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Mô tả" Binding="{Binding MoTa}" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True"></DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
                             </GroupBox>
                         </DockPanel>
                     </materialDesign:Card>

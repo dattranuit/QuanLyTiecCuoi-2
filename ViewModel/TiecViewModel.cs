@@ -63,23 +63,34 @@ namespace QuanLyTiecCuoi.ViewModel
         public decimal TienDatCoc { get => _TienDatCoc; set { _TienDatCoc = value; OnPropertyChanged(); } }
         private string _GhiChu;
         public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
-        private int _MaSanh;
-        public int MaSanh { get => _MaSanh; set { _MaSanh = value; OnPropertyChanged(); } }
-        private int _MaCa;
-        public int MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
+        private int? _MaSanh;
+        public int? MaSanh { get => _MaSanh; set { _MaSanh = value; OnPropertyChanged(); } }
+        private int? _MaCa;
+        public int? MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DatBanvaDichVuCommand { get; set; }
-        public ICommand DoubleClickCommand { get; set; }
+        public ICommand LapHoaDonCommand { get; set; }
+        bool Addable()
+        {
+            if (String.IsNullOrEmpty(TenChuRe))
+                return false;
+            if (String.IsNullOrEmpty(TenCoDau))
+                return false;
+            if (String.IsNullOrEmpty(SoDienThoai))
+                return false;
+            if (MaSanh == null)
+                return false;
+            if (MaCa == null)
+                return false;
+            return true;           
+        }
         public TiecViewModel()
         {
             ListTiecCuoi = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
             ListCa = new ObservableCollection<CA>(DataProvider.Ins.DataBase.CAs);
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
-            AddCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) =>
+            AddCommand = new RelayCommand<object>((p) => Addable() , (p) =>
             {
                 SelectedItem = new TIECCUOI()
                 {
@@ -117,76 +128,21 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 var TiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedItem.MaTiecCuoi).SingleOrDefault();
-                TiecCuoi.TenChuRe = SelectedItem.TenChuRe;
-                TiecCuoi.TenCoDau = SelectedItem.TenCoDau;
-                TiecCuoi.SoDienThoai = SelectedItem.SoDienThoai;
-                TiecCuoi.NgayDatTiec = SelectedItem.NgayDatTiec;
-                TiecCuoi.NgayDaiTiec = SelectedItem.NgayDaiTiec;
-                TiecCuoi.TienDatCoc = SelectedItem.TienDatCoc;
-                TiecCuoi.GhiChu = SelectedItem.GhiChu;
-                TiecCuoi.MaSanh = Convert.ToInt32(SelectedItem.MaSanh);
-                TiecCuoi.MaCa = Convert.ToInt32(SelectedItem.MaCa);
+                TiecCuoi.TenChuRe = TenChuRe;
+                TiecCuoi.TenCoDau = TenCoDau;
+                TiecCuoi.SoDienThoai = SoDienThoai;
+                TiecCuoi.NgayDatTiec = NgayDatTiec;
+                TiecCuoi.NgayDaiTiec = NgayDaiTiec;
+                TiecCuoi.TienDatCoc = TienDatCoc;
+                TiecCuoi.GhiChu = GhiChu;
+                TiecCuoi.MaSanh = Convert.ToInt32(MaSanh);
+                TiecCuoi.MaCa = Convert.ToInt32(MaCa);
                 DataProvider.Ins.DataBase.SaveChanges();
-                MessageBox.Show(SelectedItem.TenCoDau);
             });
             DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow(); wd.ShowDialog(); });
-            DoubleClickCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) => { InHoaDon a = new InHoaDon(); a.ShowDialog(); _getMaTiecCuoi(p); HoaDon hd = new HoaDon(); hd.ShowDialog(); });
-
-            DataGridCollection = CollectionViewSource.GetDefaultView(ListTiecCuoi);
-            DataGridCollection.Filter = new Predicate<object>(Filter);
-
+            LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
         }
-        private ICollectionView _dataGridCollection;
-        private string _filterString;
-        public ICollectionView DataGridCollection
-        {
-            get { return _dataGridCollection; }
-            set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
-        }
-        public string FilterString
-        {
-            get { return _filterString; }
-            set
-            {
-                _filterString = value;
-                OnPropertyChanged("FilterString");
-                FilterCollection();
-            }
-        }
-        private void FilterCollection()
-        {
-            if (_dataGridCollection != null)
-            {
-                _dataGridCollection.Refresh();
-            }
-        }
-        public bool Filter(object obj)
-        {
-            var data = obj as TIECCUOI;
-            if (data != null)
-            {
-                if (!string.IsNullOrEmpty(_filterString))
-                {
-                    return data.SoDienThoai.Contains(_filterString) || data.TenChuRe.Contains(_filterString) || data.TenCoDau.Contains(_filterString);
-                }
-                return true;
-            }
-            return false;
-        }
-        private string _getMaTiecCuoi(DataGrid dataGrid)
-        {
-            if (dataGrid.SelectedItem != null)
-            {
-                TIECCUOI IdTiecCuoi = dataGrid.SelectedItem as TIECCUOI;
-                return IdTiecCuoi.MaTiecCuoi.ToString();
-
-            }
-            else
-            {
-                MessageBox.Show("Lỗi");
-                return "";
-            }
-        }
+   
 
     }
 }

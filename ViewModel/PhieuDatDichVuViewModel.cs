@@ -16,13 +16,13 @@ namespace QuanLyTiecCuoi.ViewModel
         private ObservableCollection<DICHVU> _ListDichVu;
         public ObservableCollection<DICHVU> ListDichVu { get => _ListDichVu; set { _ListDichVu = value; OnPropertyChanged(); } }
 
-        private PHIEUDATDICHVU _Record;
-        public PHIEUDATDICHVU Record
+        private PHIEUDATDICHVU _SelectedItem;
+        public PHIEUDATDICHVU SelectedItem
         {
-            get => _Record;
+            get => _SelectedItem;
             set
             {
-                _Record = value;
+                _SelectedItem = value;
                 OnPropertyChanged();
             }
         }
@@ -61,19 +61,19 @@ namespace QuanLyTiecCuoi.ViewModel
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (Record == null)
+                if (SelectedItem == null)
                     return false;
-                var displayList = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == Record.MaDichVu && x.MaTiecCuoi == Record.MaTiecCuoi);
+                var displayList = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == SelectedItem.MaDichVu && x.MaTiecCuoi == SelectedItem.MaTiecCuoi);
                 if (displayList != null && displayList.Count() != 0)
                     return true;
                 return false;
             }, (p) =>
             {
-                var DichVu = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == Record.MaDichVu && x.MaTiecCuoi == Record.MaTiecCuoi).SingleOrDefault();
-                DichVu.MaDichVu = Record.MaDichVu;
-                DichVu.MaTiecCuoi = Record.MaTiecCuoi;
-                DichVu.SoLuong = Record.SoLuong;
-                DichVu.DonGia = Record.DonGia;
+                var DichVu = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == SelectedItem.MaDichVu && x.MaTiecCuoi == SelectedItem.MaTiecCuoi).SingleOrDefault();
+                DichVu.MaDichVu = SelectedItem.MaDichVu;
+                DichVu.MaTiecCuoi = SelectedItem.MaTiecCuoi;
+                DichVu.SoLuong = SelectedItem.SoLuong;
+                DichVu.DonGia = SelectedItem.DonGia;
                 DataProvider.Ins.DataBase.SaveChanges();
             });
             var ShowRecord = new PhieuDatBanViewModel()
