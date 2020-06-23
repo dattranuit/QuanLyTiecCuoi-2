@@ -44,7 +44,7 @@
                 <ColumnDefinition Width="233*"/>
             </Grid.ColumnDefinitions>
             <GroupBox Header="Danh sách dịch vụ" Margin="22,0,22,0" Grid.Column="0">
-                <DataGrid  x:Name="dtg_DichVu" Width="auto" 
+                <DataGrid  x:Name="dtg_DichVu" Width="auto" SelectedItem="{Binding SelectedItem}"
             ItemsSource="{Binding List}"
             CanUserSortColumns="True"
             CanUserAddRows="False"
@@ -93,9 +93,9 @@
                         <Label Content="Tên Dịch Vụ" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" FontSize="15" FontWeight="Bold"></Label>
                         <Label Content="Mã Dịch Vụ" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" FontSize="15" FontWeight="Bold"></Label>
                         <Label Content="Đơn giá" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" FontSize="15" FontWeight="Bold"></Label>
-                        <TextBox x:Name="txb_TenDichVu" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="0" FontSize="15"></TextBox>
-                        <TextBox x:Name="txb_MaDichVu" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="1" FontSize="15"></TextBox>
-                        <TextBox x:Name="txb_DonGiaDV" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="2" FontSize="15"></TextBox>
+                        <TextBox x:Name="txb_TenDichVu" Text="{Binding TenDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="0" FontSize="15"></TextBox>
+                        <TextBox x:Name="txb_MaDichVu" Text="{Binding MaDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="1" FontSize="15"></TextBox>
+                        <TextBox x:Name="txb_DonGiaDV" Text="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="2" FontSize="15"></TextBox>
                     </Grid>
                 </materialDesign:Card>
             </GroupBox>
