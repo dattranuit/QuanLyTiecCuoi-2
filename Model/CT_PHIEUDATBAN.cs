@@ -15,12 +15,17 @@ namespace QuanLyTiecCuoi.Model
     
     public partial class CT_PHIEUDATBAN:BaseViewModel
     {
-        public int MaPhieuDatBan { get; set; }
-        public int MaMonAn { get; set; }
-        public int SoLuong { get; set; }
-        public decimal DonGia { get; set; }
-        public string GhiChu { get; set; }
-    
+        private int _MaPhieuDatBan;
+        private int _MaMonAn;
+        private int _SoLuong;
+        private decimal _DonGia;
+        private string _GhiChu;
+        public int MaPhieuDatBan { get => _MaPhieuDatBan; set { _MaPhieuDatBan = value; OnPropertyChanged(); }}
+        public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
+        public int SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
+        public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
+        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+
         public virtual MONAN MONAN { get; set; }
         public virtual PHIEUDATBAN PHIEUDATBAN { get; set; }
     }
