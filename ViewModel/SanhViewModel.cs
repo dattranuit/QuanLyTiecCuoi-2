@@ -38,6 +38,8 @@ namespace QuanLyTiecCuoi.ViewModel
         private int _DonGiaBanToiThieu;
         private int _MaLoaiSanh2;
 
+        public List<string> LoaiSanhItemList { get; set; }
+
         private SANH _SelectedItem;
         public SANH SelectedItem
         {
@@ -73,8 +75,21 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
+
+        List<string> GetLoaiSanhItem()
+        {
+            List<string> listitemLoaiSanh = new List<string>();
+            var loaisanh = new List<LOAISANH>(DataProvider.Ins.DataBase.LOAISANHs);
+            foreach(LOAISANH a in loaisanh)
+            {
+                listitemLoaiSanh.Add(a.MaLoaiSanh.ToString());
+            }
+            return listitemLoaiSanh;
+        }
+
         public SanhViewModel()
         {
+            LoaiSanhItemList = GetLoaiSanhItem();
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
             ListLoaiSanh = new ObservableCollection<LOAISANH>(DataProvider.Ins.DataBase.LOAISANHs);
             AddCommand = new RelayCommand<object>((p) =>
