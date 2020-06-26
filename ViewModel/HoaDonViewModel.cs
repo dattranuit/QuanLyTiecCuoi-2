@@ -148,14 +148,6 @@ namespace QuanLyTiecCuoi.ViewModel
             }
             return false;
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
         
         private void data()
         {

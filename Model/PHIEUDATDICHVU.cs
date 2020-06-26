@@ -17,8 +17,8 @@ namespace QuanLyTiecCuoi.Model
     {
         private int _MaTiecCuoi;
         private int _MaDichVu;
-        private int _SoLuong;
-        private decimal _DonGia;
+        private int _SoLuong = 0;
+        private decimal _DonGia = 0;
         public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
         public int MaDichVu { get => _MaDichVu; set { _MaDichVu = value; OnPropertyChanged(); } }
         public int SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }

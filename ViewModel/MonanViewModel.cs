@@ -55,7 +55,6 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 var MonAn = new MONAN()
                 {
-                    MaMonAn = MaMonAn,
                     TenMonAn = TenMonAn,
                     DonGia = DonGia,
                     MoTa = MoTa,

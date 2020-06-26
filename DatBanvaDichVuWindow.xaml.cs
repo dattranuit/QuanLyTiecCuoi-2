@@ -24,5 +24,17 @@ namespace QuanLyTiecCuoi
         {
             InitializeComponent();
         }
+
+        private void btn_PDDV_Them_Click(object sender, RoutedEventArgs e)
+        {
+            grr_1.Height = new GridLength(0.9, GridUnitType.Star);
+            dpn_DanhSachDichVu.Visibility = Visibility.Visible;
+        }
+
+        private void btn_PDDV_Sua_Click(object sender, RoutedEventArgs e)
+        {
+            dpn_DanhSachDichVu.Visibility = Visibility.Hidden;
+            grr_1.Height = new GridLength(0.4, GridUnitType.Star);
+        }
     }
 }
