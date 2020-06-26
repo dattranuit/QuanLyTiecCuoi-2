@@ -70,10 +70,20 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=3.1.3.1513, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MaterialDesignThemes.3.1.3\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel1">
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -101,6 +111,9 @@
     </ApplicationDefinition>
     <Compile Include="HoaDon.xaml.cs">
       <DependentUpon>HoaDon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InHoaDon.xaml.cs">
+      <DependentUpon>InHoaDon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\BAOCAONGAY.cs">
       <DependentUpon>Entities.tt</DependentUpon>
@@ -169,8 +182,8 @@
     <Compile Include="Model\TIECCUOI.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
-    <Compile Include="PhieuDatBanWindow.xaml.cs">
-      <DependentUpon>PhieuDatBanWindow.xaml</DependentUpon>
+    <Compile Include="DatBanvaDichVuWindow.xaml.cs">
+      <DependentUpon>DatBanvaDichVuWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\usc_Dichvu.xaml.cs">
       <DependentUpon>usc_Dichvu.xaml</DependentUpon>
@@ -200,16 +213,21 @@
     <Compile Include="ViewModel\BaoCaoThangViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CaViewModel.cs" />
-    <Compile Include="ViewModel\DichvuViewModel.cs" />
+    <Compile Include="ViewModel\DichVuViewModel.cs" />
     <Compile Include="ViewModel\HoaDonViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MonanViewModel.cs" />
     <Compile Include="ViewModel\PhieuDatBanViewModel.cs" />
+    <Compile Include="ViewModel\PhieuDatDichVuViewModel.cs" />
     <Compile Include="ViewModel\SanhViewModel.cs" />
     <Compile Include="ViewModel\TiecViewModel.cs" />
     <Page Include="HoaDon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InHoaDon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
@@ -230,7 +248,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PhieuDatBanWindow.xaml">
+    <Page Include="DatBanvaDichVuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -353,10 +371,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Database.mdf" />
-    <Content Include="bin\Debug\Database_log.ldf">
-      <DependentUpon>Database.mdf</DependentUpon>
-    </Content>
     <Content Include="Database.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -374,7 +388,7 @@
       <DependentUpon>Entities.edmx</DependentUpon>
       <LastGenOutput>Entities.cs</LastGenOutput>
     </Content>
+    <Resource Include="photos\icon_folder.jpg" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

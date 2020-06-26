@@ -12,8 +12,13 @@ namespace QuanLyTiecCuoi.Model
     using QuanLyTiecCuoi.ViewModel;
     using System;
     using System.Collections.Generic;
+<<<<<<< HEAD
     
     public partial class MONAN : BaseViewModel
+=======
+    using QuanLyTiecCuoi.ViewModel;
+    public partial class MONAN:BaseViewModel
+>>>>>>> a987f8ea0bfd7074efb762f7525c66f48a13b238
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MONAN()

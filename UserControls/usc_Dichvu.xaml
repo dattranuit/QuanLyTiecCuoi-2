@@ -7,12 +7,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyTiecCuoi.UserControls"
              mc:Ignorable="d" 
+             DataContext="{StaticResource DichVuVM}"
              d:DesignHeight="662" d:DesignWidth="800">
     <Grid Margin="0" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition/>
-            <RowDefinition Height="280"/>
+            <RowDefinition Height="240"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -38,17 +39,46 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <GroupBox Header="Danh sách dịch vụ" Margin="22,0,22,0">
-                <DataGrid x:Name="dtg_DichVu" Width="auto"
-            ItemsSource="{Binding Items2}"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="567*"/>
+                <ColumnDefinition Width="233*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Danh sách dịch vụ" Margin="22,0,22,0" Grid.Column="0">
+                <DataGrid  x:Name="dtg_DichVu" Width="auto" SelectedItem="{Binding SelectedItem}"
+            ItemsSource="{Binding List}"
             CanUserSortColumns="True"
             CanUserAddRows="False"
-            SelectionUnit="Cell"
-            SelectionMode="Extended" />
+            SelectionUnit="FullRow"
+            AutoGenerateColumns="False"
+            SelectionMode="Extended" FontWeight="Bold">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã Dịch vụ" Binding="{Binding MaDichVu}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Tên Dịch vụ" Binding="{Binding TenDichVu}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Đơn giá " Binding="{Binding DonGia}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Mô tả" Binding="{Binding MoTa}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Hình ảnh" Binding="{Binding HinhAnh}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
             </GroupBox>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="213*"/>
+                    <RowDefinition Height="49*"/>
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" Header="Ảnh minh họa" Margin="0,0,10,0">
+                    <Image x:Name="img_AnhDV" ></Image>
+                </GroupBox>
+                <Button x:Name="btn_FolderAnh" Grid.Row="1" Margin="85,5,85,0" BorderBrush="Black">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/icon_folder.jpg" Stretch="Uniform"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
         </Grid>
         <Grid Grid.Row="2">
-            <GroupBox Header="Thông Tin Dịch Vụ">
+            <GroupBox Header="Thông Tin Dịch Vụ" OpacityMask="Black">
                 <materialDesign:Card Margin="12,12,12,12">
                     <Grid  >
                         <Grid.ColumnDefinitions>
@@ -63,9 +93,9 @@
                         <Label Content="Tên Dịch Vụ" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" FontSize="15" FontWeight="Bold"></Label>
                         <Label Content="Mã Dịch Vụ" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" FontSize="15" FontWeight="Bold"></Label>
                         <Label Content="Đơn giá" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" FontSize="15" FontWeight="Bold"></Label>
-                        <TextBox x:Name="txb_TenDichVu" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="0" FontSize="15"></TextBox>
-                        <TextBox x:Name="txb_MaDichVu" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="1" FontSize="15"></TextBox>
-                        <TextBox x:Name="txb_DonGiaDV" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="2" FontSize="15"></TextBox>
+                        <TextBox x:Name="txb_TenDichVu" Text="{Binding TenDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="0" FontSize="15"></TextBox>
+                        <TextBox x:Name="txb_MaDichVu" Text="{Binding MaDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="1" FontSize="15"></TextBox>
+                        <TextBox x:Name="txb_DonGiaDV" Text="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="2" FontSize="15"></TextBox>
                     </Grid>
                 </materialDesign:Card>
             </GroupBox>

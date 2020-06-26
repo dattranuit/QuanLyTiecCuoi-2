@@ -9,31 +9,46 @@ using System.Windows.Data;
 using System.Windows;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Model;
+using System.Windows.Controls;
+using System.Data;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
     class TiecViewModel : BaseViewModel
     {
-        private ObservableCollection<TIECCUOI> _List;
-        public ObservableCollection<TIECCUOI> List { get => _List;  set { _List = value; OnPropertyChanged(); } }
+        private ObservableCollection<TIECCUOI> _ListTiecCuoi;
+        public ObservableCollection<TIECCUOI> ListTiecCuoi { get => _ListTiecCuoi; set { _ListTiecCuoi = value; OnPropertyChanged(); } }
         private ObservableCollection<CA> _ListCa;
         public ObservableCollection<CA> ListCa { get => _ListCa; set { _ListCa = value; OnPropertyChanged(); } }
         private ObservableCollection<SANH> _ListSanh;
         public ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value; OnPropertyChanged(); } }
-        private TIECCUOI _Record;
-        public TIECCUOI Record
+        private TIECCUOI _SelectedItem;
+        public TIECCUOI SelectedItem
         {
-            get => _Record;
+            get => _SelectedItem;
             set
             {
-                _Record = value;
+                _SelectedItem = value;
                 OnPropertyChanged();
+                if (SelectedItem != null)
+                {
+                    MaTiecCuoi = Convert.ToInt32(SelectedItem.MaTiecCuoi);
+                    TenChuRe = SelectedItem.TenChuRe;
+                    TenCoDau = SelectedItem.TenCoDau;
+                    SoDienThoai = SelectedItem.SoDienThoai;
+                    NgayDatTiec = SelectedItem.NgayDatTiec;
+                    NgayDaiTiec = SelectedItem.NgayDaiTiec;
+                    TienDatCoc = SelectedItem.TienDatCoc;
+                    GhiChu = SelectedItem.GhiChu;
+                    MaSanh = Convert.ToInt32(SelectedItem.MaSanh);
+                    MaCa = Convert.ToInt32(SelectedItem.MaCa);
+                }
             }
         }
         private int _MaTiecCuoi;
         public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
         private int _TongSoBan;
-        public int TongSoBan{ get => _TongSoBan; set { _TongSoBan = value; OnPropertyChanged(); } }
+        public int TongSoBan { get => _TongSoBan; set { _TongSoBan = value; OnPropertyChanged(); } }
         private string _TenChuRe;
         public string TenChuRe { get => _TenChuRe; set { _TenChuRe = value; OnPropertyChanged(); } }
         private string _TenCoDau;
@@ -48,25 +63,36 @@ namespace QuanLyTiecCuoi.ViewModel
         public decimal TienDatCoc { get => _TienDatCoc; set { _TienDatCoc = value; OnPropertyChanged(); } }
         private string _GhiChu;
         public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
-        private int _MaSanh;
-        public int MaSanh { get => _MaSanh; set { _MaSanh = value; OnPropertyChanged(); } }
-        private int _MaCa;
-        public int MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
+        private int? _MaSanh;
+        public int? MaSanh { get => _MaSanh; set { _MaSanh = value; OnPropertyChanged(); } }
+        private int? _MaCa;
+        public int? MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
-        public ICommand PhieuDatBanCommand { get; set; }
-        public ICommand DoubleClickCommand { get; set; }
+        public ICommand DatBanvaDichVuCommand { get; set; }
+        public ICommand LapHoaDonCommand { get; set; }
+        bool Addable()
+        {
+            if (String.IsNullOrEmpty(TenChuRe))
+                return false;
+            if (String.IsNullOrEmpty(TenCoDau))
+                return false;
+            if (String.IsNullOrEmpty(SoDienThoai))
+                return false;
+            if (MaSanh == null)
+                return false;
+            if (MaCa == null)
+                return false;
+            return true;           
+        }
         public TiecViewModel()
         {
-            List = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
+            ListTiecCuoi = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
             ListCa = new ObservableCollection<CA>(DataProvider.Ins.DataBase.CAs);
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
-            AddCommand = new RelayCommand<object>((p) =>
+            AddCommand = new RelayCommand<object>((p) => Addable() , (p) =>
             {
-                return true;
-            }, (p) =>
-            {
-                Record = new TIECCUOI()
+                SelectedItem = new TIECCUOI()
                 {
                     TenChuRe = TenChuRe,
                     TenCoDau = TenCoDau,
@@ -76,20 +102,15 @@ namespace QuanLyTiecCuoi.ViewModel
                     TienDatCoc = TienDatCoc,
                     GhiChu = GhiChu,
                     MaSanh = Convert.ToInt32(MaSanh),
-                    MaCa = Convert.ToInt32(MaCa)                    
+                    MaCa = Convert.ToInt32(MaCa)
                 };
                 try
                 {
-                    //DataProvider.Ins.DataBase.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[TIECCUOI] ON");
-                    //DataProvider.Ins.DataBase.TIECCUOIs.Attach(Record);
-                    DataProvider.Ins.DataBase.TIECCUOIs.Add(Record);
-                    //DataProvider.Ins.DataBase.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[TIECCUOI] OFF");
+                    DataProvider.Ins.DataBase.TIECCUOIs.Add(SelectedItem);
                     DataProvider.Ins.DataBase.SaveChanges();
-                    List.Add(Record);
-                   // string test = DataProvider.Ins.DataBase.TIECCUOIs.ElementAt(1).ToString();
-                  //  MessageBox.Show(test);
+                    ListTiecCuoi.Add(SelectedItem);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     throw e;
                 }
@@ -98,79 +119,30 @@ namespace QuanLyTiecCuoi.ViewModel
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (Record == null)
+                if (SelectedItem == null)
                     return false;
-                var displayList = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == Record.MaTiecCuoi);
+                var displayList = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedItem.MaTiecCuoi);
                 if (displayList != null && displayList.Count() != 0)
                     return true;
                 return false;
             }, (p) =>
             {
-                var TiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == Record.MaTiecCuoi).SingleOrDefault();
-                TiecCuoi.TenChuRe = Record.TenChuRe;
-                TiecCuoi.TenCoDau = Record.TenCoDau;
-                TiecCuoi.SoDienThoai = Record.SoDienThoai;
-                TiecCuoi.NgayDatTiec = Record.NgayDatTiec;
-                TiecCuoi.NgayDaiTiec = Record.NgayDaiTiec;
-                TiecCuoi.TienDatCoc = Record.TienDatCoc;
-                TiecCuoi.GhiChu = Record.GhiChu;
-                TiecCuoi.MaSanh = Record.MaSanh;
-                TiecCuoi.MaCa = Record.MaCa;
+                var TiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedItem.MaTiecCuoi).SingleOrDefault();
+                TiecCuoi.TenChuRe = TenChuRe;
+                TiecCuoi.TenCoDau = TenCoDau;
+                TiecCuoi.SoDienThoai = SoDienThoai;
+                TiecCuoi.NgayDatTiec = NgayDatTiec;
+                TiecCuoi.NgayDaiTiec = NgayDaiTiec;
+                TiecCuoi.TienDatCoc = TienDatCoc;
+                TiecCuoi.GhiChu = GhiChu;
+                TiecCuoi.MaSanh = Convert.ToInt32(MaSanh);
+                TiecCuoi.MaCa = Convert.ToInt32(MaCa);
                 DataProvider.Ins.DataBase.SaveChanges();
             });
-            PhieuDatBanCommand = new RelayCommand<object>((p) => { return true; }, (p) => { PhieuDatBanWindow wd = new PhieuDatBanWindow(); wd.ShowDialog(); });
-            DoubleClickCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon hd = new HoaDon(); hd.ShowDialog(); });
+            DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow(); wd.ShowDialog(); });
+            LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
+        }
+   
 
-            DataGridCollection = CollectionViewSource.GetDefaultView(List);
-            DataGridCollection.Filter = new Predicate<object>(Filter);
-
-        }
-        private ICollectionView _dataGridCollection;
-        private string _filterString;
-        public ICollectionView DataGridCollection
-        {
-            get { return _dataGridCollection; }
-            set { _dataGridCollection = value; NotifyPropertyChanged("DataGridCollection"); }
-        }
-        public string FilterString
-        {
-            get { return _filterString; }
-            set
-            {
-                _filterString = value;
-                NotifyPropertyChanged("FilterString");
-                FilterCollection();
-            }
-        }
-        private void FilterCollection()
-        {
-            if (_dataGridCollection != null)
-            {
-                _dataGridCollection.Refresh();
-            }
-        }
-        public bool Filter(object obj)
-        {
-            var data = obj as TIECCUOI;
-            if (data != null)
-            {
-                if (!string.IsNullOrEmpty(_filterString))
-                {
-                    return data.SoDienThoai.Contains(_filterString) || data.TenChuRe.Contains(_filterString) || data.TenCoDau.Contains(_filterString);
-                }
-                return true;
-            }
-            return false;
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
-
-        
     }
 }

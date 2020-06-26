@@ -18,9 +18,9 @@ namespace QuanLyTiecCuoi
     /// <summary>
     /// Interaction logic for PhieuDatBanWindow.xaml
     /// </summary>
-    public partial class PhieuDatBanWindow : MetroWindow
+    public partial class DatBanvaDichVuWindow : MetroWindow
     {
-        public PhieuDatBanWindow()
+        public DatBanvaDichVuWindow()
         {
             InitializeComponent();
         }

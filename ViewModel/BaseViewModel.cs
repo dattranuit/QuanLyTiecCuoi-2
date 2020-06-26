@@ -12,7 +12,6 @@ namespace QuanLyTiecCuoi.ViewModel
     public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -51,7 +50,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            remove { CommandManager.RequerySuggested -= value; }           
         }
     }
 }

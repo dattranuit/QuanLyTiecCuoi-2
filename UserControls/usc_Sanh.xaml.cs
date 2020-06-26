@@ -24,5 +24,7 @@ namespace QuanLyTiecCuoi.UserControls
         {
             InitializeComponent();
         }
+
+        
     }
 }

@@ -24,5 +24,9 @@ namespace QuanLyTiecCuoi
         {
             InitializeComponent();
         }
+        public HoaDon(string id)
+        {
+            InitializeComponent();
+        }
     }
 }

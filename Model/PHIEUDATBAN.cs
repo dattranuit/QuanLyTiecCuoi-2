@@ -9,25 +9,34 @@
 
 namespace QuanLyTiecCuoi.Model
 {
+    using QuanLyTiecCuoi.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class PHIEUDATBAN
+    using System.Windows.Controls;
+
+    public partial class PHIEUDATBAN:BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PHIEUDATBAN()
         {
             this.CT_PHIEUDATBAN = new HashSet<CT_PHIEUDATBAN>();
         }
-    
-        public int MaPhieuDatBan { get; set; }
-        public int MaTiecCuoi { get; set; }
-        public string LoaiBan { get; set; }
-        public int SoLuong { get; set; }
-        public int SoLuongDuTru { get; set; }
-        public decimal DonGiaBan { get; set; }
-        public string GhiChu { get; set; }
-    
+
+        private int _MaPhieuDatBan;
+        private int _MaTiecCuoi;
+        private string _LoaiBan;
+        private int _SoLuong;
+        private int _SoLuongDuTru;
+        private decimal _DonGiaBan;
+        private string _GhiChu;
+        public int MaPhieuDatBan { get => _MaPhieuDatBan; set { _MaPhieuDatBan = value; OnPropertyChanged(); }}
+        public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
+        public string LoaiBan { get => _LoaiBan; set { _LoaiBan = value; OnPropertyChanged(); } }
+        public int SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
+        public int SoLuongDuTru { get => _SoLuongDuTru; set { _SoLuongDuTru = value; OnPropertyChanged(); } }
+        public decimal DonGiaBan { get => _DonGiaBan; set { _DonGiaBan = value; OnPropertyChanged(); } }
+        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUDATBAN> CT_PHIEUDATBAN { get; set; }
         public virtual TIECCUOI TIECCUOI { get; set; }

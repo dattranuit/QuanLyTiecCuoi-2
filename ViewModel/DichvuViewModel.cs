@@ -9,7 +9,7 @@ using QuanLyTiecCuoi.Model;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
-    class DichvuViewModel : BaseViewModel
+    class DichVuViewModel : BaseViewModel
     {
         private ObservableCollection<DICHVU> _List;
         public ObservableCollection<DICHVU> List { get => _List; set { _List = value; OnPropertyChanged(); } }
@@ -29,22 +29,25 @@ namespace QuanLyTiecCuoi.ViewModel
                     DonGia = SelectedItem.DonGia;
                     MoTa = SelectedItem.MoTa;
                     GhiChu = SelectedItem.GhiChu;
+                    HinhAnh = SelectedItem.HinhAnh;
                 }
             }
         }
-        private int _MaDichVu { get; set; }
-        public int MaDichVu { get; set; }
-        private string _TenDichVu { get; set; }
-        public string TenDichVu { get; set; }
-        private decimal _DonGia { get; set; }
-        public decimal DonGia { get; set; }
-        private string _MoTa { get; set; }
-        public string MoTa { get; set; }
-        private string _GhiChu { get; set; }
-        public string GhiChu { get; set; }
+        private int _MaDichVu;
+        public int MaDichVu { get => _MaDichVu; set { _MaDichVu = value; OnPropertyChanged(); }  }
+        private string _TenDichVu;
+        public string TenDichVu { get => _TenDichVu; set { _TenDichVu = value; OnPropertyChanged(); } }
+        private decimal _DonGia;
+        public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
+        private string _MoTa;
+        public string MoTa { get => _MoTa; set { _MoTa = value; OnPropertyChanged(); } }
+        private string _GhiChu;
+        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+        private string _HinhAnh;
+        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
-        public DichvuViewModel()
+        public DichVuViewModel()
         {
             List = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
             AddCommand = new RelayCommand<object>((p) =>
@@ -59,7 +62,8 @@ namespace QuanLyTiecCuoi.ViewModel
                     TenDichVu = TenDichVu,
                     DonGia = DonGia,
                     MoTa = MoTa,
-                    GhiChu = GhiChu
+                    GhiChu = GhiChu,
+                    HinhAnh = HinhAnh
                 };
                 DataProvider.Ins.DataBase.DICHVUs.Add(DichVu);
                 DataProvider.Ins.DataBase.SaveChanges();
@@ -82,6 +86,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DichVu.DonGia = SelectedItem.DonGia;
                 DichVu.MoTa = SelectedItem.MoTa;
                 DichVu.GhiChu = SelectedItem.GhiChu;
+                DichVu.HinhAnh = SelectedItem.HinhAnh;
                 DataProvider.Ins.DataBase.SaveChanges();
             });
         }

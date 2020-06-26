@@ -3,7 +3,7 @@
                     xmlns:viewmodel ="clr-namespace:QuanLyTiecCuoi.ViewModel"
                     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
-    <viewmodel:DichvuViewModel x:Key="DichVuVM"></viewmodel:DichvuViewModel>
+    <viewmodel:DichVuViewModel x:Key="DichVuVM"></viewmodel:DichVuViewModel>
     <viewmodel:TiecViewModel x:Key="TiecVM"></viewmodel:TiecViewModel>
     <viewmodel:MonanViewModel x:Key="MonAnVM"></viewmodel:MonanViewModel>
     <viewmodel:HoaDonViewModel x:Key="HoaDonVM"></viewmodel:HoaDonViewModel>
@@ -12,6 +12,7 @@
     <viewmodel:PhieuDatBanViewModel x:Key="PhieuDatBanVM"></viewmodel:PhieuDatBanViewModel>
     <viewmodel:CaViewModel x:Key="CaVM"></viewmodel:CaViewModel>
     <viewmodel:SanhViewModel x:Key="SanhVM"></viewmodel:SanhViewModel>
+    <viewmodel:PhieuDatDichVuViewModel x:Key="PhieuDatDichVuVM"></viewmodel:PhieuDatDichVuViewModel>
     <Style TargetType="GroupBox">
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="HeaderTemplate">

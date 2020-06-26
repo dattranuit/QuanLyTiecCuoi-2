@@ -9,10 +9,11 @@
 
 namespace QuanLyTiecCuoi.Model
 {
+    using QuanLyTiecCuoi.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class DICHVU
+    public partial class DICHVU:BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DICHVU()
@@ -20,12 +21,19 @@ namespace QuanLyTiecCuoi.Model
             this.PHIEUDATDICHVUs = new HashSet<PHIEUDATDICHVU>();
         }
     
-        public int MaDichVu { get; set; }
-        public string TenDichVu { get; set; }
-        public decimal DonGia { get; set; }
-        public string MoTa { get; set; }
-        public string HinhAnh { get; set; }
-        public string GhiChu { get; set; }
+        public int MaDichVu { get => _MaDichVu; set { _MaDichVu = value; OnPropertyChanged(); } }
+        public string TenDichVu { get => _TenDichVu; set { _TenDichVu = value; OnPropertyChanged(); } }
+        public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
+        public string MoTa { get => _MoTa; set { _MoTa = value; OnPropertyChanged(); } }
+        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
+        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+
+        private int _MaDichVu;
+        private string _TenDichVu;
+        private decimal _DonGia;
+        private string _MoTa;
+        private string _HinhAnh;
+        private string _GhiChu;
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHIEUDATDICHVU> PHIEUDATDICHVUs { get; set; }

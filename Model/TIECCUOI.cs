@@ -10,9 +10,10 @@
 namespace QuanLyTiecCuoi.Model
 {
     using System;
+    using QuanLyTiecCuoi.ViewModel;
     using System.Collections.Generic;
     
-    public partial class TIECCUOI
+    public partial class TIECCUOI: BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TIECCUOI()
@@ -21,18 +22,30 @@ namespace QuanLyTiecCuoi.Model
             this.PHIEUDATBANs = new HashSet<PHIEUDATBAN>();
             this.PHIEUDATDICHVUs = new HashSet<PHIEUDATDICHVU>();
         }
-    
-        public int MaTiecCuoi { get; set; }
-        public string TenChuRe { get; set; }
-        public string TenCoDau { get; set; }
-        public string SoDienThoai { get; set; }
-        public System.DateTime NgayDatTiec { get; set; }
-        public System.DateTime NgayDaiTiec { get; set; }
-        public decimal TienDatCoc { get; set; }
-        public string GhiChu { get; set; }
-        public int MaSanh { get; set; }
-        public int MaCa { get; set; }
-    
+
+        private int _MaTiecCuoi;
+        public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
+        private int _TongSoBan;
+        public int TongSoBan { get => _TongSoBan; set { _TongSoBan = value; OnPropertyChanged(); } }
+        private string _TenChuRe;
+        public string TenChuRe { get => _TenChuRe; set { _TenChuRe = value; OnPropertyChanged(); } }
+        private string _TenCoDau;
+        public string TenCoDau { get => _TenCoDau; set { _TenCoDau = value; OnPropertyChanged(); } }
+        private string _SoDienThoai;
+        public string SoDienThoai { get => _SoDienThoai; set { _SoDienThoai = value; OnPropertyChanged(); } }
+        private System.DateTime _NgayDatTiec = DateTime.Now;
+        public System.DateTime NgayDatTiec { get => _NgayDatTiec; set { _NgayDatTiec = value; OnPropertyChanged(); } }
+        private System.DateTime _NgayDaiTiec = DateTime.Now;
+        public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; set { _NgayDaiTiec = value; OnPropertyChanged(); } }
+        private decimal _TienDatCoc;
+        public decimal TienDatCoc { get => _TienDatCoc; set { _TienDatCoc = value; OnPropertyChanged(); } }
+        private string _GhiChu;
+        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+        private int _MaSanh;
+        public int MaSanh { get => _MaSanh; set { _MaSanh = value; OnPropertyChanged(); } }
+        private int _MaCa;
+        public int MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
+
         public virtual CA CA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }

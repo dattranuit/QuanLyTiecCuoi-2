@@ -12,7 +12,33 @@ namespace QuanLyTiecCuoi.ViewModel
     class SanhViewModel:BaseViewModel
     {
         private ObservableCollection<SANH> _ListSanh;
+        private ObservableCollection<LOAISANH> _ListLoaiSanh;
         public ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value; OnPropertyChanged(); } }
+        public ObservableCollection<LOAISANH> ListLoaiSanh { get => _ListLoaiSanh; set { _ListLoaiSanh = value; OnPropertyChanged(); } }
+
+        
+        public int MaSanh { get => _MaSanh; set { _MaSanh = value; OnPropertyChanged(); } }
+        public string TenSanh { get => _TenSanh; set { _TenSanh = value; OnPropertyChanged(); } }
+        public int SoLuongBanToiDa { get => _SoLuongBanToiDa; set { _SoLuongBanToiDa = value; OnPropertyChanged(); } }
+        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+        public int MaLoaiSanh { get => _MaLoaiSanh; set { _MaLoaiSanh = value; OnPropertyChanged(); } }
+        private int _MaSanh;
+        private string _TenSanh;
+        private int _SoLuongBanToiDa;
+        private string _GhiChu;
+        private int _MaLoaiSanh;
+        public ICommand AddCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+        public ICommand PhieuDatBanCommand { get; set; }
+        //Loai sanh
+        public string TenLoaiSanh { get => _TenLoaiSanh; set { _TenLoaiSanh = value; OnPropertyChanged(); } }
+        public int DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
+        public int MaLoaiSanh2 { get => _MaLoaiSanh2; set { _MaLoaiSanh2 = value; OnPropertyChanged(); } }
+        private string _TenLoaiSanh;
+        private int _DonGiaBanToiThieu;
+        private int _MaLoaiSanh2;
+
+        public List<string> LoaiSanhItemList { get; set; }
 
         private SANH _SelectedItem;
         public SANH SelectedItem
@@ -32,22 +58,40 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
-        public int MaSanh { get => _MaSanh; set { _MaSanh = value; OnPropertyChanged(); } }
-        public string TenSanh { get => _TenSanh; set { _TenSanh = value; OnPropertyChanged(); } }
-        public int SoLuongBanToiDa { get => _SoLuongBanToiDa; set { _SoLuongBanToiDa = value; OnPropertyChanged(); } }
-        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
-        public int MaLoaiSanh { get => _MaLoaiSanh; set { _MaLoaiSanh = value; OnPropertyChanged(); } }
-        private int _MaSanh;
-        private string _TenSanh;
-        private int _SoLuongBanToiDa;
-        private string _GhiChu;
-        private int _MaLoaiSanh;
-        public ICommand AddCommand { get; set; }
-        public ICommand EditCommand { get; set; }
-        public ICommand PhieuDatBanCommand { get; set; }
+
+        private LOAISANH _SelectedItem2;
+        public LOAISANH SelectedItem2
+        {
+            get => _SelectedItem2;
+            set
+            {
+                _SelectedItem2 = value;
+                OnPropertyChanged();
+                if (SelectedItem2 != null)
+                {
+                    MaLoaiSanh2 = SelectedItem2.MaLoaiSanh;
+                    TenLoaiSanh = SelectedItem2.TenLoaiSanh;
+                    DonGiaBanToiThieu = Convert.ToInt32(SelectedItem2.DonGiaBanToiThieu);
+                }
+            }
+        }
+
+        List<string> GetLoaiSanhItem()
+        {
+            List<string> listitemLoaiSanh = new List<string>();
+            var loaisanh = new List<LOAISANH>(DataProvider.Ins.DataBase.LOAISANHs);
+            foreach(LOAISANH a in loaisanh)
+            {
+                listitemLoaiSanh.Add(a.MaLoaiSanh.ToString());
+            }
+            return listitemLoaiSanh;
+        }
+
         public SanhViewModel()
         {
+            LoaiSanhItemList = GetLoaiSanhItem();
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
+            ListLoaiSanh = new ObservableCollection<LOAISANH>(DataProvider.Ins.DataBase.LOAISANHs);
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
