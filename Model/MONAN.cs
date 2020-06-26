@@ -9,10 +9,11 @@
 
 namespace QuanLyTiecCuoi.Model
 {
+    using QuanLyTiecCuoi.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class MONAN
+    public partial class MONAN : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MONAN()
@@ -20,13 +21,19 @@ namespace QuanLyTiecCuoi.Model
             this.CT_PHIEUDATBAN = new HashSet<CT_PHIEUDATBAN>();
         }
     
-        public int MaMonAn { get; set; }
-        public string TenMonAn { get; set; }
-        public decimal DonGia { get; set; }
-        public string MoTa { get; set; }
+        private int _MaMonAn { get; set; }
+        public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value;OnPropertyChanged(); } }
+        private string _TenMonAn { get; set; }
+        public string TenMonAn { get => _TenMonAn; set { _TenMonAn = value; OnPropertyChanged(); } }
+        private decimal _DonGia { get; set; }
+        public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
+        private string _MoTa { get; set; }
+        public string MoTa { get => _MoTa; set { _MoTa = value;OnPropertyChanged(); } }
         public string HinhAnh { get; set; }
-        public string GhiChu { get; set; }
-        public int MaLoaiMonAn { get; set; }
+        private string _GhiChu { get; set; }
+        public string GhiChu { get => _GhiChu; set { _GhiChu = value;OnPropertyChanged(); } }
+        private int _MaLoaiMonAn { get; set; }
+        public int MaLoaiMonAn { get => _MaLoaiMonAn; set { _MaLoaiMonAn = value;OnPropertyChanged(); } }
     
         public virtual LOAIMONAN LOAIMONAN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

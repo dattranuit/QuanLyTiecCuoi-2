@@ -26,24 +26,6 @@ namespace QuanLyTiecCuoi.UserControls
         {
             InitializeComponent();
         }
-
-        private void btn_ThemMonAn_Click(object sender, RoutedEventArgs e)
-        {
-            btn_SuaMonAn.IsEnabled = false;
-            btn_XoaMonAn.IsEnabled = false;
-            tbx_TKMonAn.IsEnabled = false;
-            cbb_LoaiMonAn.IsEnabled = false;
-            //SetActiveUserControl(pptFood);
-        }
-        //public void SetActiveUserControl(UserControl control)
-        //{
-        //    //Collapsed usercontrol
-        //    pptFood.Visibility = Visibility.Hidden;
-        //    grb_ListMenu.Visibility = Visibility.Hidden;
-
-        //    //Show usercontrol
-        //    control.Visibility = Visibility.Visible;
-        //}
     }
    
 }
