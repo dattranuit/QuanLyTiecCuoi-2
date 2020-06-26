@@ -182,6 +182,14 @@ namespace QuanLyTiecCuoi.ViewModel
 
         private ICollectionView _dataGridCollection;
         private string _filterString;
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
         public ICollectionView DataGridCollection
         {
             get { return _dataGridCollection; }
@@ -216,14 +224,6 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }
             return false;
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
         }
         
         private void data()

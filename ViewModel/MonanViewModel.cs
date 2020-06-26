@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,8 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 _SelectedItem = value;
                 OnPropertyChanged();
+
+                // click vô bảng sẽ hiển thị trên textbox
                 if (SelectedItem != null)
                 {
                     MaMonAn = SelectedItem.MaMonAn;
@@ -32,30 +35,89 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
+
+        private ICollectionView _dataGridCollection;
+        private string _filterString;
+        public ICollectionView DataGridCollection
+        {
+            get { return _dataGridCollection; }
+            set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
+        }
+        public string FilterString
+        {
+            get { return _filterString; }
+            set
+            {
+                _filterString = value;
+                OnPropertyChanged("FilterString");
+                FilterCollection();
+            }
+        }
+        private void FilterCollection()
+        {
+            if (_dataGridCollection != null)
+            {
+                _dataGridCollection.Refresh();
+            }
+        }
+        public bool Filter(object obj)
+        {
+            var data = obj as MONAN;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(_filterString))
+                {
+                    return data.TenMonAn.Contains(_filterString);
+                }
+                return true;
+            }
+            return false;
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
+        //biến bên trang chính
         private int _MaMonAn { get; set; }
-        public int MaMonAn { get; set; }
+        public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
         private string _TenMonAn { get; set; }
-        public string TenMonAn { get; set; }
+        public string TenMonAn { get => _TenMonAn; set { _TenMonAn = value; OnPropertyChanged(); } }
         private decimal _DonGia { get; set; }
-        public decimal DonGia { get; set; }
+        public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
         private string _MoTa { get; set; }
-        public string MoTa { get; set; }
+        public string MoTa { get => _MoTa; set { _MoTa = value; OnPropertyChanged(); } }
+        public string HinhAnh { get; set; }
         private string _GhiChu { get; set; }
-        public string GhiChu { get; set; }
+        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+        private int _MaLoaiMonAn { get; set; }
+        public int MaLoaiMonAn { get => _MaLoaiMonAn; set { _MaLoaiMonAn = value; OnPropertyChanged(); } }
+
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand ClickCommand { get; set; }
+
+
         public MonanViewModel()
         {
             List = new ObservableCollection<MONAN>(DataProvider.Ins.DataBase.MONANs);
             AddCommand = new RelayCommand<object>((p) =>
             {
+                //if (string.IsNullOrEmpty(TenMonAn))
+                //    return false;
+                //var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.TenMonAn == TenMonAn);
+                //if (displayList == null && displayList.Count() != 0)
+                //    return false;
                 return true;
 
             }, (p) =>
             {
                 var MonAn = new MONAN()
                 {
-                    MaMonAn = MaMonAn,
                     TenMonAn = TenMonAn,
                     DonGia = DonGia,
                     MoTa = MoTa,
@@ -68,12 +130,12 @@ namespace QuanLyTiecCuoi.ViewModel
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null)
+                if (string.IsNullOrEmpty(TenMonAn) || SelectedItem == null)
                     return false;
-                var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn);
-                if (displayList != null && displayList.Count() != 0)
-                    return true;
-                return false;
+                var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.TenMonAn == SelectedItem.TenMonAn);
+                if (displayList == null && displayList.Count() != 0)
+                    return false;
+                return true;
             }, (p) =>
             {
                 var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn).SingleOrDefault();
@@ -83,7 +145,21 @@ namespace QuanLyTiecCuoi.ViewModel
                 MonAn.MoTa = SelectedItem.MoTa;
                 MonAn.GhiChu = SelectedItem.GhiChu;
                 DataProvider.Ins.DataBase.SaveChanges();
+
+                SelectedItem.TenMonAn = TenMonAn;
+                SelectedItem.MaMonAn = MaMonAn;
+                SelectedItem.DonGia = DonGia;
+                SelectedItem.MoTa = MoTa;
+                SelectedItem.GhiChu = GhiChu;
             });
+            //DeleteCommand = new RelayCommand<object>((p) =>
+            //{
+
+
+
+            //});
+
+
         }
 
     }
