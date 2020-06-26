@@ -74,45 +74,17 @@ namespace QuanLyTiecCuoi.ViewModel
             
             List = new ObservableCollection<BAOCAONGAY>(DataProvider.Ins.DataBase.BAOCAONGAYs);
 
-            AddCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
 
-            }, (p) =>
-            {
-                var BaoCaoNgay = new BAOCAONGAY() { Ngay = Ngay, SoLuongTiecCuoi = SoLuongTiecCuoi, DoanhThu = DoanhThu, TiLe = TiLe };
-
-                DataProvider.Ins.DataBase.BAOCAONGAYs.Add(BaoCaoNgay);
-                DataProvider.Ins.DataBase.SaveChanges();
-
-                List.Add(BaoCaoNgay);
-            });
-
-            EditCommand = new RelayCommand<object>((p) =>
-            {
-                if (SelectedItem == null)
-                    return false;
-
-                var displayList = DataProvider.Ins.DataBase.BAOCAONGAYs.Where(x => x.Ngay == SelectedItem.Ngay);
-                if (displayList != null && displayList.Count() != 0)
-                    return true;
-
-                return false;
-
-            }, (p) =>
-            {
-                var BaoCaoNgay = DataProvider.Ins.DataBase.BAOCAONGAYs.Where(x => x.Ngay == SelectedItem.Ngay).SingleOrDefault();
-                BaoCaoNgay.Ngay = SelectedItem.Ngay;
-                BaoCaoNgay.SoLuongTiecCuoi = SelectedItem.SoLuongTiecCuoi;
-                BaoCaoNgay.DoanhThu = SelectedItem.DoanhThu;
-                BaoCaoNgay.TiLe = SelectedItem.TiLe;
-                DataProvider.Ins.DataBase.SaveChanges();
-                SelectedItem.Ngay = Ngay;
-            });
             tongdoanhthu = TinhTongDoanhThu().ToString();
             ExportToExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) => { Ex2Excel(p); });
 
         }
+
+        private void update()
+        {
+
+        }
+
         private decimal TinhTongDoanhThu()
         {
             decimal sum = 0;

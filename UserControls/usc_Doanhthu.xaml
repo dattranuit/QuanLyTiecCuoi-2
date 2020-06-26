@@ -118,7 +118,7 @@
                                             </materialDesign:Card>
                                         </DockPanel>
                                         <materialDesign:Card Margin="2">
-                                            <DataGrid  ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
+                                            <DataGrid  ItemsSource="{Binding List}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="Tháng" FontSize="14" Binding="{Binding Thang}">
                                                     </DataGridTextColumn>

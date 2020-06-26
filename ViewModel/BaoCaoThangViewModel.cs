@@ -51,40 +51,40 @@ namespace QuanLyTiecCuoi.ViewModel
         {
             List = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
 
-            AddCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
+            //AddCommand = new RelayCommand<object>((p) =>
+            //{
+            //    return true;
 
-            }, (p) =>
-            {
-                var BaoCaoThang = new BAOCAOTHANG() { Thang = Thang, Nam = Nam, TongDoanhThu = TongDoanhThu };
+            //}, (p) =>
+            //{
+            //    var BaoCaoThang = new BAOCAOTHANG() { Thang = Thang, Nam = Nam, TongDoanhThu = TongDoanhThu };
 
-                DataProvider.Ins.DataBase.BAOCAOTHANGs.Add(BaoCaoThang);
-                DataProvider.Ins.DataBase.SaveChanges();
+            //    DataProvider.Ins.DataBase.BAOCAOTHANGs.Add(BaoCaoThang);
+            //    DataProvider.Ins.DataBase.SaveChanges();
 
-                List.Add(BaoCaoThang);
-            });
+            //    List.Add(BaoCaoThang);
+            //});
 
-            EditCommand = new RelayCommand<object>((p) =>
-            {
-                if (SelectedItem == null)
-                    return false;
+            //EditCommand = new RelayCommand<object>((p) =>
+            //{
+            //    if (SelectedItem == null)
+            //        return false;
 
-                var displayList = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.MaBaoCaoThang == SelectedItem.MaBaoCaoThang);
-                if (displayList != null && displayList.Count() != 0)
-                    return true;
+            //    var displayList = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.MaBaoCaoThang == SelectedItem.MaBaoCaoThang);
+            //    if (displayList != null && displayList.Count() != 0)
+            //        return true;
 
-                return false;
+            //    return false;
 
-            }, (p) =>
-            {
-                var BaoCaoNgay = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.MaBaoCaoThang == SelectedItem.MaBaoCaoThang).SingleOrDefault();
-                BaoCaoNgay.Thang = SelectedItem.Thang;
-                BaoCaoNgay.Nam = SelectedItem.Nam;
-                BaoCaoNgay.TongDoanhThu = SelectedItem.TongDoanhThu;
-                DataProvider.Ins.DataBase.SaveChanges();
-                SelectedItem.Thang = Thang;
-            });
+            //}, (p) =>
+            //{
+            //    var BaoCaoNgay = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.MaBaoCaoThang == SelectedItem.MaBaoCaoThang).SingleOrDefault();
+            //    BaoCaoNgay.Thang = SelectedItem.Thang;
+            //    BaoCaoNgay.Nam = SelectedItem.Nam;
+            //    BaoCaoNgay.TongDoanhThu = SelectedItem.TongDoanhThu;
+            //    DataProvider.Ins.DataBase.SaveChanges();
+            //    SelectedItem.Thang = Thang;
+            //});
         }
     }
 }
