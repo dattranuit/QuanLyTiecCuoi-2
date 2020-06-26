@@ -170,7 +170,10 @@
                                                             <RowDefinition/>
                                                             <RowDefinition/>
                                                         </Grid.RowDefinitions>
-                                                        <ComboBox x:Name="cbb_MaSanh" BorderBrush="Black" BorderThickness="1" Margin="5,10" Grid.Row="0"></ComboBox>
+                                                        <ComboBox x:Name="cbb_MaSanh" 
+                                                                  ItemsSource="{Binding LoaiSanhItemList}" 
+                                                                  Text="{Binding MaLoaiSanh}"  
+                                                                  BorderBrush="Black" BorderThickness="1" Margin="5,10" Grid.Row="0"></ComboBox>
                                                         <TextBox x:Name="txb_TenLoaiSanh" BorderBrush="Black" BorderThickness="1" Margin="5,10" Grid.Row="1"></TextBox>
                                                         <TextBox x:Name="txb_DGBTT" BorderBrush="Black" BorderThickness="1" Margin="5,10" Grid.Row="2"></TextBox>
                                                     </Grid>
