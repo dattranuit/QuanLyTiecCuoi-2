@@ -243,20 +243,20 @@ namespace QuanLyTiecCuoi.ViewModel
         private void data()
         {
             List5 = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == idTiecCuoi));
-
+            if (List5 == null) return;
             //List5 = new ObservableCollection<object>(DataProvider.Ins.DataBase.PHIEUDATBANs.Join());
             DataProvider.Ins.DataBase.SaveChanges();
             if (List5 != null)
             {
                 SoLuong = List5.FirstOrDefault().SoLuong;
-                DonGia = List5.FirstOrDefault().DonGia;
+                DonGia = List5.FirstOrDefault().ThanhTien;
                 //var sum = List5.FirstOrDefault().SoLuong
                 //MessageBox.Show(List5[1].DICHVU.TenDichVu.ToString());
                 ////TenDichVu = List5.SingleOrDefault().MaDichVu.ToString();
                 //SoLuong = List5.SingleOrDefault().SoLuong;
                 //DonGia = List5.SingleOrDefault().DonGia;
                 ThanhTien = SoLuong * DonGia;
-                TongTienDichVu = List5.Sum(x => x.DonGia);
+                TongTienDichVu = List5.Sum(x => x.ThanhTien);
                 //MessageBox.Show(tongtiendichvu);
             }
             List3 = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == idTiecCuoi));
@@ -284,7 +284,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 
                 SoLuong = List6.FirstOrDefault().SoLuong;
                 //MessageBox.Show(SoLuongMon.ToString());
-                DonGia = List6.FirstOrDefault().DonGia;
+                DonGia = List6.FirstOrDefault().ThanhTien;
             }
 
             List7 = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOes.ToList());

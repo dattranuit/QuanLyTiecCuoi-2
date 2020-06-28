@@ -73,14 +73,6 @@ namespace QuanLyTiecCuoi.ViewModel
             }
             return false;
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
         //biến bên trang chính
         private int _MaMonAn { get; set; }
         public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }

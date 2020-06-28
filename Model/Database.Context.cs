@@ -31,7 +31,6 @@ namespace QuanLyTiecCuoi.Model
         public virtual DbSet<CHUCNANG> CHUCNANGs { get; set; }
         public virtual DbSet<DICHVU> DICHVUs { get; set; }
         public virtual DbSet<HOADON> HOADONs { get; set; }
-        public virtual DbSet<LOAIMONAN> LOAIMONANs { get; set; }
         public virtual DbSet<LOAISANH> LOAISANHs { get; set; }
         public virtual DbSet<MONAN> MONANs { get; set; }
         public virtual DbSet<NGUOIDUNG> NGUOIDUNGs { get; set; }

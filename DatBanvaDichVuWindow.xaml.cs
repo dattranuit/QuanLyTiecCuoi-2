@@ -29,12 +29,34 @@ namespace QuanLyTiecCuoi
         {
             grr_1.Height = new GridLength(0.9, GridUnitType.Star);
             dpn_DanhSachDichVu.Visibility = Visibility.Visible;
+            grb_ChiTietChinhSua.Visibility = Visibility.Hidden;
         }
 
         private void btn_PDDV_Sua_Click(object sender, RoutedEventArgs e)
         {
             dpn_DanhSachDichVu.Visibility = Visibility.Hidden;
-            grr_1.Height = new GridLength(0.4, GridUnitType.Star);
+            grb_ChiTietChinhSua.Visibility = Visibility.Visible;
+            grr_1.Height = new GridLength(0.25, GridUnitType.Star);
+        }
+
+        private void btn_CTPhieuDatBan_Click(object sender, RoutedEventArgs e)
+        {
+            grd_CTPhieuDatBan.Visibility = Visibility.Visible;
+        }
+
+        private void btn_CTPDB_QuayLai_Click(object sender, RoutedEventArgs e)
+        {
+            grd_CTPhieuDatBan.Visibility = Visibility.Collapsed;
+        }
+
+        private void btn_CTPDB_Sua_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_CTPDB_Them_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
