@@ -145,7 +145,7 @@
                                             <GroupBox Header="Danh sách món ăn"  Margin="10,10,10,10">
                                                 <ScrollViewer VerticalScrollBarVisibility="Auto" DataContext="{StaticResource CT_PhieuDatBanVM}">
                                                     <DataGrid ItemsSource="{Binding ListMonAn}" SelectedItem="{Binding SelectedMA, Mode=OneWayToSource}" 
-                                                  AutoGenerateColumns="True" CanUserAddRows="False" controls:DataGridHelper.ColumnHeaderPadding="10,0">
+                                                  AutoGenerateColumns="False" CanUserAddRows="False" controls:DataGridHelper.ColumnHeaderPadding="10,0">
                                                         <DataGrid.Columns>
                                                             <DataGridTextColumn Header="Tên Món Ăn" Binding="{Binding TenMonAn}" IsReadOnly="True"></DataGridTextColumn>
                                                             <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGia}" IsReadOnly="True"></DataGridTextColumn>
@@ -166,11 +166,11 @@
                                                     <Label Margin="0,2,0,2" Content="Số lượng:" FontWeight="SemiBold"/>
                                                     <Label Margin="0,2,0,2" Content="Thành tiền:" FontWeight="SemiBold"/>
                                                 </StackPanel>
-                                                <StackPanel Grid.Column="1" Margin="5,20,10,10" DataContext="{StaticResource PhieuDatBanVM}">
-                                                    <TextBox Margin="2,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedDV.TenDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
-                                                    <TextBox Margin="2,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedDV.DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
-                                                    <controls:NumericUpDown Margin="2,4" BorderBrush="Black" BorderThickness="1" Value="{Binding DDV_SoLuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Left" Interval="1"/>
-                                                    <TextBox Margin="2,4" BorderBrush="Black" BorderThickness="1" Text="{Binding DDV_ThanhTien, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
+                                                <StackPanel Grid.Column="1" Margin="5,20,10,10" DataContext="{StaticResource CT_PhieuDatBanVM}">
+                                                    <TextBox Margin="2,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedMA.TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
+                                                    <TextBox Margin="2,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedMA.DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
+                                                    <controls:NumericUpDown Margin="2,4" BorderBrush="Black" BorderThickness="1" Value="{Binding DMA_SoLuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Left" Interval="1"/>
+                                                    <TextBox Margin="2,4" BorderBrush="Black" BorderThickness="1" Text="{Binding DMA_ThanhTien, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
                                                     <Button
                                             Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,4,0,0"
                                             Command="{Binding AddCommand}"
@@ -224,16 +224,16 @@
                                             </Button>
                                         </Grid>
                                         <GroupBox DockPanel.Dock="Top" Header="Danh sách đặt món ăn" Margin="10,0,10,10" >
-                                            <DataGrid DataContext="{StaticResource PhieuDatDichVuVM}" ItemsSource="{Binding ListPhieuDatDichVu, Mode=OneWay}" SelectedItem="{Binding SelectedPDDV, Mode=OneWayToSource}"  
+                                            <DataGrid DataContext="{StaticResource CT_PhieuDatBanVM}" ItemsSource="{Binding ListCTPhieuDatBan, Mode=OneWay}" SelectedItem="{Binding SelectedCTPDB, Mode=OneWayToSource}"  
                                               AutoGenerateColumns="False" CanUserAddRows="False" controls:DataGridHelper.ColumnHeaderPadding="10,0" FontSize="12"
                                               Name="dtg_DanhSachDatMonAn">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Tên dịch vụ" Binding="{Binding DICHVU.TenDichVu}" IsReadOnly="True"/>
-                                                    <DataGridTextColumn Header="Đơn giá" Binding="{Binding DICHVU.DonGia}" IsReadOnly="True"/>
+                                                    <DataGridTextColumn Header="Tên món ăn" Binding="{Binding MONAN.TenMonAn}" IsReadOnly="True"/>
+                                                    <DataGridTextColumn Header="Đơn giá" Binding="{Binding MONAN.DonGia}" IsReadOnly="True"/>
                                                     <DataGridTextColumn Header="Số lượng" Binding="{Binding SoLuong, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                                                    <DataGridTextColumn Header="Thành tiền" Binding="{Binding DonGia, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                                                    <DataGridTextColumn Header="Mô tả" Binding="{Binding DICHVU.MoTa}" IsReadOnly="True"/>
-                                                    <DataGridTextColumn Header="Ghi chú" Binding="{Binding DICHVU.GhiChu}" IsReadOnly="True"/>
+                                                    <DataGridTextColumn Header="Thành tiền" Binding="{Binding ThanhTien, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                                                    <DataGridTextColumn Header="Mô tả" Binding="{Binding MONAN.MoTa}" IsReadOnly="True"/>
+                                                    <DataGridTextColumn Header="Ghi chú" Binding="{Binding MONAN.GhiChu}" IsReadOnly="True"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </GroupBox>

@@ -86,15 +86,16 @@
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
                                             <DatePicker Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding NgayDaiTiec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='mm/dd/yyyy'}"/>
-                                            <ComboBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding MaCa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding ListCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="MaCa"/>
-                                            <ComboBox Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding MaSanh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding ListSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="MaSanh"/>
+                                            <ComboBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedItem.CA.TenCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedCa,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenCa"/>
+                                            <ComboBox Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedItem.SANH.TenSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenSanh"/>
                                             <controls:NumericUpDown Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding TienDatCoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                             <Button Grid.Row="4"
                                                 Command="{Binding DatBanvaDichVuCommand}"
+                                                ToolTipService.ShowOnDisabled="True"
                                                 Style="{StaticResource MaterialDesignRaisedButton}"                      
                                                 Margin="2"
-                                                ToolTip="Mở biểu mẫu Đặt bàn và Dịch vụ" Background="Crimson" Foreground="White">
-                                                Đặt bàn và Dịch vụ
+                                                ToolTip="TÁC DỤNG: Mở phiếu đặt bàn và phiếu đặt dịch vụ&#x0a;LƯU Ý 1: Nếu đang thêm tiệc cưới cần lưu lại tiệc cưới&#x0a;LƯU Ý 2: Nếu đang chỉnh sửa tiệc cưới cần đảm bảo&#x0a;dữ liệu trong Thông tin giống với trong Danh sách" Background="Crimson" Foreground="White">
+                                                Mở Đặt bàn và Dịch vụ
                                             </Button>
                                         </Grid>
                                     </Grid>
@@ -164,16 +165,16 @@
                                 </Button>
                             </Grid>
                             <GroupBox Header="Danh sách tiệc cưới" Margin="10,0,0,10" Grid.Column="0">
-                                <DataGrid DataContext="{StaticResource TiecVM}" ItemsSource="{Binding ListTiecCuoi}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" 
+                                <DataGrid DataContext="{StaticResource TiecVM}" ItemsSource="{Binding ListTiecCuoi, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" 
                                           AutoGenerateColumns="False" CanUserAddRows="False" FontSize="12"
                                           controls:DataGridHelper.ColumnHeaderPadding="10,0">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Tên Chú Rể" Binding="{Binding TenChuRe}" IsReadOnly="True"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Tên Cô Dâu" Binding="{Binding TenCoDau}" IsReadOnly="True"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Điện thoại" Binding="{Binding SoDienThoai}" IsReadOnly="True"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Sảnh" Binding="{Binding MaSanh}" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Sảnh" Binding="{Binding SANH.TenSanh}" IsReadOnly="True"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Ngày Đãi Tiệc" Binding="{Binding NgayDaiTiec}" IsReadOnly="True"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Ca" Binding="{Binding MaCa}" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Ca" Binding="{Binding CA.TenCa}" IsReadOnly="True"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True" Width="*"></DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>

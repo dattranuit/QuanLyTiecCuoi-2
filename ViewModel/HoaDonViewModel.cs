@@ -235,14 +235,14 @@ namespace QuanLyTiecCuoi.ViewModel
             if (List5 != null)
             {
                 SoLuong = List5.FirstOrDefault().SoLuong;
-                DonGia = List5.FirstOrDefault().DonGia;
+                DonGia = List5.FirstOrDefault().ThanhTien;
                 //var sum = List5.FirstOrDefault().SoLuong
                 //MessageBox.Show(List5[1].DICHVU.TenDichVu.ToString());
                 ////TenDichVu = List5.SingleOrDefault().MaDichVu.ToString();
                 //SoLuong = List5.SingleOrDefault().SoLuong;
                 //DonGia = List5.SingleOrDefault().DonGia;
                 ThanhTien = SoLuong * DonGia;
-                TongTienDichVu = List5.Sum(x => x.DonGia);
+                TongTienDichVu = List5.Sum(x => x.ThanhTien);
                 //MessageBox.Show(tongtiendichvu);
             }
             List3 = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == idTiecCuoi));
@@ -263,17 +263,17 @@ namespace QuanLyTiecCuoi.ViewModel
                 DonGiaBan = List4.SingleOrDefault().DonGiaBan;
 
             }
-            List6 = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.PHIEUDATBAN.MaTiecCuoi == idTiecCuoi));
+            List6 = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.PHIEUDATBAN.MaTiecCuoi == idTiecCuoi));
             DataProvider.Ins.DataBase.SaveChanges();
             if (List6 != null)
             {
                 
                 SoLuong = List6.FirstOrDefault().SoLuong;
                 //MessageBox.Show(SoLuongMon.ToString());
-                DonGia = List6.FirstOrDefault().DonGia;
+                DonGia = List6.FirstOrDefault().ThanhTien;
             }
 
-            List7 = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOes.ToList());
+            List7 = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOs.ToList());
             DataProvider.Ins.DataBase.SaveChanges();
             var TiLePhat = 0.0d;
             int IsPhat = 0;

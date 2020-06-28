@@ -38,8 +38,8 @@ namespace QuanLyTiecCuoi.Model
         public virtual DbSet<PHIEUDATBAN> PHIEUDATBANs { get; set; }
         public virtual DbSet<PHIEUDATDICHVU> PHIEUDATDICHVUs { get; set; }
         public virtual DbSet<SANH> SANHs { get; set; }
-        public virtual DbSet<THAMSO> THAMSOes { get; set; }
+        public virtual DbSet<THAMSO> THAMSOs { get; set; }
         public virtual DbSet<TIECCUOI> TIECCUOIs { get; set; }
-        public virtual DbSet<CT_PHIEUDATBAN> CT_PHIEUDATBAN { get; set; }
+        public virtual DbSet<CT_PHIEUDATBAN> CT_PHIEUDATBANs { get; set; }
     }
 }
