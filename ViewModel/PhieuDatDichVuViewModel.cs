@@ -30,7 +30,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     MaDichVu = SelectedPDDV.MaDichVu;
                     Sua_PDDV_SoLuong = SelectedPDDV.SoLuong;
-                    Sua_PDDV_ThanhTien = SelectedPDDV.DonGia;
+                    Sua_PDDV_ThanhTien = SelectedPDDV.ThanhTien;
                 }
             }
         }
@@ -98,7 +98,7 @@ namespace QuanLyTiecCuoi.ViewModel
                         MaTiecCuoi = MaTiecCuoi,
                         MaDichVu = MaDichVu,
                         SoLuong = DDV_SoLuong,
-                        DonGia = DDV_ThanhTien
+                        ThanhTien = DDV_ThanhTien
                     };
                     DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Add(PhieuDatDichVu);
                     DataProvider.Ins.DataBase.SaveChanges();
@@ -116,12 +116,11 @@ namespace QuanLyTiecCuoi.ViewModel
                 return false;
             }, (p) =>
             {
-                var DichVu = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == SelectedPDDV.MaDichVu && x.MaTiecCuoi == SelectedPDDV.MaTiecCuoi).SingleOrDefault();
-                DichVu.MaDichVu = SelectedPDDV.MaDichVu;
-                DichVu.MaTiecCuoi = SelectedPDDV.MaTiecCuoi;
-                DichVu.SoLuong = Sua_PDDV_SoLuong;
-                DichVu.DonGia = Sua_PDDV_ThanhTien;
-                MessageBox.Show(SelectedPDDV.MaDichVu + " " + SelectedPDDV.SoLuong);
+                var PhieuDatDichVu = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == SelectedPDDV.MaDichVu && x.MaTiecCuoi == SelectedPDDV.MaTiecCuoi).SingleOrDefault();
+                PhieuDatDichVu.MaDichVu = SelectedPDDV.MaDichVu;
+                PhieuDatDichVu.MaTiecCuoi = SelectedPDDV.MaTiecCuoi;
+                PhieuDatDichVu.SoLuong = Sua_PDDV_SoLuong;
+                PhieuDatDichVu.ThanhTien = Sua_PDDV_ThanhTien;
                 DataProvider.Ins.DataBase.SaveChanges();
             });
         }

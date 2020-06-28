@@ -111,75 +111,72 @@
     <Compile Include="InHoaDon.xaml.cs">
       <DependentUpon>InHoaDon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DatBanvaDichVuWindow.xaml.cs">
+      <DependentUpon>DatBanvaDichVuWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\BAOCAONGAY.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\BAOCAOTHANG.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CA.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CHUCNANG.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CT_PHIEUDATBAN.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Database.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Database.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Database.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\DataProvider.cs" />
     <Compile Include="Model\DICHVU.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Entities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Entities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Entities.edmx</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\HOADON.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\LOAIMONAN.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\LOAISANH.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\MONAN.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\NGUOIDUNG.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\NHOMNGUOIDUNG.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PHIEUDATBAN.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PHIEUDATDICHVU.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SANH.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\THAMSO.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TIECCUOI.cs">
-      <DependentUpon>Entities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DatBanvaDichVuWindow.xaml.cs">
-      <DependentUpon>DatBanvaDichVuWindow.xaml</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="UserControls\usc_Dichvu.xaml.cs">
       <DependentUpon>usc_Dichvu.xaml</DependentUpon>
@@ -209,6 +206,7 @@
     <Compile Include="ViewModel\BaoCaoThangViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CaViewModel.cs" />
+    <Compile Include="ViewModel\CT_PhieuDatBanViewModel.cs" />
     <Compile Include="ViewModel\DichVuViewModel.cs" />
     <Compile Include="ViewModel\HoaDonViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -303,12 +301,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\Entities.edmx">
+    <EntityDeploy Include="Model\Database.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Entities.Designer.cs</LastGenOutput>
+      <LastGenOutput>Database.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\Entities.edmx.diagram">
-      <DependentUpon>Entities.edmx</DependentUpon>
+    <None Include="Model\Database.edmx.diagram">
+      <DependentUpon>Database.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -367,24 +365,26 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="photos\icon_folder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Database.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Database_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database.mdf</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Model\Entities.Context.tt">
+    <Content Include="Model\Database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Entities.edmx</DependentUpon>
-      <LastGenOutput>Entities.Context.cs</LastGenOutput>
+      <DependentUpon>Database.edmx</DependentUpon>
+      <LastGenOutput>Database.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\Entities.tt">
+    <Content Include="Model\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Entities.edmx</DependentUpon>
-      <LastGenOutput>Entities.cs</LastGenOutput>
+      <DependentUpon>Database.edmx</DependentUpon>
+      <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
-    <Resource Include="photos\icon_folder.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
