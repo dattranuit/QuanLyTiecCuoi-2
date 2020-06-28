@@ -13,6 +13,7 @@
     <viewmodel:CaViewModel x:Key="CaVM"></viewmodel:CaViewModel>
     <viewmodel:SanhViewModel x:Key="SanhVM"></viewmodel:SanhViewModel>
     <viewmodel:PhieuDatDichVuViewModel x:Key="PhieuDatDichVuVM"></viewmodel:PhieuDatDichVuViewModel>
+    <viewmodel:PhanQuyenViewModel x:Key="PhanQuyenVM"></viewmodel:PhanQuyenViewModel>
     <viewmodel:CT_PhieuDatBanViewModel x:Key="CT_PhieuDatBanVM"></viewmodel:CT_PhieuDatBanViewModel>
     <Style TargetType="GroupBox">
         <Setter Property="BorderBrush" Value="Black"/>

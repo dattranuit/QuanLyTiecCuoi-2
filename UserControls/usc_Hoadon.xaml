@@ -100,7 +100,7 @@
                                         </DockPanel>
                                         <materialDesign:Card Margin="2">
                                             <DataGrid GridLinesVisibility="None" controls:DataGridHelper.ColumnHeaderPadding="10,0" CanUserAddRows="False" Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List2}" AutoGenerateColumns="False" IsReadOnly="True"  HorizontalGridLinesBrush="Black"  SelectionChanged="DataGrid_SelectionChanged">
-                                                <DataGrid.InputBindings>
+                                                    <DataGrid.InputBindings>
                                                     <MouseBinding
             MouseAction="LeftDoubleClick"
             Command="{Binding DoubleClickCommand}"

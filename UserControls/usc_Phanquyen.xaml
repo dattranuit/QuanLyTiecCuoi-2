@@ -14,7 +14,7 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
-
+             DataContext="{StaticResource PhanQuyenVM}"
     d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
@@ -168,7 +168,8 @@
                                 </Grid>
                                 <Grid Grid.Row="2">
                                     <GroupBox Grid.Column="0" Grid.ColumnSpan="4" Header="Danh sách người dùng" BorderBrush="Black" FontSize="16" Margin="2,1" >
-                                        <DataGrid  x:Name="dtg_DanhSachPhanQuyen" ItemsSource="{Binding Data}" AutoGenerateColumns="False" IsReadOnly="False" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Background="{x:Null}">
+                                        <DataGrid  x:Name="dtg_DanhSachPhanQuyen" ItemsSource="{Binding List1}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"    
+                                                   AutoGenerateColumns="False" IsReadOnly="False" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Background="{x:Null}">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Tên tài khoản" FontSize="14" Binding="{Binding TenTaiKhoan}">
                                                 </DataGridTextColumn>
@@ -238,9 +239,9 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="Mã chức năng" Grid.Row="1" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" FontWeight="Bold" Margin="10,2,0,2" />
-                                        <TextBlock Text="Tên chức năng" Grid.Row="2" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" FontWeight="Bold" Margin="10,2,0,2" />
-                                        <TextBlock Text="Tên màn hình dùng" Grid.Row="3" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" FontWeight="Bold" Margin="10,2,0,2" />
+                                        <TextBlock Text="Mã chức năng:" Grid.Row="1" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" FontWeight="Bold" Margin="10,2,0,2" />
+                                        <TextBlock Text="Tên chức năng:" Grid.Row="2" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" FontWeight="Bold" Margin="10,2,0,2" />
+                                        <!--<TextBlock Text="Tên màn hình dùng" Grid.Row="3" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" FontWeight="Bold" Margin="10,2,0,2" />-->
                                     </Grid>
                                     <Grid Grid.Column="1">
                                         <Grid.RowDefinitions>
@@ -249,21 +250,21 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <TextBox    Grid.Row="1"
-                                                    controls:TextBoxHelper.Watermark="Mã tài khoản"
+                                        <TextBox    Grid.Row="1" Text="{Binding MaChucNang}"
+                                                    controls:TextBoxHelper.Watermark="Mã chức năng"
                                                     BorderThickness="0,0,0,1" Height="32"
                                                     BorderBrush="Black"
                                                     FontSize="15" Background="{x:Null}" Margin="0,0,0,3" Padding="0,4,4,4"/>
-                                        <TextBox    Grid.Row="2"
-                                                    controls:TextBoxHelper.Watermark="Tên tài khoản"
+                                        <TextBox    Grid.Row="2" Text="{Binding TenChucNang}"
+                                                    controls:TextBoxHelper.Watermark="Tên chức năng"
                                                     BorderThickness="0,0,0,1" Height="32"
                                                     BorderBrush="Black"
                                                     FontSize="15" Background="{x:Null}" Margin="0,0,0,3" Padding="0,4,4,4"/>
-                                        <TextBox    Grid.Row="3"
+                                        <!--<TextBox    Grid.Row="3"
                                                     controls:TextBoxHelper.Watermark="Mật khẩu"
                                                     BorderThickness="0,0,0,1" Height="32"
                                                     BorderBrush="Black"
-                                                    FontSize="15" Background="{x:Null}" Margin="0,0,0,3" Padding="0,4,4,4"/>
+                                                    FontSize="15" Background="{x:Null}" Margin="0,0,0,3" Padding="0,4,4,4"/>-->
                                     </Grid>
                                     <Grid Grid.Column="2">
                                         <Grid.RowDefinitions>
@@ -370,7 +371,8 @@
                                 </Grid>
                                 <Grid Grid.Row="2">
                                     <GroupBox Grid.Column="0" Grid.ColumnSpan="4" Header="Danh sách người dùng" BorderBrush="Black" FontSize="16" Margin="2,1" >
-                                        <DataGrid ItemsSource="{Binding Data}" AutoGenerateColumns="False" IsReadOnly="False" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Background="{x:Null}">
+                                        <DataGrid ItemsSource="{Binding List2}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"    
+                                                  AutoGenerateColumns="False" IsReadOnly="False" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Background="{x:Null}">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Mã nhóm người dùng" FontSize="14" Binding="{Binding MaNhomNguoiDung}">
                                                 </DataGridTextColumn>
@@ -380,8 +382,10 @@
                                                 </DataGridTextColumn>
                                                 <DataGridTextColumn Header="Tên chức năng" FontSize="14" Binding="{Binding TenChucNang}">
                                                 </DataGridTextColumn>
-                                                <DataGridTextColumn Header="Tên màn hình dùng" FontSize="14" Binding="{Binding TenManHinhDung}">
+                                                <DataGridTextColumn Header="Tên màn hình được load" FontSize="14" Binding="{Binding TenManHinhDuocLoad}">
                                                 </DataGridTextColumn>
+                                                <!--<DataGridTextColumn Header="Tên màn hình dùng" FontSize="14" Binding="{Binding TenManHinhDung}">
+                                                </DataGridTextColumn>-->
                                                 <!--<DataGridTextColumn Header="Chức năng" FontSize="14" Binding="{Binding pq_ChucNang}">
                                                 </DataGridTextColumn>-->
                                             </DataGrid.Columns>
@@ -395,17 +399,17 @@
                                         <ColumnDefinition Width="125*"/>
                                         <ColumnDefinition Width="125*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="1"
+                                    <Button Grid.Column="1" Command="{Binding AddCommand}"
                                             Style="{StaticResource MaterialDesignFlatMidBgButton}"
                                             ToolTip="MaterialDesignFlatMidButton" Margin="3,5,3,0" FontSize="16" Background="#FF0F5699" Foreground="#FFF1E6E6" Height="38" FontFamily="Calibri" FontWeight="Bold">
                                         Thêm
                                     </Button>
-                                    <Button Grid.Column="2"
+                                    <Button Grid.Column="2" Command="{Binding EditCommand}"
                                             Style="{StaticResource MaterialDesignFlatMidBgButton}"
                                                 ToolTip="MaterialDesignFlatMidButton" Margin="3,5,3,0" FontSize="16" Background="#FF0F5699" Foreground="#FFF1E6E6" Height="38" FontFamily="Calibri" FontWeight="Bold">
                                         Sửa
                                     </Button>
-                                    <Button Grid.Column="3"
+                                    <Button Grid.Column="3" Command="{Binding DeleteCommand}"
                                             Style="{StaticResource MaterialDesignFlatMidBgButton}"
                                             ToolTip="MaterialDesignFlatMidButton" Margin="3,5,3,0" FontSize="16" Background="#FF0F5699" Foreground="#FFF1E6E6" Height="38" FontFamily="Calibri" FontWeight="Bold">
                                         Xóa
