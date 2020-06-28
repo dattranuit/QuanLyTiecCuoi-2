@@ -29,7 +29,8 @@ namespace QuanLyTiecCuoi.Model
         public int SoLuongBanToiDa { get => _SoLuongBanToiDa; set { _SoLuongBanToiDa = value; OnPropertyChanged(); } }
         public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
         public int MaLoaiSanh { get => _MaLoaiSanh; set { _MaLoaiSanh = value; OnPropertyChanged(); } }
-        public virtual LOAISANH LOAISANH { get; set; }
+        private LOAISANH _LOAISANH;
+        public virtual LOAISANH LOAISANH { get => _LOAISANH; set { _LOAISANH = value; OnPropertyChanged(); } }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TIECCUOI> TIECCUOIs { get; set; }
     }

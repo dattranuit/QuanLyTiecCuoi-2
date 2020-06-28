@@ -29,7 +29,7 @@ namespace QuanLyTiecCuoi.ViewModel
         private int _MaLoaiSanh;
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
-        public ICommand PhieuDatBanCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         //Loai sanh
         public string TenLoaiSanh { get => _TenLoaiSanh; set { _TenLoaiSanh = value; OnPropertyChanged(); } }
         public int DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
@@ -37,8 +37,12 @@ namespace QuanLyTiecCuoi.ViewModel
         private string _TenLoaiSanh;
         private int _DonGiaBanToiThieu;
         private int _MaLoaiSanh2;
+        public ICommand AddCommandLoaiSanh { get; set; }
+        public ICommand EditLoaiSanhCommand { get; set; }
+        public ICommand DeleteLoaiSanhCommand { get; set; }
 
-        public List<string> LoaiSanhItemList { get; set; }
+        private LOAISANH _SelectedLoaiSanh;
+        public LOAISANH SelectedLoaiSanh { get => _SelectedLoaiSanh;set { _SelectedLoaiSanh = value ; OnPropertyChanged(); } }
 
         private SANH _SelectedItem;
         public SANH SelectedItem
@@ -76,39 +80,47 @@ namespace QuanLyTiecCuoi.ViewModel
             }
         }
 
-        List<string> GetLoaiSanhItem()
-        {
-            List<string> listitemLoaiSanh = new List<string>();
-            var loaisanh = new List<LOAISANH>(DataProvider.Ins.DataBase.LOAISANHs);
-            foreach(LOAISANH a in loaisanh)
-            {
-                listitemLoaiSanh.Add(a.MaLoaiSanh.ToString());
-            }
-            return listitemLoaiSanh;
-        }
-
         public SanhViewModel()
         {
-            LoaiSanhItemList = GetLoaiSanhItem();
+
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
             ListLoaiSanh = new ObservableCollection<LOAISANH>(DataProvider.Ins.DataBase.LOAISANHs);
             AddCommand = new RelayCommand<object>((p) =>
             {
+                if (string.IsNullOrEmpty(TenSanh) || string.IsNullOrEmpty(SoLuongBanToiDa.ToString()) || SelectedLoaiSanh == null)
+                    return false;
                 return true;
 
             }, (p) =>
             {
                 var Sanh = new SANH()
                 {
-                    MaSanh = MaSanh,
                     TenSanh = TenSanh,
                     SoLuongBanToiDa = SoLuongBanToiDa,
                     GhiChu = GhiChu,
-                    MaLoaiSanh = MaLoaiSanh,
+                    MaLoaiSanh = SelectedLoaiSanh.MaLoaiSanh,
             };
                 DataProvider.Ins.DataBase.SANHs.Add(Sanh);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListSanh.Add(Sanh);
+            });
+
+            AddCommandLoaiSanh = new RelayCommand<object>((p) =>
+            {
+                if (string.IsNullOrEmpty(TenLoaiSanh) || string.IsNullOrEmpty(DonGiaBanToiThieu.ToString()) )
+                    return false;
+                return true;
+
+            }, (p) =>
+            {
+                var LoaiSanh = new LOAISANH()
+                {
+                    TenLoaiSanh = TenLoaiSanh,
+                    DonGiaBanToiThieu = DonGiaBanToiThieu,
+                };
+                DataProvider.Ins.DataBase.LOAISANHs.Add(LoaiSanh);
+                DataProvider.Ins.DataBase.SaveChanges();
+                ListLoaiSanh.Add(LoaiSanh);
             });
 
             EditCommand = new RelayCommand<object>((p) =>

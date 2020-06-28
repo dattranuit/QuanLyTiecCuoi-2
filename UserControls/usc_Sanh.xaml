@@ -57,7 +57,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="70"/>
                             <RowDefinition/>
-                            <RowDefinition Height="280"/>
+                            <RowDefinition Height="200"/>
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
@@ -84,23 +84,27 @@
                         </Grid>
 
                         <Grid Grid.Row="1" Height="auto">
-                            <GroupBox Header="Danh sách Sảnh" Margin="22,0,22,0">
-                                <DataGrid x:Name="dtg_Sanh" Width="auto" IsReadOnly="True" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
+                            <materialDesign:Card Margin="10,0,10,0">
+                                <GroupBox Header="Danh sách Sảnh" Margin="10,0,10,10" >
+                                    <DataGrid x:Name="dtg_Sanh" Width="auto" IsReadOnly="True" 
+                                    SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
                                     ItemsSource="{Binding ListSanh}"
                                     CanUserSortColumns="True"
                                     CanUserAddRows="False"
                                     SelectionUnit="FullRow"
                                     AutoGenerateColumns="False"
-                                    SelectionMode="Extended" Margin="5,0,-5,0">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Mã Sảnh" Binding="{Binding MaSanh}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Tên Sảnh" Binding="{Binding TenSanh}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Số lượng bàn tối đa" Binding="{Binding SoLuongBanToiDa}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}"></DataGridTextColumn>
-                                        <DataGridTextColumn Width="*" Header="Mã loại Sảnh" Binding="{Binding MaLoaiSanh}"></DataGridTextColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </GroupBox>
+                                    SelectionMode="Extended" >
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Mã Sảnh" Binding="{Binding MaSanh}"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Tên Sảnh" Binding="{Binding TenSanh}"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Số lượng bàn tối đa" Binding="{Binding SoLuongBanToiDa}"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}"></DataGridTextColumn>
+                                            <DataGridTextColumn Width="*" Header="Tên loại Sảnh" Binding="{Binding LOAISANH.TenLoaiSanh}"></DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </GroupBox>
+                            </materialDesign:Card>
+                            
                         </Grid>
                         <Grid Grid.Row="2">
                             <Grid.ColumnDefinitions>
@@ -118,64 +122,58 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
                                         <Grid Grid.Column="0">
-                                            <materialDesign:Card Margin="5,5,5,0">
+                                            <materialDesign:Card Margin="5,5,5,25">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="41*"/>
+                                                        <ColumnDefinition Width="33*"/>
                                                         <ColumnDefinition Width="53*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Grid Grid.Column="0">
                                                         <Grid.RowDefinitions>
-                                                            <RowDefinition/>
                                                             <RowDefinition/>
                                                             <RowDefinition/>
                                                         </Grid.RowDefinitions>
                                                         <Label Grid.Row="0" Content="Mã Sảnh" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                                                         <Label Grid.Row="1" Content="Tên Sảnh" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                                                        <Label Grid.Row="2" Content="Số lượng bàn tối đa" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                                                        
                                                     </Grid>
                                                     <Grid Grid.Column="1">
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition/>
                                                             <RowDefinition/>
-                                                            <RowDefinition/>
                                                         </Grid.RowDefinitions>
-                                                        <TextBox x:Name="txb_MaSanh" Text="{Binding MaSanh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="5,10" Grid.Row="0"></TextBox>
-                                                        <TextBox x:Name="txb_TenSanh" Text="{Binding TenSanh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="5,10" Grid.Row="1"></TextBox>
-                                                        <TextBox x:Name="txb_SLBTD" Text="{Binding SoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="5,10" Grid.Row="2"></TextBox>
+                                                        <TextBox x:Name="txb_MaSanh" Focusable="False" Text="{Binding MaSanh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Red" BorderThickness="1" Margin="5,15" Grid.Row="0"></TextBox>
+                                                        <TextBox x:Name="txb_TenSanh" Text="{Binding TenSanh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="5,15" Grid.Row="1"></TextBox>
+                                                        
                                                     </Grid>
                                                 </Grid>
                                             </materialDesign:Card>
                                         </Grid>
                                         <Grid Grid.Column="1">
-                                            <materialDesign:Card Margin="5,5,5,0">
+                                            <materialDesign:Card Margin="5,5,5,25">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="41*"/>
+                                                        <ColumnDefinition Width="33*"/>
                                                         <ColumnDefinition Width="53*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Grid Grid.Column="0">
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition/>
                                                             <RowDefinition/>
-                                                            <RowDefinition/>
                                                         </Grid.RowDefinitions>
-                                                        <Label Grid.Row="0" Content="Mã Loại Sảnh" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                                                        <Label Grid.Row="1" Content="Tên Loại Sảnh" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
-                                                        <Label Grid.Row="2" Content="Số lượng bàn tối đa" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                                                        <Label Grid.Row="0" Content="Tên Loại Sảnh" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
+                                                        <Label Grid.Row="1" Content="Số lượng bàn tối đa" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
                                                     </Grid>
                                                     <Grid Grid.Column="1">
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition/>
                                                             <RowDefinition/>
-                                                            <RowDefinition/>
                                                         </Grid.RowDefinitions>
-                                                        <ComboBox x:Name="cbb_MaSanh" 
-                                                                  ItemsSource="{Binding LoaiSanhItemList}" 
-                                                                  Text="{Binding MaLoaiSanh}"  
-                                                                  BorderBrush="Black" BorderThickness="1" Margin="5,10" Grid.Row="0"></ComboBox>
-                                                        <TextBox x:Name="txb_TenLoaiSanh" BorderBrush="Black" BorderThickness="1" Margin="5,10" Grid.Row="1"></TextBox>
-                                                        <TextBox x:Name="txb_DGBTT" BorderBrush="Black" BorderThickness="1" Margin="5,10" Grid.Row="2"></TextBox>
+                                                        <TextBox x:Name="txb_SLBTD" Text="{Binding SoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="5,15" Grid.Row="1"></TextBox>
+                                                        <ComboBox x:Name="cbb_MaSanh" SelectedItem="{Binding SelectedLoaiSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                  ItemsSource="{Binding ListLoaiSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenLoaiSanh"
+                                                                  Text="{Binding SelectedItem.LOAISANH.TenLoaiSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                                  BorderBrush="Black" BorderThickness="1" Margin="5,15" Grid.Row="0"></ComboBox>
                                                     </Grid>
                                                 </Grid>
                                             </materialDesign:Card>
@@ -204,8 +202,6 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Button x:Name="btn_Them" Margin="3" Command="{Binding AddCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
@@ -225,18 +221,6 @@
                                     ToolTip="Xóa" Background="#FF0F5699" Foreground="White">
                                         Xóa
                                     </Button>
-                                    <Button x:Name="btn_OK" Margin="3"
-            Style="{StaticResource MaterialDesignRaisedAccentButton}"
-            ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-            materialDesign:RippleAssist.Feedback="#DD000000" FontSize="15" Background="#FF29CB29" BorderBrush="#FF181916" Grid.Column="3">
-                                        OK
-                                    </Button>
-                                    <Button x:Name="btn_Cancel" Margin="3"
-            Style="{StaticResource MaterialDesignRaisedAccentButton}"
-            ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-            materialDesign:RippleAssist.Feedback="#DD000000" Height="30" FontSize="15" Background="Red" BorderBrush="#FF181916" Grid.Column="4">
-                                        Hủy
-                                    </Button>
                                 </Grid>
                             </materialDesign:Card>
                         </Grid>
@@ -248,7 +232,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="70"/>
                             <RowDefinition/>
-                            <RowDefinition Height="220"/>
+                            <RowDefinition Height="230"/>
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
@@ -274,54 +258,55 @@
                         </Grid>
 
                         <Grid Grid.Row="1">
-                            <GroupBox Header="Danh sách loại Sảnh" Margin="22,0,22,0">
-                                <DataGrid x:Name="dtg_LoaiSanh" Width="auto" IsReadOnly="True" SelectedItem="{Binding SelectedItem2}"
+                            <materialDesign:Card Margin="10,0,10,0">
+                                <GroupBox Header="Danh sách loại Sảnh" Margin="10,0,10,10">
+                                    <DataGrid x:Name="dtg_LoaiSanh" Width="auto" IsReadOnly="True" SelectedItem="{Binding SelectedItem2}"
                                     ItemsSource="{Binding ListLoaiSanh}"
                                     CanUserSortColumns="True"
                                     CanUserAddRows="False"
                                     SelectionUnit="FullRow"
                                     AutoGenerateColumns="False"
                                     SelectionMode="Extended">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Mã loại Sảnh" Binding="{Binding MaLoaiSanh}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Tên loại Sảnh" Binding="{Binding TenLoaiSanh}"></DataGridTextColumn>
-                                        <DataGridTextColumn Width="*" Header="Đơn giá bàn tối thiểu" Binding="{Binding DonGiaBanToiThieu}"></DataGridTextColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </GroupBox>
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Mã loại Sảnh" Binding="{Binding MaLoaiSanh}"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Tên loại Sảnh" Binding="{Binding TenLoaiSanh}"></DataGridTextColumn>
+                                            <DataGridTextColumn Width="*" Header="Đơn giá bàn tối thiểu" Binding="{Binding DonGiaBanToiThieu}"></DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </GroupBox>
+                            </materialDesign:Card>
+                            
                         </Grid>
                         <Grid Grid.Row="2">
-                            <GroupBox Header="Thông Tin Loại Sảnh">
-                                <materialDesign:Card Margin="12,12,12,12">
+                            <materialDesign:Card Margin="10,10,10,0">
+                                <GroupBox Header="Thông Tin Loại Sảnh" Margin="10,0,10,10">
                                     <Grid  >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="51*"/>
-                                            <ColumnDefinition Width="140*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Label Content="Tên Loại Sảnh" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30"></Label>
-                                        <Label Content="Mã Loại Sảnh" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30"></Label>
-                                        <Label Content="Đơn giá bàn tối thiểu" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30"></Label>
-                                        <TextBox x:Name="txb_TenLoaiSanh2" Text="{Binding TenLoaiSanh}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="0" FontSize="15"></TextBox>
-                                        <TextBox x:Name="txb_MaLoaiSanh2" Text="{Binding MaLoaiSanh2}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="1" FontSize="15"></TextBox>
-                                        <TextBox x:Name="txb_DGBTT2" Text="{Binding DonGiaBanToiThieu}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="2" FontSize="15"></TextBox>
-                                    </Grid>
-                                </materialDesign:Card>
-                            </GroupBox>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="51*"/>
+                                                <ColumnDefinition Width="140*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label Content="Tên Loại Sảnh" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30"></Label>
+                                            <Label Content="Mã Loại Sảnh" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30"></Label>
+                                            <Label Content="Đơn giá bàn tối thiểu" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30"></Label>
+                                            <TextBox x:Name="txb_TenLoaiSanh2" Text="{Binding TenLoaiSanh}" BorderBrush="Black" BorderThickness="1" Margin="10,10" Grid.Column="1" Grid.Row="1" FontSize="15"></TextBox>
+                                            <TextBox x:Name="txb_MaLoaiSanh2" Focusable="False" Text="{Binding MaLoaiSanh2}" BorderBrush="Red" BorderThickness="1" Margin="10,10" Grid.Column="1" Grid.Row="0" FontSize="15"></TextBox>
+                                            <TextBox x:Name="txb_DGBTT2" Text="{Binding DonGiaBanToiThieu}" BorderBrush="Black" BorderThickness="1" Margin="10,10" Grid.Column="1" Grid.Row="2" FontSize="15"></TextBox>
+                                        </Grid>
+                                </GroupBox>
+                            </materialDesign:Card>
                         </Grid>
                         <Grid Grid.Row="3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Button x:Name="btn_Them2" Margin="3"
+                            <Button x:Name="btn_Them2" Margin="3" Command="{Binding AddCommandLoaiSanh}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Width="auto" Grid.Column="0" 
                                     ToolTip="Thêm" Background="#FF0F5699" Foreground="White">
@@ -338,18 +323,6 @@
                                     Width="auto" Grid.Column="2" 
                                     ToolTip="Xóa" Background="#FF0F5699" Foreground="White">
                                 Xóa
-                            </Button>
-                            <Button x:Name="btn_OK2" Margin="3"
-            Style="{StaticResource MaterialDesignRaisedAccentButton}"
-            ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-            materialDesign:RippleAssist.Feedback="#DD000000" FontSize="15" Background="#FF29CB29" BorderBrush="#FF181916" Grid.Column="3">
-                                OK
-                            </Button>
-                            <Button x:Name="btn_Cancel2" Margin="3"
-            Style="{StaticResource MaterialDesignRaisedAccentButton}"
-            ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-            materialDesign:RippleAssist.Feedback="#DD000000" Height="30" FontSize="15" Background="Red" BorderBrush="#FF181916" Grid.Column="4">
-                                Hủy
                             </Button>
                         </Grid>
                     </Grid>
