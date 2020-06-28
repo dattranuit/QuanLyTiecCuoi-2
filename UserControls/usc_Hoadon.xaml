@@ -99,7 +99,11 @@
                                             </materialDesign:Card>
                                         </DockPanel>
                                         <materialDesign:Card Margin="2">
+<<<<<<< HEAD
                                             <DataGrid Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List2}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" SelectionChanged="DataGrid_SelectionChanged">
+=======
+                                            <DataGrid GridLinesVisibility="None" controls:DataGridHelper.ColumnHeaderPadding="10,0" CanUserAddRows="False" Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List2}" AutoGenerateColumns="False" IsReadOnly="True"  HorizontalGridLinesBrush="Black"  SelectionChanged="DataGrid_SelectionChanged">
+>>>>>>> c33ecad1244dfa3420b1f0a4f4e6606838f57024
                                                 <DataGrid.InputBindings>
                                                     <MouseBinding
             MouseAction="LeftDoubleClick"

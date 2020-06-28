@@ -38,6 +38,7 @@ namespace QuanLyTiecCuoi.ViewModel
             }
         }
 
+<<<<<<< HEAD
         //public event PropertyChangedEventHandler PropertyChanged;
         //private void NotifyPropertyChanged(string property)
         //{
@@ -46,6 +47,45 @@ namespace QuanLyTiecCuoi.ViewModel
         //        PropertyChanged(this, new PropertyChangedEventArgs(property));
         //    }
         //}
+=======
+        private ICollectionView _dataGridCollection;
+        private string _filterString;
+        public ICollectionView DataGridCollection
+        {
+            get { return _dataGridCollection; }
+            set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
+        }
+        public string FilterString
+        {
+            get { return _filterString; }
+            set
+            {
+                _filterString = value;
+                OnPropertyChanged("FilterString");
+                FilterCollection();
+            }
+        }
+        private void FilterCollection()
+        {
+            if (_dataGridCollection != null)
+            {
+                _dataGridCollection.Refresh();
+            }
+        }
+        public bool Filter(object obj)
+        {
+            var data = obj as MONAN;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(_filterString))
+                {
+                    return data.TenMonAn.Contains(_filterString);
+                }
+                return true;
+            }
+            return false;
+        }
+>>>>>>> c33ecad1244dfa3420b1f0a4f4e6606838f57024
         //biến bên trang chính
         private int _MaMonAn { get; set; }
         public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
@@ -85,7 +125,6 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 var MonAn = new MONAN()
                 {
-                    MaMonAn = MaMonAn,
                     TenMonAn = TenMonAn,
                     DonGia = DonGia,
                     MoTa = MoTa,

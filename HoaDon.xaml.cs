@@ -24,9 +24,24 @@ namespace QuanLyTiecCuoi
         {
             InitializeComponent();
         }
-        public HoaDon(string id)
+     
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
+            try
+            {
+                this.IsEnabled = false;
+                PrintDialog printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
+                {
+                    printDialog.PrintVisual(HoaDonThanhToan, "Hóa đơn");
+
+                }
+            }
+            finally
+            {
+                this.IsEnabled = true;
+            }
         }
     }
 }

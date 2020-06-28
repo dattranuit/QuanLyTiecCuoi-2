@@ -12,30 +12,34 @@ namespace QuanLyTiecCuoi.Model
     using QuanLyTiecCuoi.ViewModel;
     using System;
     using System.Collections.Generic;
+<<<<<<< HEAD
     public partial class MONAN:BaseViewModel
 
+=======
+
+    public partial class MONAN : BaseViewModel
+>>>>>>> c33ecad1244dfa3420b1f0a4f4e6606838f57024
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MONAN()
         {
             this.CT_PHIEUDATBAN = new HashSet<CT_PHIEUDATBAN>();
         }
-    
+
         private int _MaMonAn { get; set; }
-        public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value;OnPropertyChanged(); } }
+        public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
         private string _TenMonAn { get; set; }
         public string TenMonAn { get => _TenMonAn; set { _TenMonAn = value; OnPropertyChanged(); } }
         private decimal _DonGia { get; set; }
         public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
         private string _MoTa { get; set; }
-        public string MoTa { get => _MoTa; set { _MoTa = value;OnPropertyChanged(); } }
+        public string MoTa { get => _MoTa; set { _MoTa = value; OnPropertyChanged(); } }
         public string HinhAnh { get; set; }
         private string _GhiChu { get; set; }
-        public string GhiChu { get => _GhiChu; set { _GhiChu = value;OnPropertyChanged(); } }
+        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
         private int _MaLoaiMonAn { get; set; }
-        public int MaLoaiMonAn { get => _MaLoaiMonAn; set { _MaLoaiMonAn = value;OnPropertyChanged(); } }
-    
-        public virtual LOAIMONAN LOAIMONAN { get; set; }
+        public int MaLoaiMonAn { get => _MaLoaiMonAn; set { _MaLoaiMonAn = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUDATBAN> CT_PHIEUDATBAN { get; set; }
     }

@@ -11,18 +11,21 @@ namespace QuanLyTiecCuoi.Model
 {
     using System;
     using System.Collections.Generic;
+    using QuanLyTiecCuoi.ViewModel;
     
-    public partial class CA
+    public partial class CA:BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CA()
         {
             this.TIECCUOIs = new HashSet<TIECCUOI>();
         }
-    
-        public int MaCa { get; set; }
-        public string TenCa { get; set; }
-    
+
+        private int _MaCa;
+        public int MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
+        private string _TenCa;
+        public string TenCa { get => _TenCa; set { _TenCa = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TIECCUOI> TIECCUOIs { get; set; }
     }

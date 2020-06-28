@@ -18,13 +18,11 @@ namespace QuanLyTiecCuoi.Model
         private int _MaPhieuDatBan;
         private int _MaMonAn;
         private int _SoLuong;
-        private decimal _DonGia;
-        private string _GhiChu;
+        private decimal _ThanhTien;
         public int MaPhieuDatBan { get => _MaPhieuDatBan; set { _MaPhieuDatBan = value; OnPropertyChanged(); }}
         public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
         public int SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
-        public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
-        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+        public decimal ThanhTien { get => _ThanhTien; set { _ThanhTien = value; OnPropertyChanged(); } }
 
         public virtual MONAN MONAN { get; set; }
         public virtual PHIEUDATBAN PHIEUDATBAN { get; set; }

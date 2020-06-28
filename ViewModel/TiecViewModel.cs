@@ -16,12 +16,18 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class TiecViewModel : BaseViewModel
     {
+        private static int _CurrentMaTiecCuoi;
+        public static int CurrentMaTiecCuoi { get => _CurrentMaTiecCuoi; set => _CurrentMaTiecCuoi = value; }
         private ObservableCollection<TIECCUOI> _ListTiecCuoi;
         public ObservableCollection<TIECCUOI> ListTiecCuoi { get => _ListTiecCuoi; set { _ListTiecCuoi = value; OnPropertyChanged(); } }
         private ObservableCollection<CA> _ListCa;
         public ObservableCollection<CA> ListCa { get => _ListCa; set { _ListCa = value; OnPropertyChanged(); } }
         private ObservableCollection<SANH> _ListSanh;
         public ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value; OnPropertyChanged(); } }
+        private CA _SelectedCa;
+        public CA SelectedCa { get => _SelectedCa; set { _SelectedCa = value; if(SelectedCa!= null) MaCa = _SelectedCa.MaCa; OnPropertyChanged(); } }
+        private SANH _SelectedSanh;
+        public SANH SelectedSanh { get => _SelectedSanh; set { _SelectedSanh = value; if (SelectedSanh != null) MaSanh = _SelectedSanh.MaSanh; OnPropertyChanged(); } }
         private TIECCUOI _SelectedItem;
         public TIECCUOI SelectedItem
         {
@@ -40,8 +46,8 @@ namespace QuanLyTiecCuoi.ViewModel
                     NgayDaiTiec = SelectedItem.NgayDaiTiec;
                     TienDatCoc = SelectedItem.TienDatCoc;
                     GhiChu = SelectedItem.GhiChu;
-                    MaSanh = Convert.ToInt32(SelectedItem.MaSanh);
-                    MaCa = Convert.ToInt32(SelectedItem.MaCa);
+                    MaSanh = SelectedItem.MaSanh;
+                    MaCa = SelectedItem.MaCa;
                 }
             }
         }
@@ -50,19 +56,19 @@ namespace QuanLyTiecCuoi.ViewModel
         private int _TongSoBan;
         public int TongSoBan { get => _TongSoBan; set { _TongSoBan = value; OnPropertyChanged(); } }
         private string _TenChuRe;
-        public string TenChuRe { get => _TenChuRe; set { _TenChuRe = value; OnPropertyChanged(); } }
+        public string TenChuRe { get => _TenChuRe; set { if(value != _TenChuRe) OnPropertyChanged(); _TenChuRe = value; OnPropertyChanged(); } }
         private string _TenCoDau;
-        public string TenCoDau { get => _TenCoDau; set { _TenCoDau = value; OnPropertyChanged(); } }
+        public string TenCoDau { get => _TenCoDau; set { if (value != _TenCoDau) OnPropertyChanged(); _TenCoDau = value; OnPropertyChanged(); } }
         private string _SoDienThoai;
-        public string SoDienThoai { get => _SoDienThoai; set { _SoDienThoai = value; OnPropertyChanged(); } }
+        public string SoDienThoai { get => _SoDienThoai; set { if (value != _SoDienThoai) OnPropertyChanged(); _SoDienThoai = value; OnPropertyChanged(); } }
         private System.DateTime _NgayDatTiec = DateTime.Now;
-        public System.DateTime NgayDatTiec { get => _NgayDatTiec; set { _NgayDatTiec = value; OnPropertyChanged(); } }
+        public System.DateTime NgayDatTiec { get => _NgayDatTiec; set { if (value != _NgayDatTiec) OnPropertyChanged(); _NgayDatTiec = value; OnPropertyChanged(); } }
         private System.DateTime _NgayDaiTiec = DateTime.Now;
-        public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; set { _NgayDaiTiec = value; OnPropertyChanged(); } }
+        public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; set { if (value != _NgayDaiTiec) OnPropertyChanged(); _NgayDaiTiec = value; OnPropertyChanged(); } }
         private decimal _TienDatCoc;
-        public decimal TienDatCoc { get => _TienDatCoc; set { _TienDatCoc = value; OnPropertyChanged(); } }
-        private string _GhiChu;
-        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+        public decimal TienDatCoc { get => _TienDatCoc; set { if (value != _TienDatCoc) OnPropertyChanged(); _TienDatCoc = value; OnPropertyChanged(); } }
+        private string _GhiChu = "";
+        public string GhiChu { get => _GhiChu; set { if (value != _GhiChu) OnPropertyChanged(); _GhiChu = value; OnPropertyChanged(); } }
         private int? _MaSanh;
         public int? MaSanh { get => _MaSanh; set { _MaSanh = value; OnPropertyChanged(); } }
         private int? _MaCa;
@@ -79,11 +85,39 @@ namespace QuanLyTiecCuoi.ViewModel
                 return false;
             if (String.IsNullOrEmpty(SoDienThoai))
                 return false;
+            if (String.IsNullOrEmpty(NgayDaiTiec.ToString()))
+                return false;
+            if (String.IsNullOrEmpty(NgayDatTiec.ToString()))
+                return false;
             if (MaSanh == null)
                 return false;
             if (MaCa == null)
                 return false;
             return true;           
+        }
+        bool Enable()
+        {
+            if (SelectedItem == null)
+                return false;
+            if (TenChuRe != SelectedItem.TenChuRe)
+                return false;
+            if (TenCoDau != SelectedItem.TenCoDau)
+                return false;
+            if (SoDienThoai != SelectedItem.SoDienThoai)
+                return false;
+            if (NgayDatTiec != SelectedItem.NgayDatTiec)
+                return false;
+            if (NgayDaiTiec != SelectedItem.NgayDaiTiec)
+                return false;
+            if (TienDatCoc != SelectedItem.TienDatCoc)
+                return false;
+            if (GhiChu != SelectedItem.GhiChu)
+                return false;
+            if (MaSanh != SelectedItem.MaSanh)
+                return false;
+            if (MaCa != SelectedItem.MaCa)
+                return false;
+            return true;
         }
         public TiecViewModel()
         {
@@ -101,8 +135,8 @@ namespace QuanLyTiecCuoi.ViewModel
                     NgayDaiTiec = NgayDaiTiec,
                     TienDatCoc = TienDatCoc,
                     GhiChu = GhiChu,
-                    MaSanh = Convert.ToInt32(MaSanh),
-                    MaCa = Convert.ToInt32(MaCa)
+                    MaSanh = SelectedSanh.MaSanh,
+                    MaCa = SelectedCa.MaCa
                 };
                 try
                 {
@@ -122,7 +156,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 if (SelectedItem == null)
                     return false;
                 var displayList = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedItem.MaTiecCuoi);
-                if (displayList != null && displayList.Count() != 0)
+                if (displayList != null && displayList.Count() != 0 && !Enable())
                     return true;
                 return false;
             }, (p) =>
@@ -135,14 +169,15 @@ namespace QuanLyTiecCuoi.ViewModel
                 TiecCuoi.NgayDaiTiec = NgayDaiTiec;
                 TiecCuoi.TienDatCoc = TienDatCoc;
                 TiecCuoi.GhiChu = GhiChu;
-                TiecCuoi.MaSanh = Convert.ToInt32(MaSanh);
-                TiecCuoi.MaCa = Convert.ToInt32(MaCa);
+                TiecCuoi.MaSanh = SelectedSanh.MaSanh;
+                TiecCuoi.MaCa = SelectedCa.MaCa;
                 DataProvider.Ins.DataBase.SaveChanges();
             });
-            DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow(); wd.ShowDialog(); });
+            DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return Enable(); }, (p) => { 
+                DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow();
+                CurrentMaTiecCuoi = SelectedItem.MaTiecCuoi;
+                wd.ShowDialog(); });
             LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
         }
-   
-
     }
 }

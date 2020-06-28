@@ -12,8 +12,8 @@ namespace QuanLyTiecCuoi.Model
     using System;
     using QuanLyTiecCuoi.ViewModel;
     using System.Collections.Generic;
-    
-    public partial class TIECCUOI: BaseViewModel
+
+    public partial class TIECCUOI : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TIECCUOI()
@@ -43,16 +43,19 @@ namespace QuanLyTiecCuoi.Model
         public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
         private int _MaSanh;
         public int MaSanh { get => _MaSanh; set { _MaSanh = value; OnPropertyChanged(); } }
+
         private int _MaCa;
         public int MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
-
-        public virtual CA CA { get; set; }
+        private CA _CA;
+        public virtual CA CA { get => _CA; set { _CA = value; OnPropertyChanged(); } }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHIEUDATBAN> PHIEUDATBANs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHIEUDATDICHVU> PHIEUDATDICHVUs { get; set; }
-        public virtual SANH SANH { get; set; }
+        private SANH _SANH;
+        public virtual SANH SANH { get => _SANH; set { _SANH = value; OnPropertyChanged(); } }
     }
 }
+
