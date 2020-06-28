@@ -142,7 +142,5 @@ namespace QuanLyTiecCuoi.ViewModel
             DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow(); wd.ShowDialog(); });
             LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
         }
-   
-
     }
 }

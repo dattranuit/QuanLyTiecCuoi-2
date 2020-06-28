@@ -29,10 +29,5 @@ namespace QuanLyTiecCuoi.UserControls
         {
 
         }
-
-        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-        }
     }
 }
