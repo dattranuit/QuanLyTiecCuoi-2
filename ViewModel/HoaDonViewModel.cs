@@ -61,6 +61,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public ICommand DoubleClickCommand { get; set; }
         public ICommand LuuHoaDon { get; set; }
+        public ICommand InHoaDon { get; set; }
         private ObservableCollection<TIECCUOI> _List2;
         public ObservableCollection<TIECCUOI> List2 { get => _List2; set { _List2 = value; OnPropertyChanged(); } }
         public ObservableCollection<TIECCUOI> _List3;
@@ -163,12 +164,25 @@ namespace QuanLyTiecCuoi.ViewModel
                 });
             LuuHoaDon = new RelayCommand<HoaDon>((p) =>
             {
+                var hoadon = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == idTiecCuoi);
+                if (hoadon == null || hoadon.Count() != 0)
+                    return false;
                 return true;
 
             }, (p) =>
             {
                 MessageBox.Show("Done");
+                var hoadon = new HOADON() { MaTiecCuoi = idTiecCuoi, TongTienBan = TongTienBan,
+                    NgayThanhToan = NgayDaiTiec, ConLai = ConLai, TongTienDichVu = TongTienDichVu, TongTienHoaDon = TongTienHoaDon };
+                DataProvider.Ins.DataBase.HOADONs.Add(hoadon);
+                DataProvider.Ins.DataBase.SaveChanges();
                 
+            });
+            InHoaDon = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) => 
+            {
                 
             });
 
@@ -229,7 +243,7 @@ namespace QuanLyTiecCuoi.ViewModel
         private void data()
         {
             List5 = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == idTiecCuoi));
-
+            if (List5 == null) return;
             //List5 = new ObservableCollection<object>(DataProvider.Ins.DataBase.PHIEUDATBANs.Join());
             DataProvider.Ins.DataBase.SaveChanges();
             if (List5 != null)

@@ -35,6 +35,7 @@
                     </Style>
                 </Grid.Resources>
                 <UserControl 
+                    x:Name="HoaDonThanhToan"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -92,6 +93,8 @@
     ToolTip="Thêm">
                                             </Button>
                                             <Button
+                                                Click="Button_Click"
+                                                Command="{Binding InHoaDon}"
                                 Grid.Column="3"
                                 Background="#FF0F5699" Foreground="White"
                                 HorizontalAlignment="Center"
@@ -207,7 +210,7 @@
                                                 <ColumnDefinition Width="403*"/>
                                                 <ColumnDefinition Width="354*"/>
                                             </Grid.ColumnDefinitions>
-                                            <DataGrid  ItemsSource="{Binding List5}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
+                                            <DataGrid  ItemsSource="{Binding List5}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="Dịch vụ" FontSize="14" Binding="{Binding DICHVU.TenDichVu}"/>
                                                     <DataGridTextColumn Header="Số lượng" FontSize="14" Binding="{Binding SoLuong}">
@@ -233,7 +236,7 @@
                                                 <ColumnDefinition Width="403*"/>
                                                 <ColumnDefinition Width="354*"/>
                                             </Grid.ColumnDefinitions>
-                                            <DataGrid  ItemsSource="{Binding List6}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
+                                            <DataGrid  ItemsSource="{Binding List6}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
                                                 <DataGrid.Columns>
 
                                                     <DataGridTextColumn Header="Món ăn" FontSize="14" Binding="{Binding MONAN.TenMonAn}">

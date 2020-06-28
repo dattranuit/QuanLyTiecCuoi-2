@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace QuanLyTiecCuoi.ViewModel
@@ -43,48 +45,42 @@ namespace QuanLyTiecCuoi.ViewModel
         private decimal _TongDoanhThu;
         public decimal TongDoanhThu { get => _TongDoanhThu; set { _TongDoanhThu = value; OnPropertyChanged(); } }
 
+        public ICommand DoubleClickCommand { get; set; }
 
-        public ICommand AddCommand { get; set; }
-        public ICommand EditCommand { get; set; }
+        private ObservableCollection<BAOCAONGAY> _List2;
+        public ObservableCollection<BAOCAONGAY> List2 { get => _List2; set { _List2 = value; OnPropertyChanged(); } }
 
         public BaoCaoThangViewModel()
         {
             List = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
+           
+            DoubleClickCommand = new RelayCommand<DataGrid>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                int id = _getMaBaoCaoThang(p);
+                List2 = new ObservableCollection<BAOCAONGAY>(DataProvider.Ins.DataBase.BAOCAONGAYs.Where(x => x.MaBaoCaoThang == id));
+                DataProvider.Ins.DataBase.SaveChanges();
+                
+            });
+            
 
-            //AddCommand = new RelayCommand<object>((p) =>
-            //{
-            //    return true;
+        }
 
-            //}, (p) =>
-            //{
-            //    var BaoCaoThang = new BAOCAOTHANG() { Thang = Thang, Nam = Nam, TongDoanhThu = TongDoanhThu };
+        public int _getMaBaoCaoThang(DataGrid dataGrid)
+        {
+            if (dataGrid.SelectedItem != null)
+            {
+                BAOCAOTHANG IdBaoCaoThang = dataGrid.SelectedItem as BAOCAOTHANG;
+                return IdBaoCaoThang.MaBaoCaoThang;
 
-            //    DataProvider.Ins.DataBase.BAOCAOTHANGs.Add(BaoCaoThang);
-            //    DataProvider.Ins.DataBase.SaveChanges();
-
-            //    List.Add(BaoCaoThang);
-            //});
-
-            //EditCommand = new RelayCommand<object>((p) =>
-            //{
-            //    if (SelectedItem == null)
-            //        return false;
-
-            //    var displayList = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.MaBaoCaoThang == SelectedItem.MaBaoCaoThang);
-            //    if (displayList != null && displayList.Count() != 0)
-            //        return true;
-
-            //    return false;
-
-            //}, (p) =>
-            //{
-            //    var BaoCaoNgay = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.MaBaoCaoThang == SelectedItem.MaBaoCaoThang).SingleOrDefault();
-            //    BaoCaoNgay.Thang = SelectedItem.Thang;
-            //    BaoCaoNgay.Nam = SelectedItem.Nam;
-            //    BaoCaoNgay.TongDoanhThu = SelectedItem.TongDoanhThu;
-            //    DataProvider.Ins.DataBase.SaveChanges();
-            //    SelectedItem.Thang = Thang;
-            //});
+            }
+            else
+            {
+                MessageBox.Show("Lỗi");
+                return -1;
+            }
         }
     }
 }
