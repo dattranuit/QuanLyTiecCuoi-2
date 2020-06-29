@@ -49,8 +49,9 @@
                                         Style="{StaticResource MaterialDesignRaisedButton}"                      
                                         Grid.Column="3" Margin="2" Grid.Row="2"
                                         Click="btn_CTPhieuDatBan_Click"
+                                        Command="{Binding ChiTietPDBCommand}"
                                         ToolTip="Hiện chi tiết đặt món ăn" Background="Crimson" Foreground="White">
-                                            Chi tiết đặt bàn
+                                        Chi tiết đặt bàn
                                     </Button>
                                 </Grid>
                             </GroupBox>
@@ -97,13 +98,13 @@
                                 </Grid>
                                 <GroupBox DockPanel.Dock="Top" Header="Danh sách đặt bàn" Margin="10" >
                                     <ScrollViewer VerticalScrollBarVisibility="Auto" DataContext="{StaticResource PhieuDatBanVM}">
-                                        <DataGrid ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" 
+                                        <DataGrid ItemsSource="{Binding ListPhieuDatBan}" SelectedItem="{Binding SelectedPDB, Mode=TwoWay}" 
                                                   AutoGenerateColumns="False" CanUserAddRows="False" controls:DataGridHelper.ColumnHeaderPadding="10,0">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Loại bàn" Binding="{Binding MaMonAn, Mode=OneWayToSource}" IsReadOnly="True"></DataGridTextColumn>
-                                                <DataGridTextColumn Header="Số lượng" Binding="{Binding TenMonAn}" IsReadOnly="True"></DataGridTextColumn>
-                                                <DataGridTextColumn Header="Số lượng dự trữ" Binding="{Binding DonGia}" IsReadOnly="True"></DataGridTextColumn>
-                                                <DataGridTextColumn Header="Đơn giá bàn" Binding="{Binding MoTa}" IsReadOnly="True"></DataGridTextColumn>
+                                                <DataGridTextColumn Header="Loại bàn" Binding="{Binding LoaiBan, Mode=OneWayToSource}" IsReadOnly="True"></DataGridTextColumn>
+                                                <DataGridTextColumn Header="Số lượng" Binding="{Binding SoLuong}" IsReadOnly="True"></DataGridTextColumn>
+                                                <DataGridTextColumn Header="Số lượng dự trữ" Binding="{Binding SoLuongDuTru}" IsReadOnly="True"></DataGridTextColumn>
+                                                <DataGridTextColumn Header="Đơn giá bàn" Binding="{Binding DonGiaBan}" IsReadOnly="True"></DataGridTextColumn>
                                                 <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True"></DataGridTextColumn>
                                             </DataGrid.Columns>
                                         </DataGrid>
@@ -123,58 +124,56 @@
                                     <RowDefinition Height="0.9*"/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <materialDesign:Card DockPanel.Dock="Top" Margin="10" Grid.Row="0">
+                                <materialDesign:Card DockPanel.Dock="Top" Margin="10,10,10,5" Grid.Row="0" DataContext="{StaticResource CT_PhieuDatBanVM}" >
                                     <DockPanel>
-                                        <Grid DockPanel.Dock="Top" Margin="10,10,0,0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition/>
-                                                <ColumnDefinition Width="0.5*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBox x:Name="tbx_TimKiemMonAn"
-                                            controls:TextBoxHelper.Watermark="Tìm kiếm món ăn"
-                                            BorderThickness="0,0,0,1" Height="32"
-                                            BorderBrush="Black"
-                                            FontSize="15" Grid.Column="0"
-                                            VerticalAlignment="Center" Margin="0,0,0,0" />
-                                        </Grid>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition Width="0.5*"/>
                                             </Grid.ColumnDefinitions>
-                                            <GroupBox Header="Danh sách món ăn"  Margin="10,10,10,10">
-                                                <ScrollViewer VerticalScrollBarVisibility="Auto" DataContext="{StaticResource CT_PhieuDatBanVM}">
-                                                    <DataGrid ItemsSource="{Binding ListMonAn}" SelectedItem="{Binding SelectedMA, Mode=OneWayToSource}" 
+                                            <DockPanel>
+                                                <TextBox x:Name="tbx_TimKiemMonAn"
+                                                         controls:TextBoxHelper.Watermark="Tìm kiếm món ăn"
+                                                         BorderThickness="0,0,0,1" Height="32"
+                                                         BorderBrush="Black" DockPanel.Dock="Top"
+                                                         FontSize="15" Grid.Column="0"
+                                                         VerticalAlignment="Center" Margin="10,0,0,0" Grid.ColumnSpan="2" />
+                                                <GroupBox Header="Danh sách món ăn"  Margin="10,5,0,10">
+                                                    <ScrollViewer VerticalScrollBarVisibility="Auto" DataContext="{StaticResource CT_PhieuDatBanVM}">
+                                                        <DataGrid ItemsSource="{Binding ListMonAn}" SelectedItem="{Binding SelectedMA, Mode=OneWayToSource}" 
                                                   AutoGenerateColumns="False" CanUserAddRows="False" controls:DataGridHelper.ColumnHeaderPadding="10,0">
-                                                        <DataGrid.Columns>
-                                                            <DataGridTextColumn Header="Tên Món Ăn" Binding="{Binding TenMonAn}" IsReadOnly="True"></DataGridTextColumn>
-                                                            <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGia}" IsReadOnly="True"></DataGridTextColumn>
-                                                            <DataGridTextColumn Header="Mô tả" Binding="{Binding MoTa}" IsReadOnly="True"></DataGridTextColumn>
-                                                            <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True"></DataGridTextColumn>
-                                                        </DataGrid.Columns>
-                                                    </DataGrid>
-                                                </ScrollViewer>
-                                            </GroupBox>
+                                                            <DataGrid.Columns>
+                                                                <DataGridTextColumn Header="Tên Món Ăn" Binding="{Binding TenMonAn}" IsReadOnly="True"></DataGridTextColumn>
+                                                                <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGia}" IsReadOnly="True"></DataGridTextColumn>
+                                                                <DataGridTextColumn Header="Mô tả" Binding="{Binding MoTa}" IsReadOnly="True"></DataGridTextColumn>
+                                                                <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True"></DataGridTextColumn>
+                                                            </DataGrid.Columns>
+                                                        </DataGrid>
+                                                    </ScrollViewer>
+                                                </GroupBox>
+                                            </DockPanel>
                                             <Grid Grid.Column="1" DockPanel.Dock="Right">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="0.75*"/>
                                                     <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
-                                                <StackPanel Margin="10,20,5,10" DataContext="{StaticResource PhieuDatBanVM}">
-                                                    <Label Margin="0,2,0,2" Content="Tên món ăn:" FontWeight="SemiBold"/>
-                                                    <Label Margin="0,2,0,2" Content="Đơn giá:" FontWeight="SemiBold"/>
-                                                    <Label Margin="0,2,0,2" Content="Số lượng:" FontWeight="SemiBold"/>
-                                                    <Label Margin="0,2,0,2" Content="Thành tiền:" FontWeight="SemiBold"/>
+                                                <StackPanel Margin="10,40,5,0" DataContext="{StaticResource PhieuDatBanVM}">
+                                                    <Label Margin="0,2" Content="Đơn giá bàn" FontWeight="SemiBold"/>
+                                                    <Label Margin="0,2" Content="Tên món ăn" FontWeight="SemiBold"/>
+                                                    <Label Margin="0,2" Content="Đơn giá" FontWeight="SemiBold"/>
+                                                    <Label Margin="0,2" Content="Số lượng" FontWeight="SemiBold"/>
+                                                    <Label Margin="0,2" Content="Thành tiền" FontWeight="SemiBold"/>
                                                 </StackPanel>
-                                                <StackPanel Grid.Column="1" Margin="5,20,10,10" DataContext="{StaticResource CT_PhieuDatBanVM}">
-                                                    <TextBox Margin="2,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedMA.TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
-                                                    <TextBox Margin="2,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedMA.DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
+                                                <StackPanel Grid.Column="1" Margin="5,40,5,0" DataContext="{StaticResource CT_PhieuDatBanVM}">
+                                                    <TextBox Margin="0,4" BorderBrush="Black" BorderThickness="1" Text="{Binding DonGiaBan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
+                                                    <TextBox Margin="0,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedMA.TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
+                                                    <TextBox Margin="0,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedMA.DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
                                                     <controls:NumericUpDown Margin="2,4" BorderBrush="Black" BorderThickness="1" Value="{Binding DMA_SoLuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Left" Interval="1"/>
-                                                    <TextBox Margin="2,4" BorderBrush="Black" BorderThickness="1" Text="{Binding DMA_ThanhTien, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
+                                                    <TextBox Margin="0,4" BorderBrush="Black" BorderThickness="1" Text="{Binding DMA_ThanhTien, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
                                                     <Button
-                                            Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,4,0,0"
-                                            Command="{Binding AddCommand}"
-                                            ToolTip="Đặt dịch vụ cho tiệc cưới" Background="#FF0F5699" Foreground="White">
+                                                        Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,4,0,0"
+                                                        Command="{Binding AddCommand}"
+                                                        ToolTip="Đặt dịch vụ cho tiệc cưới" Background="#FF0F5699" Foreground="White">
                                                         Đặt món ăn
                                                     </Button>
                                                 </StackPanel>
@@ -224,7 +223,7 @@
                                             </Button>
                                         </Grid>
                                         <GroupBox DockPanel.Dock="Top" Header="Danh sách đặt món ăn" Margin="10,0,10,10" >
-                                            <DataGrid DataContext="{StaticResource CT_PhieuDatBanVM}" ItemsSource="{Binding ListCTPhieuDatBan, Mode=OneWay}" SelectedItem="{Binding SelectedCTPDB, Mode=OneWayToSource}"  
+                                            <DataGrid ItemsSource="{Binding ListCTPhieuDatBan, Mode=OneWay}" SelectedItem="{Binding SelectedCTPDB, Mode=OneWayToSource}"  
                                               AutoGenerateColumns="False" CanUserAddRows="False" controls:DataGridHelper.ColumnHeaderPadding="10,0" FontSize="12"
                                               Name="dtg_DanhSachDatMonAn">
                                                 <DataGrid.Columns>
@@ -333,7 +332,7 @@
                                             Style="{StaticResource MaterialDesignRaisedButton}"
                                             Grid.Column="4" Margin="10,2"
                                             ToolTip="Lưu thông tin đặt bàn" Background="#FF0F5699" Foreground="White">
-                                                    Lưu thay đổi
+                                            Lưu thay đổi
                                         </Button>
 
                                     </Grid>
