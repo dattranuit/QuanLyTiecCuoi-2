@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using QuanLyTiecCuoi.Model;
 using System.Windows.Input;
+using System.Windows;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
@@ -85,6 +88,13 @@ namespace QuanLyTiecCuoi.ViewModel
 
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
             ListLoaiSanh = new ObservableCollection<LOAISANH>(DataProvider.Ins.DataBase.LOAISANHs);
+            //
+            DataGridCollection = CollectionViewSource.GetDefaultView(ListSanh);
+            DataGridCollection.Filter = new Predicate<object>(Filter);
+            //
+            DataGridCollection2 = CollectionViewSource.GetDefaultView(ListLoaiSanh);
+            DataGridCollection2.Filter = new Predicate<object>(Filter2);
+
             AddCommand = new RelayCommand<object>((p) =>
             {
                 if (string.IsNullOrEmpty(TenSanh) || string.IsNullOrEmpty(SoLuongBanToiDa.ToString()) || SelectedLoaiSanh == null)
@@ -128,19 +138,156 @@ namespace QuanLyTiecCuoi.ViewModel
                 if (SelectedItem == null)
                     return false;
                 var displayList = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == SelectedItem.MaSanh);
-                if (displayList != null && displayList.Count() != 0)
-                    return true;
-                return false;
+                if (displayList == null && displayList.Count() == 0)
+                    return false;
+                if (SelectedItem.TenSanh == TenSanh
+                && SelectedItem.GhiChu == GhiChu
+                && SelectedItem.SoLuongBanToiDa == SoLuongBanToiDa
+                && SelectedItem.MaLoaiSanh == SelectedLoaiSanh.MaLoaiSanh)
+                    return false;
+                return true;
             }, (p) =>
             {
                 var Sanh = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == SelectedItem.MaSanh).SingleOrDefault();
-                Sanh.MaSanh = SelectedItem.MaSanh;
                 Sanh.TenSanh = SelectedItem.TenSanh;
                 Sanh.SoLuongBanToiDa = SelectedItem.SoLuongBanToiDa;
                 Sanh.GhiChu = SelectedItem.GhiChu;
-                Sanh.MaLoaiSanh = SelectedItem.MaLoaiSanh;
+                Sanh.MaLoaiSanh = SelectedLoaiSanh.MaLoaiSanh;
                 DataProvider.Ins.DataBase.SaveChanges();
+                SelectedItem.TenSanh = TenSanh;
+                SelectedItem.SoLuongBanToiDa = SoLuongBanToiDa;
+                SelectedItem.GhiChu = GhiChu;
+                SelectedItem.MaLoaiSanh = SelectedLoaiSanh.MaLoaiSanh;
             });
+
+            EditLoaiSanhCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem2 == null)
+                    return false;
+                var displayList = DataProvider.Ins.DataBase.LOAISANHs.Where(x => x.MaLoaiSanh == SelectedItem2.MaLoaiSanh);
+                if (displayList == null && displayList.Count() == 0)
+                    return false;
+                if (SelectedItem2.TenLoaiSanh == TenLoaiSanh
+                && SelectedItem2.DonGiaBanToiThieu == DonGiaBanToiThieu)
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                var LoaiSanh = DataProvider.Ins.DataBase.LOAISANHs.Where(x => x.MaLoaiSanh == SelectedItem2.MaLoaiSanh).SingleOrDefault();
+                LoaiSanh.TenLoaiSanh = SelectedItem2.TenLoaiSanh;
+                LoaiSanh.DonGiaBanToiThieu = SelectedItem2.DonGiaBanToiThieu;
+                DataProvider.Ins.DataBase.SaveChanges();
+                SelectedItem2.TenLoaiSanh = TenLoaiSanh;
+                SelectedItem2.DonGiaBanToiThieu = DonGiaBanToiThieu;
+            });
+
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                var Sanh = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == SelectedItem.MaSanh).First();
+                DataProvider.Ins.DataBase.SANHs.Remove(Sanh);
+                DataProvider.Ins.DataBase.SaveChanges();
+                ListSanh.Remove(Sanh);
+            });
+
+            DeleteLoaiSanhCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem2 == null)
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                var LoaiSanh = DataProvider.Ins.DataBase.LOAISANHs.Where(x => x.MaLoaiSanh == SelectedItem2.MaLoaiSanh).First();
+                var Sanh = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaLoaiSanh == SelectedItem2.MaLoaiSanh);
+                if( Sanh.Count()!=0)
+                {
+                    MessageBox.Show("Không thể xóa vì có tồn tại Sảnh thuộc loại Sảnh này");
+                    return;
+                }
+                DataProvider.Ins.DataBase.LOAISANHs.Remove(LoaiSanh);
+                DataProvider.Ins.DataBase.SaveChanges();
+                ListLoaiSanh.Remove(LoaiSanh);
+            });
+        }
+        //search Sanh
+        private ICollectionView _dataGridCollection;
+        private string _filterString;
+        public ICollectionView DataGridCollection
+        {
+            get { return _dataGridCollection; }
+            set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
+        }
+        public string FilterString
+        {
+            get { return _filterString; }
+            set
+            {
+                _filterString = value;
+                OnPropertyChanged("FilterString");
+                FilterCollection();
+            }
+        }
+        private void FilterCollection()
+        {
+            if (_dataGridCollection != null)
+            {
+                _dataGridCollection.Refresh();
+            }
+        }
+        public bool Filter(object obj)
+        {
+            var data = obj as SANH;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(_filterString))
+                {
+                    return data.TenSanh.Contains(_filterString);
+                }
+                return true;
+            }
+            return false;
+        }
+        //Search Loai Sanh
+        private ICollectionView _dataGridCollection2;
+        private string _filterStringLoaiSanh;
+        public ICollectionView DataGridCollection2
+        {
+            get { return _dataGridCollection2; }
+            set { _dataGridCollection2 = value; OnPropertyChanged("DataGridCollection2"); }
+        }
+        public string FilterStringLoaiSanh
+        {
+            get { return _filterStringLoaiSanh; }
+            set
+            {
+                _filterStringLoaiSanh = value;
+                OnPropertyChanged("FilterStringLoaiSanh");
+                FilterCollection2();
+            }
+        }
+        private void FilterCollection2()
+        {
+            if (_dataGridCollection2 != null)
+            {
+                _dataGridCollection2.Refresh();
+            }
+        }
+        public bool Filter2(object obj)
+        {
+            var data = obj as LOAISANH;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(_filterStringLoaiSanh))
+                {
+                    return data.TenLoaiSanh.Contains(_filterStringLoaiSanh);
+                }
+                return true;
+            }
+            return false;
         }
     }
 }
