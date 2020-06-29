@@ -29,7 +29,6 @@ namespace QuanLyTiecCuoi.ViewModel
                 // click vô bảng sẽ hiển thị trên textbox
                 if (SelectedItem != null)
                 {
-                    MaMonAn = SelectedItem.MaMonAn;
                     TenMonAn = SelectedItem.TenMonAn;
                     DonGia = SelectedItem.DonGia;
                     MoTa = SelectedItem.MoTa;
@@ -38,7 +37,7 @@ namespace QuanLyTiecCuoi.ViewModel
             }
         }
 
-        //biến bên trang chính
+        //biến bên trang 
         private int _MaMonAn { get; set; }
         public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
         private string _TenMonAn { get; set; }
@@ -50,8 +49,6 @@ namespace QuanLyTiecCuoi.ViewModel
         public string HinhAnh { get; set; }
         private string _GhiChu { get; set; }
         public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
-        private int _MaLoaiMonAn { get; set; }
-        public int MaLoaiMonAn { get => _MaLoaiMonAn; set { _MaLoaiMonAn = value; OnPropertyChanged(); } }
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -66,11 +63,11 @@ namespace QuanLyTiecCuoi.ViewModel
             DataGridCollection.Filter = new Predicate<object>(Filter);
             AddCommand = new RelayCommand<object>((p) =>
             {
-                //if (string.IsNullOrEmpty(TenMonAn))
-                //    return false;
-                //var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.TenMonAn == TenMonAn);
-                //if (displayList == null && displayList.Count() != 0)
-                //    return false;
+                if (string.IsNullOrEmpty(TenMonAn))
+                    return false;
+                var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.TenMonAn == TenMonAn);
+                if (displayList == null || displayList.Count() != 0)
+                    return false;
                 return true;
 
             }, (p) =>
@@ -89,24 +86,22 @@ namespace QuanLyTiecCuoi.ViewModel
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(TenMonAn) || SelectedItem == null)
+                if (SelectedItem == null)
                     return false;
                 var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.TenMonAn == TenMonAn);
-                if (displayList == null && displayList.Count() != 0)
-                    return false;
-                return true;
+                if (displayList != null || displayList.Count() != 0)
+                    return true;
+                return false;
             }, (p) =>
             {
                 var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn).SingleOrDefault();
-                //MonAn.MaMonAn = SelectedItem.MaMonAn;
-                //MonAn.TenMonAn = SelectedItem.TenMonAn;
-                //MonAn.DonGia = SelectedItem.DonGia;
-                //MonAn.MoTa = SelectedItem.MoTa;
-                //MonAn.GhiChu = SelectedItem.GhiChu;
+                MonAn.TenMonAn = SelectedItem.TenMonAn;
+                MonAn.DonGia = SelectedItem.DonGia;
+                MonAn.MoTa = SelectedItem.MoTa;
+                MonAn.GhiChu = SelectedItem.GhiChu;
                 DataProvider.Ins.DataBase.SaveChanges();
 
                 SelectedItem.TenMonAn = TenMonAn;
-                SelectedItem.MaMonAn = MaMonAn;
                 SelectedItem.DonGia = DonGia;
                 SelectedItem.MoTa = MoTa;
                 SelectedItem.GhiChu = GhiChu;
@@ -115,13 +110,13 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 if (string.IsNullOrEmpty(TenMonAn) || SelectedItem == null)
                     return false;
-                var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.TenMonAn == SelectedItem.TenMonAn);
+                var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.TenMonAn == TenMonAn);
                 if (displayList == null && displayList.Count() != 0)
                     return false;
                 return true;
             }, (p) =>
             {
-                var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn).SingleOrDefault();
+                var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == MaMonAn).SingleOrDefault();
                 DataProvider.Ins.DataBase.MONANs.Remove(MonAn);
                 DataProvider.Ins.DataBase.SaveChanges();
                 MessageBox.Show("Xóa thành công!");
