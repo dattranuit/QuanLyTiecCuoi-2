@@ -11,6 +11,12 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class CT_PhieuDatBanViewModel:BaseViewModel
     {
+        private static int _CurrentMaPDB;
+        public static int CurrentMaPDB { get => _CurrentMaPDB; set => _CurrentMaPDB = value; }
+        private decimal _DonGiaBanToiThieu;
+        public decimal DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
+        private decimal _DonGiaBan = 0;
+        public decimal DonGiaBan { get => _DonGiaBan; set { _DonGiaBan = value; OnPropertyChanged(); } }
         private ObservableCollection<CT_PHIEUDATBAN> _ListCTPhieuDatBan;
         public ObservableCollection<CT_PHIEUDATBAN> ListCTPhieuDatBan { get => _ListCTPhieuDatBan; set { _ListCTPhieuDatBan = value; OnPropertyChanged(); } }
         private ObservableCollection<MONAN> _ListMonAn;
@@ -27,7 +33,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     MaMonAn = SelectedCTPDB.MaMonAn;
                     CTPDB_SoLuong = SelectedCTPDB.SoLuong;
-                    CTPDB_ThanhTien = SelectedCTPDB.ThanhTien;
+                    DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
                 }
             }
         }
@@ -44,11 +50,10 @@ namespace QuanLyTiecCuoi.ViewModel
                     MaMonAn = SelectedMA.MaMonAn;
                     DMA_SoLuong = 0;
                     DMA_ThanhTien = 0;
+                    DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
                 }
             }
         }
-        private int _MaPhieuDatBan = 0;
-        public int MaPhieuDatBan { get => _MaPhieuDatBan; set { _MaPhieuDatBan = value; OnPropertyChanged(); } }
         private int _MaMonAn;
         public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
         private int _CTPDB_SoLuong;
@@ -60,6 +65,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     if (_CTPDB_SoLuong < 0)
                         _CTPDB_SoLuong = 0;
                     CTPDB_ThanhTien = CTPDB_SoLuong * SelectedCTPDB.MONAN.DonGia;
+                    DonGiaBan += CTPDB_ThanhTien;
                 }
                 OnPropertyChanged();
             }
@@ -74,6 +80,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     if (DMA_SoLuong < 0)
                         DMA_SoLuong = 0;
                     DMA_ThanhTien = DMA_SoLuong * SelectedMA.DonGia;
+                    DonGiaBan += DMA_ThanhTien;
                 }
                 OnPropertyChanged(); } }
         private decimal _DMA_ThanhTien = 0;
@@ -83,17 +90,18 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand EditCommand { get; set; }
         public CT_PhieuDatBanViewModel()
         {
+            var CurrentTiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == TiecViewModel.CurrentMaTiecCuoi).SingleOrDefault();
+            DonGiaBanToiThieu = CurrentTiecCuoi.SANH.LOAISANH.DonGiaBanToiThieu;
             ListCTPhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBANs);
             ListMonAn = new ObservableCollection<MONAN>(DataProvider.Ins.DataBase.MONANs);
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
-
             }, (p) =>
             {
                 var CT_PhieuDatBan = new CT_PHIEUDATBAN()
                 {
-                    MaPhieuDatBan = MaPhieuDatBan,
+                    MaPhieuDatBan = CurrentMaPDB,
                     MaMonAn = MaMonAn,
                     SoLuong = DMA_SoLuong,
                     ThanhTien = DMA_ThanhTien,
@@ -101,6 +109,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Add(CT_PhieuDatBan);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListCTPhieuDatBan.Add(CT_PhieuDatBan);
+                DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x=> x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
             });
             //EditCommand = new RelayCommand<object>((p) =>
             //{

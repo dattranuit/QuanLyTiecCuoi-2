@@ -50,7 +50,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
-        private int _MaTiecCuoi = 1;
+        private int _MaTiecCuoi = TiecViewModel.CurrentMaTiecCuoi;
         public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
         private int _MaDichVu;
         public int MaDichVu { get => _MaDichVu; set { _MaDichVu = value; OnPropertyChanged(); } }

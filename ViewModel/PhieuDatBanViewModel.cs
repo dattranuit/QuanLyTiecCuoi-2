@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Model;
 
@@ -13,7 +14,8 @@ namespace QuanLyTiecCuoi.ViewModel
     {
         private ObservableCollection<PHIEUDATBAN> _ListPhieuDatBan;
         public ObservableCollection<PHIEUDATBAN> ListPhieuDatBan { get => _ListPhieuDatBan; set { _ListPhieuDatBan = value; OnPropertyChanged(); } }
-
+        private decimal _DonGiaBanToiThieu;
+        public decimal DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
         private PHIEUDATBAN _SelectedPDB;
         public PHIEUDATBAN SelectedPDB
         {
@@ -24,7 +26,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 OnPropertyChanged();
                 if (SelectedPDB != null)
                 {
-                    MaPhieuDatBan = SelectedPDB.MaPhieuDatBan;
+                    MaPhieuDatBan = CT_PhieuDatBanViewModel.CurrentMaPDB = SelectedPDB.MaPhieuDatBan;
                     MaTiecCuoi = SelectedPDB.MaTiecCuoi;
                     SoLuong = SelectedPDB.SoLuong;
                     SoLuongDuTru = SelectedPDB.SoLuongDuTru;
@@ -34,7 +36,7 @@ namespace QuanLyTiecCuoi.ViewModel
             }
         }
         private int _MaPhieuDatBan;
-        private int _MaTiecCuoi = 0;
+        private int _MaTiecCuoi = TiecViewModel.CurrentMaTiecCuoi;
         private int _SoLuong = 0;
         private int _SoLuongDuTru = 0;
         private decimal _DonGiaBan = 0;
@@ -50,6 +52,8 @@ namespace QuanLyTiecCuoi.ViewModel
         public PhieuDatBanViewModel()
         {
             ListPhieuDatBan = new ObservableCollection<PHIEUDATBAN>(DataProvider.Ins.DataBase.PHIEUDATBANs);
+            var CurrentTiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == TiecViewModel.CurrentMaTiecCuoi).SingleOrDefault();
+            DonGiaBanToiThieu = CurrentTiecCuoi.SANH.LOAISANH.DonGiaBanToiThieu;
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;

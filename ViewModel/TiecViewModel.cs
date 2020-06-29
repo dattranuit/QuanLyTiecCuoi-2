@@ -28,26 +28,26 @@ namespace QuanLyTiecCuoi.ViewModel
         public CA SelectedCa { get => _SelectedCa; set { _SelectedCa = value; if(SelectedCa!= null) MaCa = _SelectedCa.MaCa; OnPropertyChanged(); } }
         private SANH _SelectedSanh;
         public SANH SelectedSanh { get => _SelectedSanh; set { _SelectedSanh = value; if (SelectedSanh != null) MaSanh = _SelectedSanh.MaSanh; OnPropertyChanged(); } }
-        private TIECCUOI _SelectedItem;
-        public TIECCUOI SelectedItem
+        private TIECCUOI _SelectedTiecCuoi;
+        public TIECCUOI SelectedTiecCuoi
         {
-            get => _SelectedItem;
+            get => _SelectedTiecCuoi;
             set
             {
-                _SelectedItem = value;
+                _SelectedTiecCuoi = value;
                 OnPropertyChanged();
-                if (SelectedItem != null)
+                if (SelectedTiecCuoi != null)
                 {
-                    MaTiecCuoi = Convert.ToInt32(SelectedItem.MaTiecCuoi);
-                    TenChuRe = SelectedItem.TenChuRe;
-                    TenCoDau = SelectedItem.TenCoDau;
-                    SoDienThoai = SelectedItem.SoDienThoai;
-                    NgayDatTiec = SelectedItem.NgayDatTiec;
-                    NgayDaiTiec = SelectedItem.NgayDaiTiec;
-                    TienDatCoc = SelectedItem.TienDatCoc;
-                    GhiChu = SelectedItem.GhiChu;
-                    MaSanh = SelectedItem.MaSanh;
-                    MaCa = SelectedItem.MaCa;
+                    MaTiecCuoi = Convert.ToInt32(SelectedTiecCuoi.MaTiecCuoi);
+                    TenChuRe = SelectedTiecCuoi.TenChuRe;
+                    TenCoDau = SelectedTiecCuoi.TenCoDau;
+                    SoDienThoai = SelectedTiecCuoi.SoDienThoai;
+                    NgayDatTiec = SelectedTiecCuoi.NgayDatTiec;
+                    NgayDaiTiec = SelectedTiecCuoi.NgayDaiTiec;
+                    TienDatCoc = SelectedTiecCuoi.TienDatCoc;
+                    GhiChu = SelectedTiecCuoi.GhiChu;
+                    MaSanh = SelectedTiecCuoi.MaSanh;
+                    MaCa = SelectedTiecCuoi.MaCa;
                 }
             }
         }
@@ -97,25 +97,25 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         bool Enable()
         {
-            if (SelectedItem == null)
+            if (SelectedTiecCuoi == null)
                 return false;
-            if (TenChuRe != SelectedItem.TenChuRe)
+            if (TenChuRe != SelectedTiecCuoi.TenChuRe)
                 return false;
-            if (TenCoDau != SelectedItem.TenCoDau)
+            if (TenCoDau != SelectedTiecCuoi.TenCoDau)
                 return false;
-            if (SoDienThoai != SelectedItem.SoDienThoai)
+            if (SoDienThoai != SelectedTiecCuoi.SoDienThoai)
                 return false;
-            if (NgayDatTiec != SelectedItem.NgayDatTiec)
+            if (NgayDatTiec != SelectedTiecCuoi.NgayDatTiec)
                 return false;
-            if (NgayDaiTiec != SelectedItem.NgayDaiTiec)
+            if (NgayDaiTiec != SelectedTiecCuoi.NgayDaiTiec)
                 return false;
-            if (TienDatCoc != SelectedItem.TienDatCoc)
+            if (TienDatCoc != SelectedTiecCuoi.TienDatCoc)
                 return false;
-            if (GhiChu != SelectedItem.GhiChu)
+            if (GhiChu != SelectedTiecCuoi.GhiChu)
                 return false;
-            if (MaSanh != SelectedItem.MaSanh)
+            if (MaSanh != SelectedTiecCuoi.MaSanh)
                 return false;
-            if (MaCa != SelectedItem.MaCa)
+            if (MaCa != SelectedTiecCuoi.MaCa)
                 return false;
             return true;
         }
@@ -126,7 +126,7 @@ namespace QuanLyTiecCuoi.ViewModel
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
             AddCommand = new RelayCommand<object>((p) => Addable() , (p) =>
             {
-                SelectedItem = new TIECCUOI()
+                SelectedTiecCuoi = new TIECCUOI()
                 {
                     TenChuRe = TenChuRe,
                     TenCoDau = TenCoDau,
@@ -140,9 +140,9 @@ namespace QuanLyTiecCuoi.ViewModel
                 };
                 try
                 {
-                    DataProvider.Ins.DataBase.TIECCUOIs.Add(SelectedItem);
+                    DataProvider.Ins.DataBase.TIECCUOIs.Add(SelectedTiecCuoi);
                     DataProvider.Ins.DataBase.SaveChanges();
-                    ListTiecCuoi.Add(SelectedItem);
+                    ListTiecCuoi.Add(SelectedTiecCuoi);
                 }
                 catch (Exception e)
                 {
@@ -153,15 +153,15 @@ namespace QuanLyTiecCuoi.ViewModel
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null)
+                if (SelectedTiecCuoi == null)
                     return false;
-                var displayList = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedItem.MaTiecCuoi);
+                var displayList = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi);
                 if (displayList != null && displayList.Count() != 0 && !Enable())
                     return true;
                 return false;
             }, (p) =>
             {
-                var TiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedItem.MaTiecCuoi).SingleOrDefault();
+                var TiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi).SingleOrDefault();
                 TiecCuoi.TenChuRe = TenChuRe;
                 TiecCuoi.TenCoDau = TenCoDau;
                 TiecCuoi.SoDienThoai = SoDienThoai;
@@ -173,9 +173,9 @@ namespace QuanLyTiecCuoi.ViewModel
                 TiecCuoi.MaCa = SelectedCa.MaCa;
                 DataProvider.Ins.DataBase.SaveChanges();
             });
-            DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return Enable(); }, (p) => { 
+            DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return Enable(); }, (p) => {
+                CurrentMaTiecCuoi = SelectedTiecCuoi.MaTiecCuoi;
                 DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow();
-                CurrentMaTiecCuoi = SelectedItem.MaTiecCuoi;
                 wd.ShowDialog(); });
             LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
         }
