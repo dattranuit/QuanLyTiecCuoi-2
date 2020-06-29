@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
+using Microsoft.Win32;
 using QuanLyTiecCuoi.Model;
 
 namespace QuanLyTiecCuoi.ViewModel
@@ -47,12 +51,19 @@ namespace QuanLyTiecCuoi.ViewModel
         public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand ChonAnhCommmand { get; set; }
+        public ICommand XoaAnhCommmand { get; set; }
         public DichVuViewModel()
         {
             List = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
+            //
+            DataGridCollection = CollectionViewSource.GetDefaultView(List);
+            DataGridCollection.Filter = new Predicate<object>(Filter);
+
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if(string.IsNullOrEmpty(TenDichVu) || string.IsNullOrEmpty(DonGia.ToString()))
+                if(string.IsNullOrEmpty(TenDichVu) )
                 return false;
                 return true;
 
@@ -60,7 +71,6 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 var DichVu = new DICHVU()
                 {
-                    MaDichVu = MaDichVu,
                     TenDichVu = TenDichVu,
                     DonGia = DonGia,
                     MoTa = MoTa,
@@ -77,21 +87,101 @@ namespace QuanLyTiecCuoi.ViewModel
                 if (SelectedItem == null)
                     return false;
                 var displayList = DataProvider.Ins.DataBase.DICHVUs.Where(x => x.MaDichVu == SelectedItem.MaDichVu);
-                if (displayList != null && displayList.Count() != 0)
-                    return true;
-                return false;
+                if (displayList == null && displayList.Count() == 0)
+                    return false;
+                if (SelectedItem.TenDichVu == TenDichVu &&
+                SelectedItem.MoTa == MoTa &&
+                SelectedItem.GhiChu == GhiChu &&
+                SelectedItem.DonGia == DonGia &&
+                SelectedItem.HinhAnh == HinhAnh)
+                    return false;
+                return true;
             }, (p) =>
             {
                 var DichVu = DataProvider.Ins.DataBase.DICHVUs.Where(x => x.MaDichVu == SelectedItem.MaDichVu).SingleOrDefault();
-                DichVu.MaDichVu = SelectedItem.MaDichVu;
                 DichVu.TenDichVu = SelectedItem.TenDichVu;
                 DichVu.DonGia = SelectedItem.DonGia;
                 DichVu.MoTa = SelectedItem.MoTa;
                 DichVu.GhiChu = SelectedItem.GhiChu;
                 DichVu.HinhAnh = SelectedItem.HinhAnh;
                 DataProvider.Ins.DataBase.SaveChanges();
+                SelectedItem.TenDichVu = TenDichVu;
+                SelectedItem.DonGia = DonGia;
+                SelectedItem.MoTa = MoTa;
+                SelectedItem.GhiChu = GhiChu;
+                SelectedItem.HinhAnh = HinhAnh;
             });
+
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                var DichVu = DataProvider.Ins.DataBase.DICHVUs.Where(x => x.MaDichVu == SelectedItem.MaDichVu).First();
+                DataProvider.Ins.DataBase.DICHVUs.Remove(DichVu);
+                DataProvider.Ins.DataBase.SaveChanges();
+                List.Remove(DichVu);
+            });
+
+            ChonAnhCommmand = new RelayCommand<Image>((p) => { return true; }, (p) =>
+            {
+                OpenFileDialog open = new OpenFileDialog();
+                open.Filter = "Image Files(.jpg; *.png)|.jpg; *.png";
+                if (open.ShowDialog() == true)
+                {
+                    HinhAnh = open.FileName;
+                };
+            });
+
+            XoaAnhCommmand = new RelayCommand<Image>((p) => { if (string.IsNullOrWhiteSpace(HinhAnh)) return false; if (SelectedItem == null) return false; return true; }, (p) =>
+            {
+                HinhAnh = string.Empty;
+            });
+
+        }
+        //search
+        private ICollectionView _dataGridCollection;
+        private string _filterString;
+        public ICollectionView DataGridCollection
+        {
+            get { return _dataGridCollection; }
+            set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
+        }
+        public string FilterString
+        {
+            get { return _filterString; }
+            set
+            {
+                _filterString = value;
+                OnPropertyChanged("FilterString");
+                FilterCollection();
+            }
+        }
+        private void FilterCollection()
+        {
+            if (_dataGridCollection != null)
+            {
+                _dataGridCollection.Refresh();
+            }
+        }
+        public bool Filter(object obj)
+        {
+            var data = obj as DICHVU;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(_filterString))
+                {
+                    return data.TenDichVu.Contains(_filterString);
+                }
+                return true;
+            }
+            return false;
         }
 
     }
 }
+
+
+//bug dongia va them dichvu cu voi anh moi thi selected item loan xa
