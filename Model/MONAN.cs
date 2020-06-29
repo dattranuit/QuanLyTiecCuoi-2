@@ -32,6 +32,8 @@ namespace QuanLyTiecCuoi.Model
         public string HinhAnh { get; set; }
         private string _GhiChu { get; set; }
         public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+        private int _MaLoaiMonAn { get; set; }
+        public int MaLoaiMonAn { get => _MaLoaiMonAn; set { _MaLoaiMonAn = value; OnPropertyChanged(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUDATBAN> CT_PHIEUDATBAN { get; set; }
