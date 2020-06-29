@@ -9,20 +9,25 @@
 
 namespace QuanLyTiecCuoi.Model
 {
+    using QuanLyTiecCuoi.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class LOAISANH
+    public partial class LOAISANH: BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LOAISANH()
         {
             this.SANHs = new HashSet<SANH>();
         }
-    
-        public int MaLoaiSanh { get; set; }
-        public string TenLoaiSanh { get; set; }
-        public decimal DonGiaBanToiThieu { get; set; }
+
+        private int _MaLoaiSanh;
+        private string _TenLoaiSanh;
+        private decimal _DonGiaBanToiThieu;
+
+        public int MaLoaiSanh { get => _MaLoaiSanh; set { _MaLoaiSanh = value; OnPropertyChanged(); } }
+        public string TenLoaiSanh { get => _TenLoaiSanh; set { _TenLoaiSanh = value; OnPropertyChanged(); } }
+        public decimal DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SANH> SANHs { get; set; }

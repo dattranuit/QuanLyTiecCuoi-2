@@ -43,32 +43,35 @@
                 <ColumnDefinition Width="567*"/>
                 <ColumnDefinition Width="233*"/>
             </Grid.ColumnDefinitions>
-            <GroupBox Header="Danh sách dịch vụ" Margin="22,0,22,0" Grid.Column="0">
-                <DataGrid  x:Name="dtg_DichVu" Width="auto" SelectedItem="{Binding SelectedItem}"
+            <materialDesign:Card Margin="10,0,10,20">
+                <GroupBox Header="Danh sách dịch vụ" Margin="10,0,10,10" Grid.Column="0">
+                    <DataGrid  x:Name="dtg_DichVu" Width="auto" SelectedItem="{Binding SelectedItem}" IsReadOnly="True"
             ItemsSource="{Binding List}"
             CanUserSortColumns="True"
             CanUserAddRows="False"
             SelectionUnit="FullRow"
             AutoGenerateColumns="False"
             SelectionMode="Extended" FontWeight="Bold">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Mã Dịch vụ" Binding="{Binding MaDichVu}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Tên Dịch vụ" Binding="{Binding TenDichVu}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Đơn giá " Binding="{Binding DonGia}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Mô tả" Binding="{Binding MoTa}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Hình ảnh" Binding="{Binding HinhAnh}"></DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-                
-            </GroupBox>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã Dịch vụ" Binding="{Binding MaDichVu}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Tên Dịch vụ" Binding="{Binding TenDichVu}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Đơn giá " Binding="{Binding DonGia}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Mô tả" Binding="{Binding MoTa}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Hình ảnh" Binding="{Binding HinhAnh}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </GroupBox>
+
+            </materialDesign:Card>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="213*"/>
                     <RowDefinition Height="49*"/>
                 </Grid.RowDefinitions>
                 <GroupBox Grid.Row="0" Header="Ảnh minh họa" Margin="0,0,10,0">
-                    <Image x:Name="img_AnhDV" ></Image>
+                    <Image x:Name="img_AnhDV" Source="{Binding SelectedItem.HinhAnh}"></Image>
                 </GroupBox>
                 <Button x:Name="btn_FolderAnh" Grid.Row="1" Margin="85,5,85,0" BorderBrush="Black">
                     <Button.Background>
@@ -78,8 +81,8 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="2">
-            <GroupBox Header="Thông Tin Dịch Vụ" OpacityMask="Black">
-                <materialDesign:Card Margin="12,12,12,12">
+            <materialDesign:Card Margin="10,0,10,0">
+                <GroupBox Header="Thông Tin Dịch Vụ" OpacityMask="Black" Margin="10,0,10,10">
                     <Grid  >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="51*"/>
@@ -97,8 +100,9 @@
                         <TextBox x:Name="txb_MaDichVu" Text="{Binding MaDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="1" FontSize="15"></TextBox>
                         <TextBox x:Name="txb_DonGiaDV" Text="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="2" FontSize="15"></TextBox>
                     </Grid>
-                </materialDesign:Card>
-            </GroupBox>
+                </GroupBox>
+            </materialDesign:Card>
+            
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>

@@ -52,6 +52,8 @@ namespace QuanLyTiecCuoi.ViewModel
             List = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
             AddCommand = new RelayCommand<object>((p) =>
             {
+                if(string.IsNullOrEmpty(TenDichVu) || string.IsNullOrEmpty(DonGia.ToString()))
+                return false;
                 return true;
 
             }, (p) =>
