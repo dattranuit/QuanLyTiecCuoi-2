@@ -229,7 +229,7 @@
                                     </GroupBox>
                                 </Grid>
                                 <Grid Grid.Column="1">
-                                    <GroupBox Header="Món ăn">
+                                    <GroupBox Header="Phiếu đặt bàn">
                                         <Grid Margin="0" Background="White">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="1*"/>
@@ -239,14 +239,14 @@
                                             <DataGrid  ItemsSource="{Binding List6}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
                                                 <DataGrid.Columns>
 
-                                                    <DataGridTextColumn Header="Món ăn" FontSize="14" Binding="{Binding MONAN.TenMonAn}">
+                                                    <DataGridTextColumn Header="Loại Bàn" FontSize="14" Binding="{Binding MONAN.TenMonAn}">
                                                     </DataGridTextColumn>
                                                     <DataGridTextColumn Header="Số lượng" FontSize="14" Binding="{Binding SoLuong}">
                                                     </DataGridTextColumn>
 
-                                                    <DataGridTextColumn Header="Đơn giá" FontSize="14" Width="*" Binding="{Binding DonGia}">
+                                                    <DataGridTextColumn Header="Số lượng dự trữ" FontSize="14" Binding="{Binding DonGia}">
                                                     </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Thành tiền" FontSize="14" Width="*" Binding="{Binding ThanhTien}">
+                                                    <DataGridTextColumn Header="Đơn giá bàn" FontSize="14" Width="*" Binding="{Binding ThanhTien}">
                                                     </DataGridTextColumn>
                                                 </DataGrid.Columns>
                                             </DataGrid>
