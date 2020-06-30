@@ -15,8 +15,8 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class HoaDonViewModel : BaseViewModel
     {
-        private ObservableCollection<HOADON> _List;
-        public ObservableCollection<HOADON> List { get => _List; set { _List = value; OnPropertyChanged(); } }
+        private static ObservableCollection<HOADON> _List;
+        public static ObservableCollection<HOADON> List { get => _List; set { _List = value;  } }
 
         private HOADON _SelectedItem;
         
@@ -27,7 +27,7 @@ namespace QuanLyTiecCuoi.ViewModel
             set
             {
                 _SelectedItem = value;
-                OnPropertyChanged();
+                //OnPropertyChanged();
                 if (SelectedItem != null)
                 {              
                     TongTienBan = SelectedItem.TongTienBan;
@@ -243,9 +243,11 @@ namespace QuanLyTiecCuoi.ViewModel
         private void data()
         {
             List5 = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == idTiecCuoi));
-            if (List5 == null) return;
-            //List5 = new ObservableCollection<object>(DataProvider.Ins.DataBase.PHIEUDATBANs.Join());
             DataProvider.Ins.DataBase.SaveChanges();
+            //if (List5 == null || List5.Count() == 0) return;
+
+            //List5 = new ObservableCollection<object>(DataProvider.Ins.DataBase.PHIEUDATBANs.Join());
+            
             if (List5 != null)
             {
                 SoLuong = List5.FirstOrDefault().SoLuong;
@@ -272,9 +274,9 @@ namespace QuanLyTiecCuoi.ViewModel
             DataProvider.Ins.DataBase.SaveChanges();
             if(List4 != null)
             {
-                TongSoBan = Convert.ToString(List4.SingleOrDefault().SoLuong + List4.SingleOrDefault().SoLuongDuTru); // Tong so ban =  So luong ban + So luong du tru
-                TongTienBan = List4.SingleOrDefault().DonGiaBan * Convert.ToInt32(TongSoBan);
-                DonGiaBan = List4.SingleOrDefault().DonGiaBan;
+                TongSoBan = Convert.ToString(List4.FirstOrDefault().SoLuong + List4.FirstOrDefault().SoLuongDuTru); // Tong so ban =  So luong ban + So luong du tru
+                TongTienBan = List4.FirstOrDefault().DonGiaBan * Convert.ToInt32(TongSoBan);
+                DonGiaBan = List4.FirstOrDefault().DonGiaBan;
 
             }
             List6 = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.PHIEUDATBAN.MaTiecCuoi == idTiecCuoi));

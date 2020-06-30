@@ -50,10 +50,15 @@ namespace QuanLyTiecCuoi.ViewModel
         private ObservableCollection<BAOCAONGAY> _List2;
         public ObservableCollection<BAOCAONGAY> List2 { get => _List2; set { _List2 = value; OnPropertyChanged(); } }
 
+        private ObservableCollection<HOADON> _ListHoaDon;
+        public ObservableCollection<HOADON> ListHoaDon { get => _ListHoaDon; set { _ListHoaDon = value; OnPropertyChanged(); } }
+
         public BaoCaoThangViewModel()
         {
             List = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
-           
+            data();
+            DataProvider.Ins.DataBase.SaveChanges();
+            
             DoubleClickCommand = new RelayCommand<DataGrid>((p) =>
             {
                 return true;
@@ -65,6 +70,39 @@ namespace QuanLyTiecCuoi.ViewModel
                 
             });
             
+
+        }
+
+        public void data()
+        {
+            ListHoaDon = new ObservableCollection<HOADON>(DataProvider.Ins.DataBase.HOADONs);
+            DataProvider.Ins.DataBase.SaveChanges();
+            try
+            {
+                var query = from x in ListHoaDon
+                            where (x.NgayThanhToan.Year >= 2000 && x.NgayThanhToan.Year <= 2020)
+                            let sum = (from b in ListHoaDon select b.TongTienHoaDon).Sum()
+                            select new
+                            {
+                                thang = x.NgayThanhToan.Month,
+                                nam = x.NgayThanhToan.Year,
+                                doanhthu = sum
+                            };
+                //if (query == null) MessageBox.Show("err");
+                //Thang = query.FirstOrDefault().thang;
+                //MessageBox.Show(query.Count().ToString());
+                //Nam = query.FirstOrDefault().nam;
+                //TongDoanhThu = query.FirstOrDefault().doanhthu;
+                //List.Add(new BAOCAOTHANG() { Thang = Thang, Nam = Nam, TongDoanhThu = TongDoanhThu });
+                foreach(var q in query)
+                {
+                    List.Add(new BAOCAOTHANG() { Thang = q.thang, Nam = q.nam, TongDoanhThu = q.doanhthu });
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
 
         }
 
