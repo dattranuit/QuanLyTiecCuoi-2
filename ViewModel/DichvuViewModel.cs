@@ -81,6 +81,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.DICHVUs.Add(DichVu);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Add(DichVu);
+                //fix lỗi: khi nhấn add xong thì ảnh hiện ở dòng mình đang chọn
+                HinhAnh = SelectedItem.HinhAnh;
             });
 
             EditCommand = new RelayCommand<object>((p) =>
