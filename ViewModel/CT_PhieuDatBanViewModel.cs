@@ -6,21 +6,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Model;
+using System.Windows;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
     class CT_PhieuDatBanViewModel:BaseViewModel
     {
         private static int _CurrentMaPDB;
-        public static int CurrentMaPDB { get => _CurrentMaPDB; set => _CurrentMaPDB = value; }
-        private decimal _DonGiaBanToiThieu;
-        public decimal DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
+        public static int CurrentMaPDB { get => _CurrentMaPDB; set { _CurrentMaPDB = value; MessageBox.Show(_CurrentMaPDB + ""); } }
         private decimal _DonGiaBan = 0;
         public decimal DonGiaBan { get => _DonGiaBan; set { _DonGiaBan = value; OnPropertyChanged(); } }
-        private ObservableCollection<CT_PHIEUDATBAN> _ListCTPhieuDatBan;
-        public ObservableCollection<CT_PHIEUDATBAN> ListCTPhieuDatBan { get => _ListCTPhieuDatBan; set { _ListCTPhieuDatBan = value; OnPropertyChanged(); } }
-        private ObservableCollection<MONAN> _ListMonAn;
-        public ObservableCollection<MONAN> ListMonAn { get => _ListMonAn; set { _ListMonAn = value; OnPropertyChanged(); } }
+        private static ObservableCollection<CT_PHIEUDATBAN> _ListCTPhieuDatBan;
+        public static ObservableCollection<CT_PHIEUDATBAN> ListCTPhieuDatBan { get => _ListCTPhieuDatBan; set { _ListCTPhieuDatBan = value;} }
+        private static ObservableCollection<MONAN> _ListMonAn;
+        public static ObservableCollection<MONAN> ListMonAn { get => _ListMonAn; set { _ListMonAn = value; } }
         private CT_PHIEUDATBAN _SelectedCTPDB;
         public CT_PHIEUDATBAN SelectedCTPDB
         {
@@ -33,7 +32,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     MaMonAn = SelectedCTPDB.MaMonAn;
                     CTPDB_SoLuong = SelectedCTPDB.SoLuong;
-                    DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
+                    //DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
                 }
             }
         }
@@ -50,7 +49,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     MaMonAn = SelectedMA.MaMonAn;
                     DMA_SoLuong = 0;
                     DMA_ThanhTien = 0;
-                    DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
+                    //DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
                 }
             }
         }
@@ -90,8 +89,6 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand EditCommand { get; set; }
         public CT_PhieuDatBanViewModel()
         {
-            var CurrentTiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == TiecViewModel.CurrentMaTiecCuoi).SingleOrDefault();
-            DonGiaBanToiThieu = CurrentTiecCuoi.SANH.LOAISANH.DonGiaBanToiThieu;
             ListCTPhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBANs);
             ListMonAn = new ObservableCollection<MONAN>(DataProvider.Ins.DataBase.MONANs);
             AddCommand = new RelayCommand<object>((p) =>
@@ -109,7 +106,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Add(CT_PhieuDatBan);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListCTPhieuDatBan.Add(CT_PhieuDatBan);
-                DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x=> x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
+                //DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x=> x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
             });
             //EditCommand = new RelayCommand<object>((p) =>
             //{

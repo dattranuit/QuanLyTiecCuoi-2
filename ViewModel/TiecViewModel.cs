@@ -20,10 +20,10 @@ namespace QuanLyTiecCuoi.ViewModel
         public static int CurrentMaTiecCuoi { get => _CurrentMaTiecCuoi; set => _CurrentMaTiecCuoi = value; }
         private ObservableCollection<TIECCUOI> _ListTiecCuoi;
         public ObservableCollection<TIECCUOI> ListTiecCuoi { get => _ListTiecCuoi; set { _ListTiecCuoi = value; OnPropertyChanged(); } }
-        private ObservableCollection<CA> _ListCa;
-        public ObservableCollection<CA> ListCa { get => _ListCa; set { _ListCa = value; OnPropertyChanged(); } }
-        private ObservableCollection<SANH> _ListSanh;
-        public ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value; OnPropertyChanged(); } }
+        private static ObservableCollection<CA> _ListCa;
+        public static ObservableCollection<CA> ListCa { get => _ListCa; set { _ListCa = value; } }
+        private static ObservableCollection<SANH> _ListSanh;
+        public static ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value;} }
         private CA _SelectedCa;
         public CA SelectedCa { get => _SelectedCa; set { _SelectedCa = value; if(SelectedCa!= null) MaCa = _SelectedCa.MaCa; OnPropertyChanged(); } }
         private SANH _SelectedSanh;
@@ -174,9 +174,13 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.SaveChanges();
             });
             DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return Enable(); }, (p) => {
-                CurrentMaTiecCuoi = SelectedTiecCuoi.MaTiecCuoi;
+                PhieuDatDichVuViewModel.CurrentMaTiecCuoi = SelectedTiecCuoi.MaTiecCuoi;
+                PhieuDatDichVuViewModel.ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi));
+                PhieuDatBanViewModel.DonGiaBanToiThieu = SelectedSanh.LOAISANH.DonGiaBanToiThieu;
                 DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow();
-                wd.ShowDialog(); });
+                wd.ShowDialog();
+                wd.Close();
+            });
             LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
         }
     }

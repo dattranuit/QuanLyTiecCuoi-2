@@ -113,7 +113,7 @@
                             </DockPanel>
                         </materialDesign:Card>
                     </DockPanel>
-                    <Grid Background="White" Visibility="Visible" Name="grd_CTPhieuDatBan">
+                    <Grid Background="White" Visibility="Collapsed" Name="grd_CTPhieuDatBan">
                         <DockPanel LastChildFill="True">
                             <TextBlock Text="Chi Tiết Phiếu Đặt Bàn" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"

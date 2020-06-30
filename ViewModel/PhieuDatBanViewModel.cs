@@ -12,10 +12,10 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class PhieuDatBanViewModel : BaseViewModel
     {
-        private ObservableCollection<PHIEUDATBAN> _ListPhieuDatBan;
-        public ObservableCollection<PHIEUDATBAN> ListPhieuDatBan { get => _ListPhieuDatBan; set { _ListPhieuDatBan = value; OnPropertyChanged(); } }
-        private decimal _DonGiaBanToiThieu;
-        public decimal DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
+        private static ObservableCollection<PHIEUDATBAN> _ListPhieuDatBan;
+        public static ObservableCollection<PHIEUDATBAN> ListPhieuDatBan { get => _ListPhieuDatBan; set => _ListPhieuDatBan = value; }
+        private static decimal _DonGiaBanToiThieu;
+        public static decimal DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; } }
         private PHIEUDATBAN _SelectedPDB;
         public PHIEUDATBAN SelectedPDB
         {
@@ -52,8 +52,6 @@ namespace QuanLyTiecCuoi.ViewModel
         public PhieuDatBanViewModel()
         {
             ListPhieuDatBan = new ObservableCollection<PHIEUDATBAN>(DataProvider.Ins.DataBase.PHIEUDATBANs);
-            var CurrentTiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == TiecViewModel.CurrentMaTiecCuoi).SingleOrDefault();
-            DonGiaBanToiThieu = CurrentTiecCuoi.SANH.LOAISANH.DonGiaBanToiThieu;
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;

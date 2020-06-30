@@ -14,10 +14,13 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class PhieuDatDichVuViewModel:BaseViewModel
     {
-        private ObservableCollection<PHIEUDATDICHVU> _ListPhieuDatDichVu;
-        public ObservableCollection<PHIEUDATDICHVU> ListPhieuDatDichVu { get => _ListPhieuDatDichVu; set { _ListPhieuDatDichVu = value; OnPropertyChanged(); } }
-        private ObservableCollection<DICHVU> _ListDichVu;
-        public ObservableCollection<DICHVU> ListDichVu { get => _ListDichVu; set { _ListDichVu = value; OnPropertyChanged(); } }
+        private static ObservableCollection<PHIEUDATDICHVU> _ListPhieuDatDichVu;
+        public static ObservableCollection<PHIEUDATDICHVU> ListPhieuDatDichVu { get => _ListPhieuDatDichVu; set { _ListPhieuDatDichVu = value;} }
+        private static ObservableCollection<DICHVU> _ListDichVu;
+        public static ObservableCollection<DICHVU> ListDichVu { get => _ListDichVu; set { _ListDichVu = value; } }
+        private static int _CurrentMaTiecCuoi;
+        public static int CurrentMaTiecCuoi
+        { get => _CurrentMaTiecCuoi; set =>_CurrentMaTiecCuoi = value;}
         private PHIEUDATDICHVU _SelectedPDDV;
         public PHIEUDATDICHVU SelectedPDDV
         {
@@ -50,8 +53,6 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
-        private int _MaTiecCuoi = TiecViewModel.CurrentMaTiecCuoi;
-        public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
         private int _MaDichVu;
         public int MaDichVu { get => _MaDichVu; set { _MaDichVu = value; OnPropertyChanged(); } }
         private int _Sua_PDDV_SoLuong = 0;
@@ -80,7 +81,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public PhieuDatDichVuViewModel()
         {
             ListDichVu = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
-            ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs);
+            ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi));
             AddCommand = new RelayCommand<object>((p) =>
             {
                 var CheckExist = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == SelectedDV.MaDichVu).FirstOrDefault();
@@ -95,7 +96,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     var PhieuDatDichVu = new PHIEUDATDICHVU()
                     {
-                        MaTiecCuoi = MaTiecCuoi,
+                        MaTiecCuoi = CurrentMaTiecCuoi,
                         MaDichVu = MaDichVu,
                         SoLuong = DDV_SoLuong,
                         ThanhTien = DDV_ThanhTien
