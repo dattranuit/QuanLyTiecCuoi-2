@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -120,6 +121,12 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 var DichVu = DataProvider.Ins.DataBase.DICHVUs.Where(x => x.MaDichVu == SelectedItem.MaDichVu).First();
+                var PhieuDatDichVu = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == SelectedItem.MaDichVu);
+                if(PhieuDatDichVu.Count() != 0)
+                {
+                    MessageBox.Show("Không thể xóa vì có tồn tại Tiệc Cưới đặt Dịch Vụ này !");
+                    return;
+                }
                 DataProvider.Ins.DataBase.DICHVUs.Remove(DichVu);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Remove(DichVu);
@@ -184,4 +191,4 @@ namespace QuanLyTiecCuoi.ViewModel
 }
 
 
-//bug dongia va them dichvu cu voi anh moi thi selected item loan xa
+// va them dichvu cu voi anh moi thi selected item loan xa. 

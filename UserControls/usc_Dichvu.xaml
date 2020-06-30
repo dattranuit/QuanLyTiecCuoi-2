@@ -114,7 +114,7 @@
                             <Label Content="Ghi chú" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" FontSize="15" FontWeight="Bold"></Label>
                             <TextBox x:Name="txb_TenDichVu" Text="{Binding TenDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="0" FontSize="15"></TextBox>
                             <TextBox x:Name="txb_MoTa" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="1" Grid.Row="1" FontSize="15"></TextBox>
-                            <TextBox x:Name="txb_DonGiaDV" Text="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="3" Grid.Row="0" FontSize="15"></TextBox>
+                            <controls:NumericUpDown x:Name="nud_DonGia" Minimum="0" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" TextAlignment="Left" FontSize="15" BorderBrush="Black" Interval="100000" Grid.Column="3" Grid.Row="0" Margin="10,15" ValueChanged="Nud_DonGia_ValueChanged"></controls:NumericUpDown>
                             <TextBox x:Name="txb_GhiChu" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="10,15" Grid.Column="3" Grid.Row="1" FontSize="15"></TextBox>
                         </Grid>
                     </GroupBox>
