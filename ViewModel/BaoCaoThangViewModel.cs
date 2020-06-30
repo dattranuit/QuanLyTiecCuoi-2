@@ -41,7 +41,6 @@ namespace QuanLyTiecCuoi.ViewModel
         private int _Nam;
         public int Nam { get => _Nam; set { _Nam = value; OnPropertyChanged(); } }
 
-
         private decimal _TongDoanhThu;
         public decimal TongDoanhThu { get => _TongDoanhThu; set { _TongDoanhThu = value; OnPropertyChanged(); } }
 
@@ -56,7 +55,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public BaoCaoThangViewModel()
         {
             List = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
-            data();
+            //data();
             DataProvider.Ins.DataBase.SaveChanges();
             
             DoubleClickCommand = new RelayCommand<DataGrid>((p) =>
@@ -65,45 +64,41 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 int id = _getMaBaoCaoThang(p);
+                MessageBox.Show(id.ToString());
                 List2 = new ObservableCollection<BAOCAONGAY>(DataProvider.Ins.DataBase.BAOCAONGAYs.Where(x => x.MaBaoCaoThang == id));
-                DataProvider.Ins.DataBase.SaveChanges();
-                
+                DataProvider.Ins.DataBase.SaveChanges();               
             });
-            
-
         }
 
         public void data()
         {
             ListHoaDon = new ObservableCollection<HOADON>(DataProvider.Ins.DataBase.HOADONs);
             DataProvider.Ins.DataBase.SaveChanges();
+            //DataProvider.Ins.DataBase.Database.ExecuteSqlCommand("delete from BAOCAOTHANG"); // Cách này ngu vãi lều :((
+            //DataProvider.Ins.DataBase.SaveChanges();
             try
             {
                 var query = from x in ListHoaDon
-                            where (x.NgayThanhToan.Year >= 2000 && x.NgayThanhToan.Year <= 2020)
-                            let sum = (from b in ListHoaDon select b.TongTienHoaDon).Sum()
+                            where (x.NgayThanhToan.Year >= 2000 && x.NgayThanhToan.Year <= 2020)                      
+                            group x by new { x.NgayThanhToan} into y
                             select new
                             {
-                                thang = x.NgayThanhToan.Month,
-                                nam = x.NgayThanhToan.Year,
-                                doanhthu = sum
+                                thang = y.First().NgayThanhToan.Month,
+                                nam = y.First().NgayThanhToan.Year,
+                                doanhthu = y.Sum(x => x.TongTienHoaDon)
                             };
-                //if (query == null) MessageBox.Show("err");
-                //Thang = query.FirstOrDefault().thang;
-                //MessageBox.Show(query.Count().ToString());
-                //Nam = query.FirstOrDefault().nam;
-                //TongDoanhThu = query.FirstOrDefault().doanhthu;
-                //List.Add(new BAOCAOTHANG() { Thang = Thang, Nam = Nam, TongDoanhThu = TongDoanhThu });
                 foreach(var q in query)
                 {
-                    List.Add(new BAOCAOTHANG() { Thang = q.thang, Nam = q.nam, TongDoanhThu = q.doanhthu });
-                }
+                    var record = new BAOCAOTHANG() { Thang = q.thang, Nam = q.nam, TongDoanhThu = q.doanhthu };
+                    List.Add(record);
+                    DataProvider.Ins.DataBase.BAOCAOTHANGs.Add(record);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                }                           
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString());
+                MessageBox.Show("Không thể thực hiện truy vấn");
             }
-
         }
 
         public int _getMaBaoCaoThang(DataGrid dataGrid)
@@ -112,7 +107,6 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 BAOCAOTHANG IdBaoCaoThang = dataGrid.SelectedItem as BAOCAOTHANG;
                 return IdBaoCaoThang.MaBaoCaoThang;
-
             }
             else
             {

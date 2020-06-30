@@ -71,7 +71,7 @@
 
                                         <TextBlock x:Name="tblock_Tiendichvu" Text="{Binding TongTienDichVu}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="0"  Grid.Column="0" FontSize="14"/>
                                         <TextBlock x:Name="tblock_Tienhoadon" Text="{Binding TongTienHoaDon}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="1" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock DataContext="{Binding List3}" x:Name="tblock_Tiencoc" Text="{Binding TienDatCoc}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="2" Grid.Column="0" FontSize="14"/>
+                                        <TextBlock DataContext="{Binding ListTiecCuoi}" x:Name="tblock_Tiencoc" Text="{Binding TienDatCoc}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="2" Grid.Column="0" FontSize="14"/>
                                         <TextBlock x:Name="tblock_Tienphat" Text="{Binding TienPhat}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="3" Grid.Column="0" FontSize="14"/>
                                         <TextBlock x:Name="tblock_Tienconlai" Text="{Binding ConLai}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="4" Grid.Column="0" FontSize="14" FontWeight="Bold"/>
                                         <Grid Grid.Column="1" Grid.Row="2">
@@ -137,8 +137,8 @@
                                                         <RowDefinition/>
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
-                                                    <TextBox DataContext="{Binding List3}" Text="{Binding TenChuRe, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                                    <TextBox DataContext="{Binding List3}" Text="{Binding TenCoDau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <TextBox DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenChuRe, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <TextBox DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenCoDau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -163,7 +163,7 @@
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
                                                     <TextBox  Text="{Binding TongSoBan}" VerticalAlignment="Center" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                                    <TextBox DataContext="{Binding List4}" Text="{Binding DonGiaBan}" VerticalAlignment="Center" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <TextBox DataContext="{Binding ListPhieuDatBan}" Text="{Binding DonGiaBan}" VerticalAlignment="Center" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -186,7 +186,7 @@
                                                         <RowDefinition/>
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
-                                                    <DatePicker DataContext="{Binding List3}" Text="{Binding NgayDaiTiec, StringFormat='dd/MM/yyyy'}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <DatePicker DataContext="{Binding ListTiecCuoi2}" Text="{Binding NgayDaiTiec, StringFormat='dd/MM/yyyy'}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                     <TextBox  Text="{Binding TongTienBan}" VerticalAlignment="Center" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
@@ -210,7 +210,7 @@
                                                 <ColumnDefinition Width="403*"/>
                                                 <ColumnDefinition Width="354*"/>
                                             </Grid.ColumnDefinitions>
-                                            <DataGrid  ItemsSource="{Binding List5}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
+                                            <DataGrid  ItemsSource="{Binding ListPhieuDatDichVu}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="Dịch vụ" FontSize="14" Binding="{Binding DICHVU.TenDichVu}"/>
                                                     <DataGridTextColumn Header="Số lượng" FontSize="14" Binding="{Binding SoLuong}">
@@ -236,7 +236,7 @@
                                                 <ColumnDefinition Width="403*"/>
                                                 <ColumnDefinition Width="354*"/>
                                             </Grid.ColumnDefinitions>
-                                            <DataGrid  ItemsSource="{Binding List6}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
+                                            <DataGrid  ItemsSource="{Binding ListCT_PhieuDatBan}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
                                                 <DataGrid.Columns>
 
                                                     <DataGridTextColumn Header="Loại Bàn" FontSize="14" Binding="{Binding MONAN.TenMonAn}">
