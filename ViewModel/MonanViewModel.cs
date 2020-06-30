@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Controls;
 using QuanLyTiecCuoi.Model;
+using Microsoft.Win32;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
@@ -53,6 +55,8 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand AddImageCommand { get; set; }
+        public ICommand DeleteImageCommand { get; set; }
         public ICommand ClickCommand { get; set; }
 
 
@@ -63,7 +67,7 @@ namespace QuanLyTiecCuoi.ViewModel
             DataGridCollection.Filter = new Predicate<object>(Filter);
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(TenMonAn))
+                if (string.IsNullOrWhiteSpace(TenMonAn))
                     return false;
                 var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.TenMonAn == TenMonAn);
                 if (displayList == null || displayList.Count() != 0)
@@ -124,6 +128,26 @@ namespace QuanLyTiecCuoi.ViewModel
                 DonGia = 0;
                 MoTa = "";
                 GhiChu = "";
+            });
+            AddImageCommand = new RelayCommand<Image>((p) => { return true; }, (p) =>
+            {
+                OpenFileDialog open = new OpenFileDialog();
+                open.Filter = "Image Files(.jpg; *.png)|.jpg; *.png";
+                if (open.ShowDialog() == true)
+                {
+                    HinhAnh = open.FileName;
+                };
+            });
+            DeleteImageCommand = new RelayCommand<Image>((p) =>
+            {
+                if (string.IsNullOrWhiteSpace(HinhAnh))
+                    return false;
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                HinhAnh = string.Empty;
             });
         }
 
