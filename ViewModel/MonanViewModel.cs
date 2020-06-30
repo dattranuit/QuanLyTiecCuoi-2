@@ -108,18 +108,22 @@ namespace QuanLyTiecCuoi.ViewModel
             });
             DeleteCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(TenMonAn) || SelectedItem == null)
-                    return false;
-                var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.TenMonAn == TenMonAn);
-                if (displayList == null && displayList.Count() != 0)
+                if (SelectedItem == null)
                     return false;
                 return true;
             }, (p) =>
             {
-                var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == MaMonAn).SingleOrDefault();
+                var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn).First();
                 DataProvider.Ins.DataBase.MONANs.Remove(MonAn);
                 DataProvider.Ins.DataBase.SaveChanges();
+                List.Remove(MonAn);
+    
                 MessageBox.Show("Xóa thành công!");
+
+                TenMonAn = "";
+                DonGia = 0;
+                MoTa = "";
+                GhiChu = "";
             });
         }
 
