@@ -132,6 +132,12 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.DICHVUs.Remove(DichVu);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Remove(DichVu);
+                //refresh nhap
+                TenDichVu = "";
+                MoTa = "";
+                GhiChu = "";
+                HinhAnh = "";
+                DonGia = 0;
             });
 
             ChonAnhCommmand = new RelayCommand<Image>((p) => { return true; }, (p) =>

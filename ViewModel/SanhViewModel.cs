@@ -199,6 +199,10 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.SANHs.Remove(Sanh);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListSanh.Remove(Sanh);
+                //refresh nhap
+                TenSanh = "";
+                SoLuongBanToiDa = 0;
+                GhiChu = "";
             });
 
             DeleteLoaiSanhCommand = new RelayCommand<object>((p) =>
@@ -218,6 +222,9 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.LOAISANHs.Remove(LoaiSanh);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListLoaiSanh.Remove(LoaiSanh);
+                //refresh nhap
+                TenLoaiSanh = "";
+                DonGiaBanToiThieu = 0;
             });
         }
         //search Sanh
