@@ -100,10 +100,10 @@
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <GroupBox Header="Thông tin món ăn" VerticalAlignment="Top" Grid.Row="0" Margin="10,15,10,0">
+                            <GroupBox Header="Thông tin món ăn" VerticalAlignment="Bottom" Grid.Row="0" Margin="10,0,10,10">
                                 <Grid Margin="5,10,5,5">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.4*"/>
+                                        <ColumnDefinition Width="0.5*"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -118,8 +118,8 @@
                                     <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" />
                                     <Label Grid.Column="0" Grid.Row="2" Content="Mô tả:" FontWeight="SemiBold" />
                                     <TextBox Grid.Column="1" Grid.Row="2" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" />
-                                    <Label Grid.Column="0" Grid.Row="3" Content="Đơn giá:" FontWeight="SemiBold" />
-                                    <controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <Label Grid.Column="0" Grid.Row="3" Content="Đơn giá:" FontWeight="SemiBold" Grid.ColumnSpan="2" Height="29" Margin="0,0,153.2,0.4" VerticalAlignment="Bottom" />
+                                    <controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="2" BorderBrush="#FF717171" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                 </Grid>
                             </GroupBox>
                         </Grid>
@@ -152,7 +152,7 @@
                             </Grid>
 
                         </Grid>
-                        <GroupBox Header="Danh sách món ăn" Margin="10,5" Grid.Column="0">
+                        <GroupBox Header="Danh sách món ăn" Margin="10" Grid.Column="0">
                             <DataGrid   ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"    
                                     IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Background="{x:Null}" 
                                     FontSize="15"
