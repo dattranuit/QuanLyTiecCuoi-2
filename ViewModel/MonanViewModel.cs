@@ -123,6 +123,12 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn).First();
+                var CT_PhieuDatBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn);
+                if (CT_PhieuDatBan.Count() != 0)
+                {
+                    MessageBox.Show("Không thể xóa vì có tồn tại Tiệc Cưới đặt Dịch Vụ này !");
+                    return;
+                }
                 DataProvider.Ins.DataBase.MONANs.Remove(MonAn);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Remove(MonAn);
@@ -133,6 +139,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DonGia = 0;
                 MoTa = "";
                 GhiChu = "";
+                HinhAnh = string.Empty;
             });
             AddImageCommand = new RelayCommand<Image>((p) =>
             {

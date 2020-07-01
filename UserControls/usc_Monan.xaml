@@ -85,7 +85,7 @@
                                     x:Name="btn_ThemAnh"
                                     Command="{Binding AddImageCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="0" Margin="5,10"
+                                    Grid.Column="0" Margin="10"
                                     ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}">
                                     Thêm ảnh
                                 </Button>
@@ -93,7 +93,7 @@
                                     x:Name="btn_XoaAnh"
                                     Command="{Binding DeleteImageCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="1" Margin="5,10"
+                                    Grid.Column="1" Margin="10"
                                     ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}">
                                     Xóa ảnh
                                 </Button>
@@ -112,7 +112,7 @@
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Column="0" Grid.Row="0" Content="Tên món ăn:" FontWeight="SemiBold" />
+                                    <Label Grid.Column="0" Grid.Row="0" Content="Tên món:" FontWeight="SemiBold" />
                                     <TextBox Grid.Column="1" Grid.Row="0" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2"/>
                                     <Label Grid.Column="0" Grid.Row="1" Content="Ghi chú:" FontWeight="SemiBold" />
                                     <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" />
