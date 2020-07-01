@@ -35,6 +35,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     DonGia = SelectedItem.DonGia;
                     MoTa = SelectedItem.MoTa;
                     GhiChu = SelectedItem.GhiChu;
+                    HinhAnh = SelectedItem.HinhAnh;
                 }
             }
         }
@@ -48,7 +49,8 @@ namespace QuanLyTiecCuoi.ViewModel
         public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
         private string _MoTa { get; set; }
         public string MoTa { get => _MoTa; set { _MoTa = value; OnPropertyChanged(); } }
-        public string HinhAnh { get; set; }
+        private string _HinhAnh { get; set; }
+        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
         private string _GhiChu { get; set; }
         public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
 
@@ -129,18 +131,32 @@ namespace QuanLyTiecCuoi.ViewModel
                 MoTa = "";
                 GhiChu = "";
             });
-            AddImageCommand = new RelayCommand<Image>((p) => { return true; }, (p) =>
+            AddImageCommand = new RelayCommand<Image>((p) =>
             {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                //var Anh = new MONAN()
+                //{
+                //    HinhAnh = HinhAnh
+                //};
+
                 OpenFileDialog open = new OpenFileDialog();
                 open.Filter = "Image Files(.jpg; *.png)|.jpg; *.png";
                 if (open.ShowDialog() == true)
                 {
                     HinhAnh = open.FileName;
                 };
+                
+                //DataProvider.Ins.DataBase.MONANs.Add(Anh);
+                //DataProvider.Ins.DataBase.SaveChanges();
+                SelectedItem.HinhAnh = HinhAnh;
             });
             DeleteImageCommand = new RelayCommand<Image>((p) =>
             {
-                if (string.IsNullOrWhiteSpace(HinhAnh))
+                if (string.IsNullOrEmpty(HinhAnh))
                     return false;
                 if (SelectedItem == null)
                     return false;

@@ -36,7 +36,7 @@
                                     x:Name="btn_ThemMonAn"
                                     Command="{Binding AddCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="0" Margin="5,10,10,10"
+                                    Grid.Column="0" Margin="10"
                                     ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom">
                     Thêm
                 </Button>
@@ -44,7 +44,7 @@
                                     x:Name="btn_SuaMonAn"
                                     Command="{Binding EditCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="1" Margin="5,10,10,10"
+                                    Grid.Column="1" Margin="10"
                                     ToolTip="Sửa thông tin đặt Tiệc" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom">
                     Sửa
                 </Button>
@@ -52,7 +52,7 @@
                                     x:Name="btn_XoaMonAn"
                                     Command="{Binding DeleteCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="2" Margin="5,10,10,10"
+                                    Grid.Column="2" Margin="10"
                                     ToolTip="Xóa thông tin đặt Tiệc" Background="Crimson" Foreground="White" Height="35" VerticalAlignment="Bottom">
                     Xóa
                 </Button>

@@ -29,7 +29,8 @@ namespace QuanLyTiecCuoi.Model
         public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
         private string _MoTa { get; set; }
         public string MoTa { get => _MoTa; set { _MoTa = value; OnPropertyChanged(); } }
-        public string HinhAnh { get; set; }
+        private string _HinhAnh { get; set; }
+        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
         private string _GhiChu { get; set; }
         public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
         private int _MaLoaiMonAn { get; set; }
