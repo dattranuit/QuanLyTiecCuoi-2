@@ -113,6 +113,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.SANHs.Add(Sanh);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListSanh.Add(Sanh);
+                TiecViewModel.ListSanh.Add(Sanh);
             });
 
             AddCommandLoaiSanh = new RelayCommand<object>((p) =>

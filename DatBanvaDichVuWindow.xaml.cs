@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MahApps.Metro.Controls;
 using System.Windows.Shapes;
+using QuanLyTiecCuoi.Model;
 
 namespace QuanLyTiecCuoi
 {
@@ -23,6 +24,15 @@ namespace QuanLyTiecCuoi
         public DatBanvaDichVuWindow()
         {
             InitializeComponent();
+            SetAllNull();
+        }
+
+        private void SetAllNull()
+        {
+            //dtg_DanhSachDatBan.SelectedItem = dtg_DanhSachDatDichVu.SelectedItem = dtg_DanhSachDatMonAn.SelectedItem = null;
+            nbr_PDB_DonGiaBan.Value = nbr_PDB_SoLuong.Value = nbr_PDB_SoLuongDuTru.Value = nbr_PDDV_SoLuong.Value = nbr_DV_SoLuong.Value = 0;
+            tbx_PDB_LoaiBan.Text = tbx_PDB_GhiChu.Text = "";
+            tbx_DV_ThanhTien.Text = tbx_PDDV_ThanhTien.Text = "0";
         }
 
         private void btn_PDDV_Them_Click(object sender, RoutedEventArgs e)
@@ -39,24 +49,5 @@ namespace QuanLyTiecCuoi
             grr_1.Height = new GridLength(0.25, GridUnitType.Star);
         }
 
-        private void btn_CTPhieuDatBan_Click(object sender, RoutedEventArgs e)
-        {
-            grd_CTPhieuDatBan.Visibility = Visibility.Visible;
-        }
-
-        private void btn_CTPDB_QuayLai_Click(object sender, RoutedEventArgs e)
-        {
-            grd_CTPhieuDatBan.Visibility = Visibility.Collapsed;
-        }
-
-        private void btn_CTPDB_Sua_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_CTPDB_Them_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -12,7 +12,7 @@
         <DockPanel LastChildFill="True">
             <TextBlock Text="Thông Tin Tiệc Cưới" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
-                                   Margin="0,5,0,0"
+                                   Margin="0,5,0,0" FontWeight="DemiBold"
                                    DockPanel.Dock="Top"/>
             <materialDesign:Card x:Name="mdc_ThongTinDatTiec" DockPanel.Dock="Top" Margin="10,10,10,5">
                 <Grid >
@@ -86,7 +86,7 @@
                                     <DatePicker Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding NgayDaiTiec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='mm/dd/yyyy'}"/>
                                     <ComboBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.CA.TenCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedCa,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenCa"/>
                                     <ComboBox Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.SANH.TenSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenSanh"/>
-                                    <controls:NumericUpDown Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding TienDatCoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <controls:NumericUpDown Name="nbr_TienDatCoc" Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding TienDatCoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" ValueChanged="nbr_TienDatCoc_ValueChanged"/>
                                     <Button Grid.Row="4"
                                             Command="{Binding DatBanvaDichVuCommand}"
                                             ToolTipService.ShowOnDisabled="True"

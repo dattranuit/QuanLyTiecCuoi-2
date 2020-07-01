@@ -66,7 +66,19 @@ namespace QuanLyTiecCuoi.ViewModel
         private System.DateTime _NgayDaiTiec = DateTime.Now;
         public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; set { if (value != _NgayDaiTiec) OnPropertyChanged(); _NgayDaiTiec = value; OnPropertyChanged(); } }
         private decimal _TienDatCoc;
-        public decimal TienDatCoc { get => _TienDatCoc; set { if (value != _TienDatCoc) OnPropertyChanged(); _TienDatCoc = value; OnPropertyChanged(); } }
+        public decimal TienDatCoc { get => _TienDatCoc; 
+            set {
+                if (value != _TienDatCoc) 
+                    OnPropertyChanged();
+                _TienDatCoc = value;
+                if(_TienDatCoc < 0)
+                {
+                    _TienDatCoc = 0;
+                    MessageBox.Show("Tiền đặt cọc không thể bé hơn 0");
+                }    
+                OnPropertyChanged(); 
+            } 
+        }
         private string _GhiChu = "";
         public string GhiChu { get => _GhiChu; set { if (value != _GhiChu) OnPropertyChanged(); _GhiChu = value; OnPropertyChanged(); } }
         private int? _MaSanh;
@@ -177,9 +189,10 @@ namespace QuanLyTiecCuoi.ViewModel
                 PhieuDatDichVuViewModel.CurrentMaTiecCuoi = SelectedTiecCuoi.MaTiecCuoi;
                 PhieuDatDichVuViewModel.ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi));
                 PhieuDatBanViewModel.DonGiaBanToiThieu = SelectedSanh.LOAISANH.DonGiaBanToiThieu;
+                PhieuDatBanViewModel.CurrentMaTiecCuoi = SelectedTiecCuoi.MaTiecCuoi;
+                PhieuDatBanViewModel.ListPhieuDatBan = new ObservableCollection<PHIEUDATBAN>(DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi));
                 DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow();
                 wd.ShowDialog();
-                wd.Close();
             });
             LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
         }

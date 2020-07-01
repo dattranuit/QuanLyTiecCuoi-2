@@ -50,5 +50,11 @@ namespace QuanLyTiecCuoi.UserControls
                 e.CancelCommand();
             }
         }
+
+        private void nbr_TienDatCoc_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (nbr_TienDatCoc.Value.ToString() == "")
+                nbr_TienDatCoc.Value = 0;
+        }
     }
 }

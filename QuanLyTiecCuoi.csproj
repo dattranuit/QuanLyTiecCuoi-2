@@ -105,6 +105,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CT_PhieuDatBanWindow.xaml.cs">
+      <DependentUpon>CT_PhieuDatBanWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HoaDon.xaml.cs">
       <DependentUpon>HoaDon.xaml</DependentUpon>
     </Compile>
@@ -216,6 +219,10 @@
     <Compile Include="ViewModel\PhieuDatDichVuViewModel.cs" />
     <Compile Include="ViewModel\SanhViewModel.cs" />
     <Compile Include="ViewModel\TiecViewModel.cs" />
+    <Page Include="CT_PhieuDatBanWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HoaDon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
