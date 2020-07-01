@@ -192,5 +192,3 @@ namespace QuanLyTiecCuoi.ViewModel
     }
 }
 
-
-// va them dichvu cu voi anh moi thi selected item loan xa. 
