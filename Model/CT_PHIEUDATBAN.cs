@@ -9,9 +9,9 @@
 
 namespace QuanLyTiecCuoi.Model
 {
-    using QuanLyTiecCuoi.ViewModel;
     using System;
     using System.Collections.Generic;
+    using QuanLyTiecCuoi.ViewModel;
     
     public partial class CT_PHIEUDATBAN:BaseViewModel
     {
@@ -19,12 +19,13 @@ namespace QuanLyTiecCuoi.Model
         private int _MaMonAn;
         private int _SoLuong;
         private decimal _ThanhTien;
-        public int MaPhieuDatBan { get => _MaPhieuDatBan; set { _MaPhieuDatBan = value; OnPropertyChanged(); }}
+        public int MaPhieuDatBan { get => _MaPhieuDatBan; set { _MaPhieuDatBan = value; OnPropertyChanged(); } }
         public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
         public int SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
         public decimal ThanhTien { get => _ThanhTien; set { _ThanhTien = value; OnPropertyChanged(); } }
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual MONAN MONAN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual PHIEUDATBAN PHIEUDATBAN { get; set; }
     }
 }

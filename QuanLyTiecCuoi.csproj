@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="DatBanvaDichVuWindow.xaml.cs">
       <DependentUpon>DatBanvaDichVuWindow.xaml</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Model\BAOCAONGAY.cs">
       <DependentUpon>Database.tt</DependentUpon>
@@ -164,6 +165,9 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\NHOMNGUOIDUNG.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PHANQUYEN.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PHIEUDATBAN.cs">
@@ -253,6 +257,7 @@
     <Page Include="DatBanvaDichVuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>

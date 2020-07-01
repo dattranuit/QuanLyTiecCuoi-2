@@ -31,8 +31,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 if (SelectedCTPDB != null)
                 {
                     MaMonAn = SelectedCTPDB.MaMonAn;
-                    CTPDB_SoLuong = SelectedCTPDB.SoLuong;
-                    DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
+                    CTPDB_SoLuong = SelectedCTPDB.SoLuong; 
                 }
             }
         }
@@ -48,8 +47,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     MaMonAn = SelectedMA.MaMonAn;
                     MA_SoLuong = 0;
-                    MA_ThanhTien = 0;
-                    DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
+                    MA_ThanhTien = 0; 
                 }
             }
         }
@@ -64,7 +62,6 @@ namespace QuanLyTiecCuoi.ViewModel
                     if (_CTPDB_SoLuong < 0)
                         _CTPDB_SoLuong = 0;
                     CTPDB_ThanhTien = CTPDB_SoLuong * SelectedCTPDB.MONAN.DonGia;
-                    DonGiaBan += CTPDB_ThanhTien;
                 }
                 OnPropertyChanged();
             }
@@ -79,7 +76,6 @@ namespace QuanLyTiecCuoi.ViewModel
                     if (MA_SoLuong < 0)
                         MA_SoLuong = 0;
                     MA_ThanhTien = MA_SoLuong * SelectedMA.DonGia;
-                    DonGiaBan += MA_ThanhTien;
                 }
                 OnPropertyChanged(); } }
         private decimal _MA_ThanhTien = 0;
@@ -103,9 +99,11 @@ namespace QuanLyTiecCuoi.ViewModel
                     SoLuong = MA_SoLuong,
                     ThanhTien = MA_ThanhTien,
                 };
+               // MessageBox.Show(CT_PhieuDatBan.MaPhieuDatBan + " " + CT_PhieuDatBan.MaMonAn + " " + CT_PhieuDatBan.SoLuong + " " + CT_PhieuDatBan.ThanhTien);
                 DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Add(CT_PhieuDatBan);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListCTPhieuDatBan.Add(CT_PhieuDatBan);
+                DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
             });
             //EditCommand = new RelayCommand<object>((p) =>
             //{

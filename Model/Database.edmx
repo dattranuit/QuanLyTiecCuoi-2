@@ -31,6 +31,8 @@
           </Key>
           <Property Name="MaCa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenCa" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BatDau" Type="time" Precision="7" Nullable="false" />
+          <Property Name="KetThuc" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="CHUCNANG">
           <Key>
@@ -40,14 +42,10 @@
           <Property Name="TenChucNang" Type="nvarchar(max)" Nullable="false" />
           <Property Name="TenManHinhDuocLoad" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_PHIEUDATBAN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CT_PHIEUDATBAN">
           <Key>
             <PropertyRef Name="MaPhieuDatBan" />
             <PropertyRef Name="MaMonAn" />
-            <PropertyRef Name="SoLuong" />
-            <PropertyRef Name="ThanhTien" />
           </Key>
           <Property Name="MaPhieuDatBan" Type="int" Nullable="false" />
           <Property Name="MaMonAn" Type="int" Nullable="false" />
@@ -119,6 +117,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           </Key>
           <Property Name="MaChucNang" Type="int" Nullable="false" />
           <Property Name="MaNhomNguoiDung" Type="int" Nullable="false" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="PHIEUDATBAN">
           <Key>
@@ -174,7 +173,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="MaSanh" Type="int" Nullable="false" />
           <Property Name="MaCa" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__BAOCAONGA__MaBao__412EB0B6">
+        <Association Name="FK__BAOCAONGA__MaBao__4222D4EF">
           <End Role="BAOCAOTHANG" Type="Self.BAOCAOTHANG" Multiplicity="1" />
           <End Role="BAOCAONGAY" Type="Self.BAOCAONGAY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -186,7 +185,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CT_PHIEUD__MaMon__4222D4EF">
+        <Association Name="FK__CT_PHIEUD__MaMon__4316F928">
           <End Role="MONAN" Type="Self.MONAN" Multiplicity="1" />
           <End Role="CT_PHIEUDATBAN" Type="Self.CT_PHIEUDATBAN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -198,7 +197,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CT_PHIEUD__MaPhi__4316F928">
+        <Association Name="FK__CT_PHIEUD__MaPhi__440B1D61">
           <End Role="PHIEUDATBAN" Type="Self.PHIEUDATBAN" Multiplicity="1" />
           <End Role="CT_PHIEUDATBAN" Type="Self.CT_PHIEUDATBAN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -210,7 +209,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HOADON__MaTiecCu__440B1D61">
+        <Association Name="FK__HOADON__MaTiecCu__44FF419A">
           <End Role="TIECCUOI" Type="Self.TIECCUOI" Multiplicity="1" />
           <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
           <ReferentialConstraint>
@@ -222,7 +221,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NGUOIDUNG__MaNho__44FF419A">
+        <Association Name="FK__NGUOIDUNG__MaNho__45F365D3">
           <End Role="NHOMNGUOIDUNG" Type="Self.NHOMNGUOIDUNG" Multiplicity="1" />
           <End Role="NGUOIDUNG" Type="Self.NGUOIDUNG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -234,7 +233,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHANQUYEN__MaChu__45F365D3">
+        <Association Name="FK__PHANQUYEN__MaChu__46E78A0C">
           <End Role="CHUCNANG" Type="Self.CHUCNANG" Multiplicity="1" />
           <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -246,7 +245,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHANQUYEN__MaNho__46E78A0C">
+        <Association Name="FK__PHANQUYEN__MaNho__47DBAE45">
           <End Role="NHOMNGUOIDUNG" Type="Self.NHOMNGUOIDUNG" Multiplicity="1" />
           <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -258,7 +257,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDATB__MaTie__47DBAE45">
+        <Association Name="FK__PHIEUDATB__MaTie__48CFD27E">
           <End Role="TIECCUOI" Type="Self.TIECCUOI" Multiplicity="1" />
           <End Role="PHIEUDATBAN" Type="Self.PHIEUDATBAN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -270,7 +269,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDATD__MaDic__48CFD27E">
+        <Association Name="FK__PHIEUDATD__MaDic__49C3F6B7">
           <End Role="DICHVU" Type="Self.DICHVU" Multiplicity="1" />
           <End Role="PHIEUDATDICHVU" Type="Self.PHIEUDATDICHVU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -282,7 +281,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDATD__MaTie__49C3F6B7">
+        <Association Name="FK__PHIEUDATD__MaTie__4AB81AF0">
           <End Role="TIECCUOI" Type="Self.TIECCUOI" Multiplicity="1" />
           <End Role="PHIEUDATDICHVU" Type="Self.PHIEUDATDICHVU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -294,7 +293,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SANH__MaLoaiSanh__4AB81AF0">
+        <Association Name="FK__SANH__MaLoaiSanh__4BAC3F29">
           <End Role="LOAISANH" Type="Self.LOAISANH" Multiplicity="1" />
           <End Role="SANH" Type="Self.SANH" Multiplicity="*" />
           <ReferentialConstraint>
@@ -306,7 +305,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TIECCUOI__MaCa__4BAC3F29">
+        <Association Name="FK__TIECCUOI__MaCa__4CA06362">
           <End Role="CA" Type="Self.CA" Multiplicity="1" />
           <End Role="TIECCUOI" Type="Self.TIECCUOI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -318,7 +317,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TIECCUOI__MaSanh__4CA06362">
+        <Association Name="FK__TIECCUOI__MaSanh__4D94879B">
           <End Role="SANH" Type="Self.SANH" Multiplicity="1" />
           <End Role="TIECCUOI" Type="Self.TIECCUOI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -335,6 +334,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <EntitySet Name="BAOCAOTHANG" EntityType="Self.BAOCAOTHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CA" EntityType="Self.CA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CHUCNANG" EntityType="Self.CHUCNANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CT_PHIEUDATBAN" EntityType="Self.CT_PHIEUDATBAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DICHVU" EntityType="Self.DICHVU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOAISANH" EntityType="Self.LOAISANH" Schema="dbo" store:Type="Tables" />
@@ -347,63 +347,55 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <EntitySet Name="SANH" EntityType="Self.SANH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THAMSO" EntityType="Self.THAMSO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIECCUOI" EntityType="Self.TIECCUOI" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CT_PHIEUDATBAN" EntityType="Self.CT_PHIEUDATBAN" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CT_PHIEUDATBAN].[MaPhieuDatBan] AS [MaPhieuDatBan], 
-    [CT_PHIEUDATBAN].[MaMonAn] AS [MaMonAn], 
-    [CT_PHIEUDATBAN].[SoLuong] AS [SoLuong], 
-    [CT_PHIEUDATBAN].[ThanhTien] AS [ThanhTien]
-    FROM [dbo].[CT_PHIEUDATBAN] AS [CT_PHIEUDATBAN]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__BAOCAONGA__MaBao__412EB0B6" Association="Self.FK__BAOCAONGA__MaBao__412EB0B6">
+          <AssociationSet Name="FK__BAOCAONGA__MaBao__4222D4EF" Association="Self.FK__BAOCAONGA__MaBao__4222D4EF">
             <End Role="BAOCAOTHANG" EntitySet="BAOCAOTHANG" />
             <End Role="BAOCAONGAY" EntitySet="BAOCAONGAY" />
           </AssociationSet>
-          <AssociationSet Name="FK__CT_PHIEUD__MaMon__4222D4EF" Association="Self.FK__CT_PHIEUD__MaMon__4222D4EF">
+          <AssociationSet Name="FK__CT_PHIEUD__MaMon__4316F928" Association="Self.FK__CT_PHIEUD__MaMon__4316F928">
             <End Role="MONAN" EntitySet="MONAN" />
             <End Role="CT_PHIEUDATBAN" EntitySet="CT_PHIEUDATBAN" />
           </AssociationSet>
-          <AssociationSet Name="FK__CT_PHIEUD__MaPhi__4316F928" Association="Self.FK__CT_PHIEUD__MaPhi__4316F928">
+          <AssociationSet Name="FK__CT_PHIEUD__MaPhi__440B1D61" Association="Self.FK__CT_PHIEUD__MaPhi__440B1D61">
             <End Role="PHIEUDATBAN" EntitySet="PHIEUDATBAN" />
             <End Role="CT_PHIEUDATBAN" EntitySet="CT_PHIEUDATBAN" />
           </AssociationSet>
-          <AssociationSet Name="FK__HOADON__MaTiecCu__440B1D61" Association="Self.FK__HOADON__MaTiecCu__440B1D61">
+          <AssociationSet Name="FK__HOADON__MaTiecCu__44FF419A" Association="Self.FK__HOADON__MaTiecCu__44FF419A">
             <End Role="TIECCUOI" EntitySet="TIECCUOI" />
             <End Role="HOADON" EntitySet="HOADON" />
           </AssociationSet>
-          <AssociationSet Name="FK__NGUOIDUNG__MaNho__44FF419A" Association="Self.FK__NGUOIDUNG__MaNho__44FF419A">
+          <AssociationSet Name="FK__NGUOIDUNG__MaNho__45F365D3" Association="Self.FK__NGUOIDUNG__MaNho__45F365D3">
             <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNG" />
             <End Role="NGUOIDUNG" EntitySet="NGUOIDUNG" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHANQUYEN__MaChu__45F365D3" Association="Self.FK__PHANQUYEN__MaChu__45F365D3">
+          <AssociationSet Name="FK__PHANQUYEN__MaChu__46E78A0C" Association="Self.FK__PHANQUYEN__MaChu__46E78A0C">
             <End Role="CHUCNANG" EntitySet="CHUCNANG" />
             <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHANQUYEN__MaNho__46E78A0C" Association="Self.FK__PHANQUYEN__MaNho__46E78A0C">
+          <AssociationSet Name="FK__PHANQUYEN__MaNho__47DBAE45" Association="Self.FK__PHANQUYEN__MaNho__47DBAE45">
             <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNG" />
             <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDATB__MaTie__47DBAE45" Association="Self.FK__PHIEUDATB__MaTie__47DBAE45">
+          <AssociationSet Name="FK__PHIEUDATB__MaTie__48CFD27E" Association="Self.FK__PHIEUDATB__MaTie__48CFD27E">
             <End Role="TIECCUOI" EntitySet="TIECCUOI" />
             <End Role="PHIEUDATBAN" EntitySet="PHIEUDATBAN" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDATD__MaDic__48CFD27E" Association="Self.FK__PHIEUDATD__MaDic__48CFD27E">
+          <AssociationSet Name="FK__PHIEUDATD__MaDic__49C3F6B7" Association="Self.FK__PHIEUDATD__MaDic__49C3F6B7">
             <End Role="DICHVU" EntitySet="DICHVU" />
             <End Role="PHIEUDATDICHVU" EntitySet="PHIEUDATDICHVU" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDATD__MaTie__49C3F6B7" Association="Self.FK__PHIEUDATD__MaTie__49C3F6B7">
+          <AssociationSet Name="FK__PHIEUDATD__MaTie__4AB81AF0" Association="Self.FK__PHIEUDATD__MaTie__4AB81AF0">
             <End Role="TIECCUOI" EntitySet="TIECCUOI" />
             <End Role="PHIEUDATDICHVU" EntitySet="PHIEUDATDICHVU" />
           </AssociationSet>
-          <AssociationSet Name="FK__SANH__MaLoaiSanh__4AB81AF0" Association="Self.FK__SANH__MaLoaiSanh__4AB81AF0">
+          <AssociationSet Name="FK__SANH__MaLoaiSanh__4BAC3F29" Association="Self.FK__SANH__MaLoaiSanh__4BAC3F29">
             <End Role="LOAISANH" EntitySet="LOAISANH" />
             <End Role="SANH" EntitySet="SANH" />
           </AssociationSet>
-          <AssociationSet Name="FK__TIECCUOI__MaCa__4BAC3F29" Association="Self.FK__TIECCUOI__MaCa__4BAC3F29">
+          <AssociationSet Name="FK__TIECCUOI__MaCa__4CA06362" Association="Self.FK__TIECCUOI__MaCa__4CA06362">
             <End Role="CA" EntitySet="CA" />
             <End Role="TIECCUOI" EntitySet="TIECCUOI" />
           </AssociationSet>
-          <AssociationSet Name="FK__TIECCUOI__MaSanh__4CA06362" Association="Self.FK__TIECCUOI__MaSanh__4CA06362">
+          <AssociationSet Name="FK__TIECCUOI__MaSanh__4D94879B" Association="Self.FK__TIECCUOI__MaSanh__4D94879B">
             <End Role="SANH" EntitySet="SANH" />
             <End Role="TIECCUOI" EntitySet="TIECCUOI" />
           </AssociationSet>
@@ -423,7 +415,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="SoLuongTiecCuoi" Type="Int32" Nullable="false" />
           <Property Name="DoanhThu" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="TiLe" Type="Double" Nullable="false" />
-          <NavigationProperty Name="BAOCAOTHANG" Relationship="Self.FK__BAOCAONGA__MaBao__412EB0B6" FromRole="BAOCAONGAY" ToRole="BAOCAOTHANG" />
+          <NavigationProperty Name="BAOCAOTHANG" Relationship="Self.FK__BAOCAONGA__MaBao__4222D4EF" FromRole="BAOCAONGAY" ToRole="BAOCAOTHANG" />
         </EntityType>
         <EntityType Name="BAOCAOTHANG">
           <Key>
@@ -433,7 +425,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="Thang" Type="Int32" Nullable="false" />
           <Property Name="Nam" Type="Int32" Nullable="false" />
           <Property Name="TongDoanhThu" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="BAOCAONGAYs" Relationship="Self.FK__BAOCAONGA__MaBao__412EB0B6" FromRole="BAOCAOTHANG" ToRole="BAOCAONGAY" />
+          <NavigationProperty Name="BAOCAONGAYs" Relationship="Self.FK__BAOCAONGA__MaBao__4222D4EF" FromRole="BAOCAOTHANG" ToRole="BAOCAONGAY" />
         </EntityType>
         <EntityType Name="CA">
           <Key>
@@ -441,7 +433,9 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           </Key>
           <Property Name="MaCa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenCa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="TIECCUOIs" Relationship="Self.FK__TIECCUOI__MaCa__4BAC3F29" FromRole="CA" ToRole="TIECCUOI" />
+          <Property Name="BatDau" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="KetThuc" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="TIECCUOIs" Relationship="Self.FK__TIECCUOI__MaCa__4CA06362" FromRole="CA" ToRole="TIECCUOI" />
         </EntityType>
         <EntityType Name="CHUCNANG">
           <Key>
@@ -450,7 +444,19 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="MaChucNang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenChucNang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TenManHinhDuocLoad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="NHOMNGUOIDUNGs" Relationship="Self.PHANQUYEN" FromRole="CHUCNANG" ToRole="NHOMNGUOIDUNG" />
+          <NavigationProperty Name="PHANQUYENs" Relationship="Self.FK__PHANQUYEN__MaChu__46E78A0C" FromRole="CHUCNANG" ToRole="PHANQUYEN" />
+        </EntityType>
+        <EntityType Name="CT_PHIEUDATBAN">
+          <Key>
+            <PropertyRef Name="MaPhieuDatBan" />
+            <PropertyRef Name="MaMonAn" />
+          </Key>
+          <Property Name="MaPhieuDatBan" Type="Int32" Nullable="false" />
+          <Property Name="MaMonAn" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="ThanhTien" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="MONAN" Relationship="Self.FK__CT_PHIEUD__MaMon__4316F928" FromRole="CT_PHIEUDATBAN" ToRole="MONAN" />
+          <NavigationProperty Name="PHIEUDATBAN" Relationship="Self.FK__CT_PHIEUD__MaPhi__440B1D61" FromRole="CT_PHIEUDATBAN" ToRole="PHIEUDATBAN" />
         </EntityType>
         <EntityType Name="DICHVU">
           <Key>
@@ -462,7 +468,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PHIEUDATDICHVUs" Relationship="Self.FK__PHIEUDATD__MaDic__48CFD27E" FromRole="DICHVU" ToRole="PHIEUDATDICHVU" />
+          <NavigationProperty Name="PHIEUDATDICHVUs" Relationship="Self.FK__PHIEUDATD__MaDic__49C3F6B7" FromRole="DICHVU" ToRole="PHIEUDATDICHVU" />
         </EntityType>
         <EntityType Name="HOADON">
           <Key>
@@ -475,7 +481,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="ConLai" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="NgayThanhToan" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="MaTiecCuoi" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TIECCUOI" Relationship="Self.FK__HOADON__MaTiecCu__440B1D61" FromRole="HOADON" ToRole="TIECCUOI" />
+          <NavigationProperty Name="TIECCUOI" Relationship="Self.FK__HOADON__MaTiecCu__44FF419A" FromRole="HOADON" ToRole="TIECCUOI" />
         </EntityType>
         <EntityType Name="LOAISANH">
           <Key>
@@ -484,7 +490,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="MaLoaiSanh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenLoaiSanh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DonGiaBanToiThieu" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="SANHs" Relationship="Self.FK__SANH__MaLoaiSanh__4AB81AF0" FromRole="LOAISANH" ToRole="SANH" />
+          <NavigationProperty Name="SANHs" Relationship="Self.FK__SANH__MaLoaiSanh__4BAC3F29" FromRole="LOAISANH" ToRole="SANH" />
         </EntityType>
         <EntityType Name="MONAN">
           <Key>
@@ -496,7 +502,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CT_PHIEUDATBAN" Relationship="Self.FK__CT_PHIEUD__MaMon__4222D4EF" FromRole="MONAN" ToRole="CT_PHIEUDATBAN" />
+          <NavigationProperty Name="CT_PHIEUDATBAN" Relationship="Self.FK__CT_PHIEUD__MaMon__4316F928" FromRole="MONAN" ToRole="CT_PHIEUDATBAN" />
         </EntityType>
         <EntityType Name="NGUOIDUNG">
           <Key>
@@ -506,7 +512,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TenNguoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MaNhomNguoiDung" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="NHOMNGUOIDUNG" Relationship="Self.FK__NGUOIDUNG__MaNho__44FF419A" FromRole="NGUOIDUNG" ToRole="NHOMNGUOIDUNG" />
+          <NavigationProperty Name="NHOMNGUOIDUNG" Relationship="Self.FK__NGUOIDUNG__MaNho__45F365D3" FromRole="NGUOIDUNG" ToRole="NHOMNGUOIDUNG" />
         </EntityType>
         <EntityType Name="NHOMNGUOIDUNG">
           <Key>
@@ -514,8 +520,19 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           </Key>
           <Property Name="MaNhomNguoiDung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenNhomNguoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="NGUOIDUNGs" Relationship="Self.FK__NGUOIDUNG__MaNho__44FF419A" FromRole="NHOMNGUOIDUNG" ToRole="NGUOIDUNG" />
-          <NavigationProperty Name="CHUCNANGs" Relationship="Self.PHANQUYEN" FromRole="NHOMNGUOIDUNG" ToRole="CHUCNANG" />
+          <NavigationProperty Name="NGUOIDUNGs" Relationship="Self.FK__NGUOIDUNG__MaNho__45F365D3" FromRole="NHOMNGUOIDUNG" ToRole="NGUOIDUNG" />
+          <NavigationProperty Name="PHANQUYENs" Relationship="Self.FK__PHANQUYEN__MaNho__47DBAE45" FromRole="NHOMNGUOIDUNG" ToRole="PHANQUYEN" />
+        </EntityType>
+        <EntityType Name="PHANQUYEN">
+          <Key>
+            <PropertyRef Name="MaChucNang" />
+            <PropertyRef Name="MaNhomNguoiDung" />
+          </Key>
+          <Property Name="MaChucNang" Type="Int32" Nullable="false" />
+          <Property Name="MaNhomNguoiDung" Type="Int32" Nullable="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CHUCNANG" Relationship="Self.FK__PHANQUYEN__MaChu__46E78A0C" FromRole="PHANQUYEN" ToRole="CHUCNANG" />
+          <NavigationProperty Name="NHOMNGUOIDUNG" Relationship="Self.FK__PHANQUYEN__MaNho__47DBAE45" FromRole="PHANQUYEN" ToRole="NHOMNGUOIDUNG" />
         </EntityType>
         <EntityType Name="PHIEUDATBAN">
           <Key>
@@ -528,8 +545,8 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="SoLuongDuTru" Type="Int32" Nullable="false" />
           <Property Name="DonGiaBan" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CT_PHIEUDATBAN" Relationship="Self.FK__CT_PHIEUD__MaPhi__4316F928" FromRole="PHIEUDATBAN" ToRole="CT_PHIEUDATBAN" />
-          <NavigationProperty Name="TIECCUOI" Relationship="Self.FK__PHIEUDATB__MaTie__47DBAE45" FromRole="PHIEUDATBAN" ToRole="TIECCUOI" />
+          <NavigationProperty Name="CT_PHIEUDATBAN" Relationship="Self.FK__CT_PHIEUD__MaPhi__440B1D61" FromRole="PHIEUDATBAN" ToRole="CT_PHIEUDATBAN" />
+          <NavigationProperty Name="TIECCUOI" Relationship="Self.FK__PHIEUDATB__MaTie__48CFD27E" FromRole="PHIEUDATBAN" ToRole="TIECCUOI" />
         </EntityType>
         <EntityType Name="PHIEUDATDICHVU">
           <Key>
@@ -540,8 +557,8 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="MaDichVu" Type="Int32" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" Nullable="false" />
           <Property Name="ThanhTien" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="DICHVU" Relationship="Self.FK__PHIEUDATD__MaDic__48CFD27E" FromRole="PHIEUDATDICHVU" ToRole="DICHVU" />
-          <NavigationProperty Name="TIECCUOI" Relationship="Self.FK__PHIEUDATD__MaTie__49C3F6B7" FromRole="PHIEUDATDICHVU" ToRole="TIECCUOI" />
+          <NavigationProperty Name="DICHVU" Relationship="Self.FK__PHIEUDATD__MaDic__49C3F6B7" FromRole="PHIEUDATDICHVU" ToRole="DICHVU" />
+          <NavigationProperty Name="TIECCUOI" Relationship="Self.FK__PHIEUDATD__MaTie__4AB81AF0" FromRole="PHIEUDATDICHVU" ToRole="TIECCUOI" />
         </EntityType>
         <EntityType Name="SANH">
           <Key>
@@ -552,8 +569,8 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="SoLuongBanToiDa" Type="Int32" Nullable="false" />
           <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MaLoaiSanh" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="LOAISANH" Relationship="Self.FK__SANH__MaLoaiSanh__4AB81AF0" FromRole="SANH" ToRole="LOAISANH" />
-          <NavigationProperty Name="TIECCUOIs" Relationship="Self.FK__TIECCUOI__MaSanh__4CA06362" FromRole="SANH" ToRole="TIECCUOI" />
+          <NavigationProperty Name="LOAISANH" Relationship="Self.FK__SANH__MaLoaiSanh__4BAC3F29" FromRole="SANH" ToRole="LOAISANH" />
+          <NavigationProperty Name="TIECCUOIs" Relationship="Self.FK__TIECCUOI__MaSanh__4D94879B" FromRole="SANH" ToRole="TIECCUOI" />
         </EntityType>
         <EntityType Name="THAMSO">
           <Key>
@@ -576,27 +593,13 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
           <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MaSanh" Type="Int32" Nullable="false" />
           <Property Name="MaCa" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CA" Relationship="Self.FK__TIECCUOI__MaCa__4BAC3F29" FromRole="TIECCUOI" ToRole="CA" />
-          <NavigationProperty Name="HOADONs" Relationship="Self.FK__HOADON__MaTiecCu__440B1D61" FromRole="TIECCUOI" ToRole="HOADON" />
-          <NavigationProperty Name="PHIEUDATBANs" Relationship="Self.FK__PHIEUDATB__MaTie__47DBAE45" FromRole="TIECCUOI" ToRole="PHIEUDATBAN" />
-          <NavigationProperty Name="PHIEUDATDICHVUs" Relationship="Self.FK__PHIEUDATD__MaTie__49C3F6B7" FromRole="TIECCUOI" ToRole="PHIEUDATDICHVU" />
-          <NavigationProperty Name="SANH" Relationship="Self.FK__TIECCUOI__MaSanh__4CA06362" FromRole="TIECCUOI" ToRole="SANH" />
+          <NavigationProperty Name="CA" Relationship="Self.FK__TIECCUOI__MaCa__4CA06362" FromRole="TIECCUOI" ToRole="CA" />
+          <NavigationProperty Name="HOADONs" Relationship="Self.FK__HOADON__MaTiecCu__44FF419A" FromRole="TIECCUOI" ToRole="HOADON" />
+          <NavigationProperty Name="PHIEUDATBANs" Relationship="Self.FK__PHIEUDATB__MaTie__48CFD27E" FromRole="TIECCUOI" ToRole="PHIEUDATBAN" />
+          <NavigationProperty Name="PHIEUDATDICHVUs" Relationship="Self.FK__PHIEUDATD__MaTie__4AB81AF0" FromRole="TIECCUOI" ToRole="PHIEUDATDICHVU" />
+          <NavigationProperty Name="SANH" Relationship="Self.FK__TIECCUOI__MaSanh__4D94879B" FromRole="TIECCUOI" ToRole="SANH" />
         </EntityType>
-        <EntityType Name="CT_PHIEUDATBAN">
-          <Key>
-            <PropertyRef Name="MaPhieuDatBan" />
-            <PropertyRef Name="MaMonAn" />
-            <PropertyRef Name="SoLuong" />
-            <PropertyRef Name="ThanhTien" />
-          </Key>
-          <Property Name="MaPhieuDatBan" Type="Int32" Nullable="false" />
-          <Property Name="MaMonAn" Type="Int32" Nullable="false" />
-          <Property Name="SoLuong" Type="Int32" Nullable="false" />
-          <Property Name="ThanhTien" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="MONAN" Relationship="Self.FK__CT_PHIEUD__MaMon__4222D4EF" FromRole="CT_PHIEUDATBAN" ToRole="MONAN" />
-          <NavigationProperty Name="PHIEUDATBAN" Relationship="Self.FK__CT_PHIEUD__MaPhi__4316F928" FromRole="CT_PHIEUDATBAN" ToRole="PHIEUDATBAN" />
-        </EntityType>
-        <Association Name="FK__BAOCAONGA__MaBao__412EB0B6">
+        <Association Name="FK__BAOCAONGA__MaBao__4222D4EF">
           <End Role="BAOCAOTHANG" Type="Self.BAOCAOTHANG" Multiplicity="1" />
           <End Role="BAOCAONGAY" Type="Self.BAOCAONGAY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -608,7 +611,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TIECCUOI__MaCa__4BAC3F29">
+        <Association Name="FK__TIECCUOI__MaCa__4CA06362">
           <End Role="CA" Type="Self.CA" Multiplicity="1" />
           <End Role="TIECCUOI" Type="Self.TIECCUOI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -620,43 +623,19 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDATD__MaDic__48CFD27E">
-          <End Role="DICHVU" Type="Self.DICHVU" Multiplicity="1" />
-          <End Role="PHIEUDATDICHVU" Type="Self.PHIEUDATDICHVU" Multiplicity="*" />
+        <Association Name="FK__PHANQUYEN__MaChu__46E78A0C">
+          <End Role="CHUCNANG" Type="Self.CHUCNANG" Multiplicity="1" />
+          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DICHVU">
-              <PropertyRef Name="MaDichVu" />
+            <Principal Role="CHUCNANG">
+              <PropertyRef Name="MaChucNang" />
             </Principal>
-            <Dependent Role="PHIEUDATDICHVU">
-              <PropertyRef Name="MaDichVu" />
+            <Dependent Role="PHANQUYEN">
+              <PropertyRef Name="MaChucNang" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HOADON__MaTiecCu__440B1D61">
-          <End Role="TIECCUOI" Type="Self.TIECCUOI" Multiplicity="1" />
-          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIECCUOI">
-              <PropertyRef Name="MaTiecCuoi" />
-            </Principal>
-            <Dependent Role="HOADON">
-              <PropertyRef Name="MaTiecCuoi" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SANH__MaLoaiSanh__4AB81AF0">
-          <End Role="LOAISANH" Type="Self.LOAISANH" Multiplicity="1" />
-          <End Role="SANH" Type="Self.SANH" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LOAISANH">
-              <PropertyRef Name="MaLoaiSanh" />
-            </Principal>
-            <Dependent Role="SANH">
-              <PropertyRef Name="MaLoaiSanh" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CT_PHIEUD__MaMon__4222D4EF">
+        <Association Name="FK__CT_PHIEUD__MaMon__4316F928">
           <End Role="MONAN" Type="Self.MONAN" Multiplicity="1" />
           <End Role="CT_PHIEUDATBAN" Type="Self.CT_PHIEUDATBAN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -668,19 +647,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NGUOIDUNG__MaNho__44FF419A">
-          <End Role="NHOMNGUOIDUNG" Type="Self.NHOMNGUOIDUNG" Multiplicity="1" />
-          <End Role="NGUOIDUNG" Type="Self.NGUOIDUNG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NHOMNGUOIDUNG">
-              <PropertyRef Name="MaNhomNguoiDung" />
-            </Principal>
-            <Dependent Role="NGUOIDUNG">
-              <PropertyRef Name="MaNhomNguoiDung" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CT_PHIEUD__MaPhi__4316F928">
+        <Association Name="FK__CT_PHIEUD__MaPhi__440B1D61">
           <End Role="PHIEUDATBAN" Type="Self.PHIEUDATBAN" Multiplicity="1" />
           <End Role="CT_PHIEUDATBAN" Type="Self.CT_PHIEUDATBAN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -692,7 +659,67 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDATB__MaTie__47DBAE45">
+        <Association Name="FK__PHIEUDATD__MaDic__49C3F6B7">
+          <End Role="DICHVU" Type="Self.DICHVU" Multiplicity="1" />
+          <End Role="PHIEUDATDICHVU" Type="Self.PHIEUDATDICHVU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DICHVU">
+              <PropertyRef Name="MaDichVu" />
+            </Principal>
+            <Dependent Role="PHIEUDATDICHVU">
+              <PropertyRef Name="MaDichVu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HOADON__MaTiecCu__44FF419A">
+          <End Role="TIECCUOI" Type="Self.TIECCUOI" Multiplicity="1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIECCUOI">
+              <PropertyRef Name="MaTiecCuoi" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MaTiecCuoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SANH__MaLoaiSanh__4BAC3F29">
+          <End Role="LOAISANH" Type="Self.LOAISANH" Multiplicity="1" />
+          <End Role="SANH" Type="Self.SANH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAISANH">
+              <PropertyRef Name="MaLoaiSanh" />
+            </Principal>
+            <Dependent Role="SANH">
+              <PropertyRef Name="MaLoaiSanh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NGUOIDUNG__MaNho__45F365D3">
+          <End Role="NHOMNGUOIDUNG" Type="Self.NHOMNGUOIDUNG" Multiplicity="1" />
+          <End Role="NGUOIDUNG" Type="Self.NGUOIDUNG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHOMNGUOIDUNG">
+              <PropertyRef Name="MaNhomNguoiDung" />
+            </Principal>
+            <Dependent Role="NGUOIDUNG">
+              <PropertyRef Name="MaNhomNguoiDung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHANQUYEN__MaNho__47DBAE45">
+          <End Role="NHOMNGUOIDUNG" Type="Self.NHOMNGUOIDUNG" Multiplicity="1" />
+          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHOMNGUOIDUNG">
+              <PropertyRef Name="MaNhomNguoiDung" />
+            </Principal>
+            <Dependent Role="PHANQUYEN">
+              <PropertyRef Name="MaNhomNguoiDung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUDATB__MaTie__48CFD27E">
           <End Role="TIECCUOI" Type="Self.TIECCUOI" Multiplicity="1" />
           <End Role="PHIEUDATBAN" Type="Self.PHIEUDATBAN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -704,7 +731,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDATD__MaTie__49C3F6B7">
+        <Association Name="FK__PHIEUDATD__MaTie__4AB81AF0">
           <End Role="TIECCUOI" Type="Self.TIECCUOI" Multiplicity="1" />
           <End Role="PHIEUDATDICHVU" Type="Self.PHIEUDATDICHVU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -716,7 +743,7 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TIECCUOI__MaSanh__4CA06362">
+        <Association Name="FK__TIECCUOI__MaSanh__4D94879B">
           <End Role="SANH" Type="Self.SANH" Multiplicity="1" />
           <End Role="TIECCUOI" Type="Self.TIECCUOI" Multiplicity="*" />
           <ReferentialConstraint>
@@ -728,74 +755,75 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PHANQUYEN">
-          <End Role="CHUCNANG" Type="Self.CHUCNANG" Multiplicity="*" />
-          <End Role="NHOMNGUOIDUNG" Type="Self.NHOMNGUOIDUNG" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="QuanLyTiecCuoiEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BAOCAONGAYs" EntityType="Self.BAOCAONGAY" />
           <EntitySet Name="BAOCAOTHANGs" EntityType="Self.BAOCAOTHANG" />
           <EntitySet Name="CAs" EntityType="Self.CA" />
           <EntitySet Name="CHUCNANGs" EntityType="Self.CHUCNANG" />
+          <EntitySet Name="CT_PHIEUDATBAN" EntityType="Self.CT_PHIEUDATBAN" />
           <EntitySet Name="DICHVUs" EntityType="Self.DICHVU" />
           <EntitySet Name="HOADONs" EntityType="Self.HOADON" />
           <EntitySet Name="LOAISANHs" EntityType="Self.LOAISANH" />
           <EntitySet Name="MONANs" EntityType="Self.MONAN" />
           <EntitySet Name="NGUOIDUNGs" EntityType="Self.NGUOIDUNG" />
           <EntitySet Name="NHOMNGUOIDUNGs" EntityType="Self.NHOMNGUOIDUNG" />
+          <EntitySet Name="PHANQUYENs" EntityType="Self.PHANQUYEN" />
           <EntitySet Name="PHIEUDATBANs" EntityType="Self.PHIEUDATBAN" />
           <EntitySet Name="PHIEUDATDICHVUs" EntityType="Self.PHIEUDATDICHVU" />
           <EntitySet Name="SANHs" EntityType="Self.SANH" />
           <EntitySet Name="THAMSOes" EntityType="Self.THAMSO" />
           <EntitySet Name="TIECCUOIs" EntityType="Self.TIECCUOI" />
-          <EntitySet Name="CT_PHIEUDATBAN" EntityType="Self.CT_PHIEUDATBAN" />
-          <AssociationSet Name="FK__BAOCAONGA__MaBao__412EB0B6" Association="Self.FK__BAOCAONGA__MaBao__412EB0B6">
+          <AssociationSet Name="FK__BAOCAONGA__MaBao__4222D4EF" Association="Self.FK__BAOCAONGA__MaBao__4222D4EF">
             <End Role="BAOCAOTHANG" EntitySet="BAOCAOTHANGs" />
             <End Role="BAOCAONGAY" EntitySet="BAOCAONGAYs" />
           </AssociationSet>
-          <AssociationSet Name="FK__TIECCUOI__MaCa__4BAC3F29" Association="Self.FK__TIECCUOI__MaCa__4BAC3F29">
+          <AssociationSet Name="FK__TIECCUOI__MaCa__4CA06362" Association="Self.FK__TIECCUOI__MaCa__4CA06362">
             <End Role="CA" EntitySet="CAs" />
             <End Role="TIECCUOI" EntitySet="TIECCUOIs" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDATD__MaDic__48CFD27E" Association="Self.FK__PHIEUDATD__MaDic__48CFD27E">
-            <End Role="DICHVU" EntitySet="DICHVUs" />
-            <End Role="PHIEUDATDICHVU" EntitySet="PHIEUDATDICHVUs" />
+          <AssociationSet Name="FK__PHANQUYEN__MaChu__46E78A0C" Association="Self.FK__PHANQUYEN__MaChu__46E78A0C">
+            <End Role="CHUCNANG" EntitySet="CHUCNANGs" />
+            <End Role="PHANQUYEN" EntitySet="PHANQUYENs" />
           </AssociationSet>
-          <AssociationSet Name="FK__HOADON__MaTiecCu__440B1D61" Association="Self.FK__HOADON__MaTiecCu__440B1D61">
-            <End Role="TIECCUOI" EntitySet="TIECCUOIs" />
-            <End Role="HOADON" EntitySet="HOADONs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SANH__MaLoaiSanh__4AB81AF0" Association="Self.FK__SANH__MaLoaiSanh__4AB81AF0">
-            <End Role="LOAISANH" EntitySet="LOAISANHs" />
-            <End Role="SANH" EntitySet="SANHs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CT_PHIEUD__MaMon__4222D4EF" Association="Self.FK__CT_PHIEUD__MaMon__4222D4EF">
+          <AssociationSet Name="FK__CT_PHIEUD__MaMon__4316F928" Association="Self.FK__CT_PHIEUD__MaMon__4316F928">
             <End Role="MONAN" EntitySet="MONANs" />
             <End Role="CT_PHIEUDATBAN" EntitySet="CT_PHIEUDATBAN" />
           </AssociationSet>
-          <AssociationSet Name="FK__NGUOIDUNG__MaNho__44FF419A" Association="Self.FK__NGUOIDUNG__MaNho__44FF419A">
-            <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNGs" />
-            <End Role="NGUOIDUNG" EntitySet="NGUOIDUNGs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CT_PHIEUD__MaPhi__4316F928" Association="Self.FK__CT_PHIEUD__MaPhi__4316F928">
+          <AssociationSet Name="FK__CT_PHIEUD__MaPhi__440B1D61" Association="Self.FK__CT_PHIEUD__MaPhi__440B1D61">
             <End Role="PHIEUDATBAN" EntitySet="PHIEUDATBANs" />
             <End Role="CT_PHIEUDATBAN" EntitySet="CT_PHIEUDATBAN" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDATB__MaTie__47DBAE45" Association="Self.FK__PHIEUDATB__MaTie__47DBAE45">
+          <AssociationSet Name="FK__PHIEUDATD__MaDic__49C3F6B7" Association="Self.FK__PHIEUDATD__MaDic__49C3F6B7">
+            <End Role="DICHVU" EntitySet="DICHVUs" />
+            <End Role="PHIEUDATDICHVU" EntitySet="PHIEUDATDICHVUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HOADON__MaTiecCu__44FF419A" Association="Self.FK__HOADON__MaTiecCu__44FF419A">
+            <End Role="TIECCUOI" EntitySet="TIECCUOIs" />
+            <End Role="HOADON" EntitySet="HOADONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SANH__MaLoaiSanh__4BAC3F29" Association="Self.FK__SANH__MaLoaiSanh__4BAC3F29">
+            <End Role="LOAISANH" EntitySet="LOAISANHs" />
+            <End Role="SANH" EntitySet="SANHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NGUOIDUNG__MaNho__45F365D3" Association="Self.FK__NGUOIDUNG__MaNho__45F365D3">
+            <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNGs" />
+            <End Role="NGUOIDUNG" EntitySet="NGUOIDUNGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHANQUYEN__MaNho__47DBAE45" Association="Self.FK__PHANQUYEN__MaNho__47DBAE45">
+            <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNGs" />
+            <End Role="PHANQUYEN" EntitySet="PHANQUYENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHIEUDATB__MaTie__48CFD27E" Association="Self.FK__PHIEUDATB__MaTie__48CFD27E">
             <End Role="TIECCUOI" EntitySet="TIECCUOIs" />
             <End Role="PHIEUDATBAN" EntitySet="PHIEUDATBANs" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDATD__MaTie__49C3F6B7" Association="Self.FK__PHIEUDATD__MaTie__49C3F6B7">
+          <AssociationSet Name="FK__PHIEUDATD__MaTie__4AB81AF0" Association="Self.FK__PHIEUDATD__MaTie__4AB81AF0">
             <End Role="TIECCUOI" EntitySet="TIECCUOIs" />
             <End Role="PHIEUDATDICHVU" EntitySet="PHIEUDATDICHVUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__TIECCUOI__MaSanh__4CA06362" Association="Self.FK__TIECCUOI__MaSanh__4CA06362">
+          <AssociationSet Name="FK__TIECCUOI__MaSanh__4D94879B" Association="Self.FK__TIECCUOI__MaSanh__4D94879B">
             <End Role="SANH" EntitySet="SANHs" />
             <End Role="TIECCUOI" EntitySet="TIECCUOIs" />
-          </AssociationSet>
-          <AssociationSet Name="PHANQUYEN" Association="Self.PHANQUYEN">
-            <End Role="CHUCNANG" EntitySet="CHUCNANGs" />
-            <End Role="NHOMNGUOIDUNG" EntitySet="NHOMNGUOIDUNGs" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -830,6 +858,8 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
               <MappingFragment StoreEntitySet="CA">
                 <ScalarProperty Name="MaCa" ColumnName="MaCa" />
                 <ScalarProperty Name="TenCa" ColumnName="TenCa" />
+                <ScalarProperty Name="BatDau" ColumnName="BatDau" />
+                <ScalarProperty Name="KetThuc" ColumnName="KetThuc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -839,6 +869,16 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
                 <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
                 <ScalarProperty Name="TenChucNang" ColumnName="TenChucNang" />
                 <ScalarProperty Name="TenManHinhDuocLoad" ColumnName="TenManHinhDuocLoad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CT_PHIEUDATBAN">
+            <EntityTypeMapping TypeName="DatabaseModel.CT_PHIEUDATBAN">
+              <MappingFragment StoreEntitySet="CT_PHIEUDATBAN">
+                <ScalarProperty Name="MaPhieuDatBan" ColumnName="MaPhieuDatBan" />
+                <ScalarProperty Name="MaMonAn" ColumnName="MaMonAn" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -906,6 +946,15 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PHANQUYENs">
+            <EntityTypeMapping TypeName="DatabaseModel.PHANQUYEN">
+              <MappingFragment StoreEntitySet="PHANQUYEN">
+                <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
+                <ScalarProperty Name="MaNhomNguoiDung" ColumnName="MaNhomNguoiDung" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PHIEUDATBANs">
             <EntityTypeMapping TypeName="DatabaseModel.PHIEUDATBAN">
               <MappingFragment StoreEntitySet="PHIEUDATBAN">
@@ -964,24 +1013,6 @@ warning 6002: The table/view 'D:\CODE\C#\WPF\QUANLYTIECCUOI\DATABASE.MDF.dbo.CT_
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CT_PHIEUDATBAN">
-            <EntityTypeMapping TypeName="DatabaseModel.CT_PHIEUDATBAN">
-              <MappingFragment StoreEntitySet="CT_PHIEUDATBAN">
-                <ScalarProperty Name="MaPhieuDatBan" ColumnName="MaPhieuDatBan" />
-                <ScalarProperty Name="MaMonAn" ColumnName="MaMonAn" />
-                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="PHANQUYEN" TypeName="DatabaseModel.PHANQUYEN" StoreEntitySet="PHANQUYEN">
-            <EndProperty Name="CHUCNANG">
-              <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
-            </EndProperty>
-            <EndProperty Name="NHOMNGUOIDUNG">
-              <ScalarProperty Name="MaNhomNguoiDung" ColumnName="MaNhomNguoiDung" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

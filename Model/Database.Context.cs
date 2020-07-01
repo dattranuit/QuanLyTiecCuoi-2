@@ -29,17 +29,18 @@ namespace QuanLyTiecCuoi.Model
         public virtual DbSet<BAOCAOTHANG> BAOCAOTHANGs { get; set; }
         public virtual DbSet<CA> CAs { get; set; }
         public virtual DbSet<CHUCNANG> CHUCNANGs { get; set; }
+        public virtual DbSet<CT_PHIEUDATBAN> CT_PHIEUDATBANs { get; set; }
         public virtual DbSet<DICHVU> DICHVUs { get; set; }
         public virtual DbSet<HOADON> HOADONs { get; set; }
         public virtual DbSet<LOAISANH> LOAISANHs { get; set; }
         public virtual DbSet<MONAN> MONANs { get; set; }
         public virtual DbSet<NGUOIDUNG> NGUOIDUNGs { get; set; }
         public virtual DbSet<NHOMNGUOIDUNG> NHOMNGUOIDUNGs { get; set; }
+        public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
         public virtual DbSet<PHIEUDATBAN> PHIEUDATBANs { get; set; }
         public virtual DbSet<PHIEUDATDICHVU> PHIEUDATDICHVUs { get; set; }
         public virtual DbSet<SANH> SANHs { get; set; }
         public virtual DbSet<THAMSO> THAMSOs { get; set; }
         public virtual DbSet<TIECCUOI> TIECCUOIs { get; set; }
-        public virtual DbSet<CT_PHIEUDATBAN> CT_PHIEUDATBANs { get; set; }
     }
 }

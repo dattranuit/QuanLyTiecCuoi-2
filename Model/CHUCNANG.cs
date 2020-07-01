@@ -17,7 +17,7 @@ namespace QuanLyTiecCuoi.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CHUCNANG()
         {
-            this.NHOMNGUOIDUNGs = new HashSet<NHOMNGUOIDUNG>();
+            this.PHANQUYENs = new HashSet<PHANQUYEN>();
         }
     
         public int MaChucNang { get; set; }
@@ -25,6 +25,6 @@ namespace QuanLyTiecCuoi.Model
         public string TenManHinhDuocLoad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NHOMNGUOIDUNG> NHOMNGUOIDUNGs { get; set; }
+        public virtual ICollection<PHANQUYEN> PHANQUYENs { get; set; }
     }
 }
