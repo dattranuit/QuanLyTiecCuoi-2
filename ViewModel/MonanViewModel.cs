@@ -83,6 +83,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     TenMonAn = TenMonAn,
                     DonGia = DonGia,
                     MoTa = MoTa,
+                    HinhAnh = HinhAnh,
                     GhiChu = GhiChu
                 };
                 DataProvider.Ins.DataBase.MONANs.Add(MonAn);
@@ -105,12 +106,14 @@ namespace QuanLyTiecCuoi.ViewModel
                 MonAn.DonGia = SelectedItem.DonGia;
                 MonAn.MoTa = SelectedItem.MoTa;
                 MonAn.GhiChu = SelectedItem.GhiChu;
+                MonAn.HinhAnh = SelectedItem.HinhAnh;
                 DataProvider.Ins.DataBase.SaveChanges();
 
                 SelectedItem.TenMonAn = TenMonAn;
                 SelectedItem.DonGia = DonGia;
                 SelectedItem.MoTa = MoTa;
                 SelectedItem.GhiChu = GhiChu;
+                SelectedItem.HinhAnh = HinhAnh;
             });
             DeleteCommand = new RelayCommand<object>((p) =>
             {
@@ -123,7 +126,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.MONANs.Remove(MonAn);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Remove(MonAn);
-    
+
                 MessageBox.Show("Xóa thành công!");
 
                 TenMonAn = "";
@@ -138,20 +141,12 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
-                //var Anh = new MONAN()
-                //{
-                //    HinhAnh = HinhAnh
-                //};
-
                 OpenFileDialog open = new OpenFileDialog();
                 open.Filter = "Image Files(.jpg; *.png)|.jpg; *.png";
                 if (open.ShowDialog() == true)
                 {
                     HinhAnh = open.FileName;
                 };
-                
-                //DataProvider.Ins.DataBase.MONANs.Add(Anh);
-                //DataProvider.Ins.DataBase.SaveChanges();
                 SelectedItem.HinhAnh = HinhAnh;
             });
             DeleteImageCommand = new RelayCommand<Image>((p) =>
@@ -164,6 +159,7 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 HinhAnh = string.Empty;
+                SelectedItem.HinhAnh = HinhAnh;
             });
         }
 

@@ -74,7 +74,7 @@
                                 <RowDefinition Height="0.2*"/>
                             </Grid.RowDefinitions>
                             <GroupBox Grid.Row="0" Header="Ảnh minh họa" Margin="10,10,10,0">
-                                <Image x:Name="img_AnhMonAn" Source="{Binding HinhAnh, UpdateSourceTrigger=PropertyChanged}"></Image>
+                                <Image x:Name="img_AnhMonAn" Source="{Binding HinhAnh, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Margin="5"></Image>
                             </GroupBox>
                             <Grid Grid.Row="1" >
                                 <Grid.ColumnDefinitions>
