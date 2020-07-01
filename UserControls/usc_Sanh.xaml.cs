@@ -25,6 +25,16 @@ namespace QuanLyTiecCuoi.UserControls
             InitializeComponent();
         }
 
-        
+        private void Nud_SLBTD_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (nud_SLBTD.Value.ToString() == "")
+                nud_SLBTD.Value = 0;
+        }
+
+        private void Nud_DonGiaBanToiThieu_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (nud_DonGiaBanToiThieu.Value.ToString() == "")
+                nud_DonGiaBanToiThieu.Value = 0;
+        }
     }
 }

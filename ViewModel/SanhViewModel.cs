@@ -190,6 +190,12 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 var Sanh = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == SelectedItem.MaSanh).First();
+                var TiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaSanh == SelectedItem.MaSanh);
+                if (TiecCuoi.Count() != 0)
+                {
+                    MessageBox.Show("Không thể xóa vì có tồn tại Tiệc Cưới đã đặt Sảnh này!");
+                    return;
+                }
                 DataProvider.Ins.DataBase.SANHs.Remove(Sanh);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListSanh.Remove(Sanh);
@@ -206,7 +212,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 var Sanh = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaLoaiSanh == SelectedItem2.MaLoaiSanh);
                 if( Sanh.Count()!=0)
                 {
-                    MessageBox.Show("Không thể xóa vì có tồn tại Sảnh thuộc loại Sảnh này");
+                    MessageBox.Show("Không thể xóa vì có tồn tại Sảnh thuộc loại Sảnh này!");
                     return;
                 }
                 DataProvider.Ins.DataBase.LOAISANHs.Remove(LoaiSanh);

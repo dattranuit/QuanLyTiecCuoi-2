@@ -15,8 +15,8 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class HoaDonViewModel : BaseViewModel
     {
-        private static ObservableCollection<HOADON> _List;
-        public static ObservableCollection<HOADON> List { get => _List; set { _List = value;  } }
+        private ObservableCollection<HOADON> _List;
+        public ObservableCollection<HOADON> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
         private HOADON _SelectedItem;
         
@@ -27,7 +27,7 @@ namespace QuanLyTiecCuoi.ViewModel
             set
             {
                 _SelectedItem = value;
-                //OnPropertyChanged();
+                OnPropertyChanged();
                 if (SelectedItem != null)
                 {              
                     TongTienBan = SelectedItem.TongTienBan;
@@ -62,22 +62,23 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand DoubleClickCommand { get; set; }
         public ICommand LuuHoaDon { get; set; }
         public ICommand InHoaDon { get; set; }
-        private ObservableCollection<TIECCUOI> _List2;
-        public ObservableCollection<TIECCUOI> List2 { get => _List2; set { _List2 = value; OnPropertyChanged(); } }
-        public ObservableCollection<TIECCUOI> _List3;
-        public ObservableCollection<TIECCUOI> List3 { get => _List3; set { _List3 = value; OnPropertyChanged(); } }
+        private ObservableCollection<TIECCUOI> _ListTiecCuoi;
+        public ObservableCollection<TIECCUOI> ListTiecCuoi { get => _ListTiecCuoi; set { _ListTiecCuoi = value; OnPropertyChanged(); } }
 
-        public ObservableCollection<PHIEUDATBAN> _List4;
-        public ObservableCollection<PHIEUDATBAN> List4 { get => _List4; set { _List4 = value; OnPropertyChanged(); } }
+        public ObservableCollection<TIECCUOI> _ListTiecCuoi2;
+        public ObservableCollection<TIECCUOI> ListTiecCuoi2 { get => _ListTiecCuoi2; set { _ListTiecCuoi2 = value; OnPropertyChanged(); } }
 
-        public ObservableCollection<PHIEUDATDICHVU> _List5;
-        public ObservableCollection<PHIEUDATDICHVU> List5 { get => _List5; set { _List5 = value; OnPropertyChanged(); } }
+        public ObservableCollection<PHIEUDATBAN> _ListPhieuDatBan;
+        public ObservableCollection<PHIEUDATBAN> ListPhieuDatBan { get => _ListPhieuDatBan; set { _ListPhieuDatBan = value; OnPropertyChanged(); } }
 
-        public ObservableCollection<CT_PHIEUDATBAN> _List6;
-        public ObservableCollection<CT_PHIEUDATBAN> List6 { get => _List6; set { _List6 = value; OnPropertyChanged(); } }
+        public ObservableCollection<PHIEUDATDICHVU> _ListPhieuDatDichVu;
+        public ObservableCollection<PHIEUDATDICHVU> ListPhieuDatDichVu { get => _ListPhieuDatDichVu; set { _ListPhieuDatDichVu = value; OnPropertyChanged(); } }
 
-        public ObservableCollection<THAMSO> _List7;
-        public ObservableCollection<THAMSO> List7 { get => _List7; set { _List7 = value; OnPropertyChanged(); } }
+        public ObservableCollection<CT_PHIEUDATBAN> _ListCT_PhieuDatBan;
+        public ObservableCollection<CT_PHIEUDATBAN> ListCT_PhieuDatBan { get => _ListCT_PhieuDatBan; set { _ListCT_PhieuDatBan = value; OnPropertyChanged(); } }
+
+        public ObservableCollection<THAMSO> _ListThamSo;
+        public ObservableCollection<THAMSO> ListThamSo { get => _ListThamSo; set { _ListThamSo = value; OnPropertyChanged(); } }
 
         public int idTiecCuoi = 0;
         public string TongSoBan = "";
@@ -136,7 +137,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public HoaDonViewModel()
         {
             
-            List2 = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
+            ListTiecCuoi = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
             List = new ObservableCollection<HOADON>(DataProvider.Ins.DataBase.HOADONs);
 
             DataGridCollection = CollectionViewSource.GetDefaultView(List);
@@ -148,18 +149,12 @@ namespace QuanLyTiecCuoi.ViewModel
                     data();
                     
                     hd.DataContext = List;
-                    hd.DataContext = List3;
-                    hd.DataContext = List2;
-                    hd.DataContext = List4;
-                    hd.DataContext = List5;
-                    hd.DataContext = List6;
-                    //var join = (from u in DataProvider.Ins.DataBase.PHIEUDATDICHVUs
-                    //            join b in DataProvider.Ins.DataBase.DICHVUs
-                    //            on u.MaDichVu equals b.MaDichVu
-                    //            select u.MaTiecCuoi + u.MaDichVu + b.TenDichVu + u.SoLuong + u.DonGia
-                    //    ).ToList();
-                    //hd.DataContext = join;
-                    
+                    hd.DataContext = ListTiecCuoi2;
+                    hd.DataContext = ListTiecCuoi;
+                    hd.DataContext = ListPhieuDatBan;
+                    hd.DataContext = ListPhieuDatDichVu;
+                    hd.DataContext = ListCT_PhieuDatBan;
+                   
                     hd.ShowDialog();
                 });
             LuuHoaDon = new RelayCommand<HoaDon>((p) =>
@@ -176,7 +171,8 @@ namespace QuanLyTiecCuoi.ViewModel
                     NgayThanhToan = NgayDaiTiec, ConLai = ConLai, TongTienDichVu = TongTienDichVu, TongTienHoaDon = TongTienHoaDon };
                 DataProvider.Ins.DataBase.HOADONs.Add(hoadon);
                 DataProvider.Ins.DataBase.SaveChanges();
-                
+                TinhLaiBaoCaoThang();
+                TinhLaiBaoCaoNgay();
             });
             InHoaDon = new RelayCommand<object>((p) =>
             {
@@ -196,18 +192,11 @@ namespace QuanLyTiecCuoi.ViewModel
 
         private ICollectionView _dataGridCollection;
         private string _filterString;
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
+
         public ICollectionView DataGridCollection
         {
             get { return _dataGridCollection; }
-            set { _dataGridCollection = value; NotifyPropertyChanged("DataGridCollection"); }
+            set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
         }
         public string FilterString
         {
@@ -215,7 +204,7 @@ namespace QuanLyTiecCuoi.ViewModel
             set
             {
                 _filterString = value;
-                NotifyPropertyChanged("FilterString");
+                OnPropertyChanged("FilterString");
                 FilterCollection();
             }
         }
@@ -242,62 +231,66 @@ namespace QuanLyTiecCuoi.ViewModel
         
         private void data()
         {
-            List5 = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == idTiecCuoi));
+            ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == idTiecCuoi));
             DataProvider.Ins.DataBase.SaveChanges();
-            //if (List5 == null || List5.Count() == 0) return;
+            if (ListPhieuDatDichVu == null || ListPhieuDatDichVu.Count() == 0) return;
 
-            //List5 = new ObservableCollection<object>(DataProvider.Ins.DataBase.PHIEUDATBANs.Join());
+            //ListPhieuDatDichVu = new ObservableCollection<object>(DataProvider.Ins.DataBase.PHIEUDATBANs.Join());
             
-            if (List5 != null)
+            if (ListPhieuDatDichVu != null)
             {
-                SoLuong = List5.FirstOrDefault().SoLuong;
-                DonGia = List5.FirstOrDefault().ThanhTien;
-                //var sum = List5.FirstOrDefault().SoLuong
-                //MessageBox.Show(List5[1].DICHVU.TenDichVu.ToString());
-                ////TenDichVu = List5.SingleOrDefault().MaDichVu.ToString();
-                //SoLuong = List5.SingleOrDefault().SoLuong;
-                //DonGia = List5.SingleOrDefault().DonGia;
+                SoLuong = ListPhieuDatDichVu.FirstOrDefault().SoLuong;
+                DonGia = ListPhieuDatDichVu.FirstOrDefault().ThanhTien;
+                //var sum = ListPhieuDatDichVu.FirstOrDefault().SoLuong
+                //MessageBox.Show(ListPhieuDatDichVu[1].DICHVU.TenDichVu.ToString());
+                ////TenDichVu = ListPhieuDatDichVu.SingleOrDefault().MaDichVu.ToString();
+                //SoLuong = ListPhieuDatDichVu.SingleOrDefault().SoLuong;
+                //DonGia = ListPhieuDatDichVu.SingleOrDefault().DonGia;
                 ThanhTien = SoLuong * DonGia;
-                TongTienDichVu = List5.Sum(x => x.ThanhTien);
+                TongTienDichVu = ListPhieuDatDichVu.Sum(x => x.ThanhTien);
                 //MessageBox.Show(tongtiendichvu);
             }
-            List3 = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == idTiecCuoi));
+            ListTiecCuoi2 = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == idTiecCuoi));
             DataProvider.Ins.DataBase.SaveChanges();
-            if (List3 != null)
+            if (ListTiecCuoi2 == null || ListTiecCuoi2.Count() == 0) return;
+            if (ListTiecCuoi2 != null)
             {
-                TenChuRe = List3.SingleOrDefault().TenChuRe;
-                TenCoDau = List3.SingleOrDefault().TenCoDau;
-                NgayDaiTiec = List3.SingleOrDefault().NgayDaiTiec; //Ngay thanh toan trung ngay dai tiec, qua han tinh phat (Neu co)
-                TienDatCoc = Convert.ToString(List3.SingleOrDefault().TienDatCoc);
+                TenChuRe = ListTiecCuoi2.SingleOrDefault().TenChuRe;
+                TenCoDau = ListTiecCuoi2.SingleOrDefault().TenCoDau;
+                NgayDaiTiec = ListTiecCuoi2.SingleOrDefault().NgayDaiTiec; //Ngay thanh toan trung ngay dai tiec, qua han tinh phat (Neu co)
+                TienDatCoc = Convert.ToString(ListTiecCuoi2.SingleOrDefault().TienDatCoc);
             }
-            List4 = new ObservableCollection<PHIEUDATBAN>(DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == idTiecCuoi));
+            ListPhieuDatBan = new ObservableCollection<PHIEUDATBAN>(DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == idTiecCuoi));
             DataProvider.Ins.DataBase.SaveChanges();
-            if(List4 != null)
+            if (ListPhieuDatBan == null || ListPhieuDatBan.Count() == 0) return;
+            if (ListPhieuDatBan != null)
             {
-                TongSoBan = Convert.ToString(List4.FirstOrDefault().SoLuong + List4.FirstOrDefault().SoLuongDuTru); // Tong so ban =  So luong ban + So luong du tru
-                TongTienBan = List4.FirstOrDefault().DonGiaBan * Convert.ToInt32(TongSoBan);
-                DonGiaBan = List4.FirstOrDefault().DonGiaBan;
+                TongSoBan = Convert.ToString(ListPhieuDatBan.FirstOrDefault().SoLuong + ListPhieuDatBan.FirstOrDefault().SoLuongDuTru); // Tong so ban =  So luong ban + So luong du tru
+                TongTienBan = ListPhieuDatBan.FirstOrDefault().DonGiaBan * Convert.ToInt32(TongSoBan);
+                DonGiaBan = ListPhieuDatBan.FirstOrDefault().DonGiaBan;
 
             }
-            List6 = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.PHIEUDATBAN.MaTiecCuoi == idTiecCuoi));
+            ListCT_PhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.PHIEUDATBAN.MaTiecCuoi == idTiecCuoi));
             DataProvider.Ins.DataBase.SaveChanges();
-            if (List6 != null)
+            if (ListCT_PhieuDatBan == null || ListCT_PhieuDatBan.Count() == 0) return;
+            if (ListCT_PhieuDatBan != null)
             {
                 
-                SoLuong = List6.FirstOrDefault().SoLuong;
+                SoLuong = ListCT_PhieuDatBan.FirstOrDefault().SoLuong;
                 //MessageBox.Show(SoLuongMon.ToString());
-                DonGia = List6.FirstOrDefault().ThanhTien;
+                DonGia = ListCT_PhieuDatBan.FirstOrDefault().ThanhTien;
             }
 
-            List7 = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOs.ToList());
+            ListThamSo = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOs.ToList());
             DataProvider.Ins.DataBase.SaveChanges();
             var TiLePhat = 0.0d;
             int IsPhat = 0;
-            if(List7 != null)
+            if (ListThamSo == null || ListThamSo.Count() == 0) return;
+            if (ListThamSo != null)
             {
-                IsPhat = (int)List7[0].GiaTri;
+                IsPhat = (int)ListThamSo[0].GiaTri;
                 MessageBox.Show("Su dung phat: " + IsPhat);
-                TiLePhat = List7[1].GiaTri;
+                TiLePhat = ListThamSo[1].GiaTri;
                 //MessageBox.Show(TiLePhat.ToString());
             }
             
@@ -322,6 +315,55 @@ namespace QuanLyTiecCuoi.ViewModel
                 MessageBox.Show("Lỗi");
                 return -1;
             }
+        }
+
+        private void TinhLaiBaoCaoThang()
+        {
+            var BaoCaoThang = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.Thang == NgayDaiTiec.Month && x.Nam == NgayDaiTiec.Year).ToList();
+            if(BaoCaoThang.Count() != 0)
+            {
+                BaoCaoThang[0].TongDoanhThu += TongTienHoaDon;
+            }
+            else
+            {
+                DataProvider.Ins.DataBase.BAOCAOTHANGs.Add(new BAOCAOTHANG()
+                {
+                    Thang = NgayDaiTiec.Month,
+                    Nam = NgayDaiTiec.Year,
+                    TongDoanhThu = TongTienHoaDon
+                }) ;
+                DataProvider.Ins.DataBase.SaveChanges();
+            }
+        }
+        private void TinhLaiBaoCaoNgay()
+        {
+            var BaoCaoThang = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.Thang == NgayDaiTiec.Month && x.Nam == NgayDaiTiec.Year).ToList();
+            if (BaoCaoThang.Count() != 0)
+            {
+                int id = BaoCaoThang[0].MaBaoCaoThang;
+                var BaoCaoNgay = DataProvider.Ins.DataBase.BAOCAONGAYs.Where(x => x.MaBaoCaoThang == id && x.Ngay == NgayDaiTiec.Day).ToList();
+                if(BaoCaoNgay.Count() != 0)
+                {
+                    BaoCaoNgay[0].SoLuongTiecCuoi += 1;
+                    BaoCaoNgay[0].DoanhThu += TongTienHoaDon;
+                    BaoCaoNgay[0].TiLe = Convert.ToDouble(BaoCaoNgay[0].DoanhThu) / Convert.ToDouble(BaoCaoThang[0].TongDoanhThu);
+                }
+                else
+                {
+                    DataProvider.Ins.DataBase.BAOCAONGAYs.Add(new BAOCAONGAY()
+                    {
+                        MaBaoCaoThang = id,
+                        Ngay = NgayDaiTiec.Day,
+                        SoLuongTiecCuoi = 1,
+                        DoanhThu = TongTienHoaDon,
+                        TiLe = 1
+                    });
+                    DataProvider.Ins.DataBase.SaveChanges();
+                }
+            }
+            else
+                return;
+                
         }
     }
 }

@@ -109,7 +109,7 @@
                                                                 <RowDefinition/>
                                                                 <RowDefinition/>
                                                             </Grid.RowDefinitions>
-                                                            <TextBox x:Name="txb_SLBTD" Text="{Binding SoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="5,15" Grid.Row="1"></TextBox>
+                                                            <controls:NumericUpDown x:Name="nud_SLBTD" Minimum="0" NumericInputMode="Numbers" Value="{Binding SoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Margin="5,15" BorderBrush="Black" Interval="100" FontSize="15" TextAlignment="Left" ValueChanged="Nud_SLBTD_ValueChanged"></controls:NumericUpDown>
                                                             <ComboBox x:Name="cbb_MaSanh" SelectedItem="{Binding SelectedLoaiSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                                   ItemsSource="{Binding ListLoaiSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenLoaiSanh"
                                                                   Text="{Binding SelectedItem.LOAISANH.TenLoaiSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
@@ -179,8 +179,7 @@
                                                 <ColumnDefinition></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <Label Content="Đơn giá bàn tối thiểu" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                            <TextBox Grid.Column="1" x:Name="txb_DGBTT2" Text="{Binding DonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                                                 BorderBrush="Black" BorderThickness="1" Margin="2,5" FontSize="15"></TextBox>
+                                            <controls:NumericUpDown x:Name="nud_DonGiaBanToiThieu" Minimum="0" NumericInputMode="Numbers" Value="{Binding DonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Margin="2,5" BorderBrush="Black" Interval="100000" FontSize="15" TextAlignment="Left" ValueChanged="Nud_DonGiaBanToiThieu_ValueChanged"></controls:NumericUpDown>
                                         </Grid>
                                     </Grid>
                                 </GroupBox>

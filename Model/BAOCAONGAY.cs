@@ -22,4 +22,5 @@ namespace QuanLyTiecCuoi.Model
     
         public virtual BAOCAOTHANG BAOCAOTHANG { get; set; }
     }
+    
 }

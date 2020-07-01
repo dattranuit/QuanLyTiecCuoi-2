@@ -24,5 +24,11 @@ namespace QuanLyTiecCuoi.UserControls
         {
             InitializeComponent();
         }
+
+        private void Nud_DonGia_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (nud_DonGia.Value.ToString() == "")
+                nud_DonGia.Value = 0;
+        }
     }
 }
