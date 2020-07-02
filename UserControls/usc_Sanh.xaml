@@ -125,24 +125,31 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
+                                            <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
-                                        <Button x:Name="btn_Them" Margin="50,10" Command="{Binding AddCommand}"
+                                        <Button x:Name="btn_Them" Margin="30,10" Command="{Binding AddCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                                      Grid.Column="0" 
                                     ToolTip="Thêm" Background="#FF0F5699" Foreground="White">
                                             Thêm
                                         </Button>
-                                        <Button x:Name="btn_Sua" Margin="50,10" Command="{Binding EditCommand}"
+                                        <Button x:Name="btn_Sua" Margin="30,10" Command="{Binding EditCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Grid.Column="1" 
                                     ToolTip="Sửa" Background="#FF0F5699" Foreground="White">
                                             Sửa
                                         </Button>
-                                        <Button x:Name="btn_Xoa" Margin="50,10" Command="{Binding DeleteCommand}"
+                                        <Button x:Name="btn_Xoa" Margin="30,10" Command="{Binding DeleteCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Grid.Column="2" 
                                     ToolTip="Xóa" Background="Crimson" Foreground="White">
                                             Xóa
+                                        </Button>
+                                        <Button x:Name="btn_RefreshThongTin" Margin="30,10" Command="{Binding RefreshSanhCommand }"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"                      
+                                    Grid.Column="3" 
+                                    ToolTip="Xóa thông tin trong ô nhập liệu" Background="Crimson" Foreground="White">
+                                            Làm mới ô nhập
                                         </Button>
                                     </Grid>
                                 </DockPanel>

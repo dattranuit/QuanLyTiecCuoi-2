@@ -33,6 +33,8 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand RefreshSanhCommand { get; set; }
+        public ICommand RefreshLoaiSanhCommand { get; set; }
         //Loai sanh
         public string TenLoaiSanh { get => _TenLoaiSanh; set { _TenLoaiSanh = value; OnPropertyChanged(); } }
         public int DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
@@ -225,6 +227,19 @@ namespace QuanLyTiecCuoi.ViewModel
                 //refresh nhap
                 TenLoaiSanh = "";
                 DonGiaBanToiThieu = 0;
+            });
+
+            RefreshSanhCommand = new RelayCommand<object>((p) =>
+            {
+                if (!string.IsNullOrEmpty(TenSanh) 
+                || !string.IsNullOrEmpty(GhiChu)  
+                || !string.IsNullOrEmpty(SelectedLoaiSanh.MaLoaiSanh.ToString())
+                || SoLuongBanToiDa>0)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+                //code
             });
         }
         //search Sanh
