@@ -13,11 +13,11 @@ namespace QuanLyTiecCuoi.ViewModel
     class CT_PhieuDatBanViewModel:BaseViewModel
     {
         private static int _CurrentMaPDB;
-        public static int CurrentMaPDB { get => _CurrentMaPDB; set { _CurrentMaPDB = value; MessageBox.Show(_CurrentMaPDB + ""); } }
+        public static int CurrentMaPDB { get => _CurrentMaPDB; set { _CurrentMaPDB = value;} }
         private decimal _DonGiaBan = 0;
-        public decimal DonGiaBan { get => _DonGiaBan; set { _DonGiaBan = value; OnPropertyChanged(); } }
+        public decimal DonGiaBan { get => _DonGiaBan; set { if (value != _DonGiaBan) OnPropertyChanged(); _DonGiaBan = value; OnPropertyChanged(); } }
         private static ObservableCollection<CT_PHIEUDATBAN> _ListCTPhieuDatBan;
-        public static ObservableCollection<CT_PHIEUDATBAN> ListCTPhieuDatBan { get => _ListCTPhieuDatBan; set { _ListCTPhieuDatBan = value;} }
+        public static ObservableCollection<CT_PHIEUDATBAN> ListCTPhieuDatBan { get => _ListCTPhieuDatBan; set { _ListCTPhieuDatBan = value; } }
         private static ObservableCollection<MONAN> _ListMonAn;
         public static ObservableCollection<MONAN> ListMonAn { get => _ListMonAn; set { _ListMonAn = value; } }
         private CT_PHIEUDATBAN _SelectedCTPDB;
@@ -31,7 +31,9 @@ namespace QuanLyTiecCuoi.ViewModel
                 if (SelectedCTPDB != null)
                 {
                     MaMonAn = SelectedCTPDB.MaMonAn;
-                    CTPDB_SoLuong = SelectedCTPDB.SoLuong; 
+                    CTPDB_SoLuong = SelectedCTPDB.SoLuong;
+                    CTPDB_ThanhTien = SelectedCTPDB.ThanhTien;
+                    CTPDB_GhiChu = SelectedCTPDB.GhiChu;
                 }
             }
         }
@@ -47,20 +49,29 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     MaMonAn = SelectedMA.MaMonAn;
                     MA_SoLuong = 0;
-                    MA_ThanhTien = 0; 
+                    MA_ThanhTien = 0;
+                    MA_GhiChu = String.Empty;
                 }
             }
         }
+        //private bool _IsClicked;
+        //public bool IsClicked { get => _IsClicked; set { _IsClicked = value; OnPropertyChanged(); } }
         private int _MaMonAn;
         public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
+        private string _CTPDB_GhiChu;
+        public string CTPDB_GhiChu { get => _CTPDB_GhiChu; set { _CTPDB_GhiChu = value; OnPropertyChanged(); } }
         private int _CTPDB_SoLuong;
         public int CTPDB_SoLuong { get => _CTPDB_SoLuong; set
             {
                 if (SelectedCTPDB != null)
                 {
                     _CTPDB_SoLuong = value;
-                    if (_CTPDB_SoLuong < 0)
-                        _CTPDB_SoLuong = 0;
+                    if (_CTPDB_SoLuong < 1)
+                    {
+                        _CTPDB_SoLuong = 1;
+                        MessageBox.Show("Số lượng phải lớn hơn 0", "Lưu ý", MessageBoxButton.OK);
+                    }
+  
                     CTPDB_ThanhTien = CTPDB_SoLuong * SelectedCTPDB.MONAN.DonGia;
                 }
                 OnPropertyChanged();
@@ -74,56 +85,115 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     _MA_SoLuong = value;
                     if (MA_SoLuong < 0)
+                    {
                         MA_SoLuong = 0;
+                        MessageBox.Show("Số lượng không được âm", "Lưu ý", MessageBoxButton.OK);
+                    }
                     MA_ThanhTien = MA_SoLuong * SelectedMA.DonGia;
                 }
                 OnPropertyChanged(); } }
         private decimal _MA_ThanhTien = 0;
         public decimal MA_ThanhTien { get => _MA_ThanhTien; set { _MA_ThanhTien = value; OnPropertyChanged(); } }
-
+        private string _MA_GhiChu;
+        public string MA_GhiChu { get => _MA_GhiChu; set { _MA_GhiChu = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        //public ICommand PopupCommand { get; set; }
+        bool Addable()
+        {
+            if (SelectedMA == null)
+                return false;
+            var CheckExist = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == SelectedMA.MaMonAn).FirstOrDefault();
+            if (CheckExist != null)
+                return false;
+            return true;
+        }
         public CT_PhieuDatBanViewModel()
         {
-            ListCTPhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBANs);
+            //var check = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB);
+            int count = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Count();
+             if (count != 0)
+                DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);
             ListMonAn = new ObservableCollection<MONAN>(DataProvider.Ins.DataBase.MONANs);
             AddCommand = new RelayCommand<object>((p) =>
+            {
+                return Addable();
+            }, (p) =>
+            {
+                if (MA_SoLuong == 0)
+                    MessageBox.Show("Số lượng phải lớn hơn 0", "Lưu ý", MessageBoxButton.OK);
+                else
+                {
+                    try
+                    {
+                        SelectedCTPDB = new CT_PHIEUDATBAN()
+                        {
+                            MaPhieuDatBan = CurrentMaPDB,
+                            MaMonAn = MaMonAn,
+                            SoLuong = MA_SoLuong,
+                            ThanhTien = MA_ThanhTien,
+                            GhiChu = MA_GhiChu,
+                        };
+                        //MessageBox.Show(CT_PhieuDatBan.MaPhieuDatBan + " " + CT_PhieuDatBan.MaMonAn + " " + CT_PhieuDatBan.SoLuong + " " + CT_PhieuDatBan.ThanhTien);
+                        DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Add(SelectedCTPDB);
+                        DataProvider.Ins.DataBase.SaveChanges();
+                        ListCTPhieuDatBan.Add(SelectedCTPDB);
+                        DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);
+                        MessageBox.Show("Thêm chi tiết phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Thêm chi tiết phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                    }
+                }
+
+            });
+
+            EditCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedCTPDB == null || (CTPDB_SoLuong == SelectedCTPDB.SoLuong && CTPDB_GhiChu == SelectedCTPDB.GhiChu ))
+                    return false;
+                var displayList = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == SelectedCTPDB.MaPhieuDatBan && x.MaMonAn == SelectedCTPDB.MaMonAn);
+                if (displayList != null && displayList.Count() != 0)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+                try
+                {
+                    var CT_PhieuDatBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == SelectedCTPDB.MaPhieuDatBan && x.MaMonAn == SelectedCTPDB.MaMonAn).SingleOrDefault();
+                    CT_PhieuDatBan.MaMonAn = SelectedCTPDB.MaMonAn;
+                    CT_PhieuDatBan.MaPhieuDatBan = SelectedCTPDB.MaPhieuDatBan;
+                    CT_PhieuDatBan.SoLuong = CTPDB_SoLuong;
+                    CT_PhieuDatBan.ThanhTien = CTPDB_ThanhTien;
+                    CT_PhieuDatBan.GhiChu = CTPDB_GhiChu;
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    MessageBox.Show("Sửa chi tiết phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Sửa chi tiết phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+            });
+            DeleteCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
             {
-                var CT_PhieuDatBan = new CT_PHIEUDATBAN()
+                try
                 {
-                    MaPhieuDatBan = CurrentMaPDB,
-                    MaMonAn = MaMonAn,
-                    SoLuong = MA_SoLuong,
-                    ThanhTien = MA_ThanhTien,
-                };
-               // MessageBox.Show(CT_PhieuDatBan.MaPhieuDatBan + " " + CT_PhieuDatBan.MaMonAn + " " + CT_PhieuDatBan.SoLuong + " " + CT_PhieuDatBan.ThanhTien);
-                DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Add(CT_PhieuDatBan);
-                DataProvider.Ins.DataBase.SaveChanges();
-                ListCTPhieuDatBan.Add(CT_PhieuDatBan);
-                DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
+                    var CT_PhieuDatBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == SelectedCTPDB.MaPhieuDatBan && x.MaMonAn == SelectedCTPDB.MaMonAn).First();
+                    DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Remove(CT_PhieuDatBan);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    ListCTPhieuDatBan.Remove(CT_PhieuDatBan);
+                    MessageBox.Show("Xóa chi tiết phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Xóa chi tiết phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
             });
-            //EditCommand = new RelayCommand<object>((p) =>
-            //{
-            //    if (SelectedPDB == null)
-            //        return false;
-            //    var displayList = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan);
-            //    if (displayList != null && displayList.Count() != 0)
-            //        return true;
-            //    return false;
-            //}, (p) =>
-            //{
-            //    var DichVu = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan).SingleOrDefault();
-            //    DichVu.MaPhieuDatBan = SelectedPDB.MaPhieuDatBan;
-            //    DichVu.MaTiecCuoi = SelectedPDB.MaTiecCuoi;
-            //    DichVu.SoLuong = SelectedPDB.SoLuong;
-            //    DichVu.SoLuongDuTru = SelectedPDB.SoLuongDuTru;
-            //    DichVu.DonGiaBan = SelectedPDB.DonGiaBan;
-            //    DichVu.GhiChu = SelectedPDB.GhiChu;
-            //    DataProvider.Ins.DataBase.SaveChanges();
-            //});
         }
     }
 }

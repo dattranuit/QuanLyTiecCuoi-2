@@ -33,6 +33,8 @@ namespace QuanLyTiecCuoi.ViewModel
                     MaDichVu = SelectedPDDV.MaDichVu;
                     PDDV_SoLuong = SelectedPDDV.SoLuong;
                     PDDV_ThanhTien = SelectedPDDV.ThanhTien;
+                    PDDV_GhiChu = SelectedPDDV.GhiChu;
+                    //MessageBox.Show("cc");
                 }
             }
         }
@@ -50,20 +52,23 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
                 DV_SoLuong = 0;
                 DV_ThanhTien = 0;
+                DV_GhiChu = String.Empty;
             }
         }
         private int _MaDichVu;
         public int MaDichVu { get => _MaDichVu; set { _MaDichVu = value; OnPropertyChanged(); } }
+        private string _PDDV_GhiChu;
+        public string PDDV_GhiChu { get => _PDDV_GhiChu; set { _PDDV_GhiChu = value; OnPropertyChanged(); } }
         private int _PDDV_SoLuong = 0;
         public int PDDV_SoLuong
         { get => _PDDV_SoLuong; 
             set { 
                 if(SelectedPDDV !=null) _PDDV_SoLuong = value;
                 OnPropertyChanged();
-                if (_PDDV_SoLuong < 0)
+                if (_PDDV_SoLuong < 1)
                 {
-                    _PDDV_SoLuong = 0;
-                    MessageBox.Show("Số lượng không được âm");
+                    _PDDV_SoLuong = 1;
+                    MessageBox.Show("Số lượng phải lớn hơn 0","Lưu ý", MessageBoxButton.OK);
                 }
                 if (SelectedPDDV != null) PDDV_ThanhTien = PDDV_SoLuong * SelectedPDDV.DICHVU.DonGia;
             } 
@@ -72,7 +77,8 @@ namespace QuanLyTiecCuoi.ViewModel
         private decimal _PDDV_ThanhTien;
         public decimal PDDV_ThanhTien { get => _PDDV_ThanhTien; set { _PDDV_ThanhTien = value; OnPropertyChanged(); } }
 
-
+        private string _DV_GhiChu;
+        public string DV_GhiChu { get => _DV_GhiChu; set { _DV_GhiChu = value; OnPropertyChanged(); } }
         private int _DV_SoLuong = 0;
         public int DV_SoLuong
         {
@@ -82,7 +88,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 if (_DV_SoLuong <0)
                 {
                     _DV_SoLuong = 0;
-                    MessageBox.Show("Số lượng không được âm");
+                    MessageBox.Show("Số lượng không được âm", "Lưu ý", MessageBoxButton.OK);
                 }
                 OnPropertyChanged();
                 if (SelectedDV != null) DV_ThanhTien = DV_SoLuong * SelectedDV.DonGia;
@@ -92,6 +98,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public decimal DV_ThanhTien { get => _DV_ThanhTien; set { _DV_ThanhTien = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public PhieuDatDichVuViewModel()
         {
             ListDichVu = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
@@ -110,22 +117,30 @@ namespace QuanLyTiecCuoi.ViewModel
                     MessageBox.Show("Số lượng phải lớn hơn 0", "Lưu ý", MessageBoxButton.OK);
                 else
                 {
-                    var PhieuDatDichVu = new PHIEUDATDICHVU()
+                    try
                     {
-                        MaTiecCuoi = CurrentMaTiecCuoi,
-                        MaDichVu = MaDichVu,
-                        SoLuong = DV_SoLuong,
-                        ThanhTien = DV_ThanhTien
-                    };
-                    DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Add(PhieuDatDichVu);
-                    DataProvider.Ins.DataBase.SaveChanges();
-                    ListPhieuDatDichVu.Add(PhieuDatDichVu);
+                        SelectedPDDV = new PHIEUDATDICHVU()
+                        {
+                            MaTiecCuoi = CurrentMaTiecCuoi,
+                            MaDichVu = MaDichVu,
+                            SoLuong = DV_SoLuong,
+                            ThanhTien = DV_ThanhTien,
+                            GhiChu = DV_GhiChu,
+                        };
+                        DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Add(SelectedPDDV);
+                        DataProvider.Ins.DataBase.SaveChanges();
+                        ListPhieuDatDichVu.Add(SelectedPDDV);
+                        MessageBox.Show("Thêm phiếu đặt dịch vụ thành công", "Thông báo", MessageBoxButton.OK);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Thêm phiếu đặt dịch vụ không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                    }
                 }
             });
-
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedPDDV == null || PDDV_SoLuong == SelectedPDDV.SoLuong)
+                if (SelectedPDDV == null || (PDDV_SoLuong == SelectedPDDV.SoLuong && PDDV_GhiChu == SelectedPDDV.GhiChu))
                     return false;
                 var displayList = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == SelectedPDDV.MaDichVu && x.MaTiecCuoi == SelectedPDDV.MaTiecCuoi);
                 if (displayList != null && displayList.Count() != 0)
@@ -133,12 +148,40 @@ namespace QuanLyTiecCuoi.ViewModel
                 return false;
             }, (p) =>
             {
-                var PhieuDatDichVu = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == SelectedPDDV.MaDichVu && x.MaTiecCuoi == SelectedPDDV.MaTiecCuoi).SingleOrDefault();
-                PhieuDatDichVu.MaDichVu = SelectedPDDV.MaDichVu;
-                PhieuDatDichVu.MaTiecCuoi = SelectedPDDV.MaTiecCuoi;
-                PhieuDatDichVu.SoLuong = PDDV_SoLuong;
-                PhieuDatDichVu.ThanhTien = PDDV_ThanhTien;
-                DataProvider.Ins.DataBase.SaveChanges();
+                try
+                {
+                    var PhieuDatDichVu = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == SelectedPDDV.MaDichVu && x.MaTiecCuoi == SelectedPDDV.MaTiecCuoi).SingleOrDefault();
+                    PhieuDatDichVu.MaDichVu = SelectedPDDV.MaDichVu;
+                    PhieuDatDichVu.MaTiecCuoi = SelectedPDDV.MaTiecCuoi;
+                    PhieuDatDichVu.SoLuong = PDDV_SoLuong;
+                    PhieuDatDichVu.ThanhTien = PDDV_ThanhTien;
+                    PhieuDatDichVu.GhiChu = PDDV_GhiChu;
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    MessageBox.Show("Sửa phiếu đặt dịch vụ thành công", "Thông báo", MessageBoxButton.OK);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Sửa phiếu đặt dịch vụ không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+            });
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                try
+                {
+                    var PhieuDatDichVu = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaDichVu == SelectedPDDV.MaDichVu && x.MaTiecCuoi == SelectedPDDV.MaTiecCuoi).First();
+                    DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Remove(PhieuDatDichVu);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    ListPhieuDatDichVu.Remove(PhieuDatDichVu);
+                    MessageBox.Show("Xóa phiếu đặt dịch vụ thành công", "Thông báo", MessageBoxButton.OK);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Xóa phiếu đặt dịch vụ không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+                //refresh nhap
             });
         }
     }
