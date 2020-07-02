@@ -270,7 +270,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DonGiaBan = ListPhieuDatBan.FirstOrDefault().DonGiaBan;
 
             }
-            ListCT_PhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.PHIEUDATBAN.MaTiecCuoi == idTiecCuoi));
+            ListCT_PhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.PHIEUDATBAN.MaTiecCuoi == idTiecCuoi));
             DataProvider.Ins.DataBase.SaveChanges();
             if (ListCT_PhieuDatBan == null || ListCT_PhieuDatBan.Count() == 0) return;
             if (ListCT_PhieuDatBan != null)
@@ -281,7 +281,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DonGia = ListCT_PhieuDatBan.FirstOrDefault().ThanhTien;
             }
 
-            ListThamSo = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOs.ToList());
+            ListThamSo = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOes.ToList());
             DataProvider.Ins.DataBase.SaveChanges();
             var TiLePhat = 0.0d;
             int IsPhat = 0;

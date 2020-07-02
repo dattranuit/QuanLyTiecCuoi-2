@@ -29,7 +29,7 @@
                                             <ColumnDefinition Width="0.5*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBox x:Name="tbx_TimKiemSanh" DockPanel.Dock="Top"
-                                         Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
+                                         Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                          controls:TextBoxHelper.Watermark="Tìm kiếm tên Sảnh"
                                          BorderThickness="0,0,0,1" Height="32"
                                          BorderBrush="Black"

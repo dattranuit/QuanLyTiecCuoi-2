@@ -13,11 +13,11 @@ namespace QuanLyTiecCuoi.ViewModel
     class CT_PhieuDatBanViewModel:BaseViewModel
     {
         private static int _CurrentMaPDB;
-        public static int CurrentMaPDB { get => _CurrentMaPDB; set { _CurrentMaPDB = value; MessageBox.Show(_CurrentMaPDB + ""); } }
+        public static int CurrentMaPDB { get => _CurrentMaPDB; set { _CurrentMaPDB = value;} }
         private decimal _DonGiaBan = 0;
-        public decimal DonGiaBan { get => _DonGiaBan; set { _DonGiaBan = value; OnPropertyChanged(); } }
+        public decimal DonGiaBan { get => _DonGiaBan; set { if (value != _DonGiaBan) OnPropertyChanged(); _DonGiaBan = value; OnPropertyChanged(); } }
         private static ObservableCollection<CT_PHIEUDATBAN> _ListCTPhieuDatBan;
-        public static ObservableCollection<CT_PHIEUDATBAN> ListCTPhieuDatBan { get => _ListCTPhieuDatBan; set { _ListCTPhieuDatBan = value;} }
+        public static ObservableCollection<CT_PHIEUDATBAN> ListCTPhieuDatBan { get => _ListCTPhieuDatBan; set { _ListCTPhieuDatBan = value; } }
         private static ObservableCollection<MONAN> _ListMonAn;
         public static ObservableCollection<MONAN> ListMonAn { get => _ListMonAn; set { _ListMonAn = value; } }
         private CT_PHIEUDATBAN _SelectedCTPDB;
@@ -51,6 +51,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
+        //private bool _IsClicked;
+        //public bool IsClicked { get => _IsClicked; set { _IsClicked = value; OnPropertyChanged(); } }
         private int _MaMonAn;
         public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
         private int _CTPDB_SoLuong;
@@ -83,13 +85,25 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        //public ICommand PopupCommand { get; set; }
+        bool Addable()
+        {
+            if (SelectedMA == null)
+                return false;
+            if (MA_SoLuong == 0)
+                return false;
+            var CheckExist = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == SelectedMA.MaMonAn).FirstOrDefault();
+            if (CheckExist != null)
+                return false;
+            return true;
+        }
         public CT_PhieuDatBanViewModel()
         {
-            ListCTPhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBANs);
+            DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);
             ListMonAn = new ObservableCollection<MONAN>(DataProvider.Ins.DataBase.MONANs);
             AddCommand = new RelayCommand<object>((p) =>
             {
-                return true;
+                return Addable();
             }, (p) =>
             {
                 var CT_PhieuDatBan = new CT_PHIEUDATBAN()
@@ -99,11 +113,11 @@ namespace QuanLyTiecCuoi.ViewModel
                     SoLuong = MA_SoLuong,
                     ThanhTien = MA_ThanhTien,
                 };
-               // MessageBox.Show(CT_PhieuDatBan.MaPhieuDatBan + " " + CT_PhieuDatBan.MaMonAn + " " + CT_PhieuDatBan.SoLuong + " " + CT_PhieuDatBan.ThanhTien);
-                DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Add(CT_PhieuDatBan);
+                //MessageBox.Show(CT_PhieuDatBan.MaPhieuDatBan + " " + CT_PhieuDatBan.MaMonAn + " " + CT_PhieuDatBan.SoLuong + " " + CT_PhieuDatBan.ThanhTien);
+                DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Add(CT_PhieuDatBan);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListCTPhieuDatBan.Add(CT_PhieuDatBan);
-                DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB && x.MaMonAn == MaMonAn).Sum(ct => ct.ThanhTien);
+                DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);
             });
             //EditCommand = new RelayCommand<object>((p) =>
             //{
@@ -124,6 +138,7 @@ namespace QuanLyTiecCuoi.ViewModel
             //    DichVu.GhiChu = SelectedPDB.GhiChu;
             //    DataProvider.Ins.DataBase.SaveChanges();
             //});
+            //PopupCommand = new RelayCommand<object>((p) => true, (p) => { IsClicked = !IsClicked; });
         }
     }
 }

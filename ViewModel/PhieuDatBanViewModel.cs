@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,7 +71,6 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         public PhieuDatBanViewModel()
         {
-            ListPhieuDatBan = new ObservableCollection<PHIEUDATBAN>(DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x=>x.MaTiecCuoi == CurrentMaTiecCuoi));
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -113,7 +113,9 @@ namespace QuanLyTiecCuoi.ViewModel
             });
             CT_PhieuDatBanCommand = new RelayCommand<object>((p) => { return Enable(); }, (p) => {
                 CT_PhieuDatBanViewModel.CurrentMaPDB = SelectedPDB.MaPhieuDatBan;
-                CT_PhieuDatBanViewModel.ListCTPhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan));
+                CT_PhieuDatBanViewModel.ListCTPhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan));
+                //foreach (CT_PHIEUDATBAN item in CT_PhieuDatBanViewModel.ListCTPhieuDatBan)
+                //    MessageBox.Show(item.MaPhieuDatBan+"");
                 CT_PhieuDatBanWindow wd = new CT_PhieuDatBanWindow();
                 wd.ShowDialog();
             });

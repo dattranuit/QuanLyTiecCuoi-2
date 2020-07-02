@@ -226,13 +226,15 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICollectionView DataGridCollection
         {
             get { return _dataGridCollection; }
-            set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
+            set { OnPropertyChanged(); _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
         }
         public string FilterString
         {
             get { return _filterString; }
             set
             {
+                if(value != _filterString)
+                    OnPropertyChanged("FilterString");
                 _filterString = value;
                 OnPropertyChanged("FilterString");
                 FilterCollection();
@@ -242,6 +244,7 @@ namespace QuanLyTiecCuoi.ViewModel
         {
             if (_dataGridCollection != null)
             {
+             //   OnPropertyChanged();
                 _dataGridCollection.Refresh();
             }
         }
