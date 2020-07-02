@@ -24,5 +24,15 @@ namespace QuanLyTiecCuoi
         {
             InitializeComponent();
         }
+
+        private void btn_CTPDB_Sua_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_CTPDB_Them_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

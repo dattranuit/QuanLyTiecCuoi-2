@@ -126,7 +126,14 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public HoaDonViewModel()
         {
-            
+            this.PropertyChanged += (o, e) =>
+            {
+                if (e.PropertyName == "Model")
+                {
+                    OnPropertyChanged("HoaDonViewModelProperty");
+                    // Add other properties "dependent" on Model here...
+                }
+            };
             ListTiecCuoi = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
             List = new ObservableCollection<HOADON>(DataProvider.Ins.DataBase.HOADONs);
 
@@ -174,7 +181,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     id = _getMaPhieuDatBan(p);
                     CT_PhieuDatBanxaml ct_Phieu = new CT_PhieuDatBanxaml();
-                    ListCT_PhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaPhieuDatBan == id));
+                    ListCT_PhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == id));
                     DataProvider.Ins.DataBase.SaveChanges();
                     if (ListCT_PhieuDatBan == null || ListCT_PhieuDatBan.Count() == 0) return;
                     ct_Phieu.DataContext = ListCT_PhieuDatBan;
@@ -279,7 +286,7 @@ namespace QuanLyTiecCuoi.ViewModel
             //    DonGia = ListCT_PhieuDatBan.FirstOrDefault().ThanhTien;
             //}
 
-            ListThamSo = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOs.ToList());
+            ListThamSo = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOes.ToList());
             DataProvider.Ins.DataBase.SaveChanges();
             var TiLePhat = 0.0d;
             int IsPhat = 0;
