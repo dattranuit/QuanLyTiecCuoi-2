@@ -7,7 +7,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             
+             DataContext="{StaticResource BaoCaoThangVM}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
         <Grid>
@@ -58,7 +58,8 @@
                                 <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
                                     <DockPanel DockPanel.Dock="Right" Width="150" Margin="8,0">
                                         <TextBlock Text="Năm:" FontSize="14" VerticalAlignment="Center" Foreground="#000000" Padding="8,0"/>
-                                        <TextBox x:Name="year" FontSize="14" VerticalAlignment="Center" BorderBrush="Black" ToolTip="Chọn năm..." OpacityMask="#FFB9B9B9"  Height="20"/>
+                                        <TextBox Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
+                                            x:Name="year" FontSize="14" VerticalAlignment="Center" BorderBrush="Black" ToolTip="Chọn năm..." OpacityMask="#FFB9B9B9"  Height="20"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Right" Width="300" Margin="8,0">
                                         <TextBlock Text="BÁO CÁO DOANH THU THÁNG" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="8,0,0,0" Foreground="#FF0E2291" />
@@ -108,10 +109,12 @@
                                                     </Grid>
                                                     <Grid Grid.Column="7">
                                                         <Button
-                                                    Margin="2"
+                                                            Command="{Binding ExportToExcel}"
+                                                                CommandParameter="{Binding ElementName=DoanhThuNgay}"
+                                                    Margin="0,2,2,2"
                                                     Content="Xuất Excel"
     Style="{StaticResource MaterialDesignRaisedButton}"
-    ToolTip="Xuất ra file excel">
+    ToolTip="Xuất ra file excel" HorizontalAlignment="Right" Width="95">
                                                         </Button>
                                                     </Grid>
                                                 </Grid>
@@ -142,7 +145,7 @@
                                                     </DataGrid>
                                                 </Grid>
                                                 <Grid Grid.Column="1">
-                                                    <DataGrid Name="DoanhThuNgay" Margin="50,0,0,0" DataContext="{StaticResource BaoCaoThangVM}" ItemsSource="{Binding List2, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
+                                                    <DataGrid Name="DoanhThuNgay" Margin="50,0,0,0" DataContext="{StaticResource BaoCaoThangVM}" ItemsSource="{Binding ListBaoCaoNgay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
                                                         <DataGrid.Columns>
                                                             <!--<DataGridTextColumn Header="STT" FontSize="14" Binding="{Binding STT}"/>-->
                                                             <DataGridTextColumn Header="Ngày" FontSize="14" Binding="{Binding Ngay}">
@@ -223,7 +226,7 @@
                                                             <ColumnDefinition></ColumnDefinition>
                                                             <ColumnDefinition></ColumnDefinition>
                                                         </Grid.ColumnDefinitions>
-                                                     
+
                                                         <Grid Grid.Column="2">
                                                             <Button
                                                     Margin="2"

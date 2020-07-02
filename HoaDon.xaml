@@ -236,17 +236,21 @@
                                                 <ColumnDefinition Width="403*"/>
                                                 <ColumnDefinition Width="354*"/>
                                             </Grid.ColumnDefinitions>
-                                            <DataGrid  ItemsSource="{Binding ListCT_PhieuDatBan}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
+                                            <DataGrid Name="PhieuDatBan" ItemsSource="{Binding ListPhieuDatBan}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
+                                                <DataGrid.InputBindings>
+                                                    <MouseBinding
+            MouseAction="LeftDoubleClick"
+            Command="{Binding DoubleClickCommandCT_Phieu}"
+            CommandParameter="{Binding ElementName=PhieuDatBan}"/>
+                                                </DataGrid.InputBindings>
                                                 <DataGrid.Columns>
-
-                                                    <DataGridTextColumn Header="Loại Bàn" FontSize="14" Binding="{Binding MONAN.TenMonAn}">
+                                                    <DataGridTextColumn Header="Loại Bàn" FontSize="14" Binding="{Binding LoaiBan}">
                                                     </DataGridTextColumn>
                                                     <DataGridTextColumn Header="Số lượng" FontSize="14" Binding="{Binding SoLuong}">
                                                     </DataGridTextColumn>
-
-                                                    <DataGridTextColumn Header="Số lượng dự trữ" FontSize="14" Binding="{Binding DonGia}">
+                                                    <DataGridTextColumn Header="Số lượng dự trữ" FontSize="14" Binding="{Binding SoLuongDuTru}">
                                                     </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Đơn giá bàn" FontSize="14" Width="*" Binding="{Binding ThanhTien}">
+                                                    <DataGridTextColumn Header="Đơn giá bàn" FontSize="14" Width="*" Binding="{Binding DonGiaBan}">
                                                     </DataGridTextColumn>
                                                 </DataGrid.Columns>
                                             </DataGrid>
