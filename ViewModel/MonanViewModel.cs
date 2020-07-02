@@ -35,6 +35,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     DonGia = SelectedItem.DonGia;
                     MoTa = SelectedItem.MoTa;
                     GhiChu = SelectedItem.GhiChu;
+                    HinhAnh = SelectedItem.HinhAnh;
                 }
             }
         }
@@ -48,7 +49,8 @@ namespace QuanLyTiecCuoi.ViewModel
         public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
         private string _MoTa { get; set; }
         public string MoTa { get => _MoTa; set { _MoTa = value; OnPropertyChanged(); } }
-        public string HinhAnh { get; set; }
+        private string _HinhAnh { get; set; }
+        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
         private string _GhiChu { get; set; }
         public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
 
@@ -81,6 +83,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     TenMonAn = TenMonAn,
                     DonGia = DonGia,
                     MoTa = MoTa,
+                    HinhAnh = HinhAnh,
                     GhiChu = GhiChu
                 };
                 DataProvider.Ins.DataBase.MONANs.Add(MonAn);
@@ -103,12 +106,14 @@ namespace QuanLyTiecCuoi.ViewModel
                 MonAn.DonGia = SelectedItem.DonGia;
                 MonAn.MoTa = SelectedItem.MoTa;
                 MonAn.GhiChu = SelectedItem.GhiChu;
+                MonAn.HinhAnh = SelectedItem.HinhAnh;
                 DataProvider.Ins.DataBase.SaveChanges();
 
                 SelectedItem.TenMonAn = TenMonAn;
                 SelectedItem.DonGia = DonGia;
                 SelectedItem.MoTa = MoTa;
                 SelectedItem.GhiChu = GhiChu;
+                SelectedItem.HinhAnh = HinhAnh;
             });
             DeleteCommand = new RelayCommand<object>((p) =>
             {
@@ -118,18 +123,30 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn).First();
+                var CT_PhieuDatBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn);
+                if (CT_PhieuDatBan.Count() != 0)
+                {
+                    MessageBox.Show("Không thể xóa vì có tồn tại Tiệc Cưới đặt Dịch Vụ này !");
+                    return;
+                }
                 DataProvider.Ins.DataBase.MONANs.Remove(MonAn);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Remove(MonAn);
-    
+
                 MessageBox.Show("Xóa thành công!");
 
                 TenMonAn = "";
                 DonGia = 0;
                 MoTa = "";
                 GhiChu = "";
+                HinhAnh = string.Empty;
             });
-            AddImageCommand = new RelayCommand<Image>((p) => { return true; }, (p) =>
+            AddImageCommand = new RelayCommand<Image>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, (p) =>
             {
                 OpenFileDialog open = new OpenFileDialog();
                 open.Filter = "Image Files(.jpg; *.png)|.jpg; *.png";
@@ -137,10 +154,11 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     HinhAnh = open.FileName;
                 };
+                SelectedItem.HinhAnh = HinhAnh;
             });
             DeleteImageCommand = new RelayCommand<Image>((p) =>
             {
-                if (string.IsNullOrWhiteSpace(HinhAnh))
+                if (string.IsNullOrEmpty(HinhAnh))
                     return false;
                 if (SelectedItem == null)
                     return false;
@@ -148,6 +166,7 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 HinhAnh = string.Empty;
+                SelectedItem.HinhAnh = HinhAnh;
             });
         }
 
