@@ -87,6 +87,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public int? MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand DatBanvaDichVuCommand { get; set; }
         public ICommand LapHoaDonCommand { get; set; }
         bool Addable()
@@ -184,6 +185,61 @@ namespace QuanLyTiecCuoi.ViewModel
                 TiecCuoi.MaSanh = SelectedSanh.MaSanh;
                 TiecCuoi.MaCa = SelectedCa.MaCa;
                 DataProvider.Ins.DataBase.SaveChanges();
+            });
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                MessageBoxResult result;
+                var check = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi);
+                if(check == null || check.Count() == 0)
+                {
+                    result = MessageBox.Show("Tiệc cưới này chưa được lập hóa đơn \nBạn có chắc muốn xóa tiệc cưới này không", "Cảnh báo", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            int count_PDB = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi).Count();
+                            for (int i = 0; i < count_PDB; i++)
+                            {
+                                PHIEUDATBAN temp = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi).First();
+                                int count_CTPDB = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == temp.MaPhieuDatBan).Count();
+                                for (int j = 0; j < count_CTPDB; j++)
+                                {
+                                    CT_PHIEUDATBAN ctpdb = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == temp.MaPhieuDatBan).First();
+                                    DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Remove(ctpdb);
+                                    DataProvider.Ins.DataBase.SaveChanges();
+                                }
+                                DataProvider.Ins.DataBase.PHIEUDATBANs.Remove(temp);
+                                DataProvider.Ins.DataBase.SaveChanges();
+                            }
+                            int count_PDDV = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi).Count();
+                            for (int j = 0; j < count_PDDV; j ++)
+                            {
+                                PHIEUDATDICHVU ctpddv = DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi).First();
+                                DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Remove(ctpddv);
+                                DataProvider.Ins.DataBase.SaveChanges();
+                            }
+                            DataProvider.Ins.DataBase.TIECCUOIs.Remove(SelectedTiecCuoi);
+                            DataProvider.Ins.DataBase.SaveChanges();
+                            ListTiecCuoi.Remove(SelectedTiecCuoi);
+                            // Refresh
+                            TenChuRe = TenCoDau = SoDienThoai = GhiChu = String.Empty;
+                            NgayDaiTiec = NgayDatTiec = DateTime.Now;
+                            SelectedSanh = null;
+                            SelectedCa = null;
+                            TienDatCoc = 0;
+                            MessageBox.Show("Xóa tiệc cưới thành công", "Thông báo", MessageBoxButton.OK);
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Xóa phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                        }
+                    }
+                }           
+                else
+                    MessageBox.Show("Không thể xóa tiệc cưới vì đang có hóa đơn tham chiếu đến", "Thông báo", MessageBoxButton.YesNo);              
             });
             DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return Enable(); }, (p) => {
                 PhieuDatDichVuViewModel.CurrentMaTiecCuoi = SelectedTiecCuoi.MaTiecCuoi;

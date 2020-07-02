@@ -19,10 +19,12 @@ namespace QuanLyTiecCuoi.Model
         private int _MaDichVu;
         private int _SoLuong = 0;
         private decimal _ThanhTien = 0;
+        private string _GhiChu;
         public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
         public int MaDichVu { get => _MaDichVu; set { _MaDichVu = value; OnPropertyChanged(); } }
         public int SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
         public decimal ThanhTien { get => _ThanhTien; set { _ThanhTien = value; OnPropertyChanged(); } }
+        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
 
         public virtual DICHVU DICHVU { get; set; }
         public virtual TIECCUOI TIECCUOI { get; set; }

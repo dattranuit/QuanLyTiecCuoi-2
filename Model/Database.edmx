@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BAOCAONGAY">
           <Key>
             <PropertyRef Name="MaBaoCaoThang" />
@@ -51,6 +51,7 @@
           <Property Name="MaMonAn" Type="int" Nullable="false" />
           <Property Name="SoLuong" Type="int" Nullable="false" />
           <Property Name="ThanhTien" Type="money" Nullable="false" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="DICHVU">
           <Key>
@@ -140,6 +141,7 @@
           <Property Name="MaDichVu" Type="int" Nullable="false" />
           <Property Name="SoLuong" Type="int" Nullable="false" />
           <Property Name="ThanhTien" Type="money" Nullable="false" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="SANH">
           <Key>
@@ -400,8 +402,7 @@
             <End Role="TIECCUOI" EntitySet="TIECCUOI" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -457,6 +458,7 @@
           <Property Name="ThanhTien" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="MONAN" Relationship="Self.FK__CT_PHIEUD__MaMon__4316F928" FromRole="CT_PHIEUDATBAN" ToRole="MONAN" />
           <NavigationProperty Name="PHIEUDATBAN" Relationship="Self.FK__CT_PHIEUD__MaPhi__440B1D61" FromRole="CT_PHIEUDATBAN" ToRole="PHIEUDATBAN" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DICHVU">
           <Key>
@@ -559,6 +561,7 @@
           <Property Name="ThanhTien" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="DICHVU" Relationship="Self.FK__PHIEUDATD__MaDic__49C3F6B7" FromRole="PHIEUDATDICHVU" ToRole="DICHVU" />
           <NavigationProperty Name="TIECCUOI" Relationship="Self.FK__PHIEUDATD__MaTie__4AB81AF0" FromRole="PHIEUDATDICHVU" ToRole="TIECCUOI" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SANH">
           <Key>
@@ -875,6 +878,7 @@
           <EntitySetMapping Name="CT_PHIEUDATBAN">
             <EntityTypeMapping TypeName="DatabaseModel.CT_PHIEUDATBAN">
               <MappingFragment StoreEntitySet="CT_PHIEUDATBAN">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
                 <ScalarProperty Name="MaPhieuDatBan" ColumnName="MaPhieuDatBan" />
                 <ScalarProperty Name="MaMonAn" ColumnName="MaMonAn" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
@@ -971,6 +975,7 @@
           <EntitySetMapping Name="PHIEUDATDICHVUs">
             <EntityTypeMapping TypeName="DatabaseModel.PHIEUDATDICHVU">
               <MappingFragment StoreEntitySet="PHIEUDATDICHVU">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
                 <ScalarProperty Name="MaTiecCuoi" ColumnName="MaTiecCuoi" />
                 <ScalarProperty Name="MaDichVu" ColumnName="MaDichVu" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />

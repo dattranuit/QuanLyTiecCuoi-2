@@ -123,7 +123,7 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn).First();
-                var CT_PhieuDatBan = DataProvider.Ins.DataBase.CT_PHIEUDATBANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn);
+                var CT_PhieuDatBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaMonAn == SelectedItem.MaMonAn);
                 if (CT_PhieuDatBan.Count() != 0)
                 {
                     MessageBox.Show("Không thể xóa vì có tồn tại Tiệc Cưới đặt Dịch Vụ này !");
