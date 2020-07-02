@@ -70,7 +70,10 @@ namespace QuanLyTiecCuoi.ViewModel
             DataGridCollection.Filter = new Predicate<object>(Filter);
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrWhiteSpace(TenMonAn))
+                if (string.IsNullOrWhiteSpace(TenMonAn) ||
+                    string.IsNullOrWhiteSpace(MoTa) ||
+                    string.IsNullOrWhiteSpace(GhiChu) ||
+                    string.IsNullOrWhiteSpace(DonGia.ToString()))
                     return false;
                 return true;
 
@@ -157,8 +160,6 @@ namespace QuanLyTiecCuoi.ViewModel
             });
             AddImageCommand = new RelayCommand<Image>((p) =>
             {
-                if (SelectedItem == null)
-                    return false;
                 return true;
             }, (p) =>
             {

@@ -113,12 +113,12 @@
                                     </Grid.RowDefinitions>
                                     <Label Grid.Column="0" Grid.Row="0" Content="Tên món:" FontWeight="SemiBold" VerticalAlignment="Center" />
                                     <TextBox Grid.Column="1" Grid.Row="0" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" Height="27"/>
-                                    <Label Grid.Column="0" Grid.Row="1" Content="Ghi chú:" FontWeight="SemiBold" VerticalAlignment="Center" />
-                                    <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" Height="27" />
-                                    <Label Grid.Column="0" Grid.Row="2" Content="Mô tả:" FontWeight="SemiBold" VerticalAlignment="Center" />
-                                    <TextBox Grid.Column="1" Grid.Row="2" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" Height="27" />
+                                    <Label Grid.Column="0" Grid.Row="1" Content="Mô tả:" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                    <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" Height="27" />
+                                    <Label Grid.Column="0" Grid.Row="2" Content="Ghi chú:" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                    <TextBox Grid.Column="1" Grid.Row="2" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" Height="27" />
                                     <Label Grid.Column="0" Grid.Row="3" Content="Đơn giá:" FontWeight="SemiBold" Grid.ColumnSpan="2" Height="29" Margin="0" VerticalAlignment="Center" />
-                                    <controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="2" BorderBrush="#FF717171" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="27"/>
+                                    <controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="2" BorderBrush="#FF717171" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" Height="27"/>
                                     <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
                                             x:Name="btn_LamMoi"
                                             Command="{Binding RefreshCommand}"
