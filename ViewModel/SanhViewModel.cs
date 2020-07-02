@@ -34,7 +34,6 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand RefreshSanhCommand { get; set; }
-        public ICommand RefreshLoaiSanhCommand { get; set; }
         //Loai sanh
         public string TenLoaiSanh { get => _TenLoaiSanh; set { _TenLoaiSanh = value; OnPropertyChanged(); } }
         public int DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; OnPropertyChanged(); } }
@@ -45,6 +44,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommandLoaiSanh { get; set; }
         public ICommand EditLoaiSanhCommand { get; set; }
         public ICommand DeleteLoaiSanhCommand { get; set; }
+        public ICommand RefreshLoaiSanhCommand { get; set; }
 
         private LOAISANH _SelectedLoaiSanh;
         public LOAISANH SelectedLoaiSanh { get => _SelectedLoaiSanh;set { _SelectedLoaiSanh = value ; OnPropertyChanged(); } }
@@ -116,6 +116,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListSanh.Add(Sanh);
                 TiecViewModel.ListSanh.Add(Sanh);
+                SelectedItem = Sanh;
+                MessageBox.Show("Thêm Sảnh thành công !");
             });
 
             AddCommandLoaiSanh = new RelayCommand<object>((p) =>
@@ -134,6 +136,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.LOAISANHs.Add(LoaiSanh);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListLoaiSanh.Add(LoaiSanh);
+                SelectedItem2 = LoaiSanh;
+                MessageBox.Show("Thêm loại Sảnh thành công !");
             });
 
             EditCommand = new RelayCommand<object>((p) =>
@@ -161,6 +165,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 SelectedItem.SoLuongBanToiDa = SoLuongBanToiDa;
                 SelectedItem.GhiChu = GhiChu;
                 SelectedItem.MaLoaiSanh = SelectedLoaiSanh.MaLoaiSanh;
+                MessageBox.Show("Sửa thông tin Sảnh thành công !");
             });
 
             EditLoaiSanhCommand = new RelayCommand<object>((p) =>
@@ -182,6 +187,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.SaveChanges();
                 SelectedItem2.TenLoaiSanh = TenLoaiSanh;
                 SelectedItem2.DonGiaBanToiThieu = DonGiaBanToiThieu;
+                MessageBox.Show("Sửa thông tin loại Sảnh thành công !");
             });
 
             DeleteCommand = new RelayCommand<object>((p) =>
@@ -201,6 +207,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.SANHs.Remove(Sanh);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListSanh.Remove(Sanh);
+                MessageBox.Show("Xóa Sảnh thành công !");
                 //refresh nhap
                 TenSanh = "";
                 SoLuongBanToiDa = 0;
@@ -224,6 +231,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.LOAISANHs.Remove(LoaiSanh);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListLoaiSanh.Remove(LoaiSanh);
+                MessageBox.Show("Xóa loại Sảnh thành công !");
                 //refresh nhap
                 TenLoaiSanh = "";
                 DonGiaBanToiThieu = 0;
@@ -231,15 +239,21 @@ namespace QuanLyTiecCuoi.ViewModel
 
             RefreshSanhCommand = new RelayCommand<object>((p) =>
             {
-                if (!string.IsNullOrEmpty(TenSanh) 
-                || !string.IsNullOrEmpty(GhiChu)  
-                || !string.IsNullOrEmpty(SelectedLoaiSanh.MaLoaiSanh.ToString())
-                || SoLuongBanToiDa>0)
-                    return true;
-                return false;
+                return true;
             }, (p) =>
             {
-                //code
+                TenSanh = "";
+                GhiChu = "";
+                SoLuongBanToiDa = 0;
+            });
+
+            RefreshLoaiSanhCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TenLoaiSanh = "";
+                DonGiaBanToiThieu = 0;
             });
         }
         //search Sanh
