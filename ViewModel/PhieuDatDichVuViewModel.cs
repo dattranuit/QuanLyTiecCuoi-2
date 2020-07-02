@@ -119,7 +119,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     try
                     {
-                        SelectedPDDV = new PHIEUDATDICHVU()
+                        var PhieuDatDichVu = new PHIEUDATDICHVU()
                         {
                             MaTiecCuoi = CurrentMaTiecCuoi,
                             MaDichVu = MaDichVu,
@@ -127,9 +127,10 @@ namespace QuanLyTiecCuoi.ViewModel
                             ThanhTien = DV_ThanhTien,
                             GhiChu = DV_GhiChu,
                         };
-                        DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Add(SelectedPDDV);
+                        DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Add(PhieuDatDichVu);
                         DataProvider.Ins.DataBase.SaveChanges();
-                        ListPhieuDatDichVu.Add(SelectedPDDV);
+                        ListPhieuDatDichVu.Add(PhieuDatDichVu);
+                        SelectedPDDV = PhieuDatDichVu;
                         MessageBox.Show("Thêm phiếu đặt dịch vụ thành công", "Thông báo", MessageBoxButton.OK);
                     }
                     catch (Exception e)

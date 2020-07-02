@@ -127,7 +127,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     try
                     {
-                        SelectedCTPDB = new CT_PHIEUDATBAN()
+                        var CT_PhieuDatBan = new CT_PHIEUDATBAN()
                         {
                             MaPhieuDatBan = CurrentMaPDB,
                             MaMonAn = MaMonAn,
@@ -136,9 +136,10 @@ namespace QuanLyTiecCuoi.ViewModel
                             GhiChu = MA_GhiChu,
                         };
                         //MessageBox.Show(CT_PhieuDatBan.MaPhieuDatBan + " " + CT_PhieuDatBan.MaMonAn + " " + CT_PhieuDatBan.SoLuong + " " + CT_PhieuDatBan.ThanhTien);
-                        DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Add(SelectedCTPDB);
+                        DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Add(CT_PhieuDatBan);
                         DataProvider.Ins.DataBase.SaveChanges();
-                        ListCTPhieuDatBan.Add(SelectedCTPDB);
+                        ListCTPhieuDatBan.Add(CT_PhieuDatBan);
+                        SelectedCTPDB = CT_PhieuDatBan;
                         DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);
                         MessageBox.Show("Thêm chi tiết phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
                     }

@@ -236,6 +236,7 @@ namespace QuanLyTiecCuoi.ViewModel
                         {
                             MessageBox.Show("Xóa phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
                         }
+
                     }
                 }           
                 else
