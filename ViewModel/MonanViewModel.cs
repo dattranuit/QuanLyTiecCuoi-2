@@ -60,6 +60,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddImageCommand { get; set; }
         public ICommand DeleteImageCommand { get; set; }
         public ICommand ClickCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
 
 
         public MonanViewModel()
@@ -70,9 +71,6 @@ namespace QuanLyTiecCuoi.ViewModel
             AddCommand = new RelayCommand<object>((p) =>
             {
                 if (string.IsNullOrWhiteSpace(TenMonAn))
-                    return false;
-                var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.TenMonAn == TenMonAn);
-                if (displayList == null || displayList.Count() != 0)
                     return false;
                 return true;
 
@@ -89,19 +87,32 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.MONANs.Add(MonAn);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Add(MonAn);
+                // 
+                SelectedItem = MonAn;
+                //
+                MessageBox.Show("Thêm món ăn thành công!");
             });
 
             EditCommand = new RelayCommand<object>((p) =>
             {
                 if (SelectedItem == null)
                     return false;
-                var displayList = DataProvider.Ins.DataBase.MONANs.Where(x => x.TenMonAn == TenMonAn);
-                if (displayList != null || displayList.Count() != 0)
-                    return true;
-                return false;
+                if (SelectedItem.TenMonAn == TenMonAn &&
+                SelectedItem.MoTa == MoTa &&
+                SelectedItem.GhiChu == GhiChu &&
+                SelectedItem.HinhAnh == HinhAnh)
+                    return false;
+                return true;
             }, (p) =>
             {
                 var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn).SingleOrDefault();
+                
+                if (string.IsNullOrWhiteSpace(TenMonAn))
+                {
+                    MessageBox.Show("Chưa nhập tên món ăn");
+                    return;
+                }
+                
                 MonAn.TenMonAn = SelectedItem.TenMonAn;
                 MonAn.DonGia = SelectedItem.DonGia;
                 MonAn.MoTa = SelectedItem.MoTa;
@@ -114,6 +125,9 @@ namespace QuanLyTiecCuoi.ViewModel
                 SelectedItem.MoTa = MoTa;
                 SelectedItem.GhiChu = GhiChu;
                 SelectedItem.HinhAnh = HinhAnh;
+
+
+                MessageBox.Show("Sửa thành công!");
             });
             DeleteCommand = new RelayCommand<object>((p) =>
             {
@@ -126,20 +140,20 @@ namespace QuanLyTiecCuoi.ViewModel
                 var CT_PhieuDatBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaMonAn == SelectedItem.MaMonAn);
                 if (CT_PhieuDatBan.Count() != 0)
                 {
-                    MessageBox.Show("Không thể xóa vì có tồn tại Tiệc Cưới đặt Dịch Vụ này !");
+                    MessageBox.Show("Không thể xóa vì có tồn tại Món ăn này trong Chi tiết đặt bàn!");
                     return;
                 }
                 DataProvider.Ins.DataBase.MONANs.Remove(MonAn);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Remove(MonAn);
 
-                MessageBox.Show("Xóa thành công!");
-
                 TenMonAn = "";
                 DonGia = 0;
                 MoTa = "";
                 GhiChu = "";
                 HinhAnh = string.Empty;
+
+                MessageBox.Show("Xóa thành công!");
             });
             AddImageCommand = new RelayCommand<Image>((p) =>
             {
@@ -154,7 +168,6 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     HinhAnh = open.FileName;
                 };
-                SelectedItem.HinhAnh = HinhAnh;
             });
             DeleteImageCommand = new RelayCommand<Image>((p) =>
             {
@@ -166,7 +179,17 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 HinhAnh = string.Empty;
-                SelectedItem.HinhAnh = HinhAnh;
+            });
+            RefreshCommand = new RelayCommand<Image>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TenMonAn = "";
+                DonGia = 0;
+                MoTa = "";
+                GhiChu = "";
+                HinhAnh = string.Empty;
             });
         }
 
