@@ -83,6 +83,7 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
+                                <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Button Content="Thêm" Command="{Binding AddCommand}" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Margin="10" ToolTip="Thêm ca" Background="#FF0F5699" Foreground="White" Width="140"/>
@@ -90,7 +91,8 @@
                                     Margin="10" ToolTip="Sửa thông tin loại ca" Background="#FF0F5699" Foreground="White" Width="140"/>
                             <Button Content="Xóa" Grid.Column="2" Command="{Binding DeleteCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Margin="10" ToolTip="Xóa loại ca" Background="Crimson" Foreground="White" Width="140"/>
-
+                            <Button Content="Làm mới nhập" Grid.Column="3" Command="{Binding RefreshCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
+                                    Margin="10" ToolTip="Làm mới thông tin nhập" Background="#FF0F5699" Foreground="White" Width="140"/>
                         </Grid>
                         <GroupBox DockPanel.Dock="Bottom" Header="Danh sách loại ca" Margin="10,5,10,10">
                             <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ListCa}" IsReadOnly="True" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
