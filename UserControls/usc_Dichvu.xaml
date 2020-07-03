@@ -55,7 +55,7 @@
 
                     </Grid>
                     <GroupBox Header="Danh sách dịch vụ" Margin="10,0,10,10" Grid.Column="0">
-                        <DataGrid  x:Name="dtg_DichVu" Width="auto" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" IsReadOnly="True"
+                        <DataGrid  x:Name="dtg_DichVu" Width="auto" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" IsReadOnly="True"
             ItemsSource="{Binding List}"
             CanUserSortColumns="True"
             CanUserAddRows="False"
@@ -77,7 +77,7 @@
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition />
-                        <RowDefinition Height="0.6*"/>
+                        <RowDefinition Height="0.75*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
@@ -135,15 +135,23 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Label Content="Tên Dịch Vụ" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" FontWeight="SemiBold"></Label>
                                 <Label Content="Mô tả" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" FontWeight="SemiBold"></Label>
                                 <Label Content="Đơn giá" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" FontWeight="SemiBold"></Label>
                                 <Label Content="Ghi chú" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" FontWeight="SemiBold"></Label>
-                                <TextBox x:Name="txb_TenDichVu" Text="{Binding TenDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="31" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Margin="5" Grid.Row="0" FontSize="15"></TextBox>
-                                <TextBox x:Name="txb_MoTa" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="31" BorderBrush="Black" BorderThickness="1"  Grid.Column="1" Grid.Row="1" Margin="5" FontSize="15"></TextBox>
-                                <controls:NumericUpDown x:Name="nud_DonGia" Minimum="0" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="31" NumericInputMode="Numbers" TextAlignment="Left" Margin="5" FontSize="15" BorderBrush="Black" Interval="100000" Grid.Column="1" Grid.Row="2" ValueChanged="Nud_DonGia_ValueChanged"></controls:NumericUpDown>
-                                <TextBox x:Name="txb_GhiChu" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="31" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="3" Margin="5" FontSize="15"></TextBox>
+                                <TextBox x:Name="txb_TenDichVu" Text="{Binding TenDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="31" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Margin="3" Grid.Row="0" FontSize="15"></TextBox>
+                                <TextBox x:Name="txb_MoTa" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="31" BorderBrush="Black" BorderThickness="1"  Grid.Column="1" Grid.Row="1" Margin="3" FontSize="15"></TextBox>
+                                <controls:NumericUpDown x:Name="nud_DonGia" Minimum="0" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="31" NumericInputMode="Numbers" TextAlignment="Left" Margin="3" FontSize="15" BorderBrush="Black" Interval="100000" Grid.Column="1" Grid.Row="2" ValueChanged="Nud_DonGia_ValueChanged"></controls:NumericUpDown>
+                                <TextBox x:Name="txb_GhiChu" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="31" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="3" Margin="3" FontSize="15"></TextBox>
+                                <Button Grid.Row="4" Grid.ColumnSpan="2"
+                                            x:Name="btn_LamMoi"
+                                            Command="{Binding RefreshCommand}"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            ToolTip="Làm mới dữ liệu nhập" Background="#FF002C56" Foreground="White" Height="Auto" Margin="2,5,2,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="15">
+                                    Làm mới
+                                </Button>
                             </Grid>
                         </GroupBox>
                     </Grid>

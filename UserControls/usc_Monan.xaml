@@ -29,15 +29,13 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="0.4*"/>
-                    <ColumnDefinition Width="0.4*"/>
                 </Grid.ColumnDefinitions>
                 <Button 
                                     x:Name="btn_ThemMonAn"
                                     Command="{Binding AddCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Grid.Column="0" Margin="10"
-                                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom">
+                                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI">
                     Thêm
                 </Button>
                 <Button
@@ -45,7 +43,7 @@
                                     Command="{Binding EditCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Grid.Column="1" Margin="10"
-                                    ToolTip="Sửa thông tin đặt Tiệc" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom">
+                                    ToolTip="Sửa thông tin đặt Tiệc" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI">
                     Sửa
                 </Button>
                 <Button
@@ -53,7 +51,7 @@
                                     Command="{Binding DeleteCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Grid.Column="2" Margin="10"
-                                    ToolTip="Xóa thông tin đặt Tiệc" Background="Crimson" Foreground="White" Height="35" VerticalAlignment="Bottom">
+                                    ToolTip="Xóa thông tin đặt Tiệc" Background="Crimson" Foreground="White" Height="35" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI">
                     Xóa
                 </Button>
             </Grid>
@@ -85,25 +83,25 @@
                                     x:Name="btn_ThemAnh"
                                     Command="{Binding AddImageCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="0" Margin="10"
-                                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}">
+                                    Grid.Column="0" Margin="10,5,10,10"
+                                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}" FontFamily="Segoe UI" FontSize="15">
                                     Thêm ảnh
                                 </Button>
                                 <Button 
                                     x:Name="btn_XoaAnh"
                                     Command="{Binding DeleteImageCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="1" Margin="10"
-                                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}">
+                                    Grid.Column="1" Margin="10,5,10,10"
+                                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}" FontFamily="Segoe UI" FontSize="15">
                                     Xóa ảnh
                                 </Button>
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <GroupBox Header="Thông tin món ăn" VerticalAlignment="Bottom" Grid.Row="0" Margin="10,0,10,10">
-                                <Grid Margin="5,10,5,5">
+                            <GroupBox Header="Thông tin món ăn" Grid.Row="0" Margin="10,0,10,10">
+                                <Grid Margin="1,0,0,1">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.4*"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -111,15 +109,23 @@
                                         <RowDefinition/>
                                         <RowDefinition/>
                                         <RowDefinition/>
+                                        <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Column="0" Grid.Row="0" Content="Tên món:" FontWeight="SemiBold" />
-                                    <TextBox Grid.Column="1" Grid.Row="0" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2"/>
-                                    <Label Grid.Column="0" Grid.Row="1" Content="Ghi chú:" FontWeight="SemiBold" />
-                                    <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" />
-                                    <Label Grid.Column="0" Grid.Row="2" Content="Mô tả:" FontWeight="SemiBold" />
-                                    <TextBox Grid.Column="1" Grid.Row="2" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" />
-                                    <Label Grid.Column="0" Grid.Row="3" Content="Đơn giá:" FontWeight="SemiBold" Grid.ColumnSpan="2" Height="29" Margin="0,0,153.2,0.4" VerticalAlignment="Bottom" />
-                                    <controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="2" BorderBrush="#FF717171" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <Label Grid.Column="0" Grid.Row="0" Content="Tên món:" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                    <TextBox Grid.Column="1" Grid.Row="0" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" Height="27"/>
+                                    <Label Grid.Column="0" Grid.Row="1" Content="Mô tả:" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                    <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" Height="27" />
+                                    <Label Grid.Column="0" Grid.Row="2" Content="Ghi chú:" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                    <TextBox Grid.Column="1" Grid.Row="2" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" Height="27" />
+                                    <Label Grid.Column="0" Grid.Row="3" Content="Đơn giá:" FontWeight="SemiBold" Grid.ColumnSpan="2" Height="29" Margin="0" VerticalAlignment="Center" />
+                                    <controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="2" BorderBrush="#FF717171" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" Height="27"/>
+                                    <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
+                                            x:Name="btn_LamMoi"
+                                            Command="{Binding RefreshCommand}"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            ToolTip="Thêm tiệc cưới" Background="#FF002C56" Foreground="White" Height="Auto" Margin="2,5,2,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="15">
+                                        Làm mới
+                                    </Button>
                                 </Grid>
                             </GroupBox>
                         </Grid>

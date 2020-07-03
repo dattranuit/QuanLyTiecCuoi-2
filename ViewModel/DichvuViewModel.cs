@@ -55,6 +55,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand DeleteCommand { get; set; }
         public ICommand ChonAnhCommmand { get; set; }
         public ICommand XoaAnhCommmand { get; set; }
+        public ICommand RefreshCommand { get; set; }
         public DichVuViewModel()
         {
             List = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
@@ -81,8 +82,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.DICHVUs.Add(DichVu);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Add(DichVu);
-                //fix lỗi: khi nhấn add xong thì ảnh hiện ở dòng mình đang chọn
-                HinhAnh = SelectedItem.HinhAnh;
+                SelectedItem = DichVu;
+                MessageBox.Show("Thêm Dịch vụ thành công !");
             });
 
             EditCommand = new RelayCommand<object>((p) =>
@@ -108,6 +109,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DichVu.GhiChu = SelectedItem.GhiChu;
                 DichVu.HinhAnh = SelectedItem.HinhAnh;
                 DataProvider.Ins.DataBase.SaveChanges();
+                MessageBox.Show("Sửa thông tin Dịch vụ thành công !");
                 SelectedItem.TenDichVu = TenDichVu;
                 SelectedItem.DonGia = DonGia;
                 SelectedItem.MoTa = MoTa;
@@ -132,6 +134,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.DICHVUs.Remove(DichVu);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Remove(DichVu);
+                MessageBox.Show("Xóa Dịch vụ thành công !");
                 //refresh nhap
                 TenDichVu = "";
                 MoTa = "";
@@ -155,6 +158,17 @@ namespace QuanLyTiecCuoi.ViewModel
                 HinhAnh = string.Empty;
             });
 
+            RefreshCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TenDichVu = "";
+                MoTa = "";
+                DonGia = 0;
+                GhiChu = "";
+                HinhAnh = string.Empty;
+            });
         }
         //search
         private ICollectionView _dataGridCollection;

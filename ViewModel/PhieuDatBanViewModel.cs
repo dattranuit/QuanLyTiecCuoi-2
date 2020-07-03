@@ -96,6 +96,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     ListPhieuDatBan.Add(PhieuDatBan);
                     SelectedPDB = PhieuDatBan;
                     MessageBox.Show("Thêm phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
+                    
                 }
                 catch (Exception e)
                 {

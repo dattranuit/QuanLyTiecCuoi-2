@@ -7,7 +7,9 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             DataContext="{StaticResource CaVM}"
              d:DesignHeight="662" d:DesignWidth="800">
+
     <Grid Background="White">
         <DockPanel LastChildFill="True">
             <TextBlock Text="Quản lý Qui định" HorizontalAlignment="Center"
@@ -25,7 +27,7 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" FontWeight="SemiBold" FontSize="15">Áp dụng qui định phạt</Label>
-                            <CheckBox Grid.Column="1" 
+                            <CheckBox Grid.Column="1" IsChecked="{Binding ApDungQuiDinhPhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       controls:CheckBoxHelper.CheckBackgroundFillChecked="#FFFF6425"
                                       controls:CheckBoxHelper.CheckBackgroundFillUncheckedMouseOver="Transparent"
                                       controls:CheckBoxHelper.CheckBackgroundFillCheckedMouseOver="#FFFF6425"
@@ -33,7 +35,7 @@
                                       controls:CheckBoxHelper.CheckGlyphForegroundCheckedMouseOver="Black" 
                                       controls:CheckBoxHelper.CheckGlyphForegroundCheckedPressed="Black"/>
                             <Label Grid.Column="2" FontWeight="SemiBold" FontSize="15">Tỉ lệ phạt (%)</Label>
-                            <controls:NumericUpDown Grid.Column="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="10"/>
+                            <controls:NumericUpDown Value="{Binding TiLePhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Minimum="0" Maximum="100" Grid.Column="2" Margin="118,2,7,2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="10" Grid.ColumnSpan="2"/>
                         </Grid>
                     </GroupBox>
                 </DockPanel>
@@ -52,9 +54,10 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" FontWeight="SemiBold" FontSize="15">Tên loại ca</Label>
-                                <TextBox Grid.Column="1" Margin="0,2,20,2" BorderBrush="Black" BorderThickness="1"/>
+                                <TextBox Text="{Binding TenCa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Margin="0,2,20,2" BorderBrush="Black" BorderThickness="1"/>
                                 <Label Grid.Column="2" FontWeight="SemiBold" FontSize="15" Margin="10,2,0,2">Bắt đầu</Label>
-                                <materialDesign:TimePicker
+                                <materialDesign:TimePicker 
+                                    SelectedTime="{Binding BatDau}"
                                     Grid.Column="3"
                                     Margin="2,2,10,2" 
                                     BorderThickness="1"
@@ -63,6 +66,7 @@
                                     x:Name="tpk_BatDau"/>
                                 <Label Grid.Column="4" FontWeight="SemiBold" FontSize="15" Margin="20,2,0,2">Kết thúc</Label>
                                 <materialDesign:TimePicker
+                                    SelectedTime="{Binding KetThuc}"
                                     Margin="10,2,0,2"  
                                     Grid.Column="5"
                                     Is24Hours="True"
@@ -76,25 +80,21 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
-                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Button Content="Thêm" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedButton}"                      
+                            <Button Content="Thêm" Command="{Binding AddCommand}" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Margin="10" ToolTip="Thêm ca" Background="#FF0F5699" Foreground="White" Width="140"/>
-                            <Button Content="Sửa" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}"                      
+                            <Button Content="Sửa" Grid.Column="1" Command="{Binding EditCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Margin="10" ToolTip="Sửa thông tin loại ca" Background="#FF0F5699" Foreground="White" Width="140"/>
-                            <Button Content="Xóa" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Margin="10" ToolTip="Xóa loại ca" Background="#FF0F5699" Foreground="White" Width="140"/>
-                            <Button Content="Quay lại" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Margin="10" ToolTip="Xóa loại ca" Background="#FF0F5699" Foreground="White" Width="140" Visibility="Hidden"/>
-                            <Button Content="Lưu" Grid.Column="3" Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Margin="10" ToolTip="Lưu thông tin loại ca" Background="#FF0F5699" Foreground="White" Width="140"/>
+                            <Button Content="Xóa" Grid.Column="2" Command="{Binding DeleteCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
+                                    Margin="10" ToolTip="Xóa loại ca" Background="Crimson" Foreground="White" Width="140"/>
+
                         </Grid>
                         <GroupBox DockPanel.Dock="Bottom" Header="Danh sách loại ca" Margin="10,5,10,10">
-                            <DataGrid>
+                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ListCa}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Tên loại ca"/>
-                                    <DataGridTextColumn Header="Giờ băt đầu"/>
-                                    <DataGridTextColumn Header="Giờ kết thúc"/>
+                                    <DataGridTextColumn Header="Tên loại ca" Width="0.3*" Binding="{Binding TenCa}"/>
+                                    <DataGridTextColumn Header="Giờ băt đầu" Width="0.3*" Binding="{Binding BatDau}"/>
+                                    <DataGridTextColumn Header="Giờ kết thúc" Width="0.5*" Binding="{Binding KetThuc}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </GroupBox>

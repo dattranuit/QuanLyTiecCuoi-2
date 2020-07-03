@@ -51,6 +51,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
+
+      
         private int _MaTiecCuoi;
         public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
         private int _TongSoBan;
@@ -134,6 +136,7 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         public TiecViewModel()
         {
+            
             ListTiecCuoi = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
             ListCa = new ObservableCollection<CA>(DataProvider.Ins.DataBase.CAs);
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
@@ -156,6 +159,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     DataProvider.Ins.DataBase.TIECCUOIs.Add(SelectedTiecCuoi);
                     DataProvider.Ins.DataBase.SaveChanges();
                     ListTiecCuoi.Add(SelectedTiecCuoi);
+                    HoaDonViewModel.ListTiecCuoi.Add(SelectedTiecCuoi);
                 }
                 catch (Exception e)
                 {
@@ -223,7 +227,10 @@ namespace QuanLyTiecCuoi.ViewModel
                             }
                             DataProvider.Ins.DataBase.TIECCUOIs.Remove(SelectedTiecCuoi);
                             DataProvider.Ins.DataBase.SaveChanges();
+                            HoaDonViewModel.ListTiecCuoi.Remove(SelectedTiecCuoi);
                             ListTiecCuoi.Remove(SelectedTiecCuoi);
+                            
+
                             // Refresh
                             TenChuRe = TenCoDau = SoDienThoai = GhiChu = String.Empty;
                             NgayDaiTiec = NgayDatTiec = DateTime.Now;
@@ -231,6 +238,7 @@ namespace QuanLyTiecCuoi.ViewModel
                             SelectedCa = null;
                             TienDatCoc = 0;
                             MessageBox.Show("Xóa tiệc cưới thành công", "Thông báo", MessageBoxButton.OK);
+                            
                         }
                         catch (Exception e)
                         {
@@ -253,5 +261,7 @@ namespace QuanLyTiecCuoi.ViewModel
             });
             LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
         }
+
+        
     }
 }
