@@ -38,13 +38,48 @@ namespace QuanLyTiecCuoi.ViewModel
         public System.TimeSpan KetThuc { get => _KetThuc; set { _KetThuc = value; OnPropertyChanged(); } }
         private int _MaCa;
         public int MaCa { get => _MaCa; set { _MaCa = value; OnPropertyChanged(); } }
+        private bool _ApDungQuiDinhPhat { get; set; }
+        private double _TiLePhat { get; set; }
+        public bool ApDungQuiDinhPhat { get => _ApDungQuiDinhPhat; set { _ApDungQuiDinhPhat = value; OnPropertyChanged(); } }
+        public double TiLePhat { get => _TiLePhat; set { _TiLePhat = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        
+
+        //hàm được gọi mỗi khi bool ApDungQuiDinhPhat được set. Tạm bỏ
+        public void ThayDoiApDungQuiDinh()
+        {
+            var ApDungQD = DataProvider.Ins.DataBase.THAMSOes.Where(x => x.TenThamSo == "ApDungQuiDinhPhat").First();
+            if (ApDungQuiDinhPhat)
+                ApDungQD.GiaTri = 1;
+            else
+                ApDungQD.GiaTri = 0;
+            DataProvider.Ins.DataBase.SaveChanges();
+            MessageBox.Show("test đã vô hàm ThayDoiApDungQuiDinh()");
+        }
+
+        //hàm được gọi mỗi khi double TiLePhat được set. Tạm bỏ
+        public void ThayDoiTiLePhat()
+        {
+            var TiLeP = DataProvider.Ins.DataBase.THAMSOes.Where(x => x.TenThamSo == "TiLePhat").First();
+            TiLeP.GiaTri = TiLePhat / 100;
+            DataProvider.Ins.DataBase.SaveChanges();
+            MessageBox.Show("test đã vô hàm ThayDoiTiLePhat()");
+
+        }
         public CaViewModel()
         {
             ListCa = new ObservableCollection<CA>(DataProvider.Ins.DataBase.CAs);
+            //load tỉ lệ phạt lên từ database
+            var TLPhat = DataProvider.Ins.DataBase.THAMSOes.Where(x => x.TenThamSo == "TiLePhat").First();
+            TiLePhat = TLPhat.GiaTri*100;
+            //load áp dụng qui định hay không từ database
+            var ADQDP = DataProvider.Ins.DataBase.THAMSOes.Where(x => x.TenThamSo == "ApDungQuiDinhPhat").First();
+            if (ADQDP.GiaTri == 1)
+                ApDungQuiDinhPhat = true;
+            else
+                ApDungQuiDinhPhat = false;
+            /////////////////////////////////////////
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -105,6 +140,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 //refresh nhap
                 TenCa = "";
             });
+
+            
         }
     }
 }

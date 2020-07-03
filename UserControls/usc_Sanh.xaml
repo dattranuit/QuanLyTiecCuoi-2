@@ -115,11 +115,11 @@
                                                                 <RowDefinition/>
                                                                 <RowDefinition/>
                                                             </Grid.RowDefinitions>
-                                                            <controls:NumericUpDown x:Name="nud_SLBTD" Minimum="0" NumericInputMode="Numbers" Value="{Binding SoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Margin="5,15" BorderBrush="Black" Interval="100" FontSize="15" TextAlignment="Left" ValueChanged="Nud_SLBTD_ValueChanged"></controls:NumericUpDown>
+                                                            <controls:NumericUpDown x:Name="nud_SLBTD" Minimum="0" NumericInputMode="Numbers" Value="{Binding SoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Margin="6,15,4,15" BorderBrush="Black" Interval="100" FontSize="15" TextAlignment="Left" ValueChanged="Nud_SLBTD_ValueChanged"></controls:NumericUpDown>
                                                             <ComboBox x:Name="cbb_MaSanh" SelectedItem="{Binding SelectedLoaiSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                                   ItemsSource="{Binding ListLoaiSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenLoaiSanh"
                                                                   Text="{Binding SelectedItem.LOAISANH.TenLoaiSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
-                                                                  BorderBrush="Black" BorderThickness="1" Margin="5,15" Grid.Row="0"></ComboBox>
+                                                                  BorderBrush="Black" BorderThickness="1" Margin="6,15,4,15" Grid.Row="0"></ComboBox>
                                                         </Grid>
                                                     </Grid>
                                                 </Grid>

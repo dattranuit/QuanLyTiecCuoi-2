@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              DataContext="{StaticResource CaVM}"
              d:DesignHeight="662" d:DesignWidth="800">
-    
+
     <Grid Background="White">
         <DockPanel LastChildFill="True">
             <TextBlock Text="Quản lý Qui định" HorizontalAlignment="Center"
@@ -27,7 +27,7 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" FontWeight="SemiBold" FontSize="15">Áp dụng qui định phạt</Label>
-                            <CheckBox Grid.Column="1" 
+                            <CheckBox Grid.Column="1" IsChecked="{Binding ApDungQuiDinhPhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       controls:CheckBoxHelper.CheckBackgroundFillChecked="#FFFF6425"
                                       controls:CheckBoxHelper.CheckBackgroundFillUncheckedMouseOver="Transparent"
                                       controls:CheckBoxHelper.CheckBackgroundFillCheckedMouseOver="#FFFF6425"
@@ -35,7 +35,7 @@
                                       controls:CheckBoxHelper.CheckGlyphForegroundCheckedMouseOver="Black" 
                                       controls:CheckBoxHelper.CheckGlyphForegroundCheckedPressed="Black"/>
                             <Label Grid.Column="2" FontWeight="SemiBold" FontSize="15">Tỉ lệ phạt (%)</Label>
-                            <controls:NumericUpDown Grid.Column="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="10"/>
+                            <controls:NumericUpDown Value="{Binding TiLePhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Minimum="0" Maximum="100" Grid.Column="2" Margin="118,2,7,2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="10" Grid.ColumnSpan="2"/>
                         </Grid>
                     </GroupBox>
                 </DockPanel>
@@ -87,7 +87,7 @@
                                     Margin="10" ToolTip="Sửa thông tin loại ca" Background="#FF0F5699" Foreground="White" Width="140"/>
                             <Button Content="Xóa" Grid.Column="2" Command="{Binding DeleteCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Margin="10" ToolTip="Xóa loại ca" Background="Crimson" Foreground="White" Width="140"/>
-                            
+
                         </Grid>
                         <GroupBox DockPanel.Dock="Bottom" Header="Danh sách loại ca" Margin="10,5,10,10">
                             <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ListCa}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
