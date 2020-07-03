@@ -7,86 +7,187 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             TextElement.FontWeight="Regular"
-             TextElement.FontSize="13"
-             TextOptions.TextFormattingMode="Ideal"
-             TextOptions.TextRenderingMode="Auto"
-             Background="{DynamicResource MaterialDesignPaper}"
-             FontFamily="{DynamicResource MaterialDesignFont}"
+             TextElement.FontSize="15"
              DataContext="{StaticResource PhanQuyenVM}"
-    d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="662" d:DesignWidth="800">
     <Grid>
-        <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
-            <controls:MetroTabItem Header="Điều chỉnh Phân quyền">
-                <DockPanel LastChildFill="True">
-                    <TextBlock Text="Quản Lý Phân Quyền" HorizontalAlignment="Center"
+        <DockPanel LastChildFill="True" Background="White">
+            <TextBlock Text="Quản Lý Phân Quyền" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
-                                   Margin="0,5,0,0" FontWeight="DemiBold"
+                                   Margin="0,5,0,5" FontWeight="Medium"
                                    DockPanel.Dock="Top"/>
-                    <materialDesign:Card DockPanel.Dock="Top" Margin="10,5,10,10">
+            <Grid DockPanel.Dock="Top">
+                <Grid.Resources>
+                    <Style TargetType="{x:Type CheckBox}">
+                        <Setter Property="controls:CheckBoxHelper.CheckBackgroundFillChecked" Value="#FFFF6425"/>
+                        <Setter Property="controls:CheckBoxHelper.CheckBackgroundFillUncheckedMouseOver" Value="Transparent"/>
+                        <Setter Property="controls:CheckBoxHelper.CheckBackgroundFillCheckedMouseOver" Value="#FFFF6425"/>
+                        <Setter Property="controls:CheckBoxHelper.CheckGlyphForegroundChecked" Value="Black"/>
+                        <Setter Property="controls:CheckBoxHelper.CheckGlyphForegroundCheckedMouseOver" Value="Black"/>
+                        <Setter Property="controls:CheckBoxHelper.CheckGlyphForegroundCheckedPressed" Value="Black"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.1*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:Card Margin="10,5,5,10">
+                    <DockPanel>
+                        <Grid DockPanel.Dock="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button DockPanel.Dock="Bottom" Command="{Binding AddCommand}" Grid.Column="1"
+                                    Style="{StaticResource MaterialDesignFlatMidBgButton}" Margin="5,10"
+                                    ToolTip="Lưu lại các chỉnh sửa phân quyền" FontSize="15"
+                                    Background="Green" Foreground="White" FontWeight="SemiBold">
+                                Lưu thay đổi
+                            </Button>
+                            <Button DockPanel.Dock="Bottom" Command="{Binding AddCommand}" Grid.Column="0"
+                                    Style="{StaticResource MaterialDesignFlatMidBgButton}" Margin="5,10"
+                                    ToolTip="Lưu lại các chỉnh sửa phân quyền" FontSize="15" 
+                                    Background="#FF0F5699" Foreground="White" FontWeight="SemiBold">
+                                Làm mới
+                            </Button>
+                        </Grid>    
+                        <GroupBox DockPanel.Dock ="Top" Header="Thông tin phân quyền" Margin="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="0.4*"/>
+                                    <ColumnDefinition Width="0.4*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <!-- column header -->
+                                <ComboBox Margin="10"  IsEditable="True" IsReadOnly="True" Text="Nhóm người dùng" FontSize="15" Foreground="Crimson"
+                                          SelectedItem="{Binding SelectedNhomNguoiDung2,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                          ItemsSource="{Binding ListNhomNguoiDung, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenNhomNguoiDung"/>
+                                <Label Grid.Row="0" Grid.Column="1" Content="Xem" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                                <Label Grid.Row="0" Grid.Column="2" Content="Thay đổi" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                                <!--row header-->
+                                <Label Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" Content="Màn hình Sảnh" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                                <Label Grid.Row="2" Grid.Column="0" Margin="10,0,0,0" Content="Màn hình Tiệc" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                                <Label Grid.Row="3" Grid.Column="0" Margin="10,0,0,0" Content="Màn hình Hoá đơn" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                                <Label Grid.Row="4" Grid.Column="0" Margin="10,0,0,0" Content="Màn hình Doanh thu" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                                <Label Grid.Row="5" Grid.Column="0" Margin="10,0,0,0" Content="Màn hình Dịch vụ" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                                <Label Grid.Row="6" Grid.Column="0" Margin="10,0,0,0" Content="Màn hình Món ăn" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                                <Label Grid.Row="7" Grid.Column="0" Margin="10,0,0,0" Content="Màn hình Qui định" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                                <Label Grid.Row="8" Grid.Column="0" Margin="10,0,0,0" Content="Màn hình Phân quyền" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                                <!--body-->
+                                <CheckBox Name="cbx_Xem_Sanh" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_Xem_Tiec" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_Xem_HoaDon" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_Xem_DoanhThu" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_Xem_DichVu" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_xem_MonAn" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_Xem_QuiDinh" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_Xem_PhanQuyen" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    </materialDesign:Card>
-                </DockPanel>
-            </controls:MetroTabItem>
-            <controls:MetroTabItem Header="Quản lý tài khoản">
-                <DockPanel LastChildFill="True">
-                    <TextBlock Text="Quản Lý Tài Khoản" HorizontalAlignment="Center"
-                                   VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
-                                   Margin="0,5,0,0" FontWeight="DemiBold"
-                                   DockPanel.Dock="Top"/>
-                    <Grid DockPanel.Dock="Bottom">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Command="{Binding AddCommand}"
-                                    Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                                    ToolTip="MaterialDesignFlatMidButton" FontSize="16" Background="#FF0F5699" Foreground="#FFF1E6E6" FontWeight="SemiBold">
-                                    Thêm
-                                </Button>
-                                <Button Grid.Column="1" Command="{Binding EditCommand}"
-                                    Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                                    ToolTip="MaterialDesignFlatMidButton" Margin="3,5,3,0" FontSize="16" Background="#FF0F5699" Foreground="#FFF1E6E6" FontWeight="SemiBold">
-                                    Sửa
-                                </Button>
-                                <Button Grid.Column="2" Command="{Binding DeleteCommand}"
-                                    Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                                    ToolTip="MaterialDesignFlatMidButton" Margin="3,5,3,0" FontSize="16" Background="#FF0F5699" Foreground="#FFF1E6E6" FontWeight="SemiBold">
-                                    Xóa
-                                </Button>
+                                <CheckBox Name="cbx_ThayDoi_Sanh" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_ThayDoi_Tiec" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_ThayDoi_HoaDon" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_ThayDoi_DoanhThu" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_ThayDoi_DichVu" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_ThayDoi_MonAn" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_ThayDoi_QuiDinh" Grid.Row="7" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CheckBox Name="cbx_ThayDoi_PhanQuyen" Grid.Row="8" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Grid>
-                    <materialDesign:Card Margin="10" DockPanel.Dock="Top">
-                        <GroupBox Header="Loại người dùng" Margin="5" />
-                    </materialDesign:Card>
-                    <materialDesign:Card DockPanel.Dock="Top" Margin="10">
-                        <GroupBox Header="Danh sách người dùng" BorderBrush="Black" FontSize="16" Margin="5" DockPanel.Dock="Top">
-                            <DataGrid ItemsSource="{Binding List2}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"    
-                                                  AutoGenerateColumns="False" IsReadOnly="False" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Background="{x:Null}">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Mã nhóm người dùng" FontSize="14" Binding="{Binding MaNhomNguoiDung}">
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Tên nhóm người dùng" FontSize="14" Binding="{Binding TenNhomNguoiDung}">
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Mã chức năng" FontSize="14" Binding="{Binding MaChucNang}">
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Tên chức năng" FontSize="14" Binding="{Binding TenChucNang}">
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Tên màn hình được load" FontSize="14" Binding="{Binding TenManHinhDuocLoad}">
-                                    </DataGridTextColumn>
-                                    <!--<DataGridTextColumn Header="Tên màn hình dùng" FontSize="14" Binding="{Binding TenManHinhDung}">
-                                                </DataGridTextColumn>-->
-                                    <!--<DataGridTextColumn Header="Chức năng" FontSize="14" Binding="{Binding pq_ChucNang}">
-                                                </DataGridTextColumn>-->
-                                </DataGrid.Columns>
-                            </DataGrid>
                         </GroupBox>
+                    </DockPanel>
+                </materialDesign:Card>
+                <materialDesign:Card Grid.Column="1" Margin="5,5,10,10">
+                    <DockPanel LastChildFill="True">
+                        <Grid DockPanel.Dock="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button 
+                                Command="{Binding ClearCommand}"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Grid.Column="0" Margin="5,10"
+                                ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White">
+                                Mới
+                            </Button>
+                            <Button 
+                                Command="{Binding AddCommand}"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Grid.Column="1" Margin="5,10"
+                                ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White">
+                                Thêm
+                            </Button>
+                            <Button
+                                Command="{Binding EditCommand}"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Grid.Column="2" Margin="5,10"
+                                ToolTip="Sửa thông tin đặt Tiệc" Background="Green" Foreground="White">
+                                Sửa
+                            </Button>
+                            <Button
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Grid.Column="3" Margin="5,10"
+                                Command="{Binding DeleteCommand}"
+                                ToolTip="Xóa thông tin đặt Tiệc" Background="Crimson" Foreground="White">
+                                Xóa
+                            </Button>
+                        </Grid>
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="0.5*"/>
+                            </Grid.RowDefinitions>
+                            <GroupBox Grid.Row="0" Header="Danh sách người dùng" Margin="10">
+                                <DataGrid ItemsSource="{Binding ListNguoiDung, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedNguoiDung, Mode=TwoWay}" 
+                                          AutoGenerateColumns="False" CanUserAddRows="False" FontSize="12"
+                                          TextElement.FontWeight="Normal">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Họ Tên" Binding="{Binding TenNguoiDung}" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Username" Binding="{Binding Username}" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Password" Binding="{Binding Password}" IsReadOnly="True"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Nhóm người dùng" Binding="{Binding NHOMNGUOIDUNG.TenNhomNguoiDung}" IsReadOnly="True"></DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </GroupBox>
+                            <GroupBox Header="Thông tin người dùng" Grid.Row="1" Margin="10,0">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.65*"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" Content="Tên người dùng" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="SemiBold"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" Content="Username" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="SemiBold"/>
+                                    <Label Grid.Row="2" Grid.Column="0" Margin="10,0,0,0" Content="Password" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="SemiBold"/>
+                                    <Label Grid.Row="3" Grid.Column="0" Margin="10,0,0,0" Content="Nhóm người dùng" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="SemiBold"/>
 
-                    </materialDesign:Card>
-                </DockPanel>
-            </controls:MetroTabItem>
-        </controls:MetroAnimatedTabControl>
-
+                                    <TextBox Grid.Row="0" Grid.Column="1" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding TenNguoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <TextBox Grid.Row="1" Grid.Column="1" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <TextBox Grid.Row="2" Grid.Column="1" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <ComboBox Grid.Row="3" Grid.Column="1" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedNguoiDung.NHOMNGUOIDUNG.TenNhomNguoiDung, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedNhomNguoiDung,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListNhomNguoiDung, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenNhomNguoiDung"/>
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </DockPanel>
+                </materialDesign:Card>
+            </Grid>
+        </DockPanel>
     </Grid>
 </UserControl>

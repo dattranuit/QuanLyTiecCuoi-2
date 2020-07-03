@@ -13,83 +13,65 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class PhanQuyenViewModel : BaseViewModel
     {
-        private ObservableCollection<NGUOIDUNG> _List1;
-        public ObservableCollection<NGUOIDUNG> List1 { get => _List1; set { _List1 = value; OnPropertyChanged(); } }
+        private ObservableCollection<NGUOIDUNG> _ListNguoiDung;
+        public ObservableCollection<NGUOIDUNG> ListNguoiDung { get => _ListNguoiDung; set { _ListNguoiDung = value; OnPropertyChanged(); } }
        
-        private ObservableCollection<CHUCNANG> _List2;
-        public ObservableCollection<CHUCNANG> List2 { get => _List2; set { _List2 = value; OnPropertyChanged(); } }
+        private ObservableCollection<CHUCNANG> _ListChucNang;
+        public ObservableCollection<CHUCNANG> ListChucNang { get => _ListChucNang; set { _ListChucNang = value; OnPropertyChanged(); } }
 
-        private CHUCNANG _SelectedItem;
-        public CHUCNANG SelectedItem
+        private ObservableCollection<NHOMNGUOIDUNG> _ListNhomNguoiDung;
+        public ObservableCollection<NHOMNGUOIDUNG> ListNhomNguoiDung { get => _ListNhomNguoiDung; set { _ListNhomNguoiDung = value; OnPropertyChanged(); } }
+
+
+        private NGUOIDUNG _SelectedNguoiDung;
+        public NGUOIDUNG SelectedNguoiDung
         {
-            get => _SelectedItem;
+            get => _SelectedNguoiDung;
             set
             {
-                _SelectedItem = value;
+                _SelectedNguoiDung = value;
                 OnPropertyChanged();
 
                 // click vô bảng sẽ hiển thị trên textbox
-                if (SelectedItem != null)
+                if (SelectedNguoiDung != null)
                 {
-                    MaChucNang = SelectedItem.MaChucNang;
-                    TenChucNang = SelectedItem.TenChucNang;
+                    Username = SelectedNguoiDung.Username;
+                    Password = SelectedNguoiDung.Password;
+                    TenNguoiDung = SelectedNguoiDung.TenNguoiDung;
                 }
             }
         }
 
-        //private ICollectionView _dataGridCollection;
-        //private string _filterString;
-        //public ICollectionView DataGridCollection
-        //{
-        //    get { return _dataGridCollection; }
-        //    set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
-        //}
-        //public string FilterString
-        //{
-        //    get { return _filterString; }
-        //    set
-        //    {
-        //        _filterString = value;
-        //        OnPropertyChanged("FilterString");
-        //        FilterCollection();
-        //    }
-        //}
-        //private void FilterCollection()
-        //{
-        //    if (_dataGridCollection != null)
-        //    {
-        //        _dataGridCollection.Refresh();
-        //    }
-        //}
-        //public bool Filter(object obj)
-        //{
-        //    var data = obj as MONAN;
-        //    if (data != null)
-        //    {
-        //        if (!string.IsNullOrEmpty(_filterString))
-        //        {
-        //            return data.TenMonAn.Contains(_filterString);
-        //        }
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //private void NotifyPropertyChanged(string property)
-        //{
-        //    if (PropertyChanged != null)
-        //    {
-        //        PropertyChanged(this, new PropertyChangedEventArgs(property));
-        //    }
-        //}
+        private NHOMNGUOIDUNG _SelectedNhomNguoiDung;
+        public NHOMNGUOIDUNG SelectedNhomNguoiDung
+        {
+            get => _SelectedNhomNguoiDung;
+            set
+            {
+                _SelectedNhomNguoiDung = value;
+                OnPropertyChanged();
+            }
+        }
 
-        ////biến bên trang chính
-        private int _MaChucNang { get; set; }
-        public int MaChucNang { get => _MaChucNang; set { _MaChucNang = value; OnPropertyChanged(); } }
-        private string _TenChucNang { get; set; }
-        public string TenChucNang { get => _TenChucNang; set { _TenChucNang = value; OnPropertyChanged(); } }
-        private string _TenManHinhDuocLoad { get; set; }
-        public string TenManHinhDuocLoad { get => _TenManHinhDuocLoad; set { _TenManHinhDuocLoad = value; OnPropertyChanged(); } }
+        private NHOMNGUOIDUNG _SelectedNhomNguoiDung2;
+        public NHOMNGUOIDUNG SelectedNhomNguoiDung2
+        {
+            get => _SelectedNhomNguoiDung2;
+            set
+            {
+                _SelectedNhomNguoiDung2 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _Username;
+        private string _Password;
+        private string _TenNguoiDung;
+        private int _MaNhomNguoiDung;
+        public string Username { get => _Username; set { _Username = value; OnPropertyChanged(); } }
+        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
+        public string TenNguoiDung { get => _TenNguoiDung; set { _TenNguoiDung = value; OnPropertyChanged(); } }
+        public int MaNhomNguoiDung { get => _MaNhomNguoiDung; set { _MaNhomNguoiDung = value; OnPropertyChanged(); } }
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -99,8 +81,9 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public PhanQuyenViewModel()
         {
-            List1 = new ObservableCollection<NGUOIDUNG>(DataProvider.Ins.DataBase.NGUOIDUNGs);
-            List2 = new ObservableCollection<CHUCNANG>(DataProvider.Ins.DataBase.CHUCNANGs);
+            ListNguoiDung = new ObservableCollection<NGUOIDUNG>(DataProvider.Ins.DataBase.NGUOIDUNGs);
+            ListChucNang = new ObservableCollection<CHUCNANG>(DataProvider.Ins.DataBase.CHUCNANGs);
+            ListNhomNguoiDung = new ObservableCollection<NHOMNGUOIDUNG>(DataProvider.Ins.DataBase.NHOMNGUOIDUNGs);
             AddCommand = new RelayCommand<object>((p) =>
             {
                 //if (string.IsNullOrEmpty(TenMonAn))
@@ -112,39 +95,38 @@ namespace QuanLyTiecCuoi.ViewModel
 
             }, (p) =>
             {
-                var PhanQuyen = new CHUCNANG()
-                {
-                    MaChucNang = MaChucNang,
-                    TenChucNang = TenChucNang
-                };
-                DataProvider.Ins.DataBase.CHUCNANGs.Add(PhanQuyen);
-                DataProvider.Ins.DataBase.SaveChanges();
-                List2.Add(PhanQuyen);
+                //var PhanQuyen = new CHUCNANG()
+                //{
+                //    MaChucNang = MaChucNang,
+                //    TenChucNang = TenChucNang
+                //};
+                //DataProvider.Ins.DataBase.CHUCNANGs.Add(PhanQuyen);
+                //DataProvider.Ins.DataBase.SaveChanges();
             });
 
-            EditCommand = new RelayCommand<object>((p) =>
-            {
-                if (string.IsNullOrEmpty(TenChucNang) || SelectedItem == null)
-                    return false;
-                var displayList = DataProvider.Ins.DataBase.CHUCNANGs.Where(x => x.TenChucNang == SelectedItem.TenChucNang);
-                if (displayList == null && displayList.Count() != 0)
-                    return false;
-                return true;
-            }, (p) =>
-            {
-                //CheckBox chk = new CheckBox();
-                var MonAn = DataProvider.Ins.DataBase.CHUCNANGs.Where(x => x.MaChucNang == SelectedItem.MaChucNang).SingleOrDefault();
-                MonAn.MaChucNang = SelectedItem.MaChucNang;
-                MonAn.TenChucNang = SelectedItem.TenChucNang;
+            //EditCommand = new RelayCommand<object>((p) =>
+            //{
+            //    if (string.IsNullOrEmpty(TenChucNang) || SelectedChucNang == null)
+            //        return false;
+            //    var displayList = DataProvider.Ins.DataBase.CHUCNANGs.Where(x => x.TenChucNang == SelectedChucNang.TenChucNang);
+            //    if (displayList == null && displayList.Count() != 0)
+            //        return false;
+            //    return true;
+            //}, (p) =>
+            //{
+            //    //CheckBox chk = new CheckBox();
+            //    var MonAn = DataProvider.Ins.DataBase.CHUCNANGs.Where(x => x.MaChucNang == SelectedChucNang.MaChucNang).SingleOrDefault();
+            //    MonAn.MaChucNang = SelectedChucNang.MaChucNang;
+            //    MonAn.TenChucNang = SelectedChucNang.TenChucNang;
 
-                DataProvider.Ins.DataBase.SaveChanges();
+            //    DataProvider.Ins.DataBase.SaveChanges();
 
-                //SelectedItem.TenMonAn = TenMonAn;
-                //SelectedItem.MaMonAn = MaMonAn;
-                //SelectedItem.DonGia = DonGia;
-                //SelectedItem.MoTa = MoTa;
-                //SelectedItem.GhiChu = GhiChu;
-            });
+            //    //SelectedChucNang.TenMonAn = TenMonAn;
+            //    //SelectedChucNang.MaMonAn = MaMonAn;
+            //    //SelectedChucNang.DonGia = DonGia;
+            //    //SelectedChucNang.MoTa = MoTa;
+            //    //SelectedChucNang.GhiChu = GhiChu;
+            //});
             //DeleteCommand = new RelayCommand<object>((p) =>
             //{
 

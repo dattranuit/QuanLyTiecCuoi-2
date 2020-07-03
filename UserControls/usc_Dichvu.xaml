@@ -16,8 +16,7 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock Text="Quản lý Dịch Vụ" HorizontalAlignment="Center" Foreground="#FF0E2291"  VerticalAlignment="Center" FontSize="32" Height="42" />
-
+            <TextBlock Text="Quản lý Dịch Vụ" HorizontalAlignment="Center" Foreground="#FF0E2291"  VerticalAlignment="Center" FontSize="32"/>
         </Grid>
 
         <Grid Grid.Row="1">

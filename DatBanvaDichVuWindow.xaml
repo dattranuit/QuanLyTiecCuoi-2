@@ -23,29 +23,31 @@
                         </DockPanel>
                         <Grid DockPanel.Dock="Bottom">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.25*"/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition Width="0.25*"/>
                             </Grid.ColumnDefinitions>
                             <Button
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="0" Margin="10"
-                                    Command="{Binding AddCommand}"
-                                    ToolTip="Lưu thông tin đặt bàn" Background="#FF0F5699" Foreground="White">
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Grid.Column="1" Margin="10" Width="175"
+                                Command="{Binding AddCommand}"
+                                ToolTip="Lưu thông tin đặt bàn" Background="#FF0F5699" Foreground="White">
                                 Thêm Phiếu Đặt Bàn
                             </Button>
                             <Button
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="2" Margin="10"
-                                    Command="{Binding DeleteCommand}"
-                                    ToolTip="Xóa đặt bàn" Background="#FF0F5699" Foreground="White">
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Grid.Column="3" Margin="10" Width="175"
+                                Command="{Binding DeleteCommand}"
+                                ToolTip="Xóa đặt bàn" Background="Crimson" Foreground="White">
                                 Xóa Phiếu Đặt Bàn
                             </Button>
                             <Button
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="1" Margin="10"
-                                    Command="{Binding EditCommand}"
-                                    ToolTip="Thoát về màn hình Home" Background="#FF0F5699" Foreground="White">
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Grid.Column="2" Margin="10" Width="175"
+                                Command="{Binding EditCommand}"
+                                ToolTip="Thoát về màn hình Home" Background="Green" Foreground="White">
                                 Sửa Phiếu Đặt Bàn
                             </Button>
                         </Grid>

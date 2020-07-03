@@ -9,9 +9,10 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class MainViewModel:BaseViewModel
     {
+        public static bool ThayDoiTiecCuoi = true;
         public MainViewModel()
         {
-
+            bool ThayDoiTiecCuoi = true;
         }
     }
 }

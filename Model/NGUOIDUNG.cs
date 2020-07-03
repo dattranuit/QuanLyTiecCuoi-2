@@ -11,14 +11,18 @@ namespace QuanLyTiecCuoi.Model
 {
     using System;
     using System.Collections.Generic;
+    using QuanLyTiecCuoi.ViewModel;
     
-    public partial class NGUOIDUNG
+    public partial class NGUOIDUNG:BaseViewModel
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string TenNguoiDung { get; set; }
-        public int MaNhomNguoiDung { get; set; }
-    
+        private string _Username;
+        private string _Password;
+        private string _TenNguoiDung;
+        private int _MaNhomNguoiDung;
+        public string Username { get => _Username; set { _Username = value; OnPropertyChanged(); } }
+        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
+        public string TenNguoiDung { get => _TenNguoiDung; set { _TenNguoiDung = value; OnPropertyChanged(); } }
+        public int MaNhomNguoiDung { get => _MaNhomNguoiDung; set { _MaNhomNguoiDung = value; OnPropertyChanged(); } }
         public virtual NHOMNGUOIDUNG NHOMNGUOIDUNG { get; set; }
     }
 }

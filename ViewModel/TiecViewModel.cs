@@ -11,11 +11,16 @@ using System.Windows.Input;
 using QuanLyTiecCuoi.Model;
 using System.Windows.Controls;
 using System.Data;
+using System.Security.AccessControl;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
     class TiecViewModel : BaseViewModel
     {
+        private bool _IsEnable;
+        public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
+        private bool _IsReadOnly;
+        public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
         private static int _CurrentMaTiecCuoi;
         public static int CurrentMaTiecCuoi { get => _CurrentMaTiecCuoi; set => _CurrentMaTiecCuoi = value; }
         private ObservableCollection<TIECCUOI> _ListTiecCuoi;
@@ -136,7 +141,7 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         public TiecViewModel()
         {
-            
+            IsReadOnly = MainViewModel.ThayDoiTiecCuoi;
             ListTiecCuoi = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
             ListCa = new ObservableCollection<CA>(DataProvider.Ins.DataBase.CAs);
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);

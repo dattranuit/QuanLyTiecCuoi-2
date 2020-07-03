@@ -12,8 +12,7 @@
         <DockPanel LastChildFill="True">
             <TextBlock Text="Thông Tin Tiệc Cưới" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
-                                   Margin="0,5,0,0" FontWeight="DemiBold"
-                                   DockPanel.Dock="Top"/>
+                                   Margin="0,5,0,0" DockPanel.Dock="Top" FontWeight="Medium"/>
             <Grid DockPanel.Dock="Bottom">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -43,16 +42,16 @@
                 </Button>
                 <Button
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Grid.Column="3" Margin="10"
+                    Grid.Column="4" Margin="10"
                     Command="{Binding DeleteCommand}"
-                    ToolTip="Xóa thông tin đặt Tiệc" Background="#FF0F5699" Foreground="White">
+                    ToolTip="Xóa thông tin đặt Tiệc" Background="Crimson" Foreground="White">
                     Xóa
                 </Button>
                 <Button
                     Command="{Binding EditCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Grid.Column="4" Margin="10"
-                    ToolTip="Sửa thông tin đặt Tiệc" Background="#FF0F5699" Foreground="White">
+                    Grid.Column="3" Margin="10" 
+                    ToolTip="Sửa thông tin đặt Tiệc" Background="Green" Foreground="White">
                     Sửa
                 </Button>
             </Grid>
@@ -91,11 +90,11 @@
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <TextBox Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenChuRe, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                                    <TextBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenCoDau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                                    <controls:NumericUpDown Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Value="{Binding SoDienThoai, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HideUpDownButtons="True" TextAlignment="Left" NumericInputMode="Numbers"/>
-                                    <DatePicker Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding NgayDatTiec, UpdateSourceTrigger=PropertyChanged, StringFormat='mm/dd/yyyy', Mode=TwoWay}"/>
-                                    <TextBox Grid.Row="4" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenChuRe, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenCoDau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Value="{Binding SoDienThoai, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HideUpDownButtons="True" TextAlignment="Left" NumericInputMode="Numbers"/>
+                                    <DatePicker IsEnabled="{Binding IsEnable, Mode=OneWay}" Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding NgayDatTiec, UpdateSourceTrigger=PropertyChanged, StringFormat='mm/dd/yyyy', Mode=TwoWay}"/>
+                                    <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="4" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                 </Grid>
                             </Grid>
                             <Grid Grid.Column="1" Margin="20,0,0,0">
