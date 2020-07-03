@@ -45,6 +45,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand EditQuiDinhCommand { get; set; }
 
         //hàm được gọi mỗi khi bool ApDungQuiDinhPhat được set. Tạm bỏ
         public void ThayDoiApDungQuiDinh()
@@ -55,7 +56,6 @@ namespace QuanLyTiecCuoi.ViewModel
             else
                 ApDungQD.GiaTri = 0;
             DataProvider.Ins.DataBase.SaveChanges();
-            MessageBox.Show("test đã vô hàm ThayDoiApDungQuiDinh()");
         }
 
         //hàm được gọi mỗi khi double TiLePhat được set. Tạm bỏ
@@ -64,7 +64,6 @@ namespace QuanLyTiecCuoi.ViewModel
             var TiLeP = DataProvider.Ins.DataBase.THAMSOes.Where(x => x.TenThamSo == "TiLePhat").First();
             TiLeP.GiaTri = TiLePhat / 100;
             DataProvider.Ins.DataBase.SaveChanges();
-            MessageBox.Show("test đã vô hàm ThayDoiTiLePhat()");
 
         }
         public CaViewModel()
@@ -141,7 +140,22 @@ namespace QuanLyTiecCuoi.ViewModel
                 TenCa = "";
             });
 
-            
+            EditQuiDinhCommand = new RelayCommand<object>((p) =>
+            {
+                var ApDungQDP = DataProvider.Ins.DataBase.THAMSOes.Where(x => x.TenThamSo == "ApDungQuiDinhPhat").First();
+                var TLP = DataProvider.Ins.DataBase.THAMSOes.Where(x => x.TenThamSo == "TiLePhat").First();
+                bool test = true;
+                if (ApDungQDP.GiaTri == 0)
+                    test = false;
+                if (test == ApDungQuiDinhPhat && TLP.GiaTri == TiLePhat/100)
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                ThayDoiApDungQuiDinh();
+                ThayDoiTiLePhat();
+                MessageBox.Show("Sửa Qui Định thành công !");
+            });
         }
     }
 }

@@ -24,5 +24,11 @@ namespace QuanLyTiecCuoi.UserControls
         {
             InitializeComponent();
         }
+
+        private void NumericUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (nud_TiLePhat.Value.ToString() == "")
+                nud_TiLePhat.Value = 0;
+        }
     }
 }

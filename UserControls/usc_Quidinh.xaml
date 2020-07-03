@@ -21,10 +21,11 @@
                     <GroupBox Header="Quản lý qui định phạt" Margin="10" DockPanel.Dock="Top">
                         <Grid Margin="10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="0.5*"/>
-                                <ColumnDefinition Width="0.5*" />
-                                <ColumnDefinition />
+                                <ColumnDefinition Width="172*" />
+                                <ColumnDefinition Width="66*"/>
+                                <ColumnDefinition Width="103*" />
+                                <ColumnDefinition Width="170*" />
+                                <ColumnDefinition Width="217*" />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" FontWeight="SemiBold" FontSize="15">Áp dụng qui định phạt</Label>
                             <CheckBox Grid.Column="1" IsChecked="{Binding ApDungQuiDinhPhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -35,7 +36,9 @@
                                       controls:CheckBoxHelper.CheckGlyphForegroundCheckedMouseOver="Black" 
                                       controls:CheckBoxHelper.CheckGlyphForegroundCheckedPressed="Black"/>
                             <Label Grid.Column="2" FontWeight="SemiBold" FontSize="15">Tỉ lệ phạt (%)</Label>
-                            <controls:NumericUpDown Value="{Binding TiLePhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Minimum="0" Maximum="100" Grid.Column="2" Margin="118,2,7,2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="10" Grid.ColumnSpan="2"/>
+                            <controls:NumericUpDown x:Name="nud_TiLePhat" Value="{Binding TiLePhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Minimum="0" Maximum="100" Grid.Column="3" Margin="24,2,7,2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="10" ValueChanged="NumericUpDown_ValueChanged"/>
+                            <Button Content="Sửa" Grid.Column="4" Command="{Binding EditQuiDinhCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
+                                     ToolTip="Sửa Qui Định" Background="#FF0F5699" Foreground="White" Height="Auto" Margin="54,0,24,1"/>
                         </Grid>
                     </GroupBox>
                 </DockPanel>
@@ -90,7 +93,7 @@
 
                         </Grid>
                         <GroupBox DockPanel.Dock="Bottom" Header="Danh sách loại ca" Margin="10,5,10,10">
-                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ListCa}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ListCa}" IsReadOnly="True" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Tên loại ca" Width="0.3*" Binding="{Binding TenCa}"/>
                                     <DataGridTextColumn Header="Giờ băt đầu" Width="0.3*" Binding="{Binding BatDau}"/>

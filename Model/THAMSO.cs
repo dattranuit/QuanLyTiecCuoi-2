@@ -9,12 +9,16 @@
 
 namespace QuanLyTiecCuoi.Model
 {
+    using QuanLyTiecCuoi.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class THAMSO
+    public partial class THAMSO: BaseViewModel
     {
-        public string TenThamSo { get; set; }
-        public double GiaTri { get; set; }
+        private string _TenThamSo;
+        private double _GiaTri;
+
+        public string TenThamSo { get => _TenThamSo; set { _TenThamSo = value;OnPropertyChanged(); } }
+        public double GiaTri { get => _GiaTri; set { _GiaTri = value;OnPropertyChanged(); } }
     }
 }
