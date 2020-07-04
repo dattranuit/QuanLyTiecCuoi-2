@@ -12,7 +12,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public static bool ThayDoiTiecCuoi = true;
         public MainViewModel()
         {
-            bool ThayDoiTiecCuoi = true;
+            ThayDoiTiecCuoi = false;
         }
     }
 }

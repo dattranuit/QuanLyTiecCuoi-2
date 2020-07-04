@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.ModelConfiguration.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,9 +66,15 @@ namespace QuanLyTiecCuoi.ViewModel
                 return false;
             if (SoLuongDuTru != SelectedPDB.SoLuongDuTru)
                 return false;
-            if (DonGiaBan != SelectedPDB.DonGiaBan)
-                return false;
             if (GhiChu != SelectedPDB.GhiChu)
+                return false;
+            return true;
+        }
+        bool Addable()
+        {
+            if (String.IsNullOrEmpty(LoaiBan))
+                return false;
+            if (SoLuong == 0)
                 return false;
             return true;
         }
@@ -75,7 +82,7 @@ namespace QuanLyTiecCuoi.ViewModel
         {
             AddCommand = new RelayCommand<object>((p) =>
             {
-                return true;
+                return Addable();
 
             }, (p) =>
             {
@@ -105,24 +112,24 @@ namespace QuanLyTiecCuoi.ViewModel
             });
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedPDB == null)
+                if (Enable())
                     return false;
                 var displayList = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan);
                 if (displayList != null && displayList.Count() != 0)
                     return true;
-                return false;
+                return Addable();
             }, (p) =>
             {
                 try
                 {
-                    var DichVu = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan).SingleOrDefault();
-                    DichVu.MaPhieuDatBan = SelectedPDB.MaPhieuDatBan;
-                    DichVu.MaTiecCuoi = CurrentMaTiecCuoi;
-                    DichVu.LoaiBan = SelectedPDB.LoaiBan;
-                    DichVu.SoLuong = SelectedPDB.SoLuong;
-                    DichVu.SoLuongDuTru = SelectedPDB.SoLuongDuTru;
-                    DichVu.DonGiaBan = SelectedPDB.DonGiaBan;
-                    DichVu.GhiChu = SelectedPDB.GhiChu;
+                    var PhieuDatBan = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan).SingleOrDefault();
+                    PhieuDatBan.MaPhieuDatBan = SelectedPDB.MaPhieuDatBan;
+                    PhieuDatBan.MaTiecCuoi = CurrentMaTiecCuoi;
+                    PhieuDatBan.LoaiBan = SelectedPDB.LoaiBan;
+                    PhieuDatBan.SoLuong = SelectedPDB.SoLuong;
+                    PhieuDatBan.SoLuongDuTru = SelectedPDB.SoLuongDuTru;
+                    PhieuDatBan.DonGiaBan = SelectedPDB.DonGiaBan;
+                    PhieuDatBan.GhiChu = SelectedPDB.GhiChu;
                     DataProvider.Ins.DataBase.SaveChanges();
                     MessageBox.Show("Sửa phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
                 }
@@ -134,10 +141,54 @@ namespace QuanLyTiecCuoi.ViewModel
             CT_PhieuDatBanCommand = new RelayCommand<object>((p) => { return Enable(); }, (p) => {
                 CT_PhieuDatBanViewModel.CurrentMaPDB = SelectedPDB.MaPhieuDatBan;
                 CT_PhieuDatBanViewModel.ListCTPhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan));
-                //foreach (CT_PHIEUDATBAN item in CT_PhieuDatBanViewModel.ListCTPhieuDatBan)
-                //    MessageBox.Show(item.MaPhieuDatBan+"");
                 CT_PhieuDatBanWindow wd = new CT_PhieuDatBanWindow();
                 wd.ShowDialog();
+                int count = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == MaPhieuDatBan).Count();
+                if (count != 0)
+                    DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == MaPhieuDatBan).Sum(ct => ct.ThanhTien);
+                var PhieuDatBan = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan).SingleOrDefault();
+                PhieuDatBan.DonGiaBan = DonGiaBan;
+                DataProvider.Ins.DataBase.SaveChanges();
+                while (DonGiaBan < DonGiaBanToiThieu)
+                {
+                    MessageBoxResult result = MessageBox.Show("Đơn giá bàn thấp hơn đơn giá bàn tối thiểu !!!\n" +
+                        "Đơn giá bàn sẽ được thay đổi giá trị bằng đơn giá bàn tối thiểu", "Cảnh báo", MessageBoxButton.YesNo);
+                    if(result == MessageBoxResult.Yes)
+                    {
+                        DonGiaBan = DonGiaBanToiThieu;
+                        try
+                        {
+                            var DichVu = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan).SingleOrDefault();
+                            DichVu.DonGiaBan = DonGiaBan;
+                            DataProvider.Ins.DataBase.SaveChanges();
+                            MessageBox.Show("Đơn giá bàn đã được thay đổi giá trị bằng đơn giá bàn tối thiểu", "Thông báo", MessageBoxButton.OK);
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Thay đổi phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xin thay đổi chi tiết đặt bàn cho đến khi Đơn giá bàn lớn hơn hoặc bằng Đơn giá bàn tối thiểu", "Thông báo", MessageBoxButton.OK);
+                        CT_PhieuDatBanWindow ct = new CT_PhieuDatBanWindow();
+                        ct.ShowDialog();
+                    }
+                    int cc = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == MaPhieuDatBan).Count();
+                    if (cc != 0)
+                        DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == MaPhieuDatBan).Sum(ct => ct.ThanhTien);
+                    else
+                        DonGiaBan = 0;
+                    if (DonGiaBan >= DonGiaBanToiThieu)
+                    {
+                        var temp = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan).SingleOrDefault();
+                        temp.DonGiaBan = DonGiaBan;
+                      //  MessageBox.Show(PhieuDatBan.DonGiaBan.ToString());
+                        DataProvider.Ins.DataBase.SaveChanges();
+                    }
+                }
+
             });
             DeleteCommand = new RelayCommand<object>((p) =>
             {
@@ -163,7 +214,7 @@ namespace QuanLyTiecCuoi.ViewModel
                         // Refresh
                         LoaiBan = GhiChu =  String.Empty;
                         SoLuong = SoLuongDuTru = 0;
-                        DonGiaBan = 0;                       
+                        DonGiaBan = DonGiaBanToiThieu;                       
                         MessageBox.Show("Xóa phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
                     }
                     catch (Exception e)

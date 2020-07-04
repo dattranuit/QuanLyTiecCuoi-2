@@ -14,7 +14,7 @@ namespace QuanLyTiecCuoi.ViewModel
     {
         private static int _CurrentMaPDB;
         public static int CurrentMaPDB { get => _CurrentMaPDB; set { _CurrentMaPDB = value;} }
-        private decimal _DonGiaBan = 0;
+        private decimal _DonGiaBan;
         public decimal DonGiaBan { get => _DonGiaBan; set { if (value != _DonGiaBan) OnPropertyChanged(); _DonGiaBan = value; OnPropertyChanged(); } }
         private static ObservableCollection<CT_PHIEUDATBAN> _ListCTPhieuDatBan;
         public static ObservableCollection<CT_PHIEUDATBAN> ListCTPhieuDatBan { get => _ListCTPhieuDatBan; set { _ListCTPhieuDatBan = value; } }
@@ -113,8 +113,10 @@ namespace QuanLyTiecCuoi.ViewModel
         {
             //var check = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB);
             int count = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Count();
-             if (count != 0)
+            if (count != 0)
                 DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);
+            else
+                DonGiaBan = 0;
             ListMonAn = new ObservableCollection<MONAN>(DataProvider.Ins.DataBase.MONANs);
             AddCommand = new RelayCommand<object>((p) =>
             {
@@ -170,6 +172,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     CT_PhieuDatBan.ThanhTien = CTPDB_ThanhTien;
                     CT_PhieuDatBan.GhiChu = CTPDB_GhiChu;
                     DataProvider.Ins.DataBase.SaveChanges();
+                    DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);
                     MessageBox.Show("Sửa chi tiết phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
                 }
                 catch(Exception e)
@@ -188,6 +191,11 @@ namespace QuanLyTiecCuoi.ViewModel
                     DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Remove(CT_PhieuDatBan);
                     DataProvider.Ins.DataBase.SaveChanges();
                     ListCTPhieuDatBan.Remove(CT_PhieuDatBan);
+                    int cc = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Count();
+                    if (cc != 0)
+                        DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);
+                    else
+                        DonGiaBan = 0;
                     MessageBox.Show("Xóa chi tiết phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
                 }
                 catch(Exception e)

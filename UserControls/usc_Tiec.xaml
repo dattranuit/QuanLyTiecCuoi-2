@@ -24,11 +24,13 @@
                 <Button
                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                     Grid.Column="0" Margin="10"
-                    ToolTip="Xem Hợp Đồng" Background="#FF0F5699" Foreground="White">
-                    Xem Hợp Đồng
+                    Command="{Binding ClearCommand}"
+                    ToolTip="Làm mới vùng nhập" Background="#FF0F5699" Foreground="White">
+                    Làm mới
                 </Button>
                 <Button
                     Style="{StaticResource MaterialDesignRaisedButton}"
+                    Command="{Binding PrintCommand}"
                     Grid.Column="1" Margin="10"
                     ToolTip="In Hợp Đồng" Background="#FF0F5699" Foreground="White">
                     In Hợp Đồng
@@ -93,7 +95,9 @@
                                     <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenChuRe, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                     <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenCoDau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                     <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Value="{Binding SoDienThoai, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HideUpDownButtons="True" TextAlignment="Left" NumericInputMode="Numbers"/>
-                                    <DatePicker IsEnabled="{Binding IsEnable, Mode=OneWay}" Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding NgayDatTiec, UpdateSourceTrigger=PropertyChanged, StringFormat='mm/dd/yyyy', Mode=TwoWay}"/>
+                                    <DatePicker Name="dpk_NgayDatTiec" IsEnabled="{Binding IsEnable, Mode=OneWay}" Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" 
+                                                SelectedDate="{Binding NgayDatTiec, UpdateSourceTrigger=PropertyChanged, StringFormat=MM/dd/yyyy, Mode=TwoWay}"
+                                                controls:TextBoxHelper.Watermark="Hãy chọn ngày" SelectedDateChanged="dpk_NgayDatTiec_SelectedDateChanged"/>
                                     <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="4" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                 </Grid>
                             </Grid>
@@ -124,7 +128,9 @@
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <DatePicker Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding NgayDaiTiec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='mm/dd/yyyy'}"/>
+                                    <DatePicker Name="dpk_NgayDaiTiec" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" 
+                                                SelectedDate="{Binding NgayDaiTiec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=MM/dd/yyyy}" 
+                                                controls:TextBoxHelper.Watermark="Hãy chọn ngày" SelectedDateChanged="dpk_NgayDaiTiec_SelectedDateChanged"/>
                                     <ComboBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.CA.TenCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedCa,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenCa"/>
                                     <ComboBox Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.SANH.TenSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenSanh"/>
                                     <controls:NumericUpDown Name="nbr_TienDatCoc" Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding TienDatCoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" ValueChanged="nbr_TienDatCoc_ValueChanged"/>
@@ -165,7 +171,7 @@
                                 <DataGridTextColumn Header="Tên Cô Dâu" Binding="{Binding TenCoDau}" IsReadOnly="True"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Điện thoại" Binding="{Binding SoDienThoai}" IsReadOnly="True"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Sảnh" Binding="{Binding SANH.TenSanh}" IsReadOnly="True"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Ngày Đãi Tiệc" Binding="{Binding NgayDaiTiec}" IsReadOnly="True"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Ngày Đãi Tiệc" Binding="{Binding NgayDaiTiec, StringFormat=MM/dd/yyyy}" IsReadOnly="True"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Ca" Binding="{Binding CA.TenCa}" IsReadOnly="True"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True" Width="*"></DataGridTextColumn>
                             </DataGrid.Columns>

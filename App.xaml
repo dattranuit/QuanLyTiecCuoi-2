@@ -39,6 +39,9 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="controls:NumericUpDown">
+                <Setter Property="NumericInputMode" Value="Numbers"/>
+            </Style>
             <Style TargetType="controls:MetroTabItem">
                 <Setter Property="Template">
                     <Setter.Value>

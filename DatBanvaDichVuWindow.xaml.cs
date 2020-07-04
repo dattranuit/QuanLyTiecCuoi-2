@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using MahApps.Metro.Controls;
 using System.Windows.Shapes;
 using QuanLyTiecCuoi.Model;
+using QuanLyTiecCuoi.ViewModel;
 
 namespace QuanLyTiecCuoi
 {
@@ -32,7 +33,8 @@ namespace QuanLyTiecCuoi
             //dtg_DanhSachDatBan.SelectedItem = dtg_DanhSachDatDichVu.SelectedItem = dtg_DanhSachDatMonAn.SelectedItem = null;
             nbr_PDB_SoLuong.Value = nbr_PDB_SoLuongDuTru.Value = nbr_DV_SoLuong.Value = 0;
             tbx_PDB_LoaiBan.Text = tbx_PDB_GhiChu.Text = "";
-            tbx_PDB_DonGiaBan.Text = tbx_DV_ThanhTien.Text = "0";
+            tbx_DV_ThanhTien.Text = "0";
+            tbx_PDB_DonGiaBan.Text = PhieuDatBanViewModel.DonGiaBanToiThieu+"";
         }
     }
 }

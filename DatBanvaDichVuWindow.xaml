@@ -19,7 +19,7 @@
                                    DockPanel.Dock="Top"/>
                         <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Center">
                             <Label Content="Đơn giá bàn tối thiểu" Foreground="Crimson"/>
-                            <TextBox Width="200" BorderThickness="0" FontSize="15" Foreground="Crimson" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding DonGiaBanToiThieu}"/>
+                            <Label BorderThickness="0" FontSize="15" Foreground="Crimson" VerticalAlignment="Center" Content="{Binding DonGiaBanToiThieu}"/>
                         </DockPanel>
                         <Grid DockPanel.Dock="Bottom">
                             <Grid.ColumnDefinitions>
@@ -79,7 +79,8 @@
                                                             Value="{Binding SoLuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                     <controls:NumericUpDown x:Name="nbr_PDB_SoLuongDuTru" Grid.Row="2" Grid.Column="1" Margin="2,2,0,2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left"
                                                             Value="{Binding SoLuongDuTru, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                                    <TextBox x:Name="tbx_PDB_DonGiaBan" Grid.Row="0" Grid.Column="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" IsReadOnly="True"
+                                    <TextBox ToolTip="Đơn giá bàn sẽ được cập nhật sau khi đặt bàn và dịch vụ" 
+                                             x:Name="tbx_PDB_DonGiaBan" Grid.Row="0" Grid.Column="3" Margin="2" BorderBrush="Black" BorderThickness="0" TextAlignment="Left" IsReadOnly="True"
                                                             Text="{Binding DonGiaBan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                     <TextBox x:Name="tbx_PDB_GhiChu" Grid.Row="1" Grid.Column="3" Margin="2" BorderBrush="Black" BorderThickness="1"
                                              Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>

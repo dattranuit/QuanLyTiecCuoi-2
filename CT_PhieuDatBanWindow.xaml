@@ -89,7 +89,8 @@
                                         <RowDefinition/>
                                         <RowDefinition Height="1.2*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBox FontWeight="DemiBold" Grid.Row="0" Margin="0,0" Height="30" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="0" Text="{Binding DonGiaBan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Foreground="Red" FontSize="15" IsReadOnly="True"/>
+                                    <TextBox ToolTip="Đơn giá bàn phải lớn hơn hoặc bằng Đơn giá bàn tối thiểu" FontWeight="DemiBold" Grid.Row="0" Margin="0,0" Height="30" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="0" 
+                                             Text="{Binding DonGiaBan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Foreground="Red" FontSize="15" IsReadOnly="True"/>
                                     <TextBox FontWeight="DemiBold" Grid.Row="1" Margin="0,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedMA.TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
                                     <TextBox FontWeight="DemiBold" Grid.Row="2" Margin="0,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedMA.DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
                                     <controls:NumericUpDown FontWeight="DemiBold" Grid.Row="3" Name="nbr_MA_SoLuong" Margin="0,4" BorderBrush="Black" BorderThickness="1" Value="{Binding MA_SoLuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Left" Interval="1" NumericInputMode="Numbers"/>

@@ -16,7 +16,7 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock Text="Quản lý Dịch Vụ" HorizontalAlignment="Center" Foreground="#FF0E2291"  VerticalAlignment="Center" FontSize="32" FontWeight="Bold"/>
+            <TextBlock Text="Quản lý Dịch Vụ" HorizontalAlignment="Center" Foreground="#FF0E2291"  VerticalAlignment="Center" FontSize="32" FontWeight="Medium"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -55,12 +55,12 @@
                     </Grid>
                     <GroupBox Header="Danh sách dịch vụ" Margin="10,0,10,10" Grid.Column="0">
                         <DataGrid  x:Name="dtg_DichVu" Width="auto" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" IsReadOnly="True"
-            ItemsSource="{Binding List}"
-            CanUserSortColumns="True"
-            CanUserAddRows="False"
-            SelectionUnit="FullRow"
-            AutoGenerateColumns="False"
-            SelectionMode="Extended" FontWeight="Bold">
+                            ItemsSource="{Binding List}"
+                            CanUserSortColumns="True"
+                            CanUserAddRows="False"
+                            SelectionUnit="FullRow"
+                            AutoGenerateColumns="False" FontSize="12"
+                            SelectionMode="Extended" FontWeight="Medium">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Tên Dịch vụ" Binding="{Binding TenDichVu}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Đơn giá " Binding="{Binding DonGia}"></DataGridTextColumn>
@@ -159,7 +159,6 @@
 
         </Grid>
         <Grid Grid.Row="2">
-
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -167,21 +166,21 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="btn_Them" Margin="10" Command="{Binding AddCommand}"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Width="auto" Grid.Column="0" 
-                                    ToolTip="Thêm" Background="#FF0F5699" Foreground="White" Height="35">
+                    Style="{StaticResource MaterialDesignRaisedButton}"                      
+                    Width="auto" Grid.Column="0" 
+                    ToolTip="Thêm" Background="#FF0F5699" Foreground="White">
                     Thêm
                 </Button>
                 <Button x:Name="btn_Sua" Margin="10" Command="{Binding EditCommand}"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Width="auto" Grid.Column="1" 
-                                    ToolTip="Sửa" Background="Green" Foreground="White" Height="35">
+                    Style="{StaticResource MaterialDesignRaisedButton}"                      
+                    Width="auto" Grid.Column="1" 
+                    ToolTip="Sửa" Background="Green" Foreground="White">
                     Sửa
                 </Button>
                 <Button x:Name="btn_Xoa" Margin="10" Command="{Binding DeleteCommand}"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Width="auto" Grid.Column="2" 
-                                    ToolTip="Xóa" Background="Crimson" Foreground="White" Height="35">
+                    Style="{StaticResource MaterialDesignRaisedButton}"                      
+                    Width="auto" Grid.Column="2" 
+                    ToolTip="Xóa" Background="Crimson" Foreground="White">
                     Xóa
                 </Button>
             </Grid>

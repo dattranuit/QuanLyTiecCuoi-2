@@ -69,9 +69,41 @@ namespace QuanLyTiecCuoi.ViewModel
         private string _SoDienThoai;
         public string SoDienThoai { get => _SoDienThoai; set { if (value != _SoDienThoai) OnPropertyChanged(); _SoDienThoai = value; OnPropertyChanged(); } }
         private System.DateTime _NgayDatTiec = DateTime.Now;
-        public System.DateTime NgayDatTiec { get => _NgayDatTiec; set { if (value != _NgayDatTiec) OnPropertyChanged(); _NgayDatTiec = value; OnPropertyChanged(); } }
+        public System.DateTime NgayDatTiec { get => _NgayDatTiec; 
+            set {
+                if (value > NgayDaiTiec)
+                {
+                    OnPropertyChanged();
+                    MessageBox.Show("Ngày đãi tiệc không được sớm hơn Ngày đặt tiệc", "Lỗi");
+                    _NgayDatTiec = NgayDaiTiec;
+                }
+                else
+                    if (value != _NgayDatTiec)
+                {
+                    OnPropertyChanged();
+                    _NgayDatTiec = value;
+                }
+                OnPropertyChanged();
+            }
+        }
         private System.DateTime _NgayDaiTiec = DateTime.Now;
-        public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; set { if (value != _NgayDaiTiec) OnPropertyChanged(); _NgayDaiTiec = value; OnPropertyChanged(); } }
+        public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; 
+            set {
+                if (value < NgayDatTiec)
+                {
+                    OnPropertyChanged();
+                    MessageBox.Show("Ngày đãi tiệc không được sớm hơn Ngày đặt tiệc", "Lỗi");
+                    _NgayDaiTiec = NgayDatTiec;
+                }
+                else
+                    if (value != _NgayDaiTiec)
+                    {
+                        OnPropertyChanged();
+                        _NgayDaiTiec = value;
+                    }
+                OnPropertyChanged(); 
+            } 
+        }
         private decimal _TienDatCoc;
         public decimal TienDatCoc { get => _TienDatCoc; 
             set {
@@ -95,6 +127,8 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand PrintCommand { get; set; }
+        public ICommand ClearCommand { get; set; }
         public ICommand DatBanvaDichVuCommand { get; set; }
         public ICommand LapHoaDonCommand { get; set; }
         bool Addable()
@@ -138,6 +172,15 @@ namespace QuanLyTiecCuoi.ViewModel
             if (MaCa != SelectedTiecCuoi.MaCa)
                 return false;
             return true;
+        }
+        void ClearAll()
+        {
+            TenChuRe = TenCoDau = SoDienThoai = GhiChu = String.Empty;
+            NgayDaiTiec = NgayDatTiec = DateTime.Now;
+            SelectedSanh = null;
+            SelectedCa = null;
+            TienDatCoc = 0;
+            MaSanh = MaCa = null;
         }
         public TiecViewModel()
         {
@@ -234,14 +277,10 @@ namespace QuanLyTiecCuoi.ViewModel
                             DataProvider.Ins.DataBase.SaveChanges();
                             HoaDonViewModel.ListTiecCuoi.Remove(SelectedTiecCuoi);
                             ListTiecCuoi.Remove(SelectedTiecCuoi);
-                            
+
 
                             // Refresh
-                            TenChuRe = TenCoDau = SoDienThoai = GhiChu = String.Empty;
-                            NgayDaiTiec = NgayDatTiec = DateTime.Now;
-                            SelectedSanh = null;
-                            SelectedCa = null;
-                            TienDatCoc = 0;
+                            ClearAll();
                             MessageBox.Show("Xóa tiệc cưới thành công", "Thông báo", MessageBoxButton.OK);
                             
                         }
@@ -265,6 +304,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 wd.ShowDialog();
             });
             LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
+            ClearCommand = new RelayCommand<object>((p) => { return true; }, (p) => ClearAll());
         }
 
         

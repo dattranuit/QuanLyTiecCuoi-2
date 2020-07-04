@@ -29,8 +29,20 @@ namespace QuanLyTiecCuoi.UserControls
 
         private void nbr_TienDatCoc_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            if (nbr_TienDatCoc.Value.ToString() == "")
+            if (String.IsNullOrEmpty(nbr_TienDatCoc.Value.ToString()))
                 nbr_TienDatCoc.Value = 0;
+        }
+
+        private void dpk_NgayDatTiec_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(dpk_NgayDatTiec.Text.ToString()))
+                dpk_NgayDatTiec.SelectedDate = DateTime.Now;
+        }
+
+        private void dpk_NgayDaiTiec_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(dpk_NgayDaiTiec.Text.ToString()))
+                dpk_NgayDaiTiec.SelectedDate = DateTime.Now;
         }
     }
 }
