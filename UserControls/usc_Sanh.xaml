@@ -142,7 +142,7 @@
                                         <Button x:Name="btn_Sua" Margin="30,10" Command="{Binding EditCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Grid.Column="1" 
-                                    ToolTip="Sửa" Background="#FF0F5699" Foreground="White">
+                                    ToolTip="Sửa" Background="Green" Foreground="White">
                                             Sửa
                                         </Button>
                                         <Button x:Name="btn_Xoa" Margin="30,10" Command="{Binding DeleteCommand}"
@@ -215,7 +215,7 @@
                                     <Button x:Name="btn_Sua2" Margin="30,10" Command="{Binding EditLoaiSanhCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Grid.Column="1" 
-                                    ToolTip="Sửa" Background="#FF0F5699" Foreground="White">
+                                    ToolTip="Sửa" Background="Green" Foreground="White">
                                         Sửa
                                     </Button>
                                     <Button x:Name="btn_Xoa2" Margin="30,10" Command="{Binding DeleteLoaiSanhCommand}"
