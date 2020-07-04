@@ -60,16 +60,17 @@
                                 <TextBox Text="{Binding TenCa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Margin="0,2,20,2" BorderBrush="Black" BorderThickness="1"/>
                                 <Label Grid.Column="2" FontWeight="SemiBold" FontSize="15" Margin="10,2,0,2">Bắt đầu</Label>
                                 <materialDesign:TimePicker 
-                                    SelectedTime="{Binding BatDau}"
+                                    SelectedTime="{Binding BatDau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat='hh/mm/ss'}"
                                     Grid.Column="3"
                                     Margin="2,2,10,2" 
                                     BorderThickness="1"
                                     materialDesign:HintAssist.Hint=""
                                     Is24Hours="True"
-                                    x:Name="tpk_BatDau"/>
+                                    x:Name="tpk_BatDau" Background="White"/>
+                                
                                 <Label Grid.Column="4" FontWeight="SemiBold" FontSize="15" Margin="20,2,0,2">Kết thúc</Label>
                                 <materialDesign:TimePicker
-                                    SelectedTime="{Binding KetThuc}"
+                                    SelectedTime="{Binding KetThuc, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                     Margin="10,2,0,2"  
                                     Grid.Column="5"
                                     Is24Hours="True"

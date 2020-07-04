@@ -27,6 +27,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     TenCa = SelectedItem.TenCa;
                     MaCa = SelectedItem.MaCa;
+                    BatDau = SelectedItem.BatDau;
+                    KetThuc = SelectedItem.KetThuc;
                 }
             }
         }
@@ -116,6 +118,10 @@ namespace QuanLyTiecCuoi.ViewModel
                 Ca.BatDau = SelectedItem.BatDau;
                 Ca.KetThuc = SelectedItem.KetThuc;
                 DataProvider.Ins.DataBase.SaveChanges();
+                SelectedItem.TenCa = TenCa;
+                SelectedItem.BatDau = BatDau;
+                SelectedItem.KetThuc = KetThuc;
+                SelectedItem.MaCa = MaCa;
                 MessageBox.Show("Sửa thông tin Ca thành công !");
             });
 
@@ -139,6 +145,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 MessageBox.Show("Xóa Ca thành công !");
                 //refresh nhap
                 TenCa = "";
+                //them sau khi sua duoc bind :((
             });
 
             RefreshCommand = new RelayCommand<object>((p) =>
