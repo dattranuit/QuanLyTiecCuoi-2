@@ -10,8 +10,11 @@
         Title="Invoice" Height="850" Width="700" ResizeMode="NoResize" WindowStyle="None" FontFamily="Roboto" WindowStartupLocation="CenterScreen">
     <ScrollViewer>
         <Grid>
-            <Button HorizontalAlignment="Right" Margin="10"  VerticalAlignment="Top" Click="Button_Click">
+            <Button HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Top" Click="Button_Click">
                 <materialDesign:PackIcon Kind="Printer"/>
+            </Button>
+            <Button HorizontalAlignment="Right" Margin="10"  VerticalAlignment="Top" Click="Button_Click_thoat">
+                Thoát
             </Button>
             <Grid x:Name="print">
                 <Grid.RowDefinitions>

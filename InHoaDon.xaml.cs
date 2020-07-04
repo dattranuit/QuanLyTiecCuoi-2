@@ -40,5 +40,10 @@ namespace QuanLyTiecCuoi
                 this.IsEnabled = true;
             }
         }
+
+        private void Button_Click_thoat(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
