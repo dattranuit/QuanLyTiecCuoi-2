@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace QuanLyTiecCuoi
     /// <summary>
     /// Interaction logic for DSTiecChuaThanhToan.xaml
     /// </summary>
-    public partial class DSTiecChuaThanhToan : Window
+    public partial class DSTiecChuaThanhToan : MetroWindow
     {
         public DSTiecChuaThanhToan()
         {
