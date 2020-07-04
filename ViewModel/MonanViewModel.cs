@@ -79,7 +79,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             }, (p) =>
             {
-                var MonAn = new MONAN()
+                SelectedItem = new MONAN()
                 {
                     TenMonAn = TenMonAn,
                     DonGia = DonGia,
@@ -87,11 +87,10 @@ namespace QuanLyTiecCuoi.ViewModel
                     HinhAnh = HinhAnh,
                     GhiChu = GhiChu
                 };
-                DataProvider.Ins.DataBase.MONANs.Add(MonAn);
+                DataProvider.Ins.DataBase.MONANs.Add(SelectedItem);
                 DataProvider.Ins.DataBase.SaveChanges();
-                List.Add(MonAn);
+                List.Add(SelectedItem);
                 // 
-                SelectedItem = MonAn;
                 //
                 MessageBox.Show("Thêm món ăn thành công!");
             });
@@ -116,19 +115,12 @@ namespace QuanLyTiecCuoi.ViewModel
                     return;
                 }
                 
-                MonAn.TenMonAn = SelectedItem.TenMonAn;
-                MonAn.DonGia = SelectedItem.DonGia;
-                MonAn.MoTa = SelectedItem.MoTa;
-                MonAn.GhiChu = SelectedItem.GhiChu;
-                MonAn.HinhAnh = SelectedItem.HinhAnh;
+                MonAn.TenMonAn = TenMonAn;
+                MonAn.DonGia = DonGia;
+                MonAn.MoTa = MoTa;
+                MonAn.GhiChu = GhiChu;
+                MonAn.HinhAnh = HinhAnh;
                 DataProvider.Ins.DataBase.SaveChanges();
-
-                SelectedItem.TenMonAn = TenMonAn;
-                SelectedItem.DonGia = DonGia;
-                SelectedItem.MoTa = MoTa;
-                SelectedItem.GhiChu = GhiChu;
-                SelectedItem.HinhAnh = HinhAnh;
-
 
                 MessageBox.Show("Sửa thành công!");
             });

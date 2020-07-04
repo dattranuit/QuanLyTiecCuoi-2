@@ -16,15 +16,162 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              DataContext="{StaticResource MonAnVM}"
              d:DesignHeight="622" d:DesignWidth="800">
-    <Grid Background="White">
-        <!--<controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">-->
-        <!--<controls:MetroTabItem Header="Quản lý Món ăn">-->
-        <DockPanel LastChildFill="True">
-            <TextBlock Text="Món ăn" HorizontalAlignment="Center"
-                                   VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
-                                   Margin="0,5,0,0" FontWeight="DemiBold"
-                                   DockPanel.Dock="Top" FontFamily="Segoe UI"/>
-            <Grid DockPanel.Dock="Bottom">
+    <Grid Margin="0" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock Text="Quản lý Món Ăn" HorizontalAlignment="Center" Foreground="#FF0E2291"  VerticalAlignment="Center" FontSize="32" FontWeight="Bold"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="499*"/>
+                <ColumnDefinition Width="301*"/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:Card Margin="10,0,10,10">
+                <DockPanel>
+                    <Grid DockPanel.Dock="Top" Margin="10,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="11*"/>
+                                <ColumnDefinition Width="160*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0" Height="auto" Margin="0,10,0,9" >
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/search_sanh_icon.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBox Grid.Column="1"
+                            Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
+                            controls:TextBoxHelper.Watermark="Tìm kiếm món ăn"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="Black"
+                            FontSize="15"
+                            VerticalAlignment="Center" Padding="0" Height="32" Margin="10,5" VerticalContentAlignment="Center" />
+                        </Grid>
+
+
+                    </Grid>
+                    <GroupBox Header="Danh sách món ăn"  Margin="10,0,10,10" Grid.Column="0">
+                        <DataGrid   ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"    
+                                    IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Background="{x:Null}" 
+                                    FontSize="12"
+                                    controls:DataGridHelper.ColumnHeaderPadding="10,0" FontFamily="Segoe UI" 
+                                    CanUserSortColumns="True" CanUserAddRows="False"
+                                    SelectionUnit="FullRow"
+                                    AutoGenerateColumns="False"
+                                    SelectionMode="Extended">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Tên món ăn" FontSize="14" Binding="{Binding TenMonAn}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Mô tả" FontSize="14" Binding="{Binding MoTa}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Ghi chú" FontSize="14" Binding="{Binding GhiChu}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" Header="Đơn giá" FontSize="14" Binding="{Binding DonGia}">
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </DockPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Column="1" Margin="0,0,10,10">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="0.75*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.2*"/>
+                        </Grid.RowDefinitions>
+                        <GroupBox Grid.Row="0" Header="Ảnh minh họa" Margin="10,10,10,0">
+                            <Image x:Name="img_AnhMonAn" Source="{Binding HinhAnh, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Margin="5"></Image>
+                        </GroupBox>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <!--<Button x:Name="btn_FolderAnh" Grid.Column="0" Margin="15,5,22,0" BorderBrush="Black" Command="{Binding ChonAnhCommmand}">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/icon_folder.jpg" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>-->
+                            <Button 
+                                    x:Name="btn_ThemAnh"
+                                    Command="{Binding AddImageCommand}"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Grid.Column="0" Margin="10,5,10,10"
+                                    ToolTip="Thêm ảnh" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}" FontFamily="Segoe UI" FontSize="14">
+                                Thêm ảnh
+                            </Button>
+                            <Button 
+                                    x:Name="btn_XoaAnh"
+                                    Command="{Binding DeleteImageCommand}"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Grid.Column="1" Margin="10,5,10,10"
+                                    ToolTip="Xóa ảnh" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}" FontFamily="Segoe UI" FontSize="14">
+                                Xóa ảnh
+                            </Button>
+                            <!--<Button Grid.Column="1" Command="{Binding XoaAnhCommmand}"
+  Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+  ToolTip="MaterialDesignFloatingActionMiniDarkButton" Height="Auto" Margin="8" Width="Auto">
+                                <materialDesign:PackIcon
+    Kind="Bin"
+    Height="24"
+    Width="24" />
+                            </Button>-->
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <GroupBox Header="Thông tin món ăn" Grid.Row="0" Margin="10,0,10,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.4*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" Content="Tên món:" FontWeight="SemiBold" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
+                                <TextBox Grid.Column="1" Grid.Row="0" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31"/>
+                                <Label Grid.Column="0" Grid.Row="1" Content="Mô tả:" FontWeight="SemiBold" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
+                                <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31" />
+                                <Label Grid.Column="0" Grid.Row="2" Content="Ghi chú:" FontWeight="SemiBold" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
+                                <TextBox Grid.Column="1" Grid.Row="2" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31" />
+                                <Label Grid.Column="0" Grid.Row="3" Content="Đơn giá:" FontWeight="SemiBold" Height="29" Margin="0" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
+                                <controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="3" BorderBrush="#FF717171" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" Height="31"/>
+                                <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
+                                            x:Name="btn_LamMoi"
+                                            Command="{Binding RefreshCommand}"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            ToolTip="Làm mới thông tin món ăn" Background="#FF002C56" Foreground="White" Height="Auto" Margin="2,5,2,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="14">
+                                    Làm mới
+                                </Button>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
+
+        </Grid>
+        <Grid Grid.Row="2">
+
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -35,7 +182,7 @@
                                     Command="{Binding AddCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Grid.Column="0" Margin="10"
-                                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI">
+                                    ToolTip="Thêm món ăn" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI">
                     Thêm
                 </Button>
                 <Button
@@ -43,7 +190,7 @@
                                     Command="{Binding EditCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Grid.Column="1" Margin="10"
-                                    ToolTip="Sửa thông tin đặt Tiệc" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI">
+                                    ToolTip="Sửa món ăn" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI">
                     Sửa
                 </Button>
                 <Button
@@ -51,139 +198,11 @@
                                     Command="{Binding DeleteCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Grid.Column="2" Margin="10"
-                                    ToolTip="Xóa thông tin đặt Tiệc" Background="Crimson" Foreground="White" Height="35" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI">
+                                    ToolTip="Xóa món ăn" Background="Crimson" Foreground="White" Height="35" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI">
                     Xóa
                 </Button>
             </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="0.5*"/>
-                </Grid.ColumnDefinitions>
-                <materialDesign:Card x:Name="mdc_ThongTinMonAn" Grid.Column="1" Margin="0,10,10,10">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="0.6*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition Height="0.2*"/>
-                            </Grid.RowDefinitions>
-                            <GroupBox Grid.Row="0" Header="Ảnh minh họa" Margin="10,10,10,0">
-                                <Image x:Name="img_AnhMonAn" Source="{Binding HinhAnh, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Margin="5"></Image>
-                            </GroupBox>
-                            <Grid Grid.Row="1" >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Button 
-                                    x:Name="btn_ThemAnh"
-                                    Command="{Binding AddImageCommand}"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="0" Margin="10,5,10,10"
-                                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}" FontFamily="Segoe UI" FontSize="15">
-                                    Thêm ảnh
-                                </Button>
-                                <Button 
-                                    x:Name="btn_XoaAnh"
-                                    Command="{Binding DeleteImageCommand}"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="1" Margin="10,5,10,10"
-                                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}" FontFamily="Segoe UI" FontSize="15">
-                                    Xóa ảnh
-                                </Button>
-                            </Grid>
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <GroupBox Header="Thông tin món ăn" Grid.Row="0" Margin="10,0,10,10">
-                                <Grid Margin="1,0,0,1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.4*"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Label Grid.Column="0" Grid.Row="0" Content="Tên món:" FontWeight="SemiBold" VerticalAlignment="Center" />
-                                    <TextBox Grid.Column="1" Grid.Row="0" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" Height="27"/>
-                                    <Label Grid.Column="0" Grid.Row="1" Content="Mô tả:" FontWeight="SemiBold" VerticalAlignment="Center" />
-                                    <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" Height="27" />
-                                    <Label Grid.Column="0" Grid.Row="2" Content="Ghi chú:" FontWeight="SemiBold" VerticalAlignment="Center" />
-                                    <TextBox Grid.Column="1" Grid.Row="2" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2" Height="27" />
-                                    <Label Grid.Column="0" Grid.Row="3" Content="Đơn giá:" FontWeight="SemiBold" Grid.ColumnSpan="2" Height="29" Margin="0" VerticalAlignment="Center" />
-                                    <controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="2" BorderBrush="#FF717171" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" Height="27"/>
-                                    <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
-                                            x:Name="btn_LamMoi"
-                                            Command="{Binding RefreshCommand}"
-                                            Style="{StaticResource MaterialDesignRaisedButton}"
-                                            ToolTip="Thêm tiệc cưới" Background="#FF002C56" Foreground="White" Height="Auto" Margin="2,5,2,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="15">
-                                        Làm mới
-                                    </Button>
-                                </Grid>
-                            </GroupBox>
-                        </Grid>
-                    </Grid>
-                </materialDesign:Card>
-                <materialDesign:Card x:Name="mdc_DanhSachTiecCuoi" DockPanel.Dock="Bottom" Margin="10,10,10,10">
-                    <DockPanel>
-                        <Grid DockPanel.Dock="Top" Margin="10,10,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="0.5*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="11*"/>
-                                    <ColumnDefinition Width="160*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Grid.Column="0" Height="auto">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/search_sanh_icon.png"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                                <TextBox Grid.Column="1"
-                            Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
-                            controls:TextBoxHelper.Watermark="Tìm kiếm món ăn"
-                            BorderThickness="0,0,0,1"
-                            BorderBrush="Black"
-                            FontSize="15"
-                            VerticalAlignment="Center" Padding="0" Height="26" Margin="5" VerticalContentAlignment="Center" />
-                            </Grid>
 
-                        </Grid>
-                        <GroupBox Header="Danh sách món ăn" Margin="10" Grid.Column="0">
-                            <DataGrid   ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"    
-                                    IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Background="{x:Null}" 
-                                    FontSize="15"
-                                    controls:DataGridHelper.ColumnHeaderPadding="10,0" FontFamily="Segoe UI" 
-                                    CanUserSortColumns="True" CanUserAddRows="False"
-                                    SelectionUnit="FullRow"
-                                    AutoGenerateColumns="False"
-                                    SelectionMode="Extended" FontWeight="Bold">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Tên món ăn" FontSize="14" Binding="{Binding TenMonAn}">
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Mô tả" FontSize="14" Binding="{Binding MoTa}">
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Ghi chú" FontSize="14" Binding="{Binding GhiChu}">
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Width="*" Header="Đơn giá" FontSize="14" Binding="{Binding DonGia}">
-                                    </DataGridTextColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </GroupBox>
-                    </DockPanel>
-                </materialDesign:Card>
-            </Grid>
-        </DockPanel>
-        <!--</controls:MetroTabItem>-->
-        <!--</controls:MetroAnimatedTabControl>-->
+        </Grid>
     </Grid>
 </UserControl>

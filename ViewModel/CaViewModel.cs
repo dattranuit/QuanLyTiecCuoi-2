@@ -27,6 +27,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     TenCa = SelectedItem.TenCa;
                     MaCa = SelectedItem.MaCa;
+                    BatDau = SelectedItem.BatDau;
+                    KetThuc = SelectedItem.KetThuc;
                 }
             }
         }
@@ -45,6 +47,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
         public ICommand EditQuiDinhCommand { get; set; }
 
         //hàm được gọi mỗi khi bool ApDungQuiDinhPhat được set. Tạm bỏ
@@ -103,7 +106,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 if (SelectedItem == null)
                     return false;
                 var displayList = DataProvider.Ins.DataBase.CAs.Where(x => x.MaCa == SelectedItem.MaCa);
-                if (displayList == null && displayList.Count() == 0)
+                if (displayList.Count() == 0 && displayList == null  )
                     return false;
                 if (SelectedItem.TenCa == TenCa && SelectedItem.BatDau == BatDau && SelectedItem.KetThuc == KetThuc)
                     return false;
@@ -115,6 +118,10 @@ namespace QuanLyTiecCuoi.ViewModel
                 Ca.BatDau = SelectedItem.BatDau;
                 Ca.KetThuc = SelectedItem.KetThuc;
                 DataProvider.Ins.DataBase.SaveChanges();
+                SelectedItem.TenCa = TenCa;
+                SelectedItem.BatDau = BatDau;
+                SelectedItem.KetThuc = KetThuc;
+                SelectedItem.MaCa = MaCa;
                 MessageBox.Show("Sửa thông tin Ca thành công !");
             });
 
@@ -138,6 +145,17 @@ namespace QuanLyTiecCuoi.ViewModel
                 MessageBox.Show("Xóa Ca thành công !");
                 //refresh nhap
                 TenCa = "";
+                //them sau khi sua duoc bind :((
+            });
+
+            RefreshCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TenCa = "";
+                BatDau = TimeSpan.Zero;
+                KetThuc = TimeSpan.Zero;
             });
 
             EditQuiDinhCommand = new RelayCommand<object>((p) =>

@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
-        Title="Hóa đơn" Height="600" Width="800">
+        Title="Hóa đơn" Height="620" Width="800">
     <Grid>
         <UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -44,14 +44,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600" Background="White" Foreground="{x:Null}">
                     <DockPanel>
-                        <DockPanel Margin="0" DockPanel.Dock="Top" Background="#FFFFFF" Height="40">
-                            <Label FontSize="25" Content="HÓA ĐƠN THANH TOÁN" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" Foreground="#FF0E2291" BorderThickness="0" VerticalContentAlignment="Center" Padding="8,0,0,0" OpacityMask="#FF999999" BorderBrush="{x:Null}" Background="{x:Null}"></Label>
+                        <DockPanel Margin="0" DockPanel.Dock="Top" Background="#FFFFFF" Height="30">
+                            <Label FontSize="22" Content="HÓA ĐƠN THANH TOÁN" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" Foreground="#FF0E2291" BorderThickness="0" VerticalContentAlignment="Center" Padding="8,0,0,0" OpacityMask="#FF999999" BorderBrush="{x:Null}" Background="{x:Null}"></Label>
                         </DockPanel>
 
                         <DockPanel Height="200" DockPanel.Dock="Bottom" Background="#FFF1F1F1" Margin="0">
                             <materialDesign:Card Margin="2">
                                 <GroupBox Header="Thanh toán">
-                                    <Grid ><!--DataContext="{Binding List3,Mode=TwoWay}"-->
+                                    <Grid >
+                                        <!--DataContext="{Binding List3,Mode=TwoWay}"-->
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                             <RowDefinition/>
@@ -71,7 +72,7 @@
 
                                         <TextBlock x:Name="tblock_Tiendichvu" Text="{Binding TongTienDichVu}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="0"  Grid.Column="0" FontSize="14"/>
                                         <TextBlock x:Name="tblock_Tienhoadon" Text="{Binding TongTienHoaDon}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="1" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock DataContext="{Binding ListTiecCuoi}" x:Name="tblock_Tiencoc" Text="{Binding TienDatCoc}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="2" Grid.Column="0" FontSize="14"/>
+                                        <TextBlock DataContext="{Binding ListTiecCuoi2}" x:Name="tblock_Tiencoc" Text="{Binding TienDatCoc}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="2" Grid.Column="0" FontSize="14"/>
                                         <TextBlock x:Name="tblock_Tienphat" Text="{Binding TienPhat}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="3" Grid.Column="0" FontSize="14"/>
                                         <TextBlock x:Name="tblock_Tienconlai" Text="{Binding ConLai}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="4" Grid.Column="0" FontSize="14" FontWeight="Bold"/>
                                         <Grid Grid.Column="1" Grid.Row="2">
@@ -92,8 +93,9 @@
                                                     Content="Lưu hóa đơn"
     ToolTip="Thêm">
                                             </Button>
+                                            <!--Click="Button_Click"-->
                                             <Button
-                                                Click="Button_Click"
+                                                
                                                 Command="{Binding InHoaDon}"
                                 Grid.Column="3"
                                 Background="#FF0F5699" Foreground="White"
@@ -146,7 +148,7 @@
                                         <Grid Grid.Column="1">
                                             <Grid Margin="5,10,5,5">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="1*" ></ColumnDefinition>
+                                                    <ColumnDefinition Width="1.2*" ></ColumnDefinition>
                                                     <ColumnDefinition Width="2*"></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
                                                 <Grid Grid.Column="0">
@@ -155,7 +157,7 @@
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
                                                     <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="0" Content="Số lượng bàn"/>
-                                                    <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Content="Đơn giá bàn"/>
+                                                    <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Content="Tổng tiền bàn"/>
                                                 </Grid>
                                                 <Grid Grid.Column="1">
                                                     <Grid.RowDefinitions>
@@ -163,7 +165,7 @@
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
                                                     <TextBox IsEnabled="False"  Text="{Binding TongSoBan}" VerticalAlignment="Center" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                                    <TextBox  IsEnabled="False" DataContext="{Binding ListPhieuDatBan}" Text="{Binding DonGiaBan}" VerticalAlignment="Center" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <TextBox  IsEnabled="False"  Text="{Binding TongTienBan}" VerticalAlignment="Center" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -179,15 +181,13 @@
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
                                                     <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="0" Content="Ngày thanh toán"/>
-                                                    <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Content="Tổng tiền bàn"/>
                                                 </Grid>
                                                 <Grid Grid.Column="1">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition/>
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
-                                                    <DatePicker DataContext="{Binding ListTiecCuoi2}" Text="{Binding NgayDaiTiec, StringFormat='dd/MM/yyyy'}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                                    <TextBox IsEnabled="False" Text="{Binding TongTienBan}" VerticalAlignment="Center" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <DatePicker IsEnabled="False" Text="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy'}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -219,7 +219,7 @@
                                                     <DataGridTextColumn Header="Đơn giá" FontSize="14" Binding="{Binding DICHVU.DonGia}">
 
                                                     </DataGridTextColumn>
-                                                    
+
                                                     <DataGridTextColumn Header="Thành tiền" FontSize="14" Width="*" Binding="{Binding ThanhTien}">
 
                                                     </DataGridTextColumn>
@@ -258,7 +258,6 @@
                                     </GroupBox>
                                 </Grid>
                             </Grid>
-                            
                         </materialDesign:Card>
                     </DockPanel>
                 </UserControl>
