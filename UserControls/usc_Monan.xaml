@@ -23,7 +23,8 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock Text="Quản lý Món Ăn" HorizontalAlignment="Center" Foreground="#FF0E2291"  VerticalAlignment="Center" FontSize="32" FontWeight="Bold"/>
+            <TextBlock  x:Name="tbl_QuanLyMonAn" 
+                Text="Quản lý Món Ăn" HorizontalAlignment="Center" Foreground="#FF0E2291"  VerticalAlignment="Center" FontSize="32" FontWeight="Bold"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -48,7 +49,7 @@
                                     <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/search_sanh_icon.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <TextBox Grid.Column="1"
+                            <TextBox Grid.Column="1" x:Name="tb_TimKiemMonAn"
                             Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
                             controls:TextBoxHelper.Watermark="Tìm kiếm món ăn"
                             BorderThickness="0,0,0,1"
@@ -60,14 +61,14 @@
 
                     </Grid>
                     <GroupBox Header="Danh sách món ăn"  Margin="10,0,10,10" Grid.Column="0">
-                        <DataGrid   ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"    
+                        <DataGrid   x:Name="dtg_DSMonAn" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"    
                                     IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Background="{x:Null}" 
                                     FontSize="12"
                                     controls:DataGridHelper.ColumnHeaderPadding="10,0" FontFamily="Segoe UI" 
                                     CanUserSortColumns="True" CanUserAddRows="False"
                                     SelectionUnit="FullRow"
                                     AutoGenerateColumns="False"
-                                    SelectionMode="Extended">
+                                    SelectionMode="Extended" FontWeight="Bold">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Tên món ăn" FontSize="14" Binding="{Binding TenMonAn}">
                                 </DataGridTextColumn>
@@ -148,13 +149,15 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Column="0" Grid.Row="0" Content="Tên món:" FontWeight="SemiBold" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
-                                <TextBox Grid.Column="1" Grid.Row="0" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31"/>
+                                <TextBox x:Name="tbx_TenMonAn" Grid.Column="1" Grid.Row="0" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31"/>
                                 <Label Grid.Column="0" Grid.Row="1" Content="Mô tả:" FontWeight="SemiBold" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
-                                <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31" />
+                                <TextBox x:Name="tbx_MoTa" Grid.Column="1" Grid.Row="1" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31" />
                                 <Label Grid.Column="0" Grid.Row="2" Content="Ghi chú:" FontWeight="SemiBold" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
-                                <TextBox Grid.Column="1" Grid.Row="2" BorderBrush="#FF717171" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31" />
+                                <TextBox x:Name="tbx_GhiChu" Grid.Column="1" Grid.Row="2" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31" />
                                 <Label Grid.Column="0" Grid.Row="3" Content="Đơn giá:" FontWeight="SemiBold" Height="29" Margin="0" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
-                                <controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="3" BorderBrush="#FF717171" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" Height="31"/>
+                                <controls:NumericUpDown x:Name="ct_DonGia" Grid.Row="3" Grid.Column="1" Margin="3" 
+                                                        BorderBrush="#FF636363" BorderThickness="1" TextAlignment="Left" Interval="100000" Minimum="0"
+                                                        Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" Height="31"/>
                                 <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
                                             x:Name="btn_LamMoi"
                                             Command="{Binding RefreshCommand}"
@@ -190,7 +193,7 @@
                                     Command="{Binding EditCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Grid.Column="1" Margin="10"
-                                    ToolTip="Sửa món ăn" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI">
+                                    ToolTip="Sửa món ăn" Background="Green" Foreground="White" Height="35" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI">
                     Sửa
                 </Button>
                 <Button
