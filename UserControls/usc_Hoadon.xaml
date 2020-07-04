@@ -59,7 +59,9 @@
                             <DockPanel LastChildFill="True">
                                 <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
                                     <!--//-->
-                                    <TextBlock Text="DANH SÁCH TIỆC CƯỚI" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="8,0,0,0" Foreground="#FF0E2291" />
+                                    <TextBlock Text="Danh sách hóa đơn" HorizontalAlignment="Center"
+                                   VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
+                                   Margin="0,5,0,0" DockPanel.Dock="Top" FontWeight="Medium"/>
                                 </DockPanel>
                                 <Grid>
                                     <DockPanel LastChildFill="True">
@@ -99,21 +101,21 @@
                                             </materialDesign:Card>
                                         </DockPanel>
                                         <materialDesign:Card Margin="2">
-                                            <DataGrid  GridLinesVisibility="None" controls:DataGridHelper.ColumnHeaderPadding="10,0" CanUserAddRows="False" Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding ListTiecCuoi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" AutoGenerateColumns="False" IsReadOnly="True"  HorizontalGridLinesBrush="Black"  SelectionChanged="DataGrid_SelectionChanged">
+                                            <DataGrid  GridLinesVisibility="None" controls:DataGridHelper.ColumnHeaderPadding="10,0" CanUserAddRows="False" Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" AutoGenerateColumns="False" IsReadOnly="True"  HorizontalGridLinesBrush="Black"  SelectionChanged="DataGrid_SelectionChanged">
                                                     <DataGrid.InputBindings>
                                                     <MouseBinding
             MouseAction="LeftDoubleClick"
-            Command="{Binding DoubleClickCommand}"
+            Command="{Binding DoubleClickCommand_HoaDon}"
             CommandParameter="{Binding ElementName=dtgDSTiecCuoi}"/>
                                                 </DataGrid.InputBindings>
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TenChuRe}">
+                                                    <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TIECCUOI.TenChuRe}">
                                                     </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Tên cô dâu" FontSize="14" Binding="{Binding TenCoDau}">
+                                                    <DataGridTextColumn Header="Tên cô dâu" FontSize="14" Binding="{Binding TIECCUOI.TenCoDau}">
                                                     </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding SoDienThoai}">
+                                                    <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding TIECCUOI.SoDienThoai}">
                                                     </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Ngày đặt tiệc" FontSize="14" Binding="{Binding NgayDaiTiec, StringFormat='dd/MM/yyyy'}" Width="*">
+                                                    <DataGridTextColumn Header="Ngày đặt tiệc" FontSize="14" Binding="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy'}" Width="*">
                                                     </DataGridTextColumn>
                                                 </DataGrid.Columns>
                                             </DataGrid>

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace QuanLyTiecCuoi.ViewModel
@@ -60,7 +61,8 @@ namespace QuanLyTiecCuoi.ViewModel
             List = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
             //data();
             DataProvider.Ins.DataBase.SaveChanges();
-            
+            DataGridCollection = CollectionViewSource.GetDefaultView(List);
+            DataGridCollection.Filter = new Predicate<object>(Filter);
             DoubleClickCommand = new RelayCommand<DataGrid>((p) =>
             {
                 return true;
@@ -69,7 +71,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 int id = _getMaBaoCaoThang(p);
                 MessageBox.Show(id.ToString());
                 ListBaoCaoNgay = new ObservableCollection<BAOCAONGAY>(DataProvider.Ins.DataBase.BAOCAONGAYs.Where(x => x.MaBaoCaoThang == id));
-                DataProvider.Ins.DataBase.SaveChanges();               
+                DataProvider.Ins.DataBase.SaveChanges();    
             });
             ExportToExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) => { Ex2Excel(p); });
         }

@@ -111,6 +111,9 @@
     <Compile Include="CT_PhieuDatBanxaml.xaml.cs">
       <DependentUpon>CT_PhieuDatBanxaml.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DSTiecChuaThanhToan.xaml.cs">
+      <DependentUpon>DSTiecChuaThanhToan.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HoaDon.xaml.cs">
       <DependentUpon>HoaDon.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CT_PhieuDatBanxaml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DSTiecChuaThanhToan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
