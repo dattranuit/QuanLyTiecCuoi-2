@@ -32,8 +32,11 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
+      
         private string _TenCa;
         public string TenCa { get => _TenCa; set { _TenCa = value; OnPropertyChanged(); } }
+        private string t="00:00:00";
+        public string tt { get => t; set { tt = value; OnPropertyChanged(); MessageBox.Show(tt); } }
         private System.TimeSpan _BatDau;
         public System.TimeSpan BatDau { get => _BatDau; set { _BatDau = value; OnPropertyChanged(); } }
         private System.TimeSpan _KetThuc;
