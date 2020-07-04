@@ -23,6 +23,7 @@ namespace QuanLyTiecCuoi.Model
         public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
         public string TenNguoiDung { get => _TenNguoiDung; set { _TenNguoiDung = value; OnPropertyChanged(); } }
         public int MaNhomNguoiDung { get => _MaNhomNguoiDung; set { _MaNhomNguoiDung = value; OnPropertyChanged(); } }
-        public virtual NHOMNGUOIDUNG NHOMNGUOIDUNG { get; set; }
+        private NHOMNGUOIDUNG _NHOMNGUOIDUNG;
+        public virtual NHOMNGUOIDUNG NHOMNGUOIDUNG { get => _NHOMNGUOIDUNG; set { _NHOMNGUOIDUNG = value; OnPropertyChanged(); } }
     }
 }

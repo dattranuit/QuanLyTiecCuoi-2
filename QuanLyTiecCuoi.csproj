@@ -221,6 +221,7 @@
     <Compile Include="ViewModel\HoaDonViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MonanViewModel.cs" />
+    <Compile Include="ViewModel\NguoiDungViewModel.cs" />
     <Compile Include="ViewModel\PhanQuyenViewModel.cs" />
     <Compile Include="ViewModel\PhieuDatBanViewModel.cs" />
     <Compile Include="ViewModel\PhieuDatDichVuViewModel.cs" />
@@ -265,10 +266,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="ResourceXAML\MainResource.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\usc_Dichvu.xaml">
       <SubType>Designer</SubType>
