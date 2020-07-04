@@ -16,8 +16,8 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class BaoCaoThangViewModel : BaseViewModel, Microsoft.Office.Interop.Excel.Window
     {
-        private ObservableCollection<BAOCAOTHANG> _List;
-        public ObservableCollection<BAOCAOTHANG> List { get => _List; set { _List = value; OnPropertyChanged(); } }
+        private static ObservableCollection<BAOCAOTHANG> _List;
+        public static ObservableCollection<BAOCAOTHANG> List { get => _List; set { _List = value;  } }
 
         private BAOCAOTHANG _SelectedItem;
 
@@ -68,8 +68,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
-                int id = _getMaBaoCaoThang(p);
-                MessageBox.Show(id.ToString());
+                int id = getMaBaoCaoThang(p);
                 ListBaoCaoNgay = new ObservableCollection<BAOCAONGAY>(DataProvider.Ins.DataBase.BAOCAONGAYs.Where(x => x.MaBaoCaoThang == id));
                 DataProvider.Ins.DataBase.SaveChanges();    
             });
@@ -145,7 +144,7 @@ namespace QuanLyTiecCuoi.ViewModel
             }
             return false;
         }
-        public int _getMaBaoCaoThang(DataGrid dataGrid)
+        public int getMaBaoCaoThang(DataGrid dataGrid)
         {
             if (dataGrid.SelectedItem != null)
             {
@@ -154,7 +153,7 @@ namespace QuanLyTiecCuoi.ViewModel
             }
             else
             {
-                MessageBox.Show("Lỗi");
+                //MessageBox.Show("Lỗi");
                 return -1;
             }
         }

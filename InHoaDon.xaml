@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:QuanLyTiecCuoi"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        DataContext="{StaticResource HoaDonVM}"
-        Title="Invoice" Height="850" Width="700" ResizeMode="NoResize" WindowStyle="None" FontFamily="Roboto" WindowStartupLocation="CenterScreen">
+        
+        Title="Invoice" Height="900" Width="850" ResizeMode="NoResize" WindowStyle="None" FontFamily="Roboto" WindowStartupLocation="CenterScreen">
     <ScrollViewer>
-        <Grid>
+        <Grid DataContext="{StaticResource HoaDonVM}">
             <Button HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Top" Click="Button_Click">
                 <materialDesign:PackIcon Kind="Printer"/>
             </Button>
@@ -20,7 +20,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="500"/>
-                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="250"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="30" Grid.Row="0">
@@ -37,17 +37,19 @@
                             <TextBlock HorizontalAlignment="Left" Width="155" Text="Họ và tên cô dâu:" FontSize="17" Margin="5"/>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Ngày đãi tiệc:" FontSize="17" Margin="5"/>
-                                <TextBlock Text="04 Jul 2019" FontSize="17" Margin="5" FontWeight="DemiBold"/>
+                                
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Tiền cọc:" FontSize="17" Margin="5"/>
-                                <TextBlock Text="0001" FontSize="17" Margin="5" FontWeight="DemiBold"/>
+                                
+                                
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Margin="10">
-                            <TextBlock HorizontalAlignment="Left" Width="150" Text="Nguyễn Văn A" FontSize="17" Margin="5"/>
-                            <TextBlock HorizontalAlignment="Left" Width="150" Text="Lê Thị B" FontSize="17" Margin="5"/>
-                            
+                            <TextBlock DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenChuRe, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="150"  FontSize="17" Margin="5" FontWeight="DemiBold"/>
+                            <TextBlock HorizontalAlignment="Left" Width="150" DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenCoDau, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" FontSize="17" Margin="5" FontWeight="DemiBold"/>
+                            <TextBlock DataContext="{Binding ListTiecCuoi2}" Text="{Binding NgayDaiTiec, StringFormat='dd/MM/yyyy', Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" FontSize="17" Margin="5" FontWeight="DemiBold"/>
+                            <TextBlock DataContext="{Binding ListTiecCuoi2}" x:Name="tblock_Tiencoc" Text="{Binding TienDatCoc}" FontSize="17" Margin="5" FontWeight="DemiBold"/>
                         </StackPanel>
                        
                     </Grid>
@@ -57,34 +59,37 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
-                            <DataGrid  ItemsSource="{Binding List5}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
+                            <DataGrid Margin="5" ItemsSource="{Binding ListPhieuDatDichVu}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Dịch vụ" FontSize="14" Binding="{Binding DICHVU.TenDichVu}"/>
                                     <DataGridTextColumn Header="Số lượng" FontSize="14" Binding="{Binding SoLuong}">
 
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Đơn giá" FontSize="14" Binding="{Binding DonGia}">
+                                    <DataGridTextColumn Header="Đơn giá" FontSize="14" Binding="{Binding DICHVU.DonGia}">
 
                                     </DataGridTextColumn>
 
+                                    <DataGridTextColumn Header="Thành tiền" FontSize="14" Width="*" Binding="{Binding ThanhTien}">
+
+                                    </DataGridTextColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
                         <Grid Grid.Column="1">
-                            <DataGrid  ItemsSource="{Binding List6}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
+                            <DataGrid Margin="5" ItemsSource="{Binding ListPhieuDatBan}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
                                 <DataGrid.Columns>
 
-                                    <DataGridTextColumn Header="Loại bàn" FontSize="14" Binding="{Binding MONAN.TenMonAn}">
+                                    <DataGridTextColumn Header="Loại bàn" FontSize="14" Binding="{Binding LoaiBan}">
                                     </DataGridTextColumn>
                                     <DataGridTextColumn Header="Số lượng" FontSize="14" Binding="{Binding SoLuong}">
                                     </DataGridTextColumn>
 
-                                    <DataGridTextColumn Header="Số lượng trữ" FontSize="14" Width="*" Binding="{Binding DonGia}">
+                                    <DataGridTextColumn Header="Số lượng trữ" FontSize="14"  Binding="{Binding SoLuongDuTru}">
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Đơn giá" FontSize="14" Width="*" Binding="{Binding DonGia}">
+                                    <DataGridTextColumn Header="Đơn giá" FontSize="14" Width="*" Binding="{Binding DonGiaBan}">
                                     </DataGridTextColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
@@ -115,24 +120,24 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Tiền bàn:" FontSize="10" Margin="5"/>
-                                <TextBlock Text="123 456 78" FontSize="10" Margin="5" FontWeight="DemiBold"/>
+                                <TextBlock Text="Tiền bàn:" FontSize="17" Margin="5"/>
+                                <TextBlock Text="{Binding TongTienBan}" FontSize="17" Margin="5" FontWeight="DemiBold"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Tiền dịch vụ" FontSize="10" Margin="5"/>
-                                <TextBlock Text="01 23 45" FontSize="10" Margin="5" FontWeight="DemiBold"/>
+                                <TextBlock Text="Tiền dịch vụ" FontSize="17" Margin="5"/>
+                                <TextBlock  Text="{Binding TongTienDichVu}" FontSize="17" Margin="5" FontWeight="DemiBold"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Tiền phạt" FontSize="10" Margin="5"/>
-                                <TextBlock Text="01 23 45" FontSize="10" Margin="5" FontWeight="DemiBold"/>
+                                <TextBlock Text="Tiền phạt" FontSize="17" Margin="5"/>
+                                <TextBlock Text="{Binding TienPhat}" FontSize="17" Margin="5" FontWeight="DemiBold"/>
                             </StackPanel>
                             
                         </StackPanel>
                         <StackPanel Grid.Column="1">
-                            <TextBlock Text="18 Jul '19" FontSize="25" Margin="5"/>
+                            <TextBlock Text="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy'}" FontSize="25" Margin="5"/>
                         </StackPanel>
                         <StackPanel Grid.Column="2">
-                            <TextBlock Text="$ 1,590.00" FontSize="25" Margin="5" HorizontalAlignment="Right" Foreground="#FF62013C" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding ConLai}" FontSize="25" Margin="5" HorizontalAlignment="Right" Foreground="#FF62013C" FontWeight="Bold"/>
                         </StackPanel>
                     </Grid>
                     <Rectangle Fill="Black" Height="1" Margin="5" Opacity="0.5"/>
@@ -143,9 +148,9 @@
                             <TextBlock Text="Thank you!" VerticalAlignment="Center" FontSize="20" Margin="5" FontWeight="Light"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                            <TextBlock Text="invoice@uit.edu.vn" VerticalAlignment="Center" FontSize="8" Margin="5" FontWeight="Light"/>
-                            <TextBlock Text="+84 1852-0000" VerticalAlignment="Center" FontSize="8" Margin="5" FontWeight="Light"/>
-                            <TextBlock Text="uit.edu.vn" VerticalAlignment="Center" FontSize="8" Margin="5" FontWeight="Light"/>
+                            <TextBlock Text="invoice@uit.edu.vn" VerticalAlignment="Center" FontSize="12" Margin="5" FontWeight="Light"/>
+                            <TextBlock Text="+84 1852-0000" VerticalAlignment="Center" FontSize="12" Margin="5" FontWeight="Light"/>
+                            <TextBlock Text="uit.edu.vn" VerticalAlignment="Center" FontSize="12" Margin="5" FontWeight="Light"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
