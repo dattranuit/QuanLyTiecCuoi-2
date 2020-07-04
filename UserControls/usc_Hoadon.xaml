@@ -13,7 +13,83 @@
     xmlns:wpf="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" Background="White">
         <Grid>
-            <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
+            <DockPanel LastChildFill="True">
+                <Grid>
+                    <DockPanel LastChildFill="True">
+                        <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
+                            <!--//-->
+                            <TextBlock Text="Danh sách hóa đơn" HorizontalAlignment="Center"
+                                   VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
+                                   Margin="0,5,0,0" DockPanel.Dock="Top" FontWeight="Medium"/>
+                        </DockPanel>
+                        <Grid>
+                            <DockPanel LastChildFill="True">
+                                <materialDesign:Card Margin="2">
+
+                                </materialDesign:Card>
+                                <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
+                                    <materialDesign:Card Margin="2">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <TextBox 
+                                                            Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
+                            controls:TextBoxHelper.Watermark="Tìm kiếm theo tên hoặc SDT"
+                            BorderThickness="0,0,0,1" Height="32" Width="400"
+                            BorderBrush="Black"
+                            FontSize="15" Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center" Margin="0,0,0,0" />
+                                            </Grid>
+                                            <Grid Grid.Column="4">
+                                                <Button
+                                                            Background="#FF0F5699" Foreground="White"
+                                                    Command="{Binding LapHoaDonCommand}"
+                                                    Margin="2"
+                                                    Content="Lập hóa đơn"
+    Style="{StaticResource MaterialDesignRaisedButton}"
+    ToolTip="Lập hóa đơn">
+                                                </Button>
+                                            </Grid>
+                                        </Grid>
+                                    </materialDesign:Card>
+                                </DockPanel>
+                                <materialDesign:Card Margin="2">
+                                    <GroupBox Header="Danh sách tiệc đã thanh toán" Margin="10,0,10,10" >
+                                        <DataGrid  GridLinesVisibility="None" controls:DataGridHelper.ColumnHeaderPadding="10,0" CanUserAddRows="False" Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" AutoGenerateColumns="False" IsReadOnly="True"  HorizontalGridLinesBrush="Black"  SelectionChanged="DataGrid_SelectionChanged">
+                                            <DataGrid.InputBindings>
+                                                <MouseBinding
+            MouseAction="LeftDoubleClick"
+            Command="{Binding DoubleClickCommand_HoaDon}"
+            CommandParameter="{Binding ElementName=dtgDSTiecCuoi}"/>
+                                            </DataGrid.InputBindings>
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TIECCUOI.TenChuRe}">
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="Tên cô dâu" FontSize="14" Binding="{Binding TIECCUOI.TenCoDau}">
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding TIECCUOI.SoDienThoai}">
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="Ngày đãi tiệc" FontSize="14" Binding="{Binding TIECCUOI.NgayDaiTiec, StringFormat='dd/MM/yyyy'}">
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="Ngày thanh toán" FontSize="14" Binding="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy'}" Width="*">
+                                                </DataGridTextColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </GroupBox>
+                                </materialDesign:Card>
+                            </DockPanel>
+                        </Grid>
+                    </DockPanel>
+                </Grid>
+            </DockPanel>
+            <!--<controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
                 <controls:MetroAnimatedTabControl.Resources>
                     <Style TargetType="controls:MetroTabItem">
                         <Setter Property="Template">
@@ -54,82 +130,9 @@
                     </Style>
                 </controls:MetroAnimatedTabControl.Resources>
                 <controls:MetroTabItem Header="Tiệc cưới">
-                    <DockPanel LastChildFill="True">
-                        <Grid>
-                            <DockPanel LastChildFill="True">
-                                <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
-                                    <!--//-->
-                                    <TextBlock Text="Danh sách hóa đơn" HorizontalAlignment="Center"
-                                   VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
-                                   Margin="0,5,0,0" DockPanel.Dock="Top" FontWeight="Medium"/>
-                                </DockPanel>
-                                <Grid>
-                                    <DockPanel LastChildFill="True">
-                                        <materialDesign:Card Margin="2">
-
-                                        </materialDesign:Card>
-                                        <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
-                                            <materialDesign:Card Margin="2">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                                        <ColumnDefinition></ColumnDefinition>
-                                                        <ColumnDefinition></ColumnDefinition>
-                                                        <ColumnDefinition></ColumnDefinition>
-                                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Grid Grid.Column="0">
-                                                        <TextBox 
-                                                            Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
-                            controls:TextBoxHelper.Watermark="Tìm kiếm theo tên hoặc SDT"
-                            BorderThickness="0,0,0,1" Height="32" Width="400"
-                            BorderBrush="Black"
-                            FontSize="15" Grid.Column="0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center" Margin="0,0,0,0" />
-                                                    </Grid>
-                                                    <Grid Grid.Column="4">
-                                                        <Button
-                                                            Background="#FF0F5699" Foreground="White"
-                                                    Command="{Binding LapHoaDonCommand}"
-                                                    Margin="2"
-                                                    Content="Lập hóa đơn"
-    Style="{StaticResource MaterialDesignRaisedButton}"
-    ToolTip="Lập hóa đơn">
-                                                        </Button>
-                                                    </Grid>
-                                                </Grid>
-                                            </materialDesign:Card>
-                                        </DockPanel>
-                                        <materialDesign:Card Margin="2">
-                                            <DataGrid  GridLinesVisibility="None" controls:DataGridHelper.ColumnHeaderPadding="10,0" CanUserAddRows="False" Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" AutoGenerateColumns="False" IsReadOnly="True"  HorizontalGridLinesBrush="Black"  SelectionChanged="DataGrid_SelectionChanged">
-                                                    <DataGrid.InputBindings>
-                                                    <MouseBinding
-            MouseAction="LeftDoubleClick"
-            Command="{Binding DoubleClickCommand_HoaDon}"
-            CommandParameter="{Binding ElementName=dtgDSTiecCuoi}"/>
-                                                </DataGrid.InputBindings>
-                                                <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TIECCUOI.TenChuRe}">
-                                                    </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Tên cô dâu" FontSize="14" Binding="{Binding TIECCUOI.TenCoDau}">
-                                                    </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding TIECCUOI.SoDienThoai}">
-                                                    </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Ngày đãi tiệc" FontSize="14" Binding="{Binding TIECCUOI.NgayDaiTiec, StringFormat='dd/MM/yyyy'}">
-                                                    </DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Ngày thanh toán" FontSize="14" Binding="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy'}" Width="*">
-                                                    </DataGridTextColumn>
-                                                </DataGrid.Columns>
-                                            </DataGrid>
-                                        </materialDesign:Card>
-                                    </DockPanel>
-                                </Grid>
-                            </DockPanel>
-                        </Grid>
-                    </DockPanel>
+                   
                 </controls:MetroTabItem>
-                <!--<controls:MetroTabItem Header="Danh sách hóa đơn" >
+                --><!--<controls:MetroTabItem Header="Danh sách hóa đơn" >
                     <Grid>
                         <wpf:Grid.ColumnDefinitions>
                             <ColumnDefinition Width="23*"/>
@@ -247,8 +250,8 @@
                             </Grid>
                         </UserControl>
                     </Grid>
-                </controls:MetroTabItem>-->
-            </controls:MetroAnimatedTabControl>
+                </controls:MetroTabItem>--><!--
+            </controls:MetroAnimatedTabControl>-->
         </Grid>
     </Grid>
 </UserControl>

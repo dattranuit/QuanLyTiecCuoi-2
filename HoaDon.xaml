@@ -187,7 +187,7 @@
                                                         <RowDefinition/>
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
-                                                    <DatePicker IsEnabled="False" Text="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy'}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <DatePicker x:Name="DP_ngaythanhtoan" IsEnabled="True" Text="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy', UpdateSourceTrigger=PropertyChanged}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>

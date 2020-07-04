@@ -86,15 +86,13 @@ namespace QuanLyTiecCuoi.ViewModel
         public ObservableCollection<THAMSO> _ListThamSo;
         public ObservableCollection<THAMSO> ListThamSo { get => _ListThamSo; set { _ListThamSo = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<object> _ListTiecCuoinew;
-        public ObservableCollection<object> ListTiecCuoinew { get => _ListTiecCuoinew; set { _ListTiecCuoinew = value; } }
 
         public int idTiecCuoi = 0;
+        public int id = 0;
 
         private decimal _TongSoBan;
         public decimal TongSoBan { get => _TongSoBan; set { _TongSoBan = value; OnPropertyChanged(); } }
-        //public decimal TongTienBan = 0;
-        public int id = 0;
+        
 
         private string _TenChuRe;
         public string TenChuRe { get => _TenChuRe; set { _TenChuRe = value; } }
@@ -201,7 +199,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             }, (p) =>
             {
-                MessageBox.Show("Done");
+                
                 var hoadon = new HOADON()
                 {
                     MaTiecCuoi = idTiecCuoi,
@@ -213,6 +211,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 };
                 DataProvider.Ins.DataBase.HOADONs.Add(hoadon);
                 DataProvider.Ins.DataBase.SaveChanges();
+                MessageBox.Show("Đã thêm hóa đơn");
                 List.Add(hoadon);
                 ListTiecCuoi.Remove(item);
                 TinhLaiBaoCaoThang();

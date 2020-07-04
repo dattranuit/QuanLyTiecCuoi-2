@@ -10,107 +10,42 @@
              DataContext="{StaticResource BaoCaoThangVM}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
-        <Grid>
-            <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
-                <controls:MetroAnimatedTabControl.Resources>
-                    <Style TargetType="controls:MetroTabItem">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="controls:MetroTabItem">
-                                    <Border Name="Border">
-                                        <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        ContentSource="Header"
-                                        Margin="20,2"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter TargetName="Border" Property="BorderBrush" Value="#FF1585B5"/>
-                                            <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,3"/>
-                                        </Trigger>
-                                        <Trigger Property="IsSelected" Value="False">
-                                            <Setter Property="Foreground" Value="#FFAEAEBD" />
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="FontWeight" Value="DemiBold"/>
-                        <Setter Property="Foreground" Value="Black"/>
-                        <Setter Property="FontSize" Value="15"/>
-                    </Style>
-                    <Style TargetType="GroupBox">
-                        <Setter Property="BorderBrush" Value="Black"/>
-                        <Setter Property="HeaderTemplate">
-                            <Setter.Value>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}" FontSize="15" Foreground="#FF0E2291"/>
-                                </DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </controls:MetroAnimatedTabControl.Resources>
-                <controls:MetroTabItem Header="Báo cáo">
-                    <DockPanel LastChildFill="True">
-                        <Grid>
-                            <DockPanel LastChildFill="True">
-                                <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
-                                    <DockPanel DockPanel.Dock="Right" Width="150" Margin="8,0">
-                                        <TextBlock Text="Năm:" FontSize="14" VerticalAlignment="Center" Foreground="#000000" Padding="8,0"/>
-                                        <TextBox Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
+
+        <DockPanel LastChildFill="True">
+            <Grid>
+                <DockPanel LastChildFill="True">
+                    <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
+                        <DockPanel DockPanel.Dock="Right" Width="150" Margin="8,0">
+                            <TextBlock Text="Năm:" FontSize="14" VerticalAlignment="Center" Foreground="#000000" Padding="8,0"/>
+                            <TextBox Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
                                             x:Name="year" FontSize="14" VerticalAlignment="Center" BorderBrush="Black" ToolTip="Chọn năm..." OpacityMask="#FFB9B9B9"  Height="20"/>
-                                    </DockPanel>
-                                    <DockPanel DockPanel.Dock="Right" Width="300" Margin="8,0">
-                                        <TextBlock Text="Báo cáo doanh thu" HorizontalAlignment="Center"
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Right" Width="300" Margin="8,0">
+                            <TextBlock Text="Báo cáo doanh thu" HorizontalAlignment="Center"
                                    VerticalAlignment="Center" FontSize="32" Foreground="#FF0E2291"
                                    Margin="0,5,0,0" DockPanel.Dock="Top" FontWeight="Medium"/>
-                                    </DockPanel>
-                                </DockPanel>
-                                <Grid>
-                                    <DockPanel LastChildFill="True">
-                                        <materialDesign:Card Margin="2">
+                        </DockPanel>
+                    </DockPanel>
+                    <Grid>
+                        <DockPanel LastChildFill="True">
+                            <materialDesign:Card Margin="2">
 
-                                        </materialDesign:Card>
-                                        <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
-                                            <materialDesign:Card Margin="2">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition></ColumnDefinition>
-                                                        <ColumnDefinition></ColumnDefinition>
-                                                        <ColumnDefinition></ColumnDefinition>
-                                                        <ColumnDefinition></ColumnDefinition>
-                                                        <ColumnDefinition></ColumnDefinition>
-                                                        <ColumnDefinition></ColumnDefinition>
-                                                        <ColumnDefinition></ColumnDefinition>
-                                                        <ColumnDefinition></ColumnDefinition>
-                                                    </Grid.ColumnDefinitions>
-                                                    <!--<Grid Grid.Column="4">
-                                                        <Button
-                                                    Margin="2"
-    Style="{StaticResource MaterialDesignRaisedButton}"
-                                                    Content="Thêm"
-    ToolTip="Thêm">
-                                                        </Button>
-                                                    </Grid>
-                                                    <Grid Grid.Column="5">
-                                                        <Button
-                                                    Margin="2"
-                                                    Content="Sửa"
-    Style="{StaticResource MaterialDesignRaisedButton}"
-    ToolTip="Sửa">
-                                                        </Button>
-                                                    </Grid>
-                                                    <Grid Grid.Column="6">
-                                                        <Button
-                                                    Margin="2"
-                                                    Content="Xóa"
-    Style="{StaticResource MaterialDesignRaisedButton}"
-    ToolTip="Xóa">
-                                                        </Button>
-                                                    </Grid>-->
-                                                    <Grid Grid.Column="7">
-                                                        <Button
+                            </materialDesign:Card>
+                            <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
+                                <materialDesign:Card Margin="2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="7">
+                                            <Button
                                                             Background="#FF0F5699" Foreground="White"
                                                             Command="{Binding ExportToExcel}"
                                                                 CommandParameter="{Binding ElementName=DoanhThuNgay}"
@@ -118,64 +53,66 @@
                                                     Content="Xuất Excel"
     Style="{StaticResource MaterialDesignRaisedButton}"
     ToolTip="Xuất ra file excel" HorizontalAlignment="Right" Width="100">
-                                                        </Button>
-                                                    </Grid>
-                                                </Grid>
-                                            </materialDesign:Card>
-                                        </DockPanel>
-                                        <materialDesign:Card Margin="2">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                                                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid Grid.Column="0">
-                                                    <DataGrid Name="DoanhThuThang" DataContext="{StaticResource BaoCaoThangVM}" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
-                                                        <DataGrid.InputBindings>
-                                                            <MouseBinding
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </materialDesign:Card>
+                            </DockPanel>
+                            <materialDesign:Card Margin="2">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <GroupBox Header="Doanh thu theo tháng" Margin="5" >
+                                            <DataGrid Margin="5" Name="DoanhThuThang" DataContext="{StaticResource BaoCaoThangVM}" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
+                                                <DataGrid.InputBindings>
+                                                    <MouseBinding
             MouseAction="LeftDoubleClick"
             Command="{Binding DoubleClickCommand}"
             CommandParameter="{Binding ElementName=DoanhThuThang}"/>
-                                                        </DataGrid.InputBindings>
-                                                        <DataGrid.Columns>
-                                                            <DataGridTextColumn Header="Tháng" FontSize="14" Binding="{Binding Thang}">
-                                                            </DataGridTextColumn>
-                                                            <DataGridTextColumn Header="Năm" FontSize="14" Binding="{Binding Nam}">
-                                                            </DataGridTextColumn>
-                                                            <DataGridTextColumn Header="Tổng doanh Thu" FontSize="14" Binding="{Binding TongDoanhThu}" Width="*">
-                                                            </DataGridTextColumn>
-                                                        </DataGrid.Columns>
-                                                    </DataGrid>
-                                                </Grid>
-                                                <Grid Grid.Column="1">
-                                                    <DataGrid Name="DoanhThuNgay" Margin="50,0,0,0" DataContext="{StaticResource BaoCaoThangVM}" ItemsSource="{Binding ListBaoCaoNgay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
-                                                        <DataGrid.Columns>
-                                                            <!--<DataGridTextColumn Header="STT" FontSize="14" Binding="{Binding STT}"/>-->
-                                                            <DataGridTextColumn Header="Ngày" FontSize="14" Binding="{Binding Ngay}">
+                                                </DataGrid.InputBindings>
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Tháng" FontSize="14" Binding="{Binding Thang}">
+                                                    </DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Năm" FontSize="14" Binding="{Binding Nam}">
+                                                    </DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Tổng doanh Thu" FontSize="14" Binding="{Binding TongDoanhThu, UpdateSourceTrigger=PropertyChanged}" Width="*">
+                                                    </DataGridTextColumn>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </GroupBox>
 
-                                                            </DataGridTextColumn>
-                                                            <DataGridTextColumn Header="Số Lượng Tiệc Cưới" FontSize="14" Binding="{Binding SoLuongTiecCuoi}">
 
-                                                            </DataGridTextColumn>
-                                                            <DataGridTextColumn Header="Doanh Thu" FontSize="14" Binding="{Binding DoanhThu}">
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <GroupBox Header="Doanh thu theo ngày" Margin="5" >
+                                            <DataGrid Name="DoanhThuNgay" Margin="5" DataContext="{StaticResource BaoCaoThangVM}" ItemsSource="{Binding ListBaoCaoNgay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
+                                                <DataGrid.Columns>
+                                                    <!--<DataGridTextColumn Header="STT" FontSize="14" Binding="{Binding STT}"/>-->
+                                                    <DataGridTextColumn Header="Ngày" FontSize="14" Binding="{Binding Ngay}">
 
-                                                            </DataGridTextColumn>
-                                                            <DataGridTextColumn Header="Tỉ lệ" FontSize="14" Width="*" Binding="{Binding TiLe}">
+                                                    </DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Số Lượng Tiệc Cưới" FontSize="14" Binding="{Binding SoLuongTiecCuoi}">
 
-                                                            </DataGridTextColumn>
-                                                        </DataGrid.Columns>
-                                                    </DataGrid>
-                                                </Grid>
-                                            </Grid>
-                                        </materialDesign:Card>
-                                    </DockPanel>
+                                                    </DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Doanh Thu" FontSize="14" Binding="{Binding DoanhThu}">
+
+                                                    </DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Tỉ lệ" FontSize="14" Width="*" Binding="{Binding TiLe}">
+
+                                                    </DataGridTextColumn>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </GroupBox>
+                                    </Grid>
                                 </Grid>
-                            </DockPanel>
-                        </Grid>
-                    </DockPanel>
-                </controls:MetroTabItem>
-                
-            </controls:MetroAnimatedTabControl>
-        </Grid>
+                            </materialDesign:Card>
+                        </DockPanel>
+                    </Grid>
+                </DockPanel>
+            </Grid>
+        </DockPanel>
     </Grid>
 </UserControl>
