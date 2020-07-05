@@ -70,19 +70,10 @@ namespace QuanLyTiecCuoi.ViewModel
         }
 
         public BaoCaoNgayViewModel()
-        {
-            
+        {      
             List = new ObservableCollection<BAOCAONGAY>(DataProvider.Ins.DataBase.BAOCAONGAYs);
-
-
             tongdoanhthu = TinhTongDoanhThu().ToString();
             ExportToExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) => { Ex2Excel(p); });
-
-        }
-
-        private void update()
-        {
-
         }
 
         private decimal TinhTongDoanhThu()

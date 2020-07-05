@@ -66,12 +66,12 @@
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Column="0">
                                         <GroupBox Header="Doanh thu theo tháng" Margin="5" >
-                                            <DataGrid Margin="5" Name="DoanhThuThang" ItemsSource="{Binding ListBCT, UpdateSourceTrigger=PropertyChanged, Source={StaticResource BaoCaoThangVM}}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
+                                            <DataGrid Margin="5" Name="DoanhThuThang" DataContext="{StaticResource BaoCaoThangVM }" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black">
                                                 <DataGrid.InputBindings>
                                                     <MouseBinding
-            MouseAction="LeftDoubleClick"
-            Command="{Binding DoubleClickCommand}"
-            CommandParameter="{Binding ElementName=DoanhThuThang}"/>
+                                                        MouseAction="LeftDoubleClick"
+                                                        Command="{Binding DoubleClickCommand}"
+                                                        CommandParameter="{Binding ElementName=DoanhThuThang}"/>
                                                 </DataGrid.InputBindings>
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="Tháng" FontSize="14" Binding="{Binding Thang}">

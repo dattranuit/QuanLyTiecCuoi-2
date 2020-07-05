@@ -33,10 +33,11 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="3*"></ColumnDefinition>
                                                 <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition Width="1.2*"></ColumnDefinition>
                                                 <ColumnDefinition></ColumnDefinition>
-                                                <ColumnDefinition></ColumnDefinition>
-                                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                <ColumnDefinition Width="1.2*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
+                                            
                                             <Grid Grid.Column="0">
                                                 <TextBox 
                                                             Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
@@ -61,7 +62,7 @@
                                     </materialDesign:Card>
                                 </DockPanel>
                                 <materialDesign:Card Margin="2">
-                                    <GroupBox Header="Danh sách tiệc đã thanh toán" Margin="10,0,10,10" >
+                                    <GroupBox Header="Danh sách tiệc đã thanh toán" Margin="5" >
                                         <DataGrid  GridLinesVisibility="None" controls:DataGridHelper.ColumnHeaderPadding="10,0" CanUserAddRows="False" Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" AutoGenerateColumns="False" IsReadOnly="True"  HorizontalGridLinesBrush="Black"  SelectionChanged="DataGrid_SelectionChanged">
                                             <DataGrid.InputBindings>
                                                 <MouseBinding
@@ -78,7 +79,7 @@
                                                 </DataGridTextColumn>
                                                 <DataGridTextColumn Header="Ngày đãi tiệc" FontSize="14" Binding="{Binding TIECCUOI.NgayDaiTiec, StringFormat='dd/MM/yyyy'}">
                                                 </DataGridTextColumn>
-                                                <DataGridTextColumn Header="Ngày thanh toán" FontSize="14" Binding="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy'}" Width="*">
+                                                <DataGridTextColumn Header="Ngày lập hóa đơn" FontSize="14" Binding="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy'}" Width="*">
                                                 </DataGridTextColumn>
                                             </DataGrid.Columns>
                                         </DataGrid>

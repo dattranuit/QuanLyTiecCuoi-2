@@ -15,15 +15,9 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class HoaDonViewModel : BaseViewModel
     {
-        private static ObservableCollection<HOADON> _List;
-        public static ObservableCollection<HOADON> List { get => _List; set { _List = value; } }
 
         private HOADON _SelectedItem;
 
-        private bool _IsEnable;
-        public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
-        private bool _IsReadOnly;
-        public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
         public HOADON SelectedItem
         {
             get => _SelectedItem;
@@ -41,7 +35,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
-
+        // Bien
+        #region
         private decimal _TongTienBan;
         public decimal TongTienBan { get => _TongTienBan; set { _TongTienBan = value; OnPropertyChanged(); } }
 
@@ -58,19 +53,42 @@ namespace QuanLyTiecCuoi.ViewModel
         public decimal ConLai { get => _ConLai; set { _ConLai = value; OnPropertyChanged(); } }
 
 
-        private DateTime _NgayThanhToan;
-        public DateTime NgayThanhToan { get => _NgayThanhToan; set { _NgayThanhToan = value; update();  OnPropertyChanged();  } }
+        private DateTime _NgayThanhToan = DateTime.Now;
+        public DateTime NgayThanhToan { get => _NgayThanhToan;
+            set 
+            {
+                if (value < NgayDaiTiec)
+                {
+                    MessageBox.Show("Ngay thanh toán phải cùng hoặc sau ngày đãi tiệc");
+                    _NgayThanhToan = DateTime.Now;
+                }
+                else
+                    if (value != _NgayThanhToan)
+                    {
+                        OnPropertyChanged();
+                        _NgayThanhToan = value;
+                        TimeSpan da = NgayThanhToan.Subtract(NgayDaiTiec);
+                        TienPhat = TongTienHoaDon * (decimal)IsPhat * (decimal)TiLePhat * (decimal)Math.Abs((int)da.TotalDays);// * (decimal)(DateTime.Now.Subtract(NgayDaiTiec).TotalDays);                                                                                                                   //MessageBox.Show(TienPhat.ToString());
+                        ConLai = TongTienHoaDon + TienPhat - Convert.ToDecimal(TienDatCoc);
+                    }
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
-        // command
+        // Icommand
+        #region
         public ICommand DoubleClickCommand_HoaDon { get; set; }
         public ICommand DoubleClickCommand_Tiec { get; set; }
         public ICommand LapHoaDonCommand { get; set; }
         public ICommand LuuHoaDon { get; set; }
         public ICommand InHoaDon { get; set; }
         public ICommand DoubleClickCommandCT_Phieu { get; set; }
+        public ICommand GetBaoCaoThangVM { get; set; }
+        #endregion
 
-
-        // Get data
+        // ObservableCollection
+        #region
         private static ObservableCollection<TIECCUOI> _ListTiecCuoi;
         public static ObservableCollection<TIECCUOI> ListTiecCuoi { get => _ListTiecCuoi; set { _ListTiecCuoi = value; } }
 
@@ -89,17 +107,19 @@ namespace QuanLyTiecCuoi.ViewModel
         public ObservableCollection<THAMSO> _ListThamSo;
         public ObservableCollection<THAMSO> ListThamSo { get => _ListThamSo; set { _ListThamSo = value; OnPropertyChanged(); } }
 
-        //public ObservableCollection<BAOCAOTHANG> _ListBaoCaoThang;
-        //public ObservableCollection<BAOCAOTHANG> ListBaoCaoThang { get => _ListBaoCaoThang; set { _ListBaoCaoThang = value; OnPropertyChanged(); } }
+        private static ObservableCollection<HOADON> _List;
+        public static ObservableCollection<HOADON> List { get => _List; set { _List = value; } }
+        BaoCaoThangViewModel baoCaoThangViewModel;
+        #endregion
 
-
+        // Cac bien
+        #region
         public int idTiecCuoi = 0;
         public int id = 0;
 
         private decimal _TongSoBan;
         public decimal TongSoBan { get => _TongSoBan; set { _TongSoBan = value; OnPropertyChanged(); } }
-        
-
+       
         private string _TenChuRe;
         public string TenChuRe { get => _TenChuRe; set { _TenChuRe = value; } }
 
@@ -108,7 +128,6 @@ namespace QuanLyTiecCuoi.ViewModel
 
         private System.DateTime _NgayDaiTiec;// = DateTime.Now;
         public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; set { _NgayDaiTiec = value; OnPropertyChanged();  } }
-
 
         private int _SoLuong;
         private int _SoLuongDuTru;
@@ -120,7 +139,6 @@ namespace QuanLyTiecCuoi.ViewModel
 
         private string _TienDatCoc;
         public string TienDatCoc { get => _TienDatCoc; set { _TienDatCoc = value; OnPropertyChanged(); } }
-
 
         //private int _MaDichVu;
         public int MaDichVu { get; set; }
@@ -146,58 +164,25 @@ namespace QuanLyTiecCuoi.ViewModel
         public decimal TienPhat { get => _TienPhat; set { _TienPhat = value; OnPropertyChanged(); } }
         public double TiLePhat = 0.0d;
         public int IsPhat = 0;
-
         public TIECCUOI item;
         public int idIn = 0;
-
-        public void update()
-        {
-            if(NgayThanhToan < NgayDaiTiec)
-            {
-                MessageBox.Show("Ngày thanh toán phải trùng hoặc sau ngày đãi tiệc");
-                TienPhat = ConLai = 0;
-            }
-            else
-            {
-                TimeSpan da = NgayThanhToan.Subtract(NgayDaiTiec);
-                TienPhat = TongTienHoaDon * (decimal)IsPhat * (decimal)TiLePhat * (decimal)Math.Abs((int)da.TotalDays);// * (decimal)(DateTime.Now.Subtract(NgayDaiTiec).TotalDays);                                                                                                                   //MessageBox.Show(TienPhat.ToString());
-                ConLai = TongTienHoaDon + TienPhat - Convert.ToDecimal(TienDatCoc);
-            }            
-        }
+        #endregion  
         public HoaDonViewModel()
         {
-            IsReadOnly = !LoginViewModel.ThayDoiHoaDon;
+
             ListTiecCuoi = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.HOADONs.Count() == 0));
             List = new ObservableCollection<HOADON>(DataProvider.Ins.DataBase.HOADONs);
-            //ListBaoCaoThang = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
             DataProvider.Ins.DataBase.SaveChanges();
 
+            // Filter
             DataGridCollection = CollectionViewSource.GetDefaultView(List);
             DataGridCollection.Filter = new Predicate<object>(Filter);
+
+
             DoubleClickCommand_HoaDon = new RelayCommand<DataGrid>((p) => { return true; },
                 (p) =>
                 {
                     idTiecCuoi = getMaTiecCuoi_HoaDon(p);
-                    if (DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == idTiecCuoi).Count() == 0)
-                    {
-                        //MessageBox.Show("Tiệc cưới chưa hoàn thành thông tin, vui lòng kiểm tra lại");
-                    }
-                    else
-                    {
-                        HoaDon hd = new HoaDon();
-                        Loaddata();
-                        //hd.DataContext = List;
-                        //hd.DataContext = ListTiecCuoi2;
-                        //hd.DataContext = ListTiecCuoi;
-                        //hd.DataContext = ListPhieuDatBan;
-                        //hd.DataContext = ListPhieuDatDichVu;
-                        hd.ShowDialog();
-                    }
-                });
-            DoubleClickCommand_Tiec = new RelayCommand<DataGrid>((p) => { return true; },
-                (p) =>
-                {
-                    idTiecCuoi = idIn = getMaTiecCuoi_Tiec(p);
                     if (DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == idTiecCuoi).Count() == 0)
                     {
                         MessageBox.Show("Tiệc cưới chưa hoàn thành thông tin, vui lòng kiểm tra lại");
@@ -206,58 +191,81 @@ namespace QuanLyTiecCuoi.ViewModel
                     {
                         HoaDon hd = new HoaDon();
                         Loaddata();
-                        //hd.DataContext = List;
-                        //hd.DataContext = ListTiecCuoi2;
-                        //hd.DataContext = ListTiecCuoi;
-                        //hd.DataContext = ListPhieuDatBan;
-                        //hd.DataContext = ListPhieuDatDichVu;
                         hd.ShowDialog();
                     }
                 });
+
+            DoubleClickCommand_Tiec = new RelayCommand<DataGrid>((p) => { return true; },
+                (p) =>
+                {
+                    idTiecCuoi = idIn = getMaTiecCuoi_Tiec(p);
+                    var a = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == idTiecCuoi);
+                    if (a.Count() != 0)
+                    {
+                        if(a.ToList()[0].NgayDaiTiec > DateTime.Now)
+                        {
+                            MessageBox.Show("Chưa đến ngày thanh toán");
+                            return;
+                        }
+                    }
+                    if (DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == idTiecCuoi).Count() == 0)
+                    {
+                        MessageBox.Show("Tiệc cưới chưa hoàn thành thông tin, vui lòng kiểm tra lại");
+                    }
+                    else
+                    {
+                        HoaDon hd = new HoaDon();
+                        Loaddata();
+                        hd.ShowDialog();
+                    }
+                });
+
             LuuHoaDon = new RelayCommand<HoaDon>((p) =>
             {
                 var hoadon = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == idTiecCuoi);
-                //MessageBox.Show("a");
+                if (NgayThanhToan < NgayDaiTiec)
+                {          
+                    return false;
+                }
                 if (hoadon == null || hoadon.Count() != 0)
                     return false;
                 return true;
 
-            }, (p) =>
-            {
-                
-                var hoadon = new HOADON()
+            },
+                (p) =>
                 {
-                    MaTiecCuoi = idTiecCuoi,
-                    TongTienBan = TongTienBan,
-                    NgayThanhToan = NgayThanhToan,
-                    ConLai = ConLai,
-                    TongTienDichVu = TongTienDichVu,
-                    TongTienHoaDon = TongTienHoaDon
-                };
-                DataProvider.Ins.DataBase.HOADONs.Add(hoadon);
-                DataProvider.Ins.DataBase.SaveChanges();
-                MessageBox.Show("Đã thêm hóa đơn");
-                List.Add(hoadon);
-                ListTiecCuoi.Remove(item);
-                TinhLaiBaoCaoThang();
-                TinhLaiBaoCaoNgay();
-                UpdateTiLe();
-            });
+                    var hoadon = new HOADON()
+                    {
+                        MaTiecCuoi = idTiecCuoi,
+                        TongTienBan = TongTienBan,
+                        NgayThanhToan = NgayThanhToan,
+                        ConLai = ConLai,
+                        TongTienDichVu = TongTienDichVu,
+                        TongTienHoaDon = TongTienHoaDon
+                    };
+                    DataProvider.Ins.DataBase.HOADONs.Add(hoadon);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    MessageBox.Show("Đã thêm hóa đơn");
+                    List.Add(hoadon);
+                    ListTiecCuoi.Remove(item);
+                    TinhLaiBaoCaoThang();
+                    TinhLaiBaoCaoNgay();
+                    UpdateTiLe();
+
+                });
+
             InHoaDon = new RelayCommand<object>((p) =>
             {
                 return true;
-            }, (p) =>
+            }, 
+            (p) =>
             {
  
                 var inHoaDon = new InHoaDon();
-                //data();
-                //inHoaDon.DataContext = List;
-                //inHoaDon.DataContext = ListTiecCuoi2;
-                //inHoaDon.DataContext = ListTiecCuoi;
-                //inHoaDon.DataContext = ListPhieuDatBan;
-                //inHoaDon.DataContext = ListPhieuDatDichVu;
                 inHoaDon.ShowDialog();
             });
+
+
             DoubleClickCommandCT_Phieu = new RelayCommand<DataGrid>((p) => { return true; },
                 (p) =>
                 {
@@ -269,16 +277,25 @@ namespace QuanLyTiecCuoi.ViewModel
                     ct_Phieu.DataContext = ListCT_PhieuDatBan;
                     ct_Phieu.ShowDialog();
                 });
+
             LapHoaDonCommand = new RelayCommand<Button>((p) => { return true; },
                 (p) =>
                 {
                     DSTiecChuaThanhToan dSTiecChuaThanhToan = new DSTiecChuaThanhToan();
                     dSTiecChuaThanhToan.ShowDialog();
                 });
+            GetBaoCaoThangVM = new RelayCommand<Grid>((p) => { return true; },
+                (p) =>
+                {
+                    
+                    baoCaoThangViewModel= p.DataContext as BaoCaoThangViewModel;
+                });
+
         }
 
 
         // Search box
+        #region
         private ICollectionView _dataGridCollection;
         private string _filterString;
         public ICollectionView DataGridCollection
@@ -316,9 +333,9 @@ namespace QuanLyTiecCuoi.ViewModel
             }
             return false;
         }
+        #endregion
 
-
-
+        //function
         private void Loaddata()
         {
             if (ListPhieuDatDichVu != null) ListPhieuDatDichVu.ToList().Clear();
@@ -369,9 +386,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 IsPhat = (int)ListThamSo[0].GiaTri;
                 TiLePhat = ListThamSo[1].GiaTri;
             }
-
-            TongTienHoaDon = TongTienBan + TongTienDichVu;
-           
+            TongTienHoaDon = TongTienBan + TongTienDichVu;          
         }
 
         public int getMaTiecCuoi_HoaDon(DataGrid dataGrid)
@@ -383,11 +398,9 @@ namespace QuanLyTiecCuoi.ViewModel
             }
             else
             {
-                //MessageBox.Show("Lỗi");
                 return -1;
             }
         }
-
 
         public int getMaTiecCuoi_Tiec(DataGrid dataGrid)
         {
@@ -399,7 +412,6 @@ namespace QuanLyTiecCuoi.ViewModel
             }
             else
             {
-                //MessageBox.Show("Lỗi");
                 return -1;
             }
         }
@@ -424,6 +436,7 @@ namespace QuanLyTiecCuoi.ViewModel
             if (BaoCaoThang.Count() != 0)
             {
                 BaoCaoThang[0].TongDoanhThu += TongTienHoaDon;
+                DataProvider.Ins.DataBase.SaveChanges();
             }
             else
             {
@@ -435,21 +448,10 @@ namespace QuanLyTiecCuoi.ViewModel
                 };
                 DataProvider.Ins.DataBase.BAOCAOTHANGs.Add(item);
                 DataProvider.Ins.DataBase.SaveChanges();
-                
-                //BaoCaoThangViewModel.List.Add(item);
-                
-                //BaoCaoThangViewModel.List.CollectionChanged += List_CollectionChanged;
             }
+            baoCaoThangViewModel.List = new ObservableCollection<BAOCAOTHANG>();
+            baoCaoThangViewModel.List = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
         }
-
-        //private void List_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        //{
-        //    if(e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
-        //    {
-        //        BaoCaoThangViewModel.Reload();
-        //    }
-        //    //throw new NotImplementedException();
-        //}
 
         private void TinhLaiBaoCaoNgay()
         {
@@ -472,7 +474,7 @@ namespace QuanLyTiecCuoi.ViewModel
                         Ngay = NgayDaiTiec.Day,
                         SoLuongTiecCuoi = 1,
                         DoanhThu = TongTienHoaDon,
-                        TiLe = 1//Convert.ToDouble(BaoCaoNgay[0].DoanhThu) / Convert.ToDouble(BaoCaoThang[0].TongDoanhThu)
+                        TiLe = 1
                     });
                     DataProvider.Ins.DataBase.SaveChanges();
                 }
