@@ -92,6 +92,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 if (value < NgayDatTiec)
                 {
                     OnPropertyChanged();
+
                     MessageBox.Show("Ngày đãi tiệc không được sớm hơn Ngày đặt tiệc", "Lỗi");
                     _NgayDaiTiec = NgayDatTiec;
                 }

@@ -7,6 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyTiecCuoi"
         mc:Ignorable="d"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
         Title="Hóa đơn" Height="620" Width="850">
@@ -82,8 +83,17 @@
                                                 <ColumnDefinition></ColumnDefinition>
                                                 <ColumnDefinition></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0" x:Name="abc" DataContext="{StaticResource BaoCaoThangVM}">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Loaded">
+                                                        <i:InvokeCommandAction Command="{Binding GetBaoCaoThangVM , Source={StaticResource HoaDonVM}}" CommandParameter="{Binding ElementName=abc}"></i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Grid>
                                             <Button
-                                                Command="{Binding LuuHoaDon}"
+                                                x:Name="btn_LuuHoaDon"
+                                              
+                                                Command="{Binding LuuHoaDon, Source={StaticResource HoaDonVM}}"
                                 Grid.Column="2"
                                 Background="#FF0F5699" Foreground="White"
                                 HorizontalAlignment="Center"
@@ -180,7 +190,7 @@
                                                         <RowDefinition/>
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
-                                                    <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="0" Content="Ngày thanh toán"/>
+                                                    <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="0" Content="Ngày đãi tiệc"/>
                                                     <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Content="Ngày lập hóa đơn"/>
                                                 </Grid>
                                                 <Grid Grid.Column="1">
@@ -189,7 +199,7 @@
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
                                                     <DatePicker x:Name="DP_ngaythanhtoan" IsEnabled="True" Text="{Binding NgayDaiTiec, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                                    <DatePicker x:Name="DP_ngaylaphoadon" IsEnabled="True" Text="{Binding NgayThanhToan, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <DatePicker x:Name="DP_ngaylaphoadon" IsEnabled="True" Text="{Binding NgayThanhToan, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>

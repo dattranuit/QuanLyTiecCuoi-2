@@ -17,11 +17,10 @@ namespace QuanLyTiecCuoi.ViewModel
     class BaoCaoThangViewModel : BaseViewModel, Microsoft.Office.Interop.Excel.Window
     { 
         
-        private static ObservableCollection<BAOCAOTHANG> _List;
-        public static ObservableCollection<BAOCAOTHANG> List { get => _List; set { _List = value; } }
+        private  ObservableCollection<BAOCAOTHANG> _List;
+        public  ObservableCollection<BAOCAOTHANG> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
-        private  ObservableCollection<BAOCAOTHANG> _ListBCT;
-        public  ObservableCollection<BAOCAOTHANG> ListBCT { get => _ListBCT; set { _ListBCT = value; OnPropertyChanged(); } }
+        
 
         private BAOCAOTHANG _SelectedItem;
 
@@ -63,9 +62,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public BaoCaoThangViewModel()
         {
             List = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
-            ListBCT = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
-            MessageBox.Show(ListBCT.Count().ToString());
-            //data();
+            
             DataProvider.Ins.DataBase.SaveChanges();
             DataGridCollection = CollectionViewSource.GetDefaultView(List);
             DataGridCollection.Filter = new Predicate<object>(Filter);
