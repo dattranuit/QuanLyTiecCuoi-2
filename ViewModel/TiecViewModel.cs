@@ -185,7 +185,8 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         public TiecViewModel()
         {
-            IsReadOnly = false;//MainViewModel.ThayDoiTiecCuoi;
+            IsReadOnly = !LoginViewModel.ThayDoiTiec;
+           // MessageBox.Show(IsReadOnly + "");
             ListTiecCuoi = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
             ListCa = new ObservableCollection<CA>(DataProvider.Ins.DataBase.CAs);
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);

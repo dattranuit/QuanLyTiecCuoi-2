@@ -14,6 +14,10 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class PhieuDatDichVuViewModel:BaseViewModel
     {
+        private bool _IsEnable;
+        public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
+        private bool _IsReadOnly;
+        public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
         private static ObservableCollection<PHIEUDATDICHVU> _ListPhieuDatDichVu;
         public static ObservableCollection<PHIEUDATDICHVU> ListPhieuDatDichVu { get => _ListPhieuDatDichVu; set { _ListPhieuDatDichVu = value; } }
         private static ObservableCollection<DICHVU> _ListDichVu;
@@ -101,6 +105,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand DeleteCommand { get; set; }
         public PhieuDatDichVuViewModel()
         {
+            IsReadOnly = !LoginViewModel.ThayDoiTiec;
             ListDichVu = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
             ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi));
             AddCommand = new RelayCommand<object>((p) =>

@@ -12,6 +12,10 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class CT_PhieuDatBanViewModel:BaseViewModel
     {
+        private bool _IsEnable;
+        public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
+        private bool _IsReadOnly;
+        public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
         private static int _CurrentMaPDB;
         public static int CurrentMaPDB { get => _CurrentMaPDB; set { _CurrentMaPDB = value;} }
         private decimal _DonGiaBan;
@@ -111,7 +115,7 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         public CT_PhieuDatBanViewModel()
         {
-            //var check = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB);
+            IsReadOnly = !LoginViewModel.ThayDoiTiec;
             int count = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Count();
             if (count != 0)
                 DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);

@@ -7,7 +7,7 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="CT_PhieuDatBanWindow" Height="662" Width="800">
+        Title="Chi Tiết Phiếu Đặt Bàn" Height="662" Width="800">
     <Grid Background="White" Name="grd_CTPhieuDatBan">
         <DockPanel LastChildFill="True" DataContext="{StaticResource CT_PhieuDatBanVM}" >
             <TextBlock Text="Chi Tiết Phiếu Đặt Bàn" HorizontalAlignment="Center"
@@ -93,10 +93,11 @@
                                              Text="{Binding DonGiaBan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Foreground="Red" FontSize="15" IsReadOnly="True"/>
                                     <TextBox FontWeight="DemiBold" Grid.Row="1" Margin="0,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedMA.TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
                                     <TextBox FontWeight="DemiBold" Grid.Row="2" Margin="0,4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedMA.DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
-                                    <controls:NumericUpDown FontWeight="DemiBold" Grid.Row="3" Name="nbr_MA_SoLuong" Margin="0,4" BorderBrush="Black" BorderThickness="1" Value="{Binding MA_SoLuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Left" Interval="1" NumericInputMode="Numbers"/>
+                                    <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" FontWeight="DemiBold" Grid.Row="3" Name="nbr_MA_SoLuong" Margin="0,4" BorderBrush="Black" BorderThickness="1" Value="{Binding MA_SoLuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextAlignment="Left" Interval="1" NumericInputMode="Numbers"/>
                                     <TextBox FontWeight="DemiBold" Grid.Row="4" Name="tbx_MA_ThanhTien" Margin="0,4" BorderBrush="Black" BorderThickness="1" Text="{Binding MA_ThanhTien, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
-                                    <TextBox FontWeight="DemiBold" Grid.Row="5" Name="tbx_MA_GhiChu" Margin="0,4" BorderBrush="Black" BorderThickness="1" Text="{Binding MA_GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <TextBox IsReadOnly="{Binding IsReadOnly}" FontWeight="DemiBold" Grid.Row="5" Name="tbx_MA_GhiChu" Margin="0,4" BorderBrush="Black" BorderThickness="1" Text="{Binding MA_GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                     <Button Grid.Row="6"
+                                            IsEnabled="{Binding IsEnable}"
                                             Style="{StaticResource MaterialDesignRaisedButton}"
                                             Command="{Binding AddCommand}"
                                             VerticalAlignment="Center"
@@ -141,7 +142,7 @@
                             </Button>
                         </Grid>-->
                         <GroupBox DockPanel.Dock="Top" Header="Danh sách đặt món ăn" Margin="10,0,10,10" DataContext="{StaticResource CT_PhieuDatBanVM}" >
-                            <DataGrid ItemsSource="{Binding ListCTPhieuDatBan}" SelectedItem="{Binding SelectedCTPDB, Mode=OneWayToSource}"  
+                            <DataGrid IsReadOnly="{Binding IsReadOnly}" ItemsSource="{Binding ListCTPhieuDatBan}" SelectedItem="{Binding SelectedCTPDB, Mode=OneWayToSource}"  
                                               AutoGenerateColumns="False" CanUserAddRows="False" controls:DataGridHelper.ColumnHeaderPadding="10,0" FontSize="12"
                                               Name="dtg_DanhSachDatMonAn" FontWeight="DemiBold">
                                 <DataGrid.Columns>

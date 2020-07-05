@@ -5,7 +5,7 @@
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:viewmodel ="clr-namespace:QuanLyTiecCuoi.ViewModel"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Login.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -29,6 +29,7 @@
             <viewmodel:PhanQuyenViewModel x:Key="PhanQuyenVM"></viewmodel:PhanQuyenViewModel>
             <viewmodel:CT_PhieuDatBanViewModel x:Key="CT_PhieuDatBanVM"></viewmodel:CT_PhieuDatBanViewModel>
             <viewmodel:NguoiDungViewModel x:Key="NguoiDungVM"></viewmodel:NguoiDungViewModel>
+            <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
             <Style TargetType="GroupBox">
                 <Setter Property="BorderBrush" Value="Black"/>
                 <Setter Property="HeaderTemplate">
@@ -39,6 +40,23 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--<Style TargetType="TextBox">
+                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsFocused" Value="True">
+                                    <Setter Property="BorderBrush" Value="#FF1585B5"/>
+                                </Trigger>
+                                <Trigger Property="IsFocused" Value="False">
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>-->
             <Style TargetType="controls:NumericUpDown">
                 <Setter Property="NumericInputMode" Value="Numbers"/>
             </Style>

@@ -38,7 +38,7 @@ namespace QuanLyTiecCuoi
         }
         private void btn_Close_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Application.Current.Shutdown();
+            this.Close();
         }
         private void cbx_NhoMatKhau_Checked(object sender, RoutedEventArgs e)
         {

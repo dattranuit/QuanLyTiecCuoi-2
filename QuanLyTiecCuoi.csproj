@@ -228,6 +228,7 @@
     <Compile Include="ViewModel\CT_PhieuDatBanViewModel.cs" />
     <Compile Include="ViewModel\DichVuViewModel.cs" />
     <Compile Include="ViewModel\HoaDonViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MonanViewModel.cs" />
     <Compile Include="ViewModel\NguoiDungViewModel.cs" />
