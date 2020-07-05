@@ -27,7 +27,6 @@ namespace QuanLyTiecCuoi
         }
         private void Loading_Data()
         {
-            /// Loading cbx_NhoMatKhau
             if (String.IsNullOrEmpty(Properties.Settings.Default.TenDangNhap) && String.IsNullOrEmpty(Properties.Settings.Default.MatKhau))
                 cbx_NhoMatKhau.IsChecked = false;
             else
@@ -54,6 +53,16 @@ namespace QuanLyTiecCuoi
             Properties.Settings.Default.TenDangNhap = "" ;
             Properties.Settings.Default.MatKhau = "";
             Properties.Settings.Default.Save();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(cbx_NhoMatKhau.IsChecked == true)
+            {
+                Properties.Settings.Default.TenDangNhap = tbx_TenDangNhap.Text;
+                Properties.Settings.Default.MatKhau = pwb_MatKhau.Password;
+                Properties.Settings.Default.Save();
+            }
         }
     }
 }

@@ -117,6 +117,13 @@ namespace QuanLyTiecCuoi.ViewModel
         public CT_PhieuDatBanViewModel()
         {
             IsReadOnly = !LoginViewModel.ThayDoiTiec;
+            if (IsReadOnly == false)
+            {
+                var xx = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB).SingleOrDefault();
+                int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == xx.MaTiecCuoi).Count();
+                if (temp > 0)
+                    IsReadOnly = true;
+            }
             int count = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Count();
             if (count != 0)
                 DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);
@@ -213,6 +220,14 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
+                IsReadOnly = !LoginViewModel.ThayDoiTiec;
+                if (IsReadOnly == false)
+                {
+                    var xx = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB).SingleOrDefault();
+                    int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == xx.MaTiecCuoi).Count();
+                    if (temp > 0)
+                        IsReadOnly = true;
+                }
                 SelectedCTPDB = null;
                 SelectedMA = null;
                 CTPDB_SoLuong = MA_SoLuong = 0;

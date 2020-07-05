@@ -107,6 +107,12 @@ namespace QuanLyTiecCuoi.ViewModel
         public PhieuDatDichVuViewModel()
         {
             IsReadOnly = !LoginViewModel.ThayDoiTiec;
+            if (IsReadOnly == false)
+            {
+                int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Count();
+                if (temp > 0)
+                    IsReadOnly = true;
+            }
             ListDichVu = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
             ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi));
             AddCommand = new RelayCommand<object>((p) =>
@@ -195,6 +201,13 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
+                IsReadOnly = !LoginViewModel.ThayDoiTiec;
+                if (IsReadOnly == false)
+                {
+                    int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Count();
+                    if (temp > 0)
+                        IsReadOnly = true;
+                }
                 SelectedDV = null;
                 SelectedPDDV = null;
                 DV_SoLuong = 0;

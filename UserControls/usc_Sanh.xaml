@@ -164,15 +164,13 @@
                         </Grid>
                     </DockPanel>
                 </controls:MetroTabItem>
-                <!--////////-->
                 <controls:MetroTabItem Header="Quản lý loại Sảnh" >
                     <DockPanel LastChildFill="True">
                         <TextBlock Text="Quản lý Loại Sảnh" Foreground="#FF0E2291" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" DockPanel.Dock="Top"/>
 
                         <materialDesign:Card Margin="10" DockPanel.Dock="Bottom" Height="165">
                             <DockPanel >
-
-                                <Grid DockPanel.Dock="Top" Height="102">
+                                <Grid DockPanel.Dock="Top">
                                     <GroupBox Header="Thông Tin Loại Sảnh" Margin="10,10,10,10" DockPanel.Dock="Top" Height="80">
                                         <Grid Margin="0,0,0,0">
                                             <Grid.ColumnDefinitions>
@@ -186,7 +184,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <Label Content="Tên Loại Sảnh" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                                                 <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Column="1" x:Name="txb_TenLoaiSanh2" Text="{Binding TenLoaiSanh, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                                                 BorderBrush="Black" BorderThickness="1" Margin="2,5" FontSize="15"></TextBox>
+                                                 BorderBrush="Black" BorderThickness="1" Margin="2,10" FontSize="12"></TextBox>
                                             </Grid>
                                             <Grid Grid.Column="1" Margin="0,0,20,0">
                                                 <Grid.ColumnDefinitions>
@@ -194,7 +192,7 @@
                                                     <ColumnDefinition></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
                                                 <Label Content="Đơn giá bàn tối thiểu" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                                <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="nud_DonGiaBanToiThieu" Minimum="0" NumericInputMode="Numbers" Value="{Binding DonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Margin="2,5" BorderBrush="Black" Interval="100000" FontSize="15" TextAlignment="Left" ValueChanged="Nud_DonGiaBanToiThieu_ValueChanged"></controls:NumericUpDown>
+                                                <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="nud_DonGiaBanToiThieu" Minimum="0" NumericInputMode="Numbers" Value="{Binding DonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Margin="2,10" BorderBrush="Black" Interval="100000" FontSize="12" TextAlignment="Left" ValueChanged="Nud_DonGiaBanToiThieu_ValueChanged"></controls:NumericUpDown>
                                             </Grid>
                                         </Grid>
                                     </GroupBox>

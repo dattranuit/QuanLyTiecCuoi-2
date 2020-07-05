@@ -7,13 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
     class MainViewModel:BaseViewModel
     {
 
-        public bool Isloaded = false;
+        public string TenNguoiDung;
+
         private bool _XemSanh = false;
 
         private bool _XemTiec = false;
@@ -46,18 +48,30 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public bool XemPhanQuyen { get => _XemPhanQuyen; set { _XemPhanQuyen = value; OnPropertyChanged(); } }
 
+        public ICommand LogoutCommand { get; set; }
         public ICommand LoadedWindowCommand { get; set; }
 
         public MainViewModel()
         {
-            XemSanh = LoginViewModel.XemSanh;
-            XemTiec = LoginViewModel.XemTiec;
-            XemHoaDon = LoginViewModel.XemHoaDon;
-            XemDoanhThu = LoginViewModel.XemDoanhThu;
-            XemDichVu = LoginViewModel.XemDichVu;
-            XemMonAn = LoginViewModel.XemMonAn;
-            XemQuiDinh = LoginViewModel.XemQuiDinh;
-            XemPhanQuyen = LoginViewModel.XemPhanQuyen;
+            LogoutCommand = new RelayCommand<Window>((p) => { return true; }, (p) => 
+           { 
+               Login wd = new Login();
+               p.Hide();
+               wd.ShowDialog();
+               p.Close();
+           });
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                TenNguoiDung = LoginViewModel.TenNguoiDung;
+                XemSanh = LoginViewModel.XemSanh;
+                XemTiec = LoginViewModel.XemTiec;
+                XemHoaDon = LoginViewModel.XemHoaDon;
+                XemDoanhThu = LoginViewModel.XemDoanhThu;
+                XemDichVu = LoginViewModel.XemDichVu;
+                XemMonAn = LoginViewModel.XemMonAn;
+                XemQuiDinh = LoginViewModel.XemQuiDinh;
+                XemPhanQuyen = LoginViewModel.XemPhanQuyen;
+            });
         }
     }
 }
