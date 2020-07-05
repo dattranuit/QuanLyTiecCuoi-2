@@ -99,7 +99,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(TenSanh) || string.IsNullOrEmpty(SoLuongBanToiDa.ToString()) || SelectedLoaiSanh == null)
+                if (string.IsNullOrEmpty(TenSanh) || string.IsNullOrEmpty(SoLuongBanToiDa.ToString()) || SelectedLoaiSanh == null || string.IsNullOrEmpty(GhiChu))
                     return false;
                 return true;
 
@@ -122,7 +122,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             AddCommandLoaiSanh = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(TenLoaiSanh) || string.IsNullOrEmpty(DonGiaBanToiThieu.ToString()) )
+                if (string.IsNullOrEmpty(TenLoaiSanh) || string.IsNullOrEmpty(DonGiaBanToiThieu.ToString())  )
                     return false;
                 return true;
 

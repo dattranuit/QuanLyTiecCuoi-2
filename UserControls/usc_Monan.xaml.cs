@@ -26,6 +26,12 @@ namespace QuanLyTiecCuoi.UserControls
         {
             InitializeComponent();
         }
+
+        private void Ct_DonGia_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (ct_DonGia.Value.ToString() == "")
+                ct_DonGia.Value = 0;
+        }
     }
    
 }

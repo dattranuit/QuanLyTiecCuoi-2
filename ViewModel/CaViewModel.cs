@@ -87,6 +87,8 @@ namespace QuanLyTiecCuoi.ViewModel
             /////////////////////////////////////////
             AddCommand = new RelayCommand<object>((p) =>
             {
+                if (string.IsNullOrEmpty(TenCa) )
+                    return false;
                 return true;
             }, (p) =>
             {
@@ -148,7 +150,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 MessageBox.Show("Xóa Ca thành công !");
                 //refresh nhap
                 TenCa = "";
-                //them sau khi sua duoc bind :((
+                BatDau = TimeSpan.Zero;
+                KetThuc = TimeSpan.Zero;
             });
 
             RefreshCommand = new RelayCommand<object>((p) =>
