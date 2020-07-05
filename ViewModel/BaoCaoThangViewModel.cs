@@ -19,11 +19,7 @@ namespace QuanLyTiecCuoi.ViewModel
         
         private  ObservableCollection<BAOCAOTHANG> _List;
         public  ObservableCollection<BAOCAOTHANG> List { get => _List; set { _List = value; OnPropertyChanged(); } }
-
-        
-
         private BAOCAOTHANG _SelectedItem;
-
         public BAOCAOTHANG SelectedItem
         {
             get => _SelectedItem;
@@ -78,43 +74,6 @@ namespace QuanLyTiecCuoi.ViewModel
             ExportToExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) => { Ex2Excel(p); });
         }
 
-        //public static void Reload()
-        //{
-        //    List.ToList().Clear();
-        //    List.Count();
-        //    List =  new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
-        //    MessageBox.Show(List.Count().ToString());
-        //}
-        //public void data()
-        //{
-        //    ListHoaDon = new ObservableCollection<HOADON>(DataProvider.Ins.DataBase.HOADONs);
-        //    DataProvider.Ins.DataBase.SaveChanges();
-        //    //DataProvider.Ins.DataBase.Database.ExecuteSqlCommand("delete from BAOCAOTHANG"); // Cách này ngu vãi lều :((
-        //    //DataProvider.Ins.DataBase.SaveChanges();
-        //    try
-        //    {
-        //        var query = from x in ListHoaDon
-        //                    where (x.NgayThanhToan.Year >= 2000 && x.NgayThanhToan.Year <= 2020)                      
-        //                    group x by new { x.NgayThanhToan} into y
-        //                    select new
-        //                    {
-        //                        thang = y.First().NgayThanhToan.Month,
-        //                        nam = y.First().NgayThanhToan.Year,
-        //                        doanhthu = y.Sum(x => x.TongTienHoaDon)
-        //                    };
-        //        foreach(var q in query)
-        //        {
-        //            var record = new BAOCAOTHANG() { Thang = q.thang, Nam = q.nam, TongDoanhThu = q.doanhthu };
-        //            List.Add(record);
-        //            DataProvider.Ins.DataBase.BAOCAOTHANGs.Add(record);
-        //            DataProvider.Ins.DataBase.SaveChanges();
-        //        }                           
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        MessageBox.Show("Không thể thực hiện truy vấn");
-        //    }
-        //}
 
         // Search box
         private ICollectionView _dataGridCollection;
@@ -163,7 +122,6 @@ namespace QuanLyTiecCuoi.ViewModel
             }
             else
             {
-                //MessageBox.Show("Lỗi");
                 return -1;
             }
         }
