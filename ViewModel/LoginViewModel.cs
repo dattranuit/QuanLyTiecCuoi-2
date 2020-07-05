@@ -64,7 +64,7 @@ namespace QuanLyTiecCuoi.ViewModel
         {
             if (p == null)
                 return;
-
+            
             var accCount = DataProvider.Ins.DataBase.NGUOIDUNGs.Where(x => x.Username == Username && x.Password == Password).Count();
             if (accCount > 0)
             {

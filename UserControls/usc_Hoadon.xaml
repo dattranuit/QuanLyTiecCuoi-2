@@ -40,6 +40,7 @@
                                             
                                             <Grid Grid.Column="0">
                                                 <TextBox 
+                                                    IsReadOnly="{Binding IsReadOnly}"
                                                             Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
                             controls:TextBoxHelper.Watermark="Tìm kiếm theo tên hoặc SDT"
                             BorderThickness="0,0,0,1" Height="32" Width="400"
@@ -50,6 +51,7 @@
                                             </Grid>
                                             <Grid Grid.Column="4">
                                                 <Button
+                                                       IsEnabled="{Binding IsEnable}"
                                                             Background="#FF0F5699" Foreground="White"
                                                     Command="{Binding LapHoaDonCommand}"
                                                     Margin="2"

@@ -91,6 +91,7 @@
                                                 </i:Interaction.Triggers>
                                             </Grid>
                                             <Button
+                                                IsEnabled="{Binding IsEnable}"
                                                 x:Name="btn_LuuHoaDon"
                                               
                                                 Command="{Binding LuuHoaDon, Source={StaticResource HoaDonVM}}"
@@ -105,7 +106,7 @@
                                             </Button>
                                             <!--Click="Button_Click"-->
                                             <Button
-                                                
+                                                IsEnabled="{Binding IsEnable}"
                                                 Command="{Binding InHoaDon}"
                                 Grid.Column="3"
                                 Background="#FF0F5699" Foreground="White"
@@ -198,8 +199,8 @@
                                                         <RowDefinition/>
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
-                                                    <DatePicker x:Name="DP_ngaythanhtoan" IsEnabled="True" Text="{Binding NgayDaiTiec, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                                    <DatePicker x:Name="DP_ngaylaphoadon" IsEnabled="True" Text="{Binding NgayThanhToan, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <DatePicker x:Name="DP_ngaythanhtoan" IsEnabled="False" Text="{Binding NgayDaiTiec, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <DatePicker  x:Name="DP_ngaylaphoadon" IsEnabled="{Binding IsEnable}" Text="{Binding NgayThanhToan, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>

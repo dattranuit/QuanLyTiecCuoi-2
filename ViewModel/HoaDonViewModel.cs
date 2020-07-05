@@ -15,6 +15,10 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class HoaDonViewModel : BaseViewModel
     {
+        private bool _IsEnable;
+        public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
+        private bool _IsReadOnly;
+        public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
 
         private HOADON _SelectedItem;
 
@@ -169,6 +173,7 @@ namespace QuanLyTiecCuoi.ViewModel
         #endregion  
         public HoaDonViewModel()
         {
+            IsReadOnly = !LoginViewModel.ThayDoiHoaDon;
 
             ListTiecCuoi = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.HOADONs.Count() == 0));
             List = new ObservableCollection<HOADON>(DataProvider.Ins.DataBase.HOADONs);

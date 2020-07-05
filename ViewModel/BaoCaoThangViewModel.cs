@@ -15,8 +15,12 @@ using System.Windows.Input;
 namespace QuanLyTiecCuoi.ViewModel
 {
     class BaoCaoThangViewModel : BaseViewModel, Microsoft.Office.Interop.Excel.Window
-    { 
-        
+    {
+        private bool _IsEnable;
+        public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
+        private bool _IsReadOnly;
+        public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
+
         private  ObservableCollection<BAOCAOTHANG> _List;
         public  ObservableCollection<BAOCAOTHANG> List { get => _List; set { _List = value; OnPropertyChanged(); } }
         private BAOCAOTHANG _SelectedItem;
@@ -57,6 +61,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public BaoCaoThangViewModel()
         {
+            IsReadOnly = !LoginViewModel.ThayDoiDoanhThu;
             List = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
             
             DataProvider.Ins.DataBase.SaveChanges();

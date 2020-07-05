@@ -17,7 +17,7 @@
                     <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
                         <DockPanel DockPanel.Dock="Right" Width="150" Margin="8,0">
                             <TextBlock Text="Năm:" FontSize="14" VerticalAlignment="Center" Foreground="#000000" Padding="8,0"/>
-                            <TextBox Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
+                            <TextBox IsReadOnly="{Binding IsReadOnly}" Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
                                             x:Name="year" FontSize="14" VerticalAlignment="Center" BorderBrush="Black" ToolTip="Chọn năm..." OpacityMask="#FFB9B9B9"  Height="20"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Right" Width="300" Margin="8,0">
@@ -46,6 +46,7 @@
                                         </Grid.ColumnDefinitions>
                                         <Grid Grid.Column="7">
                                             <Button
+                                                IsEnabled="{Binding IsEnable}"
                                                             Background="#FF0F5699" Foreground="White"
                                                             Command="{Binding ExportToExcel}"
                                                                 CommandParameter="{Binding ElementName=DoanhThuNgay}"
