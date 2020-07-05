@@ -103,6 +103,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
         public PhieuDatDichVuViewModel()
         {
             IsReadOnly = !LoginViewModel.ThayDoiTiec;
@@ -188,6 +189,16 @@ namespace QuanLyTiecCuoi.ViewModel
                     MessageBox.Show("Xóa phiếu đặt dịch vụ không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
                 }
                 //refresh nhap
+            });
+            LoadedWindowCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                SelectedDV = null;
+                SelectedPDDV = null;
+                DV_SoLuong = 0;
+                PDDV_GhiChu = DV_GhiChu = String.Empty;
             });
         }
     }

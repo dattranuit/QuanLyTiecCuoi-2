@@ -16,6 +16,10 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class DichVuViewModel : BaseViewModel
     {
+        private bool _IsEnable;
+        public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
+        private bool _IsReadOnly;
+        public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
         private ObservableCollection<DICHVU> _List;
         public ObservableCollection<DICHVU> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
@@ -58,6 +62,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand RefreshCommand { get; set; }
         public DichVuViewModel()
         {
+            IsReadOnly = !LoginViewModel.ThayDoiDichVu;
             List = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
             //
             DataGridCollection = CollectionViewSource.GetDefaultView(List);

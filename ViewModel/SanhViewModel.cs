@@ -14,6 +14,10 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class SanhViewModel:BaseViewModel
     {
+        private bool _IsEnable;
+        public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
+        private bool _IsReadOnly;
+        public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
         private ObservableCollection<SANH> _ListSanh;
         private ObservableCollection<LOAISANH> _ListLoaiSanh;
         public ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value; OnPropertyChanged(); } }
@@ -87,7 +91,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public SanhViewModel()
         {
-
+            IsReadOnly = !LoginViewModel.ThayDoiSanh;
             ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
             ListLoaiSanh = new ObservableCollection<LOAISANH>(DataProvider.Ins.DataBase.LOAISANHs);
             //

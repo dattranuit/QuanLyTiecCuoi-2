@@ -8,6 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        AllowsTransparency="True"
         Height="300" Width="450" 
         WindowStyle="None" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen"

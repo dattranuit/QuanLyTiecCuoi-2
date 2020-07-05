@@ -47,26 +47,28 @@
                             BorderThickness="0,0,0,1"
                             BorderBrush="Black"
                             FontSize="15"
-                            VerticalAlignment="Center" Padding="0" Height="32" Margin="10,5" VerticalContentAlignment="Center" />
+                            VerticalAlignment="Center" Margin="10,5" VerticalContentAlignment="Center" />
                         </Grid>
                     </Grid>
                     <GroupBox Header="Danh sách món ăn"  Margin="10,0,10,10" Grid.Column="0">
                         <DataGrid   x:Name="dtg_DSMonAn" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"    
-                                    IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" 
-                                    FontSize="12"
-                                    controls:DataGridHelper.ColumnHeaderPadding="10,0" FontFamily="Segoe UI" 
+                                    IsReadOnly="True" 
+                                    GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" 
+                                    TextElement.FontSize="12"
+                                    controls:DataGridHelper.ColumnHeaderPadding="10,0" 
+                                    FontFamily="Segoe UI" 
                                     CanUserSortColumns="True" CanUserAddRows="False"
                                     SelectionUnit="FullRow"
                                     AutoGenerateColumns="False"
-                                    SelectionMode="Extended" FontWeight="Medium">
+                                    FontWeight="Medium">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Tên món ăn" FontSize="14" Binding="{Binding TenMonAn}">
+                                <DataGridTextColumn Header="Tên món ăn" Binding="{Binding TenMonAn}">
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Header="Mô tả" FontSize="14" Binding="{Binding MoTa}">
+                                <DataGridTextColumn Header="Mô tả" Binding="{Binding MoTa}">
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Header="Ghi chú" FontSize="14" Binding="{Binding GhiChu}">
+                                <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}">
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Width="*" Header="Đơn giá" FontSize="14" Binding="{Binding DonGia}">
+                                <DataGridTextColumn Width="*" Header="Đơn giá" Binding="{Binding DonGia}">
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
@@ -92,35 +94,24 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <!--<Button x:Name="btn_FolderAnh" Grid.Column="0" Margin="15,5,22,0" BorderBrush="Black" Command="{Binding ChonAnhCommmand}">
-                                <Button.Background>
-                                    <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/icon_folder.jpg" Stretch="Uniform"/>
-                                </Button.Background>
-                            </Button>-->
                             <Button 
-                                    x:Name="btn_ThemAnh"
-                                    Command="{Binding AddImageCommand}"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="0" Margin="10,5,10,10"
-                                    ToolTip="Thêm ảnh" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}" FontFamily="Segoe UI" FontSize="14">
+                                x:Name="btn_ThemAnh"
+                                Command="{Binding AddImageCommand}"
+                                IsEnabled="{Binding IsEnable}"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Grid.Column="0" Margin="10,5,10,10"
+                                ToolTip="Thêm ảnh" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}" FontFamily="Segoe UI" FontSize="14">
                                 Thêm ảnh
                             </Button>
                             <Button 
-                                    x:Name="btn_XoaAnh"
-                                    Command="{Binding DeleteImageCommand}"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    Grid.Column="1" Margin="10,5,10,10"
-                                    ToolTip="Xóa ảnh" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}" FontFamily="Segoe UI" FontSize="14">
+                                x:Name="btn_XoaAnh"
+                                Command="{Binding DeleteImageCommand}"
+                                IsEnabled="{Binding IsEnable}"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Grid.Column="1" Margin="10,5,10,10"
+                                ToolTip="Xóa ảnh" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom" BorderBrush="{x:Null}" FontFamily="Segoe UI" FontSize="14">
                                 Xóa ảnh
                             </Button>
-                            <!--<Button Grid.Column="1" Command="{Binding XoaAnhCommmand}"
-  Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-  ToolTip="MaterialDesignFloatingActionMiniDarkButton" Height="Auto" Margin="8" Width="Auto">
-                                <materialDesign:PackIcon
-    Kind="Bin"
-    Height="24"
-    Width="24" />
-                            </Button>-->
                         </Grid>
                     </Grid>
 
@@ -138,21 +129,22 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Label Grid.Column="0" Grid.Row="0" Content="Tên món:" FontWeight="SemiBold" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
-                                <TextBox x:Name="tbx_TenMonAn" Grid.Column="1" Grid.Row="0" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31"/>
-                                <Label Grid.Column="0" Grid.Row="1" Content="Mô tả:" FontWeight="SemiBold" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
-                                <TextBox x:Name="tbx_MoTa" Grid.Column="1" Grid.Row="1" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31" />
-                                <Label Grid.Column="0" Grid.Row="2" Content="Ghi chú:" FontWeight="SemiBold" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
-                                <TextBox x:Name="tbx_GhiChu" Grid.Column="1" Grid.Row="2" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" Height="31" />
-                                <Label Grid.Column="0" Grid.Row="3" Content="Đơn giá:" FontWeight="SemiBold" Height="29" Margin="0" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
-                                <controls:NumericUpDown x:Name="ct_DonGia" Grid.Row="3" Grid.Column="1" Margin="3" 
+                                <Label Grid.Column="0" Grid.Row="0" Content="Tên Món Ăn" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="12" Grid.ColumnSpan="2" />
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="tbx_TenMonAn" Grid.Column="1" Grid.Row="0" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3"/>
+                                <Label Grid.Column="0" Grid.Row="1" Content="Mô tả" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="12" />
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="tbx_MoTa" Grid.Column="1" Grid.Row="1" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3"/>
+                                <Label Grid.Column="0" Grid.Row="3" Content="Ghi chú" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="12" />
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="tbx_GhiChu" Grid.Column="1" Grid.Row="3" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3"/>
+                                <Label Grid.Column="0" Grid.Row="2" Content="Đơn giá" FontWeight="SemiBold" Height="29" Margin="0" VerticalAlignment="Center" FontSize="12" />
+                                <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="ct_DonGia" Grid.Row="2" Grid.Column="1" Margin="3" 
                                                         BorderBrush="#FF636363" BorderThickness="1" TextAlignment="Left" Interval="100000" Minimum="0"
-                                                        Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" Height="31" ValueChanged="Ct_DonGia_ValueChanged"/>
+                                                        Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" ValueChanged="Ct_DonGia_ValueChanged"/>
                                 <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
-                                            x:Name="btn_LamMoi"
-                                            Command="{Binding RefreshCommand}"
-                                            Style="{StaticResource MaterialDesignRaisedButton}"
-                                            ToolTip="Làm mới thông tin món ăn" Background="#FF002C56" Foreground="White" Height="Auto" Margin="2,5,2,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="14">
+                                        x:Name="btn_LamMoi"
+                                        Command="{Binding RefreshCommand}"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        IsEnabled="{Binding IsEnable}"
+                                        ToolTip="Làm mới thông tin món ăn" Background="#FF002C56" Foreground="White" Height="Auto" Margin="2,5,2,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="14">
                                     Làm mới
                                 </Button>
                             </Grid>
@@ -162,7 +154,7 @@
             </materialDesign:Card>
 
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Margin="0,5,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -172,17 +164,19 @@
                 <Button 
                     x:Name="btn_ThemMonAn"
                     Command="{Binding AddCommand}"
+                    IsEnabled="{Binding IsEnable}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Grid.Column="0" Margin="10"
-                    ToolTip="Thêm món ăn" Background="#FF0F5699" Foreground="White" Height="35" VerticalAlignment="Bottom">
+                    ToolTip="Thêm món ăn" Background="#FF0F5699" Foreground="White">
                     Thêm
                 </Button>
                 <Button
                     x:Name="btn_SuaMonAn"
                     Command="{Binding EditCommand}"
+                    IsEnabled="{Binding IsEnable}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Grid.Column="1" Margin="10"
-                    ToolTip="Sửa món ăn" Background="Green" Foreground="White" Height="35" VerticalAlignment="Bottom">
+                    ToolTip="Sửa món ăn" Background="Green" Foreground="White">
                     Sửa
                 </Button>
                 <Button
@@ -190,7 +184,8 @@
                     Command="{Binding DeleteCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Grid.Column="2" Margin="10"
-                    ToolTip="Xóa món ăn" Background="Crimson" Foreground="White" Height="35" VerticalAlignment="Bottom">
+                    IsEnabled="{Binding IsEnable}"
+                    ToolTip="Xóa món ăn" Background="Crimson" Foreground="White">
                     Xóa
                 </Button>
             </Grid>

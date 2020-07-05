@@ -13,7 +13,10 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class PhanQuyenViewModel : BaseViewModel
     {
-       
+        private bool _IsEnable;
+        public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
+        private bool _IsReadOnly;
+        public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
         private ObservableCollection<CHUCNANG> _ListChucNang;
         public ObservableCollection<CHUCNANG> ListChucNang { get => _ListChucNang; set { _ListChucNang = value; OnPropertyChanged(); } }
 
@@ -69,6 +72,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public PhanQuyenViewModel()
         {
+            IsReadOnly = !LoginViewModel.ThayDoiPhanQuyen;
             ListNhomNguoiDung = new ObservableCollection<NHOMNGUOIDUNG>(DataProvider.Ins.DataBase.NHOMNGUOIDUNGs);
             AddCommand = new RelayCommand<object>((p) =>
             {

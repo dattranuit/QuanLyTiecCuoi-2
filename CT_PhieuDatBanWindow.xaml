@@ -1,13 +1,22 @@
-﻿<controls:MetroWindow x:Class="QuanLyTiecCuoi.CT_PhieuDatBanWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QuanLyTiecCuoi"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Chi Tiết Phiếu Đặt Bàn" Height="662" Width="800">
+﻿<controls:MetroWindow 
+    x:Class="QuanLyTiecCuoi.CT_PhieuDatBanWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:QuanLyTiecCuoi"
+    mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    Name="CT_PhieuDatBanWd"
+    Title="Chi Tiết Phiếu Đặt Bàn" Height="662" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" 
+                                   CommandParameter="{Binding ElementName=CT_PhieuDatBanWd}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Background="White" Name="grd_CTPhieuDatBan">
         <DockPanel LastChildFill="True" DataContext="{StaticResource CT_PhieuDatBanVM}" >
             <TextBlock Text="Chi Tiết Phiếu Đặt Bàn" HorizontalAlignment="Center"
@@ -149,7 +158,7 @@
                                     <DataGridTemplateColumn Header="Sửa">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <materialDesign:PopupBox DataContext="{StaticResource CT_PhieuDatBanVM}" HorizontalAlignment="Left" PlacementMode="BottomAndAlignCentres" StaysOpen="True" PopupMode="Click"
+                                                <materialDesign:PopupBox IsEnabled="{Binding IsEnable}" DataContext="{StaticResource CT_PhieuDatBanVM}" HorizontalAlignment="Left" PlacementMode="BottomAndAlignCentres" StaysOpen="True" PopupMode="Click"
                                                                          ToolTip="Hiện bảng sửa chi tiết đặt bàn">
                                                         <materialDesign:PopupBox.ToggleContent>
                                                         <materialDesign:PackIcon Kind="Edit" Foreground="#FF0F5699"/>
@@ -192,7 +201,7 @@
                                     <DataGridTemplateColumn Header="Xóa">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <materialDesign:PopupBox DataContext="{StaticResource CT_PhieuDatBanVM}" HorizontalAlignment="Left" PlacementMode="BottomAndAlignCentres" StaysOpen="True" PopupMode="Click"
+                                                <materialDesign:PopupBox IsEnabled="{Binding IsEnable}" DataContext="{StaticResource CT_PhieuDatBanVM}" HorizontalAlignment="Left" PlacementMode="BottomAndAlignCentres" StaysOpen="True" PopupMode="Click"
                                                                          ToolTip="Xóa chi tiết đặt bàn">
                                                     <materialDesign:PopupBox.ToggleContent>
                                                         <materialDesign:PackIcon Kind="Delete" Foreground="#FF0F5699"/>

@@ -91,8 +91,8 @@
                                                                 <RowDefinition/>
                                                                 <RowDefinition/>
                                                             </Grid.RowDefinitions>
-                                                            <TextBox x:Name="txb_GhiChu" Text="{Binding GhiChu,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" BorderBrush="Black" Margin="5,15" BorderThickness="1" Grid.Row="1"></TextBox>
-                                                            <TextBox x:Name="txb_TenSanh" Text="{Binding TenSanh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="5,15" Grid.Row="0"></TextBox>
+                                                            <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_GhiChu" Text="{Binding GhiChu,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" BorderBrush="Black" Margin="5,15" BorderThickness="1" Grid.Row="1"></TextBox>
+                                                            <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_TenSanh" Text="{Binding TenSanh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Margin="5,15" Grid.Row="0"></TextBox>
                                                         </Grid>
                                                     </Grid>
                                                 </Grid>
@@ -115,8 +115,8 @@
                                                                 <RowDefinition/>
                                                                 <RowDefinition/>
                                                             </Grid.RowDefinitions>
-                                                            <controls:NumericUpDown x:Name="nud_SLBTD" Minimum="0" NumericInputMode="Numbers" Value="{Binding SoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Margin="6,15,4,15" BorderBrush="Black" Interval="100" FontSize="15" TextAlignment="Left" ValueChanged="Nud_SLBTD_ValueChanged"></controls:NumericUpDown>
-                                                            <ComboBox x:Name="cbb_MaSanh" SelectedItem="{Binding SelectedLoaiSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="nud_SLBTD" Minimum="0" NumericInputMode="Numbers" Value="{Binding SoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Margin="6,15,4,15" BorderBrush="Black" Interval="100" FontSize="15" TextAlignment="Left" ValueChanged="Nud_SLBTD_ValueChanged"></controls:NumericUpDown>
+                                                            <ComboBox IsReadOnly="{Binding IsReadOnly}" x:Name="cbb_MaSanh" SelectedItem="{Binding SelectedLoaiSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                                   ItemsSource="{Binding ListLoaiSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenLoaiSanh"
                                                                   Text="{Binding SelectedItem.LOAISANH.TenLoaiSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
                                                                   BorderBrush="Black" BorderThickness="1" Margin="6,15,4,15" Grid.Row="0"></ComboBox>
@@ -135,26 +135,26 @@
                                         </Grid.ColumnDefinitions>
                                         <Button x:Name="btn_Them" Margin="30,10" Command="{Binding AddCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                     Grid.Column="0" 
+                                     Grid.Column="1"  IsEnabled="{Binding IsEnable}"
                                     ToolTip="Thêm" Background="#FF0F5699" Foreground="White">
                                             Thêm
                                         </Button>
                                         <Button x:Name="btn_Sua" Margin="30,10" Command="{Binding EditCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Grid.Column="1" 
+                                    Grid.Column="2"  IsEnabled="{Binding IsEnable}"
                                     ToolTip="Sửa" Background="Green" Foreground="White">
                                             Sửa
                                         </Button>
                                         <Button x:Name="btn_Xoa" Margin="30,10" Command="{Binding DeleteCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Grid.Column="2" 
+                                    Grid.Column="3"  IsEnabled="{Binding IsEnable}"
                                     ToolTip="Xóa" Background="Crimson" Foreground="White">
                                             Xóa
                                         </Button>
                                         <Button x:Name="btn_RefreshThongTin" Margin="30,10" Command="{Binding RefreshSanhCommand }"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Grid.Column="3" 
-                                    ToolTip="Xóa thông tin trong ô nhập liệu" Background="Crimson" Foreground="White">
+                                    Grid.Column="0"  IsEnabled="{Binding IsEnable}"
+                                    ToolTip="Xóa thông tin trong ô nhập liệu" Background="#FF0F5699" Foreground="White">
                                             Làm mới ô nhập
                                         </Button>
                                     </Grid>
@@ -185,7 +185,7 @@
                                                     <ColumnDefinition></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
                                                 <Label Content="Tên Loại Sảnh" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                                <TextBox Grid.Column="1" x:Name="txb_TenLoaiSanh2" Text="{Binding TenLoaiSanh, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                                <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Column="1" x:Name="txb_TenLoaiSanh2" Text="{Binding TenLoaiSanh, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                                                  BorderBrush="Black" BorderThickness="1" Margin="2,5" FontSize="15"></TextBox>
                                             </Grid>
                                             <Grid Grid.Column="1" Margin="0,0,20,0">
@@ -194,7 +194,7 @@
                                                     <ColumnDefinition></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
                                                 <Label Content="Đơn giá bàn tối thiểu" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                                <controls:NumericUpDown x:Name="nud_DonGiaBanToiThieu" Minimum="0" NumericInputMode="Numbers" Value="{Binding DonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Margin="2,5" BorderBrush="Black" Interval="100000" FontSize="15" TextAlignment="Left" ValueChanged="Nud_DonGiaBanToiThieu_ValueChanged"></controls:NumericUpDown>
+                                                <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="nud_DonGiaBanToiThieu" Minimum="0" NumericInputMode="Numbers" Value="{Binding DonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Margin="2,5" BorderBrush="Black" Interval="100000" FontSize="15" TextAlignment="Left" ValueChanged="Nud_DonGiaBanToiThieu_ValueChanged"></controls:NumericUpDown>
                                             </Grid>
                                         </Grid>
                                     </GroupBox>
@@ -208,26 +208,26 @@
                                     </Grid.ColumnDefinitions>
                                     <Button x:Name="btn_Them2" Margin="30,10" Command="{Binding AddCommandLoaiSanh}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                     Grid.Column="0" 
+                                     Grid.Column="1"  IsEnabled="{Binding IsEnable}"
                                     ToolTip="Thêm" Background="#FF0F5699" Foreground="White">
                                         Thêm
                                     </Button>
                                     <Button x:Name="btn_Sua2" Margin="30,10" Command="{Binding EditLoaiSanhCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Grid.Column="1" 
+                                    Grid.Column="2"  IsEnabled="{Binding IsEnable}"
                                     ToolTip="Sửa" Background="Green" Foreground="White">
                                         Sửa
                                     </Button>
                                     <Button x:Name="btn_Xoa2" Margin="30,10" Command="{Binding DeleteLoaiSanhCommand}"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Grid.Column="2" 
+                                    Grid.Column="3"  IsEnabled="{Binding IsEnable}"
                                     ToolTip="Xóa" Background="Crimson" Foreground="White">
                                         Xóa
                                     </Button>
                                     <Button x:Name="btn_RefreshThongTin2" Margin="30,10" Command="{Binding RefreshLoaiSanhCommand }"
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
-                                    Grid.Column="3" 
-                                    ToolTip="Xóa thông tin trong ô nhập liệu" Background="Crimson" Foreground="White">
+                                    Grid.Column="0"  IsEnabled="{Binding IsEnable}"
+                                    ToolTip="Xóa thông tin trong ô nhập liệu" Background="#FF0F5699" Foreground="White">
                                         Làm mới ô nhập
                                     </Button>
                                 </Grid>

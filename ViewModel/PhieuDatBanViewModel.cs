@@ -60,6 +60,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand CT_PhieuDatBanCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
         bool Enable()
         {
             if (SelectedPDB == null)
@@ -228,6 +229,15 @@ namespace QuanLyTiecCuoi.ViewModel
                     }
                 }
                 
+            });
+            LoadedWindowCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                SelectedPDB = null;
+                SoLuong = SoLuongDuTru = 0;
+                GhiChu = LoaiBan = String.Empty;
             });
         }
 

@@ -52,7 +52,8 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         public LoginViewModel()
         {
-            Username = Password = "";
+            Username = Properties.Settings.Default.TenDangNhap;
+            Password = Properties.Settings.Default.MatKhau;
             LoginCommand = new RelayCommand<Window>((p) => { return Enable(); }, (p) => {Login(p); });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => 
             {

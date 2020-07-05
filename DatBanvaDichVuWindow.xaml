@@ -5,13 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyTiecCuoi"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        mc:Ignorable="d" 
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Đặt Bàn và Dịch vụ" Height="662" Width="800" WindowStartupLocation="CenterScreen">
+        mc:Ignorable="d" Name="DatBanVaDichVuWd"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                      Title="Đặt Bàn và Dịch vụ" Height="662" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
             <controls:MetroTabItem Header="Thông tin đặt bàn">
                 <Grid DataContext="{StaticResource PhieuDatBanVM}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Loaded">
+                            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <DockPanel LastChildFill="True">
                         <TextBlock Text="Phiếu Đặt Bàn" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
@@ -129,7 +134,12 @@
                     </DockPanel>
                 </Grid>
             </controls:MetroTabItem>
-            <controls:MetroTabItem Header="Thông tin đặt dịch vụ">
+            <controls:MetroTabItem Header="Thông tin đặt dịch vụ" DataContext="{StaticResource PhieuDatDichVuVM}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <DockPanel LastChildFill="True">
                     <TextBlock Text="Phiếu Đặt Dịch Vụ" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
@@ -269,7 +279,7 @@
                                             <DataGridTemplateColumn Header="Sửa">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <materialDesign:PopupBox DataContext="{StaticResource PhieuDatDichVuVM}" HorizontalAlignment="Left" PlacementMode="BottomAndAlignCentres" StaysOpen="True" PopupMode="Click"
+                                                        <materialDesign:PopupBox  IsEnabled="{Binding IsEnable}" DataContext="{StaticResource PhieuDatDichVuVM}" HorizontalAlignment="Left" PlacementMode="BottomAndAlignCentres" StaysOpen="True" PopupMode="Click"
                                                                                  ToolTip="Hiện bảng sửa phiếu đặt bàn">
                                                             <materialDesign:PopupBox.ToggleContent>
                                                                 <materialDesign:PackIcon Kind="Edit" Foreground="#FF0F5699"/>
@@ -312,7 +322,7 @@
                                             <DataGridTemplateColumn Header="Xóa">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <materialDesign:PopupBox DataContext="{StaticResource PhieuDatDichVuVM}" HorizontalAlignment="Left" PlacementMode="TopAndAlignCentres" StaysOpen="True" PopupMode="Click"
+                                                        <materialDesign:PopupBox  IsEnabled="{Binding IsEnable}" DataContext="{StaticResource PhieuDatDichVuVM}" HorizontalAlignment="Left" PlacementMode="TopAndAlignCentres" StaysOpen="True" PopupMode="Click"
                                                                          ToolTip="Xóa phiếu đặt dịch vụ">
                                                             <materialDesign:PopupBox.ToggleContent>
                                                                 <materialDesign:PackIcon Kind="Delete" Foreground="#FF0F5699"/>

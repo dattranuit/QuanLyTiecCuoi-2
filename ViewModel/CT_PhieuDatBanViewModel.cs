@@ -103,6 +103,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
         //public ICommand PopupCommand { get; set; }
         bool Addable()
         {
@@ -206,6 +207,16 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     MessageBox.Show("Xóa chi tiết phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
                 }
+            });
+            LoadedWindowCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                SelectedCTPDB = null;
+                SelectedMA = null;
+                CTPDB_SoLuong = MA_SoLuong = 0;
+                CTPDB_GhiChu = MA_GhiChu = String.Empty;
             });
         }
     }

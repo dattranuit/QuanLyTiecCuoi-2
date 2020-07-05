@@ -46,11 +46,13 @@
                             <DockPanel Grid.Column="1" LastChildFill="False" VerticalAlignment="Center">
                                 <Button Margin="4,15" DockPanel.Dock="Top" Foreground="White" Background="Green"
                                         Command="{Binding AddCommand}"
+                                        IsEnabled="{Binding IsEnabled}"
                                         Style="{StaticResource MaterialDesignRaisedButton}">
                                     <materialDesign:PackIcon Kind="ChevronDoubleRight" Height="24"/>
                                 </Button>
                                 <Button Margin="4,15" DockPanel.Dock="Bottom" Foreground="White" Background="Crimson"
                                         Command="{Binding DeleteCommand}"
+                                        IsEnabled="{Binding IsEnabled}"
                                         Style="{StaticResource MaterialDesignRaisedButton}">
                                     <materialDesign:PackIcon Kind="ChevronDoubleLeft" Height="24"/>
                                 </Button>
@@ -117,14 +119,15 @@
                                         <Label Grid.Row="4" Content="Mật khẩu" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="SemiBold"/>
                                         <Label Grid.Row="6" Content="Nhóm người dùng" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="SemiBold"/>
 
-                                        <TextBox Grid.Row="1" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding TenNguoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                                        <TextBox Grid.Row="3" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                                        <TextBox Grid.Row="5" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                                        <ComboBox Grid.Row="7" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedNguoiDung.NHOMNGUOIDUNG.TenNhomNguoiDung, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedNhomNguoiDung,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListNhomNguoiDung, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenNhomNguoiDung"/>
+                                        <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="1" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding TenNguoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="3" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="5" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        <ComboBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="7" Margin="4" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedNguoiDung.NHOMNGUOIDUNG.TenNhomNguoiDung, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedNhomNguoiDung,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListNhomNguoiDung, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenNhomNguoiDung"/>
                                     </Grid>
                                 </GroupBox>
                                 <StackPanel Grid.Row="1">
                                     <Button 
+                                        IsEnabled="{Binding IsEnable}"
                                         Command="{Binding ClearCommand}"
                                         Style="{StaticResource MaterialDesignRaisedButton}"
                                         Margin="20,7"
@@ -132,6 +135,7 @@
                                         Làm Mới Vùng Nhập
                                     </Button>
                                     <Button 
+                                        IsEnabled="{Binding IsEnable}"
                                         Command="{Binding AddCommand}"
                                         Style="{StaticResource MaterialDesignRaisedButton}"
                                         Margin="20,7"
@@ -139,6 +143,7 @@
                                         Thêm Người Dùng
                                     </Button>
                                     <Button
+                                        IsEnabled="{Binding IsEnable}"
                                         Command="{Binding EditCommand}"
                                         Style="{StaticResource MaterialDesignRaisedButton}"
                                         Margin="20,7"
@@ -146,6 +151,7 @@
                                         Sửa Người Dùng
                                     </Button>
                                     <Button
+                                        IsEnabled="{Binding IsEnable}"
                                         Style="{StaticResource MaterialDesignRaisedButton}"
                                         Margin="20,7"
                                         Command="{Binding DeleteCommand}"

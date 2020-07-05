@@ -170,7 +170,7 @@
                     <GroupBox Header="Danh sách tiệc cưới" Margin="10,0,0,10" Grid.Column="0">
                         <DataGrid DataContext="{StaticResource TiecVM}" ItemsSource="{Binding ListTiecCuoi, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedTiecCuoi, Mode=TwoWay}" 
                                           AutoGenerateColumns="False" CanUserAddRows="False" FontSize="12"
-                                          controls:DataGridHelper.ColumnHeaderPadding="10,0" TextElement.FontWeight="Normal">
+                                          controls:DataGridHelper.ColumnHeaderPadding="10,0" TextElement.FontWeight="DemiBold">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Tên Chú Rể" Binding="{Binding TenChuRe}" IsReadOnly="True"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Tên Cô Dâu" Binding="{Binding TenCoDau}" IsReadOnly="True"></DataGridTextColumn>
