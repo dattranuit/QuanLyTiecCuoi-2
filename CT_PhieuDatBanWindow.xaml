@@ -36,12 +36,21 @@
                                 <ColumnDefinition Width="0.5*"/>
                             </Grid.ColumnDefinitions>
                             <DockPanel>
-                                <TextBox x:Name="tbx_TimKiemMonAn"
-                                                         controls:TextBoxHelper.Watermark="Tìm kiếm món ăn"
-                                                         BorderThickness="0,0,0,1" Height="32"
-                                                         BorderBrush="Black" DockPanel.Dock="Top"
-                                                         FontSize="15" Grid.Column="0"
-                                                         VerticalAlignment="Center" Margin="10,0,0,0" Grid.ColumnSpan="2" />
+                                <Grid DockPanel.Dock="Top">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10*"/>
+                                        <ColumnDefinition Width="160*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <materialDesign:PackIcon Kind="Search" Width="32" Height="32" Margin="5,5,0,0"/>
+                                    <TextBox Grid.Column="1" x:Name="tb_TimKiem"
+                                    Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
+                                    controls:TextBoxHelper.Watermark="Tìm kiếm Món Ăn"
+                                    BorderThickness="0,0,0,1"
+                                    BorderBrush="Black"
+                                    FontSize="15"
+                                    VerticalAlignment="Center" Margin="10,5" 
+                                    VerticalContentAlignment="Center" />
+                                </Grid>
                                 <GroupBox Header="Danh sách món ăn"  Margin="10,5,0,10">
                                     <DataGrid Name="dtg_DanhSachMonAn" ItemsSource="{Binding ListMonAn}" SelectedItem="{Binding SelectedMA, Mode=OneWayToSource}" 
                                                   AutoGenerateColumns="False" CanUserAddRows="False" controls:DataGridHelper.ColumnHeaderPadding="10,0" FontWeight="DemiBold">

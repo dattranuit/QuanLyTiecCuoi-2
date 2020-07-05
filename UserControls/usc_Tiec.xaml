@@ -165,7 +165,7 @@
                                 <ColumnDefinition Width="10*"/>
                                 <ColumnDefinition Width="160*"/>
                             </Grid.ColumnDefinitions>
-                            <materialDesign:PackIcon Kind="Search" Width="32" Height="32" Margin="0,5,0,0"/>
+                            <Image  Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
                             <TextBox Grid.Column="1" x:Name="tb_TimKiem"
                             Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
                             controls:TextBoxHelper.Watermark="Tìm kiếm Tiệc cưới"
