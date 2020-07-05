@@ -31,14 +31,17 @@
                                     <materialDesign:Card Margin="2">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.35*"></ColumnDefinition>
                                                 <ColumnDefinition Width="3*"></ColumnDefinition>
-                                                <ColumnDefinition></ColumnDefinition>
                                                 <ColumnDefinition Width="1.2*"></ColumnDefinition>
                                                 <ColumnDefinition></ColumnDefinition>
                                                 <ColumnDefinition Width="1.2*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            
                                             <Grid Grid.Column="0">
+                                                <materialDesign:PackIcon Kind="Search" Width="32" Height="32" Margin="0,5,0,0"/>
+                                            </Grid>
+                                            <Grid Grid.Column="1">
+                                                
                                                 <TextBox 
                                                     IsReadOnly="{Binding IsReadOnly}"
                                                             Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
