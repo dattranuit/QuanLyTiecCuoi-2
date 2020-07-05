@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
-        Title="Hóa đơn" Height="620" Width="800">
+        Title="Hóa đơn" Height="620" Width="850">
     <Grid>
         <UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -73,8 +73,8 @@
                                         <TextBlock x:Name="tblock_Tiendichvu" Text="{Binding TongTienDichVu}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="0"  Grid.Column="0" FontSize="14"/>
                                         <TextBlock x:Name="tblock_Tienhoadon" Text="{Binding TongTienHoaDon}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="1" Grid.Column="0" FontSize="14"/>
                                         <TextBlock DataContext="{Binding ListTiecCuoi2}" x:Name="tblock_Tiencoc" Text="{Binding TienDatCoc}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="2" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock x:Name="tblock_Tienphat" Text="{Binding TienPhat}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="3" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock x:Name="tblock_Tienconlai" Text="{Binding ConLai}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="4" Grid.Column="0" FontSize="14" FontWeight="Bold"/>
+                                        <TextBlock x:Name="tblock_Tienphat" Text="{Binding TienPhat, Mode=OneWay}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="3" Grid.Column="0" FontSize="14"/>
+                                        <TextBlock x:Name="tblock_Tienconlai" Text="{Binding ConLai, Mode=OneWay}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="4" Grid.Column="0" FontSize="14" FontWeight="Bold"/>
                                         <Grid Grid.Column="1" Grid.Row="2">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition></ColumnDefinition>
@@ -181,13 +181,15 @@
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
                                                     <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="0" Content="Ngày thanh toán"/>
+                                                    <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Content="Ngày lập hóa đơn"/>
                                                 </Grid>
                                                 <Grid Grid.Column="1">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition/>
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
-                                                    <DatePicker x:Name="DP_ngaythanhtoan" IsEnabled="True" Text="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy', UpdateSourceTrigger=PropertyChanged}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <DatePicker x:Name="DP_ngaythanhtoan" IsEnabled="True" Text="{Binding NgayDaiTiec, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <DatePicker x:Name="DP_ngaylaphoadon" IsEnabled="True" Text="{Binding NgayThanhToan, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
