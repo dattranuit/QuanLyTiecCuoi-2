@@ -59,7 +59,7 @@
                             CanUserSortColumns="True"
                             CanUserAddRows="False"
                             SelectionUnit="FullRow"
-                            AutoGenerateColumns="False" FontSize="12"
+                            AutoGenerateColumns="False" FontSize="12" FontFamily="Segoe UI"
                             SelectionMode="Extended" FontWeight="Medium">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Tên Dịch vụ" Binding="{Binding TenDichVu}"></DataGridTextColumn>
@@ -136,10 +136,10 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <Label Content="Tên Dịch Vụ" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" FontWeight="SemiBold"></Label>
-                                <Label Content="Mô tả" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" FontWeight="SemiBold"></Label>
-                                <Label Content="Đơn giá" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" FontWeight="SemiBold"></Label>
-                                <Label Content="Ghi chú" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" FontWeight="SemiBold"></Label>
+                                <Label Content="Tên Dịch Vụ" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" FontWeight="SemiBold"></Label>
+                                <Label Content="Mô tả" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" FontWeight="SemiBold"></Label>
+                                <Label Content="Đơn giá" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" FontWeight="SemiBold"></Label>
+                                <Label Content="Ghi chú" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" FontWeight="SemiBold"></Label>
                                 <TextBox x:Name="txb_TenDichVu" Text="{Binding TenDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="31" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Margin="3" Grid.Row="0" FontSize="15"></TextBox>
                                 <TextBox x:Name="txb_MoTa" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="31" BorderBrush="Black" BorderThickness="1"  Grid.Column="1" Grid.Row="1" Margin="3" FontSize="15"></TextBox>
                                 <controls:NumericUpDown x:Name="nud_DonGia" Minimum="0" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="31" NumericInputMode="Numbers" TextAlignment="Left" Margin="3" FontSize="15" BorderBrush="Black" Interval="100000" Grid.Column="1" Grid.Row="2" ValueChanged="Nud_DonGia_ValueChanged"></controls:NumericUpDown>
