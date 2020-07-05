@@ -18,6 +18,8 @@ namespace QuanLyTiecCuoi.ViewModel
         private string _Password;
         public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
 
+        public static string TenNguoiDung;
+
         public static bool XemSanh;
         public static bool ThayDoiSanh;
 
@@ -52,7 +54,8 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         public LoginViewModel()
         {
-            Username = Password = "";
+            Username = Properties.Settings.Default.TenDangNhap;
+            Password = Properties.Settings.Default.MatKhau;
             LoginCommand = new RelayCommand<Window>((p) => { return Enable(); }, (p) => {Login(p); });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => 
             {
@@ -68,6 +71,7 @@ namespace QuanLyTiecCuoi.ViewModel
             var accCount = DataProvider.Ins.DataBase.NGUOIDUNGs.Where(x => x.Username == Username && x.Password == Password).Count();
             if (accCount > 0)
             {
+                TenNguoiDung = DataProvider.Ins.DataBase.NGUOIDUNGs.Where(x => x.Username == Username && x.Password == Password).SingleOrDefault().TenNguoiDung;
                 XemSanh = XemTiec = XemHoaDon = XemDichVu = XemPhanQuyen = XemDoanhThu = XemMonAn = XemQuiDinh = false;
                 ThayDoiSanh = ThayDoiTiec = ThayDoiHoaDon = ThayDoiDichVu = ThayDoiPhanQuyen = ThayDoiDoanhThu = ThayDoiMonAn = ThayDoiQuiDinh = false;
                 NGUOIDUNG user = DataProvider.Ins.DataBase.NGUOIDUNGs.Where(x => x.Username == Username).SingleOrDefault();

@@ -103,9 +103,16 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
         public PhieuDatDichVuViewModel()
         {
             IsReadOnly = !LoginViewModel.ThayDoiTiec;
+            if (IsReadOnly == false)
+            {
+                int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Count();
+                if (temp > 0)
+                    IsReadOnly = true;
+            }
             ListDichVu = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
             ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi));
             AddCommand = new RelayCommand<object>((p) =>
@@ -188,6 +195,23 @@ namespace QuanLyTiecCuoi.ViewModel
                     MessageBox.Show("Xóa phiếu đặt dịch vụ không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
                 }
                 //refresh nhap
+            });
+            LoadedWindowCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                IsReadOnly = !LoginViewModel.ThayDoiTiec;
+                if (IsReadOnly == false)
+                {
+                    int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Count();
+                    if (temp > 0)
+                        IsReadOnly = true;
+                }
+                SelectedDV = null;
+                SelectedPDDV = null;
+                DV_SoLuong = 0;
+                PDDV_GhiChu = DV_GhiChu = String.Empty;
             });
         }
     }

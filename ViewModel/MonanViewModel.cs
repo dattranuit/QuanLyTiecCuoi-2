@@ -16,6 +16,10 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class MonanViewModel : BaseViewModel
     {
+        private bool _IsEnable;
+        public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
+        private bool _IsReadOnly;
+        public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
         private ObservableCollection<MONAN> _List;
         public ObservableCollection<MONAN> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
@@ -65,6 +69,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public MonanViewModel()
         {
+            IsReadOnly = !LoginViewModel.ThayDoiMonAn;
             List = new ObservableCollection<MONAN>(DataProvider.Ins.DataBase.MONANs);
             DataGridCollection = CollectionViewSource.GetDefaultView(List);
             DataGridCollection.Filter = new Predicate<object>(Filter);

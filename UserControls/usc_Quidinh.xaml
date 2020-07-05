@@ -28,7 +28,7 @@
                                 <ColumnDefinition Width="217*" />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" FontWeight="SemiBold" FontSize="15">Áp dụng qui định phạt</Label>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding ApDungQuiDinhPhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            <CheckBox IsEnabled="{Binding IsEnable}" Grid.Column="1" IsChecked="{Binding ApDungQuiDinhPhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       controls:CheckBoxHelper.CheckBackgroundFillChecked="#FFFF6425"
                                       controls:CheckBoxHelper.CheckBackgroundFillUncheckedMouseOver="Transparent"
                                       controls:CheckBoxHelper.CheckBackgroundFillCheckedMouseOver="#FFFF6425"
@@ -36,8 +36,8 @@
                                       controls:CheckBoxHelper.CheckGlyphForegroundCheckedMouseOver="Black" 
                                       controls:CheckBoxHelper.CheckGlyphForegroundCheckedPressed="Black"/>
                             <Label Grid.Column="2" FontWeight="SemiBold" FontSize="15">Tỉ lệ phạt (%)</Label>
-                            <controls:NumericUpDown x:Name="nud_TiLePhat" Value="{Binding TiLePhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Minimum="0" Maximum="100" Grid.Column="3" Margin="24,2,7,2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="10" ValueChanged="NumericUpDown_ValueChanged"/>
-                            <Button x:Name="btn_SuaQuiDinh" Content="Sửa" Grid.Column="4" Command="{Binding EditQuiDinhCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
+                            <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="nud_TiLePhat" Value="{Binding TiLePhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Minimum="0" Maximum="100" Grid.Column="3" Margin="24,2,7,2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="10" ValueChanged="NumericUpDown_ValueChanged"/>
+                            <Button IsEnabled="{Binding IsEnable}" x:Name="btn_SuaQuiDinh" Content="Sửa" Grid.Column="4" Command="{Binding EditQuiDinhCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
                                      ToolTip="Sửa Qui Định" Background="#FF0F5699" Foreground="White" Height="Auto" Margin="54,0,24,1"/>
                         </Grid>
                     </GroupBox>
@@ -57,13 +57,13 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" FontWeight="SemiBold" FontSize="15">Tên loại ca</Label>
-                                <TextBox Text="{Binding TenCa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Margin="0,2,20,2" BorderBrush="Black" BorderThickness="1"/>
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" Text="{Binding TenCa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" Margin="0,2,20,2" BorderBrush="Black" BorderThickness="1"/>
                                 <Label Grid.Column="2" FontWeight="SemiBold" FontSize="15" Margin="10,2,0,2">Bắt đầu</Label>
-                                <TextBox x:Name="txb_BatDau" controls:TextBoxHelper.Watermark="hh:mm:ss" Text="{Binding BatDau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_BatDau" controls:TextBoxHelper.Watermark="hh:mm:ss" Text="{Binding BatDau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                          Grid.Column="3" Margin="0,2,20,2" BorderBrush="Black" BorderThickness="1"
                                          PreviewTextInput="TextBox_PreviewTextInput" DataObject.Pasting="TextBox_Pasting"/>
                                 <Label Grid.Column="4" FontWeight="SemiBold" FontSize="15" Margin="20,2,0,2">Kết thúc</Label>
-                                <TextBox x:Name="txb_KetThuc" controls:TextBoxHelper.Watermark="hh:mm:ss" Text="{Binding KetThuc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_KetThuc" controls:TextBoxHelper.Watermark="hh:mm:ss" Text="{Binding KetThuc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                          Grid.Column="5" Margin="0,2,20,2" BorderBrush="Black" BorderThickness="1"/>
                             </Grid>
                         </Grid>
@@ -74,13 +74,13 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Button Content="Thêm" Command="{Binding AddCommand}" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedButton}"                      
+                            <Button IsEnabled="{Binding IsEnable}" Content="Thêm" Command="{Binding AddCommand}" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Margin="10" ToolTip="Thêm ca" Background="#FF0F5699" Foreground="White" Width="140"/>
-                            <Button Content="Sửa" Grid.Column="1" Command="{Binding EditCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
+                            <Button IsEnabled="{Binding IsEnable}" Content="Sửa" Grid.Column="1" Command="{Binding EditCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Margin="10" ToolTip="Sửa thông tin loại ca" Background="Green" Foreground="White" Width="140"/>
-                            <Button Content="Xóa" Grid.Column="2" Command="{Binding DeleteCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
+                            <Button IsEnabled="{Binding IsEnable}" Content="Xóa" Grid.Column="2" Command="{Binding DeleteCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Margin="10" ToolTip="Xóa loại ca" Background="Crimson" Foreground="White" Width="140"/>
-                            <Button Content="Làm mới nhập" Grid.Column="3" Command="{Binding RefreshCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
+                            <Button IsEnabled="{Binding IsEnable}" Content="Làm mới nhập" Grid.Column="3" Command="{Binding RefreshCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Margin="10" ToolTip="Làm mới thông tin nhập" Background="#FF0F5699" Foreground="White" Width="140"/>
                         </Grid>
                         <GroupBox DockPanel.Dock="Bottom" Header="Danh sách loại ca" Margin="10,5,10,10">

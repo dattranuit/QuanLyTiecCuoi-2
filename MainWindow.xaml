@@ -8,11 +8,34 @@
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
                       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                       mc:Ignorable="d"
+                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                       DataContext="{StaticResource MainVM}"
                       Title="Quản lý Tiệc Cưới" Height="700" Width="1000"
                       BorderThickness="0" 
                       Name="Mainwindow"
                       WindowStartupLocation="CenterScreen" TitleCharacterCasing="Upper">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button ToolTip="Đăng xuất"
+                    Command="{Binding LogoutCommand}"
+                    CommandParameter="{Binding ElementName=Mainwindow}">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" >
+                            <materialDesign:PackIcon
+                                        VerticalAlignment="Center"
+                                        Kind="Logout" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.Resources>
             <DataTemplate x:Key="MenuItemTemplate" DataType="{x:Type controls:HamburgerMenuIconItem}">

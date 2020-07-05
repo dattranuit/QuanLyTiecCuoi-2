@@ -103,6 +103,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
         //public ICommand PopupCommand { get; set; }
         bool Addable()
         {
@@ -116,6 +117,13 @@ namespace QuanLyTiecCuoi.ViewModel
         public CT_PhieuDatBanViewModel()
         {
             IsReadOnly = !LoginViewModel.ThayDoiTiec;
+            if (IsReadOnly == false)
+            {
+                var xx = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB).SingleOrDefault();
+                int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == xx.MaTiecCuoi).Count();
+                if (temp > 0)
+                    IsReadOnly = true;
+            }
             int count = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Count();
             if (count != 0)
                 DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);
@@ -206,6 +214,24 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     MessageBox.Show("Xóa chi tiết phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
                 }
+            });
+            LoadedWindowCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                IsReadOnly = !LoginViewModel.ThayDoiTiec;
+                if (IsReadOnly == false)
+                {
+                    var xx = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB).SingleOrDefault();
+                    int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == xx.MaTiecCuoi).Count();
+                    if (temp > 0)
+                        IsReadOnly = true;
+                }
+                SelectedCTPDB = null;
+                SelectedMA = null;
+                CTPDB_SoLuong = MA_SoLuong = 0;
+                CTPDB_GhiChu = MA_GhiChu = String.Empty;
             });
         }
     }
