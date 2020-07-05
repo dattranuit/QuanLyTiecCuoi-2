@@ -25,15 +25,10 @@ namespace QuanLyTiecCuoi
         public MainWindow()
         {
             InitializeComponent();
-            //Login l = new Login();
-            //l.ShowDialog();
-            //PhieuDatBanWindow wd = new PhieuDatBanWindow();
-            //wd.ShowDialog();
         }
         private void HamburgerMenuControl_OnItemClick(object sender, ItemClickEventArgs e)
         {
             this.HamburgerMenuControl.Content = e.ClickedItem;
-            //this.HamburgerMenuControl.IsPaneOpen = false;
         }
     }
 }

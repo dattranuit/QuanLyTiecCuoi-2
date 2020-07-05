@@ -15,6 +15,10 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class PhieuDatBanViewModel : BaseViewModel
     {
+        private bool _IsEnable;
+        public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
+        private bool _IsReadOnly;
+        public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
         private static int _CurrentMaTiecCuoi;
         public static int CurrentMaTiecCuoi { get => _CurrentMaTiecCuoi; set { _CurrentMaTiecCuoi = value; } }
         private static ObservableCollection<PHIEUDATBAN> _ListPhieuDatBan;
@@ -80,6 +84,7 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         public PhieuDatBanViewModel()
         {
+            IsReadOnly = !LoginViewModel.ThayDoiTiec;
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return Addable();

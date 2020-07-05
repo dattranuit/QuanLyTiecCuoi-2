@@ -22,6 +22,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button
+                    IsEnabled="{Binding IsEnable}"
                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                     Grid.Column="0" Margin="10"
                     Command="{Binding ClearCommand}"
@@ -29,6 +30,7 @@
                     Làm mới
                 </Button>
                 <Button
+                    IsEnabled="{Binding IsEnable}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Command="{Binding PrintCommand}"
                     Grid.Column="1" Margin="10"
@@ -36,6 +38,7 @@
                     In Hợp Đồng
                 </Button>
                 <Button 
+                    IsEnabled="{Binding IsEnable}"
                     Command="{Binding AddCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Grid.Column="2" Margin="10"
@@ -43,6 +46,7 @@
                     Thêm
                 </Button>
                 <Button
+                    IsEnabled="{Binding IsEnable}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Grid.Column="4" Margin="10"
                     Command="{Binding DeleteCommand}"
@@ -50,6 +54,7 @@
                     Xóa
                 </Button>
                 <Button
+                    IsEnabled="{Binding IsEnable}"
                     Command="{Binding EditCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Grid.Column="3" Margin="10" 
@@ -128,12 +133,12 @@
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <DatePicker Name="dpk_NgayDaiTiec" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" 
+                                    <DatePicker IsEnabled="{Binding IsEnable}" Name="dpk_NgayDaiTiec" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" 
                                                 SelectedDate="{Binding NgayDaiTiec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=MM/dd/yyyy}" 
                                                 controls:TextBoxHelper.Watermark="Hãy chọn ngày" SelectedDateChanged="dpk_NgayDaiTiec_SelectedDateChanged"/>
-                                    <ComboBox Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.CA.TenCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedCa,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenCa"/>
-                                    <ComboBox Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.SANH.TenSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenSanh"/>
-                                    <controls:NumericUpDown Name="nbr_TienDatCoc" Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding TienDatCoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" ValueChanged="nbr_TienDatCoc_ValueChanged"/>
+                                    <ComboBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.CA.TenCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedCa,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenCa"/>
+                                    <ComboBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.SANH.TenSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenSanh"/>
+                                    <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" Name="nbr_TienDatCoc" Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding TienDatCoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" ValueChanged="nbr_TienDatCoc_ValueChanged"/>
                                     <Button Grid.Row="4"
                                             Command="{Binding DatBanvaDichVuCommand}"
                                             ToolTipService.ShowOnDisabled="True"
