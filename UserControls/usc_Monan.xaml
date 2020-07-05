@@ -147,7 +147,7 @@
                                 <Label Grid.Column="0" Grid.Row="3" Content="Đơn giá:" FontWeight="SemiBold" Height="29" Margin="0" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
                                 <controls:NumericUpDown x:Name="ct_DonGia" Grid.Row="3" Grid.Column="1" Margin="3" 
                                                         BorderBrush="#FF636363" BorderThickness="1" TextAlignment="Left" Interval="100000" Minimum="0"
-                                                        Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" Height="31"/>
+                                                        Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" Height="31" ValueChanged="Ct_DonGia_ValueChanged"/>
                                 <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
                                             x:Name="btn_LamMoi"
                                             Command="{Binding RefreshCommand}"

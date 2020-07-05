@@ -15,9 +15,13 @@ using System.Windows.Input;
 namespace QuanLyTiecCuoi.ViewModel
 {
     class BaoCaoThangViewModel : BaseViewModel, Microsoft.Office.Interop.Excel.Window
-    {
+    { 
+        
         private static ObservableCollection<BAOCAOTHANG> _List;
-        public static ObservableCollection<BAOCAOTHANG> List { get => _List; set { _List = value;  } }
+        public static ObservableCollection<BAOCAOTHANG> List { get => _List; set { _List = value; } }
+
+        private  ObservableCollection<BAOCAOTHANG> _ListBCT;
+        public  ObservableCollection<BAOCAOTHANG> ListBCT { get => _ListBCT; set { _ListBCT = value; OnPropertyChanged(); } }
 
         private BAOCAOTHANG _SelectedItem;
 
@@ -42,10 +46,10 @@ namespace QuanLyTiecCuoi.ViewModel
 
 
         private int _Nam;
-        public int Nam { get => _Nam; set { _Nam = value; OnPropertyChanged(); } }
+        public int Nam { get => _Nam; set { _Nam = value; OnPropertyChanged();  } }
 
         private decimal _TongDoanhThu;
-        public decimal TongDoanhThu { get => _TongDoanhThu; set { _TongDoanhThu = value; OnPropertyChanged(); } }
+        public decimal TongDoanhThu { get => _TongDoanhThu; set { _TongDoanhThu = value; OnPropertyChanged();  } }
 
         public ICommand DoubleClickCommand { get; set; }
         public ICommand ExportToExcel { set; get; }
@@ -59,6 +63,8 @@ namespace QuanLyTiecCuoi.ViewModel
         public BaoCaoThangViewModel()
         {
             List = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
+            ListBCT = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
+            MessageBox.Show(ListBCT.Count().ToString());
             //data();
             DataProvider.Ins.DataBase.SaveChanges();
             DataGridCollection = CollectionViewSource.GetDefaultView(List);
@@ -75,6 +81,13 @@ namespace QuanLyTiecCuoi.ViewModel
             ExportToExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) => { Ex2Excel(p); });
         }
 
+        //public static void Reload()
+        //{
+        //    List.ToList().Clear();
+        //    List.Count();
+        //    List =  new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
+        //    MessageBox.Show(List.Count().ToString());
+        //}
         //public void data()
         //{
         //    ListHoaDon = new ObservableCollection<HOADON>(DataProvider.Ins.DataBase.HOADONs);

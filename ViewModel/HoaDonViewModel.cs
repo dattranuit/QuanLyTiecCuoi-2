@@ -56,7 +56,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
 
         private DateTime _NgayThanhToan;
-        public DateTime NgayThanhToan { get => _NgayThanhToan; set { _NgayThanhToan = value; OnPropertyChanged(); } }
+        public DateTime NgayThanhToan { get => _NgayThanhToan; set { _NgayThanhToan = value; update();  OnPropertyChanged();  } }
 
         // command
         public ICommand DoubleClickCommand_HoaDon { get; set; }
@@ -86,6 +86,9 @@ namespace QuanLyTiecCuoi.ViewModel
         public ObservableCollection<THAMSO> _ListThamSo;
         public ObservableCollection<THAMSO> ListThamSo { get => _ListThamSo; set { _ListThamSo = value; OnPropertyChanged(); } }
 
+        //public ObservableCollection<BAOCAOTHANG> _ListBaoCaoThang;
+        //public ObservableCollection<BAOCAOTHANG> ListBaoCaoThang { get => _ListBaoCaoThang; set { _ListBaoCaoThang = value; OnPropertyChanged(); } }
+
 
         public int idTiecCuoi = 0;
         public int id = 0;
@@ -101,7 +104,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public string TenCoDau { get => _TenCoDau; set { _TenCoDau = value; OnPropertyChanged(); } }
 
         private System.DateTime _NgayDaiTiec;// = DateTime.Now;
-        public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; set { _NgayDaiTiec = value; OnPropertyChanged(); } }
+        public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; set { _NgayDaiTiec = value; OnPropertyChanged();  } }
 
 
         private int _SoLuong;
@@ -138,13 +141,32 @@ namespace QuanLyTiecCuoi.ViewModel
 
         private decimal _TienPhat;
         public decimal TienPhat { get => _TienPhat; set { _TienPhat = value; OnPropertyChanged(); } }
+        public double TiLePhat = 0.0d;
+        public int IsPhat = 0;
 
         public TIECCUOI item;
         public int idIn = 0;
+
+        public void update()
+        {
+            if(NgayThanhToan < NgayDaiTiec)
+            {
+                MessageBox.Show("Ngày thanh toán phải trùng hoặc sau ngày đãi tiệc");
+                TienPhat = ConLai = 0;
+            }
+            else
+            {
+                TimeSpan da = NgayThanhToan.Subtract(NgayDaiTiec);
+                TienPhat = TongTienHoaDon * (decimal)IsPhat * (decimal)TiLePhat * (decimal)Math.Abs((int)da.TotalDays);// * (decimal)(DateTime.Now.Subtract(NgayDaiTiec).TotalDays);                                                                                                                   //MessageBox.Show(TienPhat.ToString());
+                ConLai = TongTienHoaDon + TienPhat - Convert.ToDecimal(TienDatCoc);
+            }            
+        }
         public HoaDonViewModel()
         {
+
             ListTiecCuoi = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.HOADONs.Count() == 0));
             List = new ObservableCollection<HOADON>(DataProvider.Ins.DataBase.HOADONs);
+            //ListBaoCaoThang = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
             DataProvider.Ins.DataBase.SaveChanges();
 
             DataGridCollection = CollectionViewSource.GetDefaultView(List);
@@ -337,8 +359,7 @@ namespace QuanLyTiecCuoi.ViewModel
             if (ListThamSo != null) ListThamSo.ToList().Clear();
             ListThamSo = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOes.ToList());
             DataProvider.Ins.DataBase.SaveChanges();
-            var TiLePhat = 0.0d;
-            int IsPhat = 0;
+            
             if (ListThamSo == null || ListThamSo.Count() == 0) return;
             if (ListThamSo != null)
             {
@@ -347,10 +368,7 @@ namespace QuanLyTiecCuoi.ViewModel
             }
 
             TongTienHoaDon = TongTienBan + TongTienDichVu;
-            TimeSpan da = NgayThanhToan.Subtract(NgayDaiTiec);
-            TienPhat = TongTienHoaDon * (decimal)IsPhat * (decimal)TiLePhat * (decimal)Math.Abs((int)da.TotalDays);// * (decimal)(DateTime.Now.Subtract(NgayDaiTiec).TotalDays);
-
-            ConLai = TongTienHoaDon + TienPhat - Convert.ToDecimal(TienDatCoc);
+           
         }
 
         public int getMaTiecCuoi_HoaDon(DataGrid dataGrid)
@@ -414,15 +432,21 @@ namespace QuanLyTiecCuoi.ViewModel
                 };
                 DataProvider.Ins.DataBase.BAOCAOTHANGs.Add(item);
                 DataProvider.Ins.DataBase.SaveChanges();
-                BaoCaoThangViewModel.List.Add(item);
-                BaoCaoThangViewModel.List.CollectionChanged += List_CollectionChanged;
+                
+                //BaoCaoThangViewModel.List.Add(item);
+                
+                //BaoCaoThangViewModel.List.CollectionChanged += List_CollectionChanged;
             }
         }
 
-        private void List_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        //private void List_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        //{
+        //    if(e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+        //    {
+        //        BaoCaoThangViewModel.Reload();
+        //    }
+        //    //throw new NotImplementedException();
+        //}
 
         private void TinhLaiBaoCaoNgay()
         {

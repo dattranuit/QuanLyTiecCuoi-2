@@ -25,7 +25,7 @@
                 <DataGridTextColumn Header="Tên Cô Dâu" Binding="{Binding TenCoDau}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="Điện thoại" Binding="{Binding SoDienThoai}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="Sảnh" Binding="{Binding SANH.TenSanh}" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridTextColumn Header="Ngày Đãi Tiệc" Binding="{Binding NgayDaiTiec}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ngày Đãi Tiệc" Binding="{Binding NgayDaiTiec, StringFormat='dd/MM/yyyy'}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="Ca" Binding="{Binding CA.TenCa}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>

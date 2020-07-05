@@ -65,7 +65,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if(string.IsNullOrEmpty(TenDichVu) )
+                if(string.IsNullOrEmpty(TenDichVu) || string.IsNullOrEmpty(MoTa) || string.IsNullOrEmpty(GhiChu))
                 return false;
                 return true;
 
