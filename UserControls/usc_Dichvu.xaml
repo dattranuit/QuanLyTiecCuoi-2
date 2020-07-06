@@ -35,14 +35,10 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="11*"/>
+                                <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="160*"/>
                             </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Column="0" Height="auto" Margin="0,10,0,9" >
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="/QuanLyTiecCuoi;component/photos/search_sanh_icon.png"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
+                            <Image  Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
                             <TextBox x:Name="tbx_TimKiemDichVu" Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
                                          Grid.Column="1"
                                          controls:TextBoxHelper.Watermark="Tìm kiếm dịch vụ"
