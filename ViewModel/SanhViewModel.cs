@@ -295,7 +295,7 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 if (!string.IsNullOrEmpty(_filterString))
                 {
-                    return data.TenSanh.Contains(_filterString);
+                    return data.TenSanh.ToLower().Contains(_filterString.ToLower());
                 }
                 return true;
             }
@@ -333,7 +333,7 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 if (!string.IsNullOrEmpty(_filterStringLoaiSanh))
                 {
-                    return data.TenLoaiSanh.Contains(_filterStringLoaiSanh);
+                    return data.TenLoaiSanh.ToLower().Contains(_filterStringLoaiSanh.ToLower());
                 }
                 return true;
             }
