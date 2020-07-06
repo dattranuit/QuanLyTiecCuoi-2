@@ -220,15 +220,22 @@
                                 <ColumnDefinition Width="10*"/>
                                 <ColumnDefinition Width="160*"/>
                             </Grid.ColumnDefinitions>
-                            <Image  Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
+                            <Image  Margin="0,5,0,0" Width="32" Height="32" 
+                                    Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
                             <TextBox Grid.Column="1" x:Name="tb_TimKiem"
                             Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
-                            controls:TextBoxHelper.Watermark="Tìm kiếm Tiệc cưới"
+                            controls:TextBoxHelper.Watermark="{Binding ElementName=cbx_LoaiTimKiem, Path=Text, Mode=OneWay}"
                             BorderThickness="0,0,0,1"
                             BorderBrush="Black"
                             FontSize="15"
                             VerticalAlignment="Center" Margin="10,5" VerticalContentAlignment="Center" />
                         </Grid>
+                        <ComboBox Name="cbx_LoaiTimKiem" DataContext="{StaticResource TiecVM}" Grid.Column="1" Margin="25,5" Foreground="Crimson" FontWeight="SemiBold" 
+                                  Text="{Binding LoaiTimKiem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="Tìm kiếm theo Tên Chú Rể" FontWeight="SemiBold" IsSelected="True"/>
+                            <ComboBoxItem Content="Tìm kiếm theo Tên Cô Dâu" FontWeight="SemiBold" />
+                            <ComboBoxItem Content="Tìm kiếm theo Số Điện Thoại" FontWeight="SemiBold" />
+                        </ComboBox>
                     </Grid>
                     <GroupBox Header="Danh sách tiệc cưới" Margin="10,0,0,10" Grid.Column="0">
                         <DataGrid DataContext="{StaticResource TiecVM}" ItemsSource="{Binding ListTiecCuoi, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedTiecCuoi, Mode=TwoWay}" 

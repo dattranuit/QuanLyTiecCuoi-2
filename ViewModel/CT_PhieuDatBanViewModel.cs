@@ -8,6 +8,7 @@ using System.Windows.Input;
 using QuanLyTiecCuoi.Model;
 using System.Windows;
 using System.ComponentModel;
+using System.Windows.Data;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
@@ -127,6 +128,8 @@ namespace QuanLyTiecCuoi.ViewModel
             else
                 DonGiaBan = 0;
             ListMonAn = new ObservableCollection<MONAN>(DataProvider.Ins.DataBase.MONANs);
+            DataGridCollection = CollectionViewSource.GetDefaultView(ListMonAn);
+            DataGridCollection.Filter = new Predicate<object>(Filter);
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return Addable();
@@ -246,7 +249,7 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 if (!string.IsNullOrEmpty(_filterString))
                 {
-                    return data.TenMonAn.Contains(_filterString);
+                    return data.TenMonAn.ToLower().Contains(_filterString.ToLower());
                 }
                 return true;
             }

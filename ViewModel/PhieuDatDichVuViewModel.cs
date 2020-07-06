@@ -10,6 +10,7 @@ using System.Windows;
 using System.Data.Entity.Migrations.Model;
 using Microsoft.Office.Interop.Excel;
 using System.ComponentModel;
+using System.Windows.Data;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
@@ -115,6 +116,10 @@ namespace QuanLyTiecCuoi.ViewModel
             }
             ListDichVu = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
             ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi));
+
+            DataGridCollection = CollectionViewSource.GetDefaultView(ListDichVu);
+            DataGridCollection.Filter = new Predicate<object>(Filter);
+
             AddCommand = new RelayCommand<object>((p) =>
             {
                 if (SelectedDV == null)
@@ -229,7 +234,7 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 if (!string.IsNullOrEmpty(_filterString))
                 {
-                    return data.TenDichVu.Contains(_filterString);
+                    return data.TenDichVu.ToLower().Contains(_filterString.ToLower());
                 }
                 return true;
             }

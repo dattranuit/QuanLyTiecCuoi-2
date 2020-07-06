@@ -18,6 +18,8 @@ namespace QuanLyTiecCuoi.ViewModel
 {
     class TiecViewModel : BaseViewModel
     {
+        private string _LoaiTimKiem = "Tìm kiếm theo Tên Chú Rể";
+        public string LoaiTimKiem { get => _LoaiTimKiem; set { _LoaiTimKiem = value; OnPropertyChanged(); } }
         private bool _IsEnable;
         public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
         private bool _IsReadOnly;
@@ -57,6 +59,11 @@ namespace QuanLyTiecCuoi.ViewModel
                     MaCa = SelectedTiecCuoi.MaCa;
                     SANH temp = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == MaSanh).SingleOrDefault();
                     SelectedSanh = temp;
+
+                    IsReadOnly = false;
+                    var check = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi);
+                    if (check != null && check.Count() > 0)
+                        IsReadOnly = true;
                 }
             }
         }
@@ -392,7 +399,12 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 if (!string.IsNullOrEmpty(_filterString))
                 {
-                    return data.TenChuRe.Contains(_filterString);
+                    if (LoaiTimKiem == "Tìm kiếm theo Tên Chú Rể")
+                        return data.TenChuRe.ToLower().Contains(_filterString.ToLower());
+                    if (LoaiTimKiem == "Tìm kiếm theo Tên Cô Dâu")
+                        return data.TenCoDau.ToLower().Contains(_filterString.ToLower());
+                    if (LoaiTimKiem == "Tìm kiếm theo Số Điện Thoại")
+                        return data.SoDienThoai.Contains(_filterString);
                 }
                 return true;
             }
