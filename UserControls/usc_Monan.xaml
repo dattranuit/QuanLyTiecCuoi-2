@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <TextBlock  x:Name="tbl_QuanLyMonAn" 
-                Text="Quản lý Món Ăn" HorizontalAlignment="Center" Foreground="#FF0E2291"  VerticalAlignment="Center" FontSize="32" FontWeight="Medium"/>
+                Text="Quản Lý Món Ăn" HorizontalAlignment="Center" Foreground="#FF0E2291"  VerticalAlignment="Center" FontSize="32" FontWeight="Medium"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -126,7 +126,6 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
-                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Column="0" Grid.Row="0" Content="Tên Món Ăn" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="12" Grid.ColumnSpan="2" />
                                 <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="tbx_TenMonAn" Grid.Column="1" Grid.Row="0" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" FontSize="15"  FontWeight="SemiBold"/>
@@ -138,14 +137,6 @@
                                 <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="ct_DonGia" Grid.Row="2" Grid.Column="1" Margin="3" 
                                                         BorderBrush="#FF636363" BorderThickness="1" TextAlignment="Left" Interval="100000" Minimum="0"  FontSize="15"  FontWeight="SemiBold"
                                                         Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" ValueChanged="Ct_DonGia_ValueChanged"/>
-                                <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
-                                        x:Name="btn_LamMoi"
-                                        Command="{Binding RefreshCommand}"
-                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                        IsEnabled="{Binding IsEnable}"
-                                        ToolTip="Làm mới thông tin món ăn" Background="#FF002C56" Foreground="White" Height="Auto" Margin="2,5,2,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="14">
-                                    Làm mới
-                                </Button>
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -159,13 +150,22 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                                        x:Name="btn_LamMoi"
+                                        Command="{Binding RefreshCommand}"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        IsEnabled="{Binding IsEnable}"
+                                        ToolTip="Làm mới thông tin món ăn" Background="#FF0F5699" Foreground="White" Height="Auto" Margin="10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="14">
+                    Làm mới
+                </Button>
                 <Button 
                     x:Name="btn_ThemMonAn"
                     Command="{Binding AddCommand}"
                     IsEnabled="{Binding IsEnable}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Grid.Column="0" Margin="10"
+                    Grid.Column="1" Margin="10"
                     ToolTip="Thêm món ăn" Background="#FF0F5699" Foreground="White">
                     Thêm
                 </Button>
@@ -174,7 +174,7 @@
                     Command="{Binding EditCommand}"
                     IsEnabled="{Binding IsEnable}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Grid.Column="1" Margin="10"
+                    Grid.Column="2" Margin="10"
                     ToolTip="Sửa món ăn" Background="Green" Foreground="White">
                     Sửa
                 </Button>
@@ -182,7 +182,7 @@
                     x:Name="btn_XoaMonAn"
                     Command="{Binding DeleteCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Grid.Column="2" Margin="10"
+                    Grid.Column="3" Margin="10"
                     IsEnabled="{Binding IsEnable}"
                     ToolTip="Xóa món ăn" Background="Crimson" Foreground="White">
                     Xóa
