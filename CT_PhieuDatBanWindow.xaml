@@ -9,8 +9,14 @@
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    DataContext="{StaticResource CT_PhieuDatBanVM}" 
     Name="CT_PhieuDatBanWd"
     Title="Chi Tiết Phiếu Đặt Bàn" Height="662" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Background="White" Name="grd_CTPhieuDatBan">
         <DockPanel LastChildFill="True" DataContext="{StaticResource CT_PhieuDatBanVM}" >
             <TextBlock Text="Chi Tiết Phiếu Đặt Bàn" HorizontalAlignment="Center"

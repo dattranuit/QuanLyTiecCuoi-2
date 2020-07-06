@@ -114,9 +114,8 @@ namespace QuanLyTiecCuoi.ViewModel
 
                 }
                 MainWindow wd = new MainWindow();
-                p.Hide();
-                wd.ShowDialog();
                 p.Close();
+                wd.ShowDialog();
             }
             else
             {

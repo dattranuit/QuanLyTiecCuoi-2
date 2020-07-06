@@ -19,7 +19,6 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button
                     IsEnabled="{Binding IsEnable}"
@@ -29,37 +28,29 @@
                     ToolTip="Làm mới vùng nhập" Background="#FF0F5699" Foreground="White">
                     Làm mới
                 </Button>
-                <Button
-                    IsEnabled="{Binding IsEnable}"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Command="{Binding PrintCommand}"
-                    Grid.Column="1" Margin="10"
-                    ToolTip="In Hợp Đồng" Background="#FF0F5699" Foreground="White">
-                    In Hợp Đồng
-                </Button>
                 <Button 
                     IsEnabled="{Binding IsEnable}"
                     Command="{Binding AddCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Grid.Column="2" Margin="10"
+                    Grid.Column="1" Margin="10"
                     ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White">
-                    Thêm
-                </Button>
-                <Button
-                    IsEnabled="{Binding IsEnable}"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Grid.Column="4" Margin="10"
-                    Command="{Binding DeleteCommand}"
-                    ToolTip="Xóa thông tin đặt Tiệc" Background="Crimson" Foreground="White">
-                    Xóa
+                    Thêm tiệc cưới 
                 </Button>
                 <Button
                     IsEnabled="{Binding IsEnable}"
                     Command="{Binding EditCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Grid.Column="3" Margin="10" 
+                    Grid.Column="2" Margin="10" 
                     ToolTip="Sửa thông tin đặt Tiệc" Background="Green" Foreground="White">
-                    Sửa
+                    Sửa tiệc cưới
+                </Button>
+                <Button
+                    IsEnabled="{Binding IsEnable}"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Grid.Column="3" Margin="10"
+                    Command="{Binding DeleteCommand}"
+                    ToolTip="Xóa thông tin đặt Tiệc" Background="Crimson" Foreground="White">
+                    Xóa tiệc cưới
                 </Button>
             </Grid>
             <materialDesign:Card x:Name="mdc_ThongTinDatTiec" DockPanel.Dock="Top" Margin="10,10,10,5">
@@ -99,7 +90,8 @@
                                     </Grid.RowDefinitions>
                                     <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenChuRe, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                     <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding TenCoDau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                                    <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Value="{Binding SoDienThoai, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HideUpDownButtons="True" TextAlignment="Left" NumericInputMode="Numbers"/>
+                                    <TextBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SoDienThoai, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                             PreviewTextInput="TextBox_PreviewTextInput" DataObject.Pasting="TextBox_Pasting"/>
                                     <DatePicker Name="dpk_NgayDatTiec" IsEnabled="{Binding IsEnable, Mode=OneWay}" Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" 
                                                 SelectedDate="{Binding NgayDatTiec, UpdateSourceTrigger=PropertyChanged, StringFormat=MM/dd/yyyy, Mode=TwoWay}"
                                                 controls:TextBoxHelper.Watermark="Hãy chọn ngày" SelectedDateChanged="dpk_NgayDatTiec_SelectedDateChanged"/>
@@ -136,7 +128,11 @@
                                     <DatePicker IsEnabled="{Binding IsEnable}" Name="dpk_NgayDaiTiec" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" 
                                                 SelectedDate="{Binding NgayDaiTiec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=MM/dd/yyyy}" 
                                                 controls:TextBoxHelper.Watermark="Hãy chọn ngày" SelectedDateChanged="dpk_NgayDaiTiec_SelectedDateChanged"/>
-                                    <ComboBox IsEnabled="{Binding IsEnable}" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.CA.TenCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedCa,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenCa"/>
+                                    <ComboBox IsEnabled="{Binding IsEnable}" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" 
+                                              Text="{Binding SelectedTiecCuoi.CA.TenCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                                              ToolTip="{Binding Time}"
+                                              SelectedItem="{Binding SelectedCa,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                              ItemsSource="{Binding ListCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenCa"/>
                                     <TextBox Grid.Row="2" >
                                         <TextBox.Template>
                                             <ControlTemplate>

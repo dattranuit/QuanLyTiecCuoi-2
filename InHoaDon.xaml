@@ -27,7 +27,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="30" Grid.Row="0">
-                    <TextBlock Text="HÓA ĐƠN THANH TOÁN" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" FontWeight="Bold" Foreground="#FFFBE188"/>
+                    <TextBlock Text="HÓA ĐƠN THANH TOÁN" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" FontWeight="Bold" Foreground="Black"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Margin="20">
                     <Grid HorizontalAlignment="Stretch">

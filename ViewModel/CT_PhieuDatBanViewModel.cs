@@ -9,6 +9,7 @@ using QuanLyTiecCuoi.Model;
 using System.Windows;
 using System.ComponentModel;
 using System.Windows.Data;
+using System.Windows.Navigation;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
@@ -103,6 +104,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand LoadedCommand { get; set; }
         bool Addable()
         {
             if (SelectedMA == null)
@@ -114,14 +116,6 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         public CT_PhieuDatBanViewModel()
         {
-            IsReadOnly = !LoginViewModel.ThayDoiTiec;
-            if (IsReadOnly == false)
-            {
-                var xx = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB).SingleOrDefault();
-                int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == xx.MaTiecCuoi).Count();
-                if (temp > 0)
-                    IsReadOnly = true;
-            }
             int count = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Count();
             if (count != 0)
                 DonGiaBan = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == CurrentMaPDB).Sum(ct => ct.ThanhTien);
@@ -213,6 +207,20 @@ namespace QuanLyTiecCuoi.ViewModel
                 catch(Exception e)
                 {
                     MessageBox.Show("Xóa chi tiết phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+            });
+            LoadedCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                IsReadOnly = !LoginViewModel.ThayDoiTiec;
+                if (IsReadOnly == false)
+                {
+                    var xx = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB).SingleOrDefault();
+                    int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == xx.MaTiecCuoi).Count();
+                    if (temp > 0)
+                        IsReadOnly = true;
                 }
             });
 

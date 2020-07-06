@@ -44,5 +44,30 @@ namespace QuanLyTiecCuoi.UserControls
             if (String.IsNullOrEmpty(dpk_NgayDaiTiec.Text.ToString()))
                 dpk_NgayDaiTiec.SelectedDate = DateTime.Now;
         }
+        private static readonly Regex _regex = new Regex("[^0-9-]+"); //regex that matches disallowed text
+        private static bool IsTextAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = _regex.IsMatch(e.Text);
+        }
+
+        private void TextBox_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!IsTextAllowed(text))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
     }
 }

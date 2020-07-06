@@ -77,19 +77,18 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand CT_PhieuDatBanCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand LoadedCommand { get; set; }
         bool Enable()
         {
-            if (SelectedPDB == null)
-                return false;
             if (LoaiBan != SelectedPDB.LoaiBan)
-                return false;
+                return true;
             if (SoLuong != SelectedPDB.SoLuong)
-                return false;
+                return true;
             if (SoLuongDuTru != SelectedPDB.SoLuongDuTru)
-                return false;
+                return true;
             if (GhiChu != SelectedPDB.GhiChu)
-                return false;
-            return true;
+                return true;
+            return false;
         }
         bool Addable()
         {
@@ -106,13 +105,6 @@ namespace QuanLyTiecCuoi.ViewModel
                 TongSoLuongBan = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Sum(slb => slb.SoLuong);
             else
                 TongSoLuongBan = 0;
-            IsReadOnly = !LoginViewModel.ThayDoiTiec;
-            if (IsReadOnly == false)
-            {
-                int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Count();
-                if (temp > 0)
-                    IsReadOnly = true;
-            }
             DataGridCollection = CollectionViewSource.GetDefaultView(ListPhieuDatBan);
             DataGridCollection.Filter = new Predicate<object>(Filter);
             AddCommand = new RelayCommand<object>((p) =>
@@ -158,12 +150,12 @@ namespace QuanLyTiecCuoi.ViewModel
             });
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (Enable())
+                if (SelectedPDB == null)
                     return false;
                 var displayList = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan);
-                if (displayList != null && displayList.Count() != 0)
+                if (displayList != null && displayList.Count() != 0 && Addable() && Enable())
                     return true;
-                return Addable();
+                return false;
             }, (p) =>
             {
                 if (SoLuong == 0)
@@ -194,7 +186,12 @@ namespace QuanLyTiecCuoi.ViewModel
                         MessageBox.Show("Sửa phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
                     }
             });
-            CT_PhieuDatBanCommand = new RelayCommand<object>((p) => { return Enable(); }, (p) => {
+            CT_PhieuDatBanCommand = new RelayCommand<object>((p) => 
+            {
+                if (SelectedPDB == null)
+                    return false;
+                return !Enable(); 
+            }, (p) => {
                 CT_PhieuDatBanViewModel.CurrentMaPDB = SelectedPDB.MaPhieuDatBan;
                 CT_PhieuDatBanViewModel.ListCTPhieuDatBan = new ObservableCollection<CT_PHIEUDATBAN>(DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan));
                 CT_PhieuDatBanWindow wd = new CT_PhieuDatBanWindow();
@@ -282,6 +279,19 @@ namespace QuanLyTiecCuoi.ViewModel
                     }
                 }
                 
+            });
+            LoadedCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                IsReadOnly = !LoginViewModel.ThayDoiTiec;
+                if (IsReadOnly == false)
+                {
+                    int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Count();
+                    if (temp > 0)
+                        IsReadOnly = true;
+                }
             });
         }
         private ICollectionView _dataGridCollection;

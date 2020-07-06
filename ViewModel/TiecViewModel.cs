@@ -20,6 +20,8 @@ namespace QuanLyTiecCuoi.ViewModel
     {
         private string _LoaiTimKiem = "Tìm kiếm theo Tên Chú Rể";
         public string LoaiTimKiem { get => _LoaiTimKiem; set { _LoaiTimKiem = value; OnPropertyChanged(); } }
+        private string _Time;
+        public string Time { get => _Time; set { _Time = value; OnPropertyChanged(); } }
         private bool _IsEnable;
         public bool IsEnable { get => _IsEnable; set { _IsEnable = value; OnPropertyChanged(); } }
         private bool _IsReadOnly;
@@ -34,7 +36,17 @@ namespace QuanLyTiecCuoi.ViewModel
         public ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value; OnPropertyChanged(); } }
 
         private CA _SelectedCa;
-        public CA SelectedCa { get => _SelectedCa; set { _SelectedCa = value; if(SelectedCa!= null) MaCa = _SelectedCa.MaCa; OnPropertyChanged(); } }
+        public CA SelectedCa { get => _SelectedCa; 
+            set { 
+                _SelectedCa = value; 
+                if(SelectedCa!= null)
+                {
+                    MaCa = _SelectedCa.MaCa;
+                    Time = "Giờ bắt đầu: " + SelectedCa.BatDau + "  Giờ kết thúc: " + SelectedCa.KetThuc;
+                }
+                
+                OnPropertyChanged(); 
+            } }
         private SANH _SelectedSanh;
         public SANH SelectedSanh { get => _SelectedSanh; set { _SelectedSanh = value; if (SelectedSanh != null) MaSanh = _SelectedSanh.MaSanh; OnPropertyChanged(); } }
         private TIECCUOI _SelectedTiecCuoi;
@@ -78,30 +90,27 @@ namespace QuanLyTiecCuoi.ViewModel
         private System.DateTime _NgayDatTiec = DateTime.Now;
         public System.DateTime NgayDatTiec { get => _NgayDatTiec; 
             set {
-                if (value > NgayDaiTiec)
+                if (value >= NgayDaiTiec)
                 {
+                    MessageBox.Show("Ngày đặt tiệc phải sớm hơn Ngày đãi tiệc", "Lỗi");
+                    _NgayDatTiec = NgayDaiTiec.AddDays(-1);
                     OnPropertyChanged();
-                    MessageBox.Show("Ngày đãi tiệc không được sớm hơn Ngày đặt tiệc", "Lỗi");
-                    _NgayDatTiec = NgayDaiTiec;
+                    return;
                 }
-                else
-                    if (value != _NgayDatTiec)
-                {
-                    OnPropertyChanged();
-                    _NgayDatTiec = value;
-                }
+                _NgayDatTiec = value;
+                //if(SelectedTiecCuoi!=null)MessageBox.Show(SelectedTiecCuoi.NgayDatTiec + "");
                 OnPropertyChanged();
             }
         }
-        private System.DateTime _NgayDaiTiec = DateTime.Now;
+        private System.DateTime _NgayDaiTiec = DateTime.Now.AddDays(1);
         public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; 
             set {
-                if (value < NgayDatTiec)
+                if (value <= NgayDatTiec)
                 {
                     OnPropertyChanged();
 
-                    MessageBox.Show("Ngày đãi tiệc không được sớm hơn Ngày đặt tiệc", "Lỗi");
-                    _NgayDaiTiec = NgayDatTiec;
+                    MessageBox.Show("Ngày đặt tiệc phải sớm hơn Ngày đãi tiệc", "Lỗi");
+                    _NgayDaiTiec = NgayDatTiec.AddDays(1);
                 }
                 else
                     if (value != _NgayDaiTiec)
@@ -109,10 +118,6 @@ namespace QuanLyTiecCuoi.ViewModel
                         OnPropertyChanged();
                         _NgayDaiTiec = value;
                     }
-                //int CountCa = DataProvider.Ins.DataBase.CAs.Count();
-                //ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs.Where(x => x.TIECCUOIs.Where(y => y.NgayDaiTiec == NgayDaiTiec && y.MaSanh == x.MaSanh).Count() != CountCa));
-                //if(!Enable())
-                //    SelectedSanh = null;
                 OnPropertyChanged(); 
             } 
         }
@@ -162,9 +167,30 @@ namespace QuanLyTiecCuoi.ViewModel
                 return false;
             if (MaCa == null)
                 return false;
+            int temp = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaCa == MaCa && x.MaSanh == MaSanh && x.NgayDaiTiec == NgayDaiTiec).Count();
+            if (temp > 0)
+                return false;
             return true;           
         }
         bool Enable()
+        {
+            if (String.IsNullOrEmpty(TenChuRe))
+                return false;
+            if (String.IsNullOrEmpty(TenCoDau))
+                return false;
+            if (String.IsNullOrEmpty(SoDienThoai))
+                return false;
+            if (String.IsNullOrEmpty(NgayDaiTiec.ToString()))
+                return false;
+            if (String.IsNullOrEmpty(NgayDatTiec.ToString()))
+                return false;
+            if (MaSanh == null)
+                return false;
+            if (MaCa == null)
+                return false;
+            return true;
+        }
+        bool Disable()
         {
             if (SelectedTiecCuoi == null)
                 return false;
@@ -191,7 +217,9 @@ namespace QuanLyTiecCuoi.ViewModel
         void ClearAll()
         {
             TenChuRe = TenCoDau = SoDienThoai = GhiChu = String.Empty;
-            NgayDaiTiec = NgayDatTiec = DateTime.Now;
+            NgayDatTiec = DateTime.MinValue;
+            NgayDaiTiec = DateTime.Now.AddDays(1);
+            NgayDatTiec = DateTime.Now;
             SelectedSanh = null;
             SelectedCa = null;
             TienDatCoc = 0;
@@ -241,7 +269,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 if (SelectedTiecCuoi == null)
                     return false;
                 var displayList = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi);
-                if (displayList != null && displayList.Count() != 0 && !Enable())
+                if (displayList != null && displayList.Count() != 0 && !Disable() && Enable())
                     return true;
                 return false;
             }, (p) =>
@@ -315,8 +343,6 @@ namespace QuanLyTiecCuoi.ViewModel
                             DataProvider.Ins.DataBase.SaveChanges();
                             HoaDonViewModel.ListTiecCuoi.Remove(SelectedTiecCuoi);
                             ListTiecCuoi.Remove(SelectedTiecCuoi);
-
-
                             // Refresh
                             ClearAll();
                             MessageBox.Show("Xóa tiệc cưới thành công", "Thông báo", MessageBoxButton.OK);
