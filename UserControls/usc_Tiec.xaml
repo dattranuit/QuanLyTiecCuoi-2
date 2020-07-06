@@ -10,7 +10,7 @@
              d:DesignHeight="662" d:DesignWidth="800">
     <Grid Background="White">
         <DockPanel LastChildFill="True">
-            <TextBlock Text="Thông Tin Tiệc Cưới" HorizontalAlignment="Center"
+            <TextBlock Text="Quản Lý Tiệc Cưới" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
                                    Margin="0,5,0,0" DockPanel.Dock="Top" FontWeight="Medium"/>
             <Grid DockPanel.Dock="Bottom">
