@@ -43,17 +43,17 @@ namespace QuanLyTiecCuoi.ViewModel
             }
         }
         private int _MaDichVu;
-        public int MaDichVu { get => _MaDichVu; set { _MaDichVu = value; OnPropertyChanged(); }  }
+        public int MaDichVu { get => _MaDichVu; set { OnPropertyChanged(); _MaDichVu = value; OnPropertyChanged(); }  }
         private string _TenDichVu;
-        public string TenDichVu { get => _TenDichVu; set { _TenDichVu = value; OnPropertyChanged(); } }
+        public string TenDichVu { get => _TenDichVu; set { OnPropertyChanged(); _TenDichVu = value; OnPropertyChanged(); } }
         private decimal _DonGia;
-        public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
+        public decimal DonGia { get => _DonGia; set { OnPropertyChanged(); _DonGia = value; OnPropertyChanged(); } }
         private string _MoTa;
-        public string MoTa { get => _MoTa; set { _MoTa = value; OnPropertyChanged(); } }
+        public string MoTa { get => _MoTa; set { OnPropertyChanged(); _MoTa = value; OnPropertyChanged(); } }
         private string _GhiChu;
-        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+        public string GhiChu { get => _GhiChu; set { OnPropertyChanged(); _GhiChu = value; OnPropertyChanged(); } }
         private string _HinhAnh;
-        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
+        public string HinhAnh { get => _HinhAnh; set { OnPropertyChanged(); _HinhAnh = value; OnPropertyChanged(); } }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
@@ -70,7 +70,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if(string.IsNullOrEmpty(TenDichVu) || string.IsNullOrEmpty(MoTa) || string.IsNullOrEmpty(GhiChu))
+                if(string.IsNullOrEmpty(TenDichVu) || string.IsNullOrEmpty(MoTa))
                 return false;
                 return true;
 
@@ -103,7 +103,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null)
+                if (SelectedItem == null || String.IsNullOrEmpty(TenDichVu) || string.IsNullOrEmpty(MoTa))
                     return false;
                 var displayList = DataProvider.Ins.DataBase.DICHVUs.Where(x => x.MaDichVu == SelectedItem.MaDichVu);
                 if (displayList == null && displayList.Count() == 0)
