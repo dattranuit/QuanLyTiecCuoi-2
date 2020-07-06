@@ -13,7 +13,7 @@
              d:DesignHeight="662" d:DesignWidth="800">
     <Grid Background="White">
         <DockPanel LastChildFill="True">
-            <TextBlock Text="Quản lý Qui Định Và Ca" HorizontalAlignment="Center"
+            <TextBlock Text="Quản Lý Qui Định Và Ca" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
                                    Margin="0,5,0,0" FontWeight="SemiBold"
                                    DockPanel.Dock="Top"/>
@@ -81,7 +81,7 @@
                                     Margin="10" ToolTip="Sửa thông tin Ca" Background="Green" Foreground="White" Width="140"/>
                             <Button IsEnabled="{Binding IsEnable}" Content="Xóa" Grid.Column="2" Command="{Binding DeleteCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Margin="10" ToolTip="Xóa Ca" Background="Crimson" Foreground="White" Width="140"/>
-                            <Button IsEnabled="{Binding IsEnable}" Content="Làm mới nhập" Grid.Column="3" Command="{Binding RefreshCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
+                            <Button IsEnabled="{Binding IsEnable}" Content="Làm mới" Grid.Column="3" Command="{Binding RefreshCommand}"  Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Margin="10" ToolTip="Làm mới thông tin nhập" Background="#FF0F5699" Foreground="White" Width="140"/>
                         </Grid>
                         <GroupBox DockPanel.Dock="Bottom" Header="Danh sách Ca" Margin="10,5,10,10">

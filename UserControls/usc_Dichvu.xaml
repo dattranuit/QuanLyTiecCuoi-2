@@ -18,7 +18,7 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock Text="Quản lý Dịch Vụ" HorizontalAlignment="Center" Foreground="#FF0E2291"  VerticalAlignment="Center" FontSize="32" FontWeight="Medium"/>
+            <TextBlock Text="Quản Lý Dịch Vụ" HorizontalAlignment="Center" Foreground="#FF0E2291"  VerticalAlignment="Center" FontSize="32" FontWeight="Medium"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -122,7 +122,6 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Label Content="Tên Dịch Vụ" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"></Label>
                                 <Label Content="Mô tả" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"></Label>
@@ -132,14 +131,7 @@
                                 <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_MoTa" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1"  Grid.Column="1" Grid.Row="1" Margin="3" FontSize="15" FontWeight="SemiBold"></TextBox>
                                 <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="nud_DonGia" Minimum="0" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" TextAlignment="Left" Margin="3" FontSize="15" BorderBrush="Black" Interval="100000" Grid.Column="1" Grid.Row="2" ValueChanged="Nud_DonGia_ValueChanged" FontWeight="SemiBold"></controls:NumericUpDown>
                                 <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_GhiChu" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="3" Margin="3" FontSize="15" FontWeight="SemiBold"></TextBox>
-                                <Button Grid.Row="4" Grid.ColumnSpan="2"
-                                        x:Name="btn_Refresh"
-                                        IsEnabled="{Binding IsEnable}"
-                                        Command="{Binding RefreshCommand}"
-                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                        ToolTip="Làm mới dữ liệu nhập" Background="#FF002C56" Foreground="White" Height="Auto" Margin="2,5,2,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="14">
-                                    Làm mới
-                                </Button>
+                                
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -153,27 +145,36 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="btn_Them" Margin="10" Command="{Binding AddCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"                      
-                    Width="auto" Grid.Column="0" 
+                    Width="auto" Grid.Column="1" 
                     IsEnabled="{Binding IsEnable}"
                     ToolTip="Thêm" Background="#FF0F5699" Foreground="White">
                     Thêm
                 </Button>
                 <Button x:Name="btn_Sua" Margin="10" Command="{Binding EditCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"                      
-                    Width="auto" Grid.Column="1" 
+                    Width="auto" Grid.Column="2" 
                     IsEnabled="{Binding IsEnable}"
                     ToolTip="Sửa" Background="Green" Foreground="White">
                     Sửa
                 </Button>
                 <Button x:Name="btn_Xoa" Margin="10" Command="{Binding DeleteCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"                      
-                    Width="auto" Grid.Column="2" 
+                    Width="auto" Grid.Column="3" 
                     IsEnabled="{Binding IsEnable}"
                     ToolTip="Xóa" Background="Crimson" Foreground="White">
                     Xóa
+                </Button>
+                <Button Grid.Column="0"  
+                                        x:Name="btn_Refresh"
+                                        IsEnabled="{Binding IsEnable}"
+                                        Command="{Binding RefreshCommand}"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        ToolTip="Làm mới dữ liệu nhập" Background="#FF0F5699" Foreground="White" Height="32" Margin="10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontSize="14">
+                    Làm mới
                 </Button>
             </Grid>
 

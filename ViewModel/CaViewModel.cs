@@ -98,18 +98,26 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
-                var Ca = new CA()
+                try
                 {
-                    TenCa = TenCa,
-                    MaCa = MaCa,
-                    BatDau=BatDau,
-                    KetThuc=KetThuc,
-                };
-                DataProvider.Ins.DataBase.CAs.Add(Ca);
-                DataProvider.Ins.DataBase.SaveChanges();
-                ListCa.Add(Ca);
-                MessageBox.Show("Thêm Ca thành công !");
-                SelectedItem = Ca;
+                    var Ca = new CA()
+                    {
+                        TenCa = TenCa,
+                        MaCa = MaCa,
+                        BatDau = BatDau,
+                        KetThuc = KetThuc,
+                    };
+                    DataProvider.Ins.DataBase.CAs.Add(Ca);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    ListCa.Add(Ca);
+                    MessageBox.Show("Thêm Ca thành công !");
+                    SelectedItem = Ca;
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Thêm Ca không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+                
             });
 
             EditCommand = new RelayCommand<object>((p) =>
@@ -124,16 +132,23 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
-                var Ca = DataProvider.Ins.DataBase.CAs.Where(x => x.MaCa == SelectedItem.MaCa).SingleOrDefault();
-                Ca.TenCa = SelectedItem.TenCa;
-                Ca.BatDau = SelectedItem.BatDau;
-                Ca.KetThuc = SelectedItem.KetThuc;
-                DataProvider.Ins.DataBase.SaveChanges();
-                SelectedItem.TenCa = TenCa;
-                SelectedItem.BatDau = BatDau;
-                SelectedItem.KetThuc = KetThuc;
-                SelectedItem.MaCa = MaCa;
-                MessageBox.Show("Sửa thông tin Ca thành công !");
+                try
+                {
+                    var Ca = DataProvider.Ins.DataBase.CAs.Where(x => x.MaCa == SelectedItem.MaCa).SingleOrDefault();
+                    Ca.TenCa = SelectedItem.TenCa;
+                    Ca.BatDau = SelectedItem.BatDau;
+                    Ca.KetThuc = SelectedItem.KetThuc;
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    SelectedItem.TenCa = TenCa;
+                    SelectedItem.BatDau = BatDau;
+                    SelectedItem.KetThuc = KetThuc;
+                    SelectedItem.MaCa = MaCa;
+                    MessageBox.Show("Sửa thông tin Ca thành công !");
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Sửa thông tin Ca không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
             });
 
             DeleteCommand = new RelayCommand<object>((p) =>
@@ -150,14 +165,22 @@ namespace QuanLyTiecCuoi.ViewModel
                     MessageBox.Show("Không thể xóa vì có tồn tại Tiệc Cưới được đặt ở Ca này !");
                     return;
                 }
-                DataProvider.Ins.DataBase.CAs.Remove(Ca);
-                DataProvider.Ins.DataBase.SaveChanges();
-                ListCa.Remove(Ca);
-                MessageBox.Show("Xóa Ca thành công !");
-                //refresh nhap
-                TenCa = "";
-                BatDau = TimeSpan.Zero;
-                KetThuc = TimeSpan.Zero;
+                try
+                {
+                    DataProvider.Ins.DataBase.CAs.Remove(Ca);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    ListCa.Remove(Ca);
+                    MessageBox.Show("Xóa Ca thành công !");
+                    //refresh nhap
+                    TenCa = "";
+                    BatDau = TimeSpan.Zero;
+                    KetThuc = TimeSpan.Zero;
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Xóa Ca không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+                
             });
 
             RefreshCommand = new RelayCommand<object>((p) =>
@@ -182,9 +205,16 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
-                ThayDoiApDungQuiDinh();
-                ThayDoiTiLePhat();
-                MessageBox.Show("Sửa Qui Định thành công !");
+                try
+                {
+                    ThayDoiApDungQuiDinh();
+                    ThayDoiTiLePhat();
+                    MessageBox.Show("Sửa Qui Định thành công !");
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Sửa Qui Định không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
             });
         }
     }
