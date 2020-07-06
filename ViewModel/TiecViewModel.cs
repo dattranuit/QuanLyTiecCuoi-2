@@ -174,6 +174,9 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         bool Enable()
         {
+            int temp = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaCa == MaCa && x.MaSanh == MaSanh && x.NgayDaiTiec == NgayDaiTiec).Count();
+            if (temp > 0)
+                return false;
             if (String.IsNullOrEmpty(TenChuRe))
                 return false;
             if (String.IsNullOrEmpty(TenCoDau))

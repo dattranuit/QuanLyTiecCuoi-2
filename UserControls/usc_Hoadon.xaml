@@ -16,82 +16,70 @@
             <DockPanel LastChildFill="True">
                 <Grid>
                     <DockPanel LastChildFill="True">
-                        <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
-                            <!--//-->
-                            <TextBlock Text="Danh sách hóa đơn" HorizontalAlignment="Center"
+                        <TextBlock Text="Danh Sách Hóa Đơn" HorizontalAlignment="Center"
                                    VerticalAlignment="Center" FontSize="32" Foreground="#FF0E2291"
                                    Margin="0,5,0,0" DockPanel.Dock="Top" FontWeight="Medium"/>
-                        </DockPanel>
-                        <Grid>
+                            <materialDesign:Card Margin="10">
                             <DockPanel LastChildFill="True">
-                                <materialDesign:Card Margin="2">
+                                <Grid DockPanel.Dock="Top">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Image  Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
 
-                                </materialDesign:Card>
-                                <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
-                                    <materialDesign:Card Margin="2">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="0.35*"></ColumnDefinition>
-                                                <ColumnDefinition Width="3*"></ColumnDefinition>
-                                                <ColumnDefinition Width="1.2*"></ColumnDefinition>
-                                                <ColumnDefinition></ColumnDefinition>
-                                                <ColumnDefinition Width="1.2*"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid Grid.Column="0">
-                                                <Image  Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                
-                                                <TextBox 
+                                        <TextBox 
                                                     IsReadOnly="{Binding IsReadOnly}"
                                                             Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
-                            controls:TextBoxHelper.Watermark="Tìm kiếm theo tên hoặc SDT"
-                            BorderThickness="0,0,0,1" Height="32" Width="400"
-                            BorderBrush="Black"
-                            FontSize="15" Grid.Column="0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center" Margin="0,0,0,0" />
-                                            </Grid>
-                                            <Grid Grid.Column="4">
-                                                <Button
+                                                    controls:TextBoxHelper.Watermark="Tìm kiếm theo tên hoặc SDT"
+                                                    BorderThickness="0,0,0,1" Height="32" Width="400"
+                                                    BorderBrush="Black"
+                                                    FontSize="15" Grid.Column="0"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Center" Margin="0,0,0,0" />
+                                    </Grid>
+                                    <Grid Grid.Column="4">
+                                        <Button
                                                        IsEnabled="{Binding IsEnable}"
                                                             Background="#FF0F5699" Foreground="White"
                                                     Command="{Binding LapHoaDonCommand}"
-                                                    Margin="2"
-                                                    Content="Lập hóa đơn"
-    Style="{StaticResource MaterialDesignRaisedButton}"
-    ToolTip="Lập hóa đơn">
-                                                </Button>
-                                            </Grid>
-                                        </Grid>
-                                    </materialDesign:Card>
-                                </DockPanel>
-                                <materialDesign:Card Margin="2">
-                                    <GroupBox Header="Danh sách tiệc đã thanh toán" Margin="5" >
-                                        <DataGrid  GridLinesVisibility="None" controls:DataGridHelper.ColumnHeaderPadding="10,0" CanUserAddRows="False" Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" AutoGenerateColumns="False" IsReadOnly="True"  HorizontalGridLinesBrush="Black"  SelectionChanged="DataGrid_SelectionChanged">
-                                            <DataGrid.InputBindings>
-                                                <MouseBinding
-            MouseAction="LeftDoubleClick"
-            Command="{Binding DoubleClickCommand_HoaDon}"
-            CommandParameter="{Binding ElementName=dtgDSTiecCuoi}"/>
-                                            </DataGrid.InputBindings>
-                                            <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TIECCUOI.TenChuRe}">
-                                                </DataGridTextColumn>
-                                                <DataGridTextColumn Header="Tên cô dâu" FontSize="14" Binding="{Binding TIECCUOI.TenCoDau}">
-                                                </DataGridTextColumn>
-                                                <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding TIECCUOI.SoDienThoai}">
-                                                </DataGridTextColumn>
-                                                <DataGridTextColumn Header="Ngày đãi tiệc" FontSize="14" Binding="{Binding TIECCUOI.NgayDaiTiec, StringFormat='dd/MM/yyyy'}">
-                                                </DataGridTextColumn>
-                                                <DataGridTextColumn Header="Ngày lập hóa đơn" FontSize="14" Binding="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy'}" Width="*">
-                                                </DataGridTextColumn>
-                                            </DataGrid.Columns>
-                                        </DataGrid>
-                                    </GroupBox>
-                                </materialDesign:Card>
+                                                    Margin="5"
+                                                    Content="Thêm hóa đơn"
+                                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                                    ToolTip="Lập hóa đơn mới">
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                                <GroupBox Header="Danh sách tiệc đã thanh toán" Margin="5" >
+                                    <DataGrid  GridLinesVisibility="None" controls:DataGridHelper.ColumnHeaderPadding="10,0" CanUserAddRows="False" Name="dtgDSTiecCuoi" Margin="1" ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" AutoGenerateColumns="False" IsReadOnly="True"  HorizontalGridLinesBrush="Black"  SelectionChanged="DataGrid_SelectionChanged">
+                                        <DataGrid.InputBindings>
+                                            <MouseBinding
+                                                    MouseAction="LeftDoubleClick"
+                                                    Command="{Binding DoubleClickCommand_HoaDon}"
+                                                    CommandParameter="{Binding ElementName=dtgDSTiecCuoi}"/>
+                                        </DataGrid.InputBindings>
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Tên chú rể" FontSize="14" Binding="{Binding TIECCUOI.TenChuRe}">
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="Tên cô dâu" FontSize="14" Binding="{Binding TIECCUOI.TenCoDau}">
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="Số điện thoại" FontSize="14" Binding="{Binding TIECCUOI.SoDienThoai}">
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="Ngày đãi tiệc" FontSize="14" Binding="{Binding TIECCUOI.NgayDaiTiec, StringFormat='dd/MM/yyyy'}">
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn Header="Ngày lập hóa đơn" FontSize="14" Binding="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy'}" Width="*">
+                                            </DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </GroupBox>
                             </DockPanel>
-                        </Grid>
+                        </materialDesign:Card>
                     </DockPanel>
                 </Grid>
             </DockPanel>
