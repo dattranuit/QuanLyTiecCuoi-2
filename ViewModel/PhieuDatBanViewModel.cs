@@ -245,6 +245,8 @@ namespace QuanLyTiecCuoi.ViewModel
             });
             DeleteCommand = new RelayCommand<object>((p) =>
             {
+                if (SelectedPDB == null)
+                    return false;
                 return true;
             }, (p) =>
             {

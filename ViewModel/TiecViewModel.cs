@@ -277,6 +277,18 @@ namespace QuanLyTiecCuoi.ViewModel
                 return false;
             }, (p) =>
             {
+                var ccc = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi).Count();
+                if (ccc > 0)
+                {
+                    int TongSoBan = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi).Sum(slb => slb.SoLuong);
+                    if(TongSoBan > SelectedSanh.SoLuongBanToiDa)
+                    {
+                        MessageBox.Show("Số lượng bàn vượt qua số lượng bàn tối đa của sảnh", "Thông báo");
+                        SANH tempsanh = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == SelectedTiecCuoi.MaSanh).SingleOrDefault();
+                        SelectedSanh = tempsanh;
+                        return;
+                    }
+                }
                 var check = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi);
                 if (check != null && check.Count() > 0)
                 {
@@ -285,6 +297,39 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
                 else
                 {
+                    int temp = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == MaTiecCuoi).Count();
+                    if (temp > 0 && SelectedTiecCuoi.SANH.LOAISANH.DonGiaBanToiThieu != SelectedSanh.LOAISANH.DonGiaBanToiThieu)
+                    {
+                        MessageBoxResult result = MessageBox.Show("Bạn đã đổi qua loại sảnh với đơn giá bàn tối thiểu khác \n Xác nhận đổi các đơn giá bàn bé hơn thành Đơn giá bàn tối thiểu mới? \n" +
+                            "(Nếu chọn không sẽ không sửa thông tin tiệc cưới)", "Thông báo", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            PhieuDatBanViewModel.DonGiaBanToiThieu = SelectedSanh.LOAISANH.DonGiaBanToiThieu;
+                            PhieuDatBanViewModel.SoLuongBanToiDa = SelectedSanh.SoLuongBanToiDa;
+                            try
+                            {
+                                temp = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == MaTiecCuoi && x.DonGiaBan < SelectedSanh.LOAISANH.DonGiaBanToiThieu).Count();
+                                for (int i = 0; i < temp; i++)
+                                {
+                                    var PhieuDatBan = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi && x.DonGiaBan < SelectedSanh.LOAISANH.DonGiaBanToiThieu).SingleOrDefault();
+                                    PhieuDatBan.DonGiaBan = SelectedSanh.LOAISANH.DonGiaBanToiThieu;
+                                    DataProvider.Ins.DataBase.SaveChanges();
+                                }
+                                MessageBox.Show("Sửa đơn giá bàn thành công", "Thông báo", MessageBoxButton.OK);
+                            }
+                            catch(Exception e)
+                            {
+                                MessageBox.Show("Sửa đơn giá bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                            }
+
+                        }
+                        else
+                        {
+                            SANH tempsanh = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == SelectedTiecCuoi.MaSanh).SingleOrDefault();
+                            SelectedSanh = tempsanh;
+                            return;
+                        }    
+                    }
                     try
                     {
                         var TiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi).SingleOrDefault();
@@ -309,6 +354,8 @@ namespace QuanLyTiecCuoi.ViewModel
             });
             DeleteCommand = new RelayCommand<object>((p) =>
             {
+                if (SelectedTiecCuoi == null)
+                    return false;
                 return true;
             }, (p) =>
             {
@@ -361,7 +408,7 @@ namespace QuanLyTiecCuoi.ViewModel
                 else
                     MessageBox.Show("Không thể xóa tiệc cưới vì đang có hóa đơn tham chiếu đến", "Thông báo", MessageBoxButton.YesNo);              
             });
-            DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return Enable(); }, (p) => {
+            DatBanvaDichVuCommand = new RelayCommand<object>((p) => { return Disable(); }, (p) => {
                 PhieuDatDichVuViewModel.CurrentMaTiecCuoi = SelectedTiecCuoi.MaTiecCuoi;
                 PhieuDatDichVuViewModel.ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi));
                 PhieuDatBanViewModel.DonGiaBanToiThieu = SelectedSanh.LOAISANH.DonGiaBanToiThieu;
@@ -391,8 +438,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
-                IsSelected = true;
-                p.IsPopupOpen = false;
+                    IsSelected = true;
+                    p.IsPopupOpen = false;
             });
             ClosePopupCommand = new RelayCommand<object>((p) =>
             {

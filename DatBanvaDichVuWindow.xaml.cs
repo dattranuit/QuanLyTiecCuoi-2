@@ -35,6 +35,9 @@ namespace QuanLyTiecCuoi
             tbx_PDB_LoaiBan.Text = tbx_PDB_GhiChu.Text = "";
             tbx_DV_ThanhTien.Text = "0";
             lbl_DonGiaBan.Content = PhieuDatBanViewModel.DonGiaBanToiThieu+"";
+            dtg_DanhSachDatBan.SelectedItem = null;
+            dtg_DanhSachDatDichVu.SelectedItem = null;
+            dtg_DanhSachDichVu.SelectedItem = null;
         }
     }
 }

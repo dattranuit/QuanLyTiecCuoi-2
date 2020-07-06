@@ -160,7 +160,7 @@
                             </Button>
                         </Grid>-->
                         <GroupBox DockPanel.Dock="Top" Header="Danh sách đặt món ăn" Margin="10,0,10,10" DataContext="{StaticResource CT_PhieuDatBanVM}" >
-                            <DataGrid IsReadOnly="{Binding IsReadOnly}" ItemsSource="{Binding ListCTPhieuDatBan}" SelectedItem="{Binding SelectedCTPDB, Mode=OneWayToSource}"  
+                            <DataGrid IsReadOnly="{Binding IsReadOnly}" ItemsSource="{Binding ListCTPhieuDatBan}" SelectedItem="{Binding SelectedCTPDB, Mode=TwoWay}"  
                                               AutoGenerateColumns="False" CanUserAddRows="False" controls:DataGridHelper.ColumnHeaderPadding="10,0" FontSize="12"
                                               Name="dtg_DanhSachDatMonAn" FontWeight="DemiBold">
                                 <DataGrid.Columns>
