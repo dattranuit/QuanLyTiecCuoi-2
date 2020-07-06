@@ -332,7 +332,9 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 if (!string.IsNullOrEmpty(_filterString))
                 {
-                    return data.TIECCUOI.SoDienThoai.Contains(_filterString) || data.TIECCUOI.TenChuRe.Contains(_filterString) || data.TIECCUOI.TenCoDau.Contains(_filterString);
+                    return data.TIECCUOI.SoDienThoai.Contains(_filterString) 
+                        || data.TIECCUOI.TenChuRe.ToLower().Contains(_filterString.ToLower()) 
+                        || data.TIECCUOI.TenCoDau.ToLower().Contains(_filterString.ToLower());
                 }
                 return true;
             }
