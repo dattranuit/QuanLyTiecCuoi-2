@@ -115,11 +115,19 @@ namespace QuanLyTiecCuoi.ViewModel
                     GhiChu = GhiChu,
                     MaLoaiSanh = SelectedLoaiSanh.MaLoaiSanh,
             };
-                DataProvider.Ins.DataBase.SANHs.Add(Sanh);
-                DataProvider.Ins.DataBase.SaveChanges();
-                ListSanh.Add(Sanh);
-                SelectedItem = Sanh;
-                MessageBox.Show("Thêm Sảnh thành công !");
+                try
+                {
+                    DataProvider.Ins.DataBase.SANHs.Add(Sanh);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    ListSanh.Add(Sanh);
+                    SelectedItem = Sanh;
+                    MessageBox.Show("Thêm Sảnh thành công !");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Thêm Sảnh không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+                
             });
 
             AddCommandLoaiSanh = new RelayCommand<object>((p) =>
@@ -135,11 +143,19 @@ namespace QuanLyTiecCuoi.ViewModel
                     TenLoaiSanh = TenLoaiSanh,
                     DonGiaBanToiThieu = DonGiaBanToiThieu,
                 };
-                DataProvider.Ins.DataBase.LOAISANHs.Add(LoaiSanh);
-                DataProvider.Ins.DataBase.SaveChanges();
-                ListLoaiSanh.Add(LoaiSanh);
-                SelectedItem2 = LoaiSanh;
-                MessageBox.Show("Thêm loại Sảnh thành công !");
+                try
+                {
+                    DataProvider.Ins.DataBase.LOAISANHs.Add(LoaiSanh);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    ListLoaiSanh.Add(LoaiSanh);
+                    SelectedItem2 = LoaiSanh;
+                    MessageBox.Show("Thêm loại Sảnh thành công !");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Thêm loại Sảnh không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+
             });
 
             EditCommand = new RelayCommand<object>((p) =>
@@ -157,17 +173,25 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
-                var Sanh = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == SelectedItem.MaSanh).SingleOrDefault();
-                Sanh.TenSanh = SelectedItem.TenSanh;
-                Sanh.SoLuongBanToiDa = SelectedItem.SoLuongBanToiDa;
-                Sanh.GhiChu = SelectedItem.GhiChu;
-                Sanh.MaLoaiSanh = SelectedLoaiSanh.MaLoaiSanh;
-                DataProvider.Ins.DataBase.SaveChanges();
-                SelectedItem.TenSanh = TenSanh;
-                SelectedItem.SoLuongBanToiDa = SoLuongBanToiDa;
-                SelectedItem.GhiChu = GhiChu;
-                SelectedItem.MaLoaiSanh = SelectedLoaiSanh.MaLoaiSanh;
-                MessageBox.Show("Sửa thông tin Sảnh thành công !");
+                try
+                {
+                    var Sanh = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == SelectedItem.MaSanh).SingleOrDefault();
+                    Sanh.TenSanh = SelectedItem.TenSanh;
+                    Sanh.SoLuongBanToiDa = SelectedItem.SoLuongBanToiDa;
+                    Sanh.GhiChu = SelectedItem.GhiChu;
+                    Sanh.MaLoaiSanh = SelectedLoaiSanh.MaLoaiSanh;
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    SelectedItem.TenSanh = TenSanh;
+                    SelectedItem.SoLuongBanToiDa = SoLuongBanToiDa;
+                    SelectedItem.GhiChu = GhiChu;
+                    SelectedItem.MaLoaiSanh = SelectedLoaiSanh.MaLoaiSanh;
+                    MessageBox.Show("Sửa thông tin Sảnh thành công !");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Sửa thông tin Sảnh không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+                
             });
 
             EditLoaiSanhCommand = new RelayCommand<object>((p) =>
@@ -183,13 +207,21 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
-                var LoaiSanh = DataProvider.Ins.DataBase.LOAISANHs.Where(x => x.MaLoaiSanh == SelectedItem2.MaLoaiSanh).SingleOrDefault();
-                LoaiSanh.TenLoaiSanh = SelectedItem2.TenLoaiSanh;
-                LoaiSanh.DonGiaBanToiThieu = SelectedItem2.DonGiaBanToiThieu;
-                DataProvider.Ins.DataBase.SaveChanges();
-                SelectedItem2.TenLoaiSanh = TenLoaiSanh;
-                SelectedItem2.DonGiaBanToiThieu = DonGiaBanToiThieu;
-                MessageBox.Show("Sửa thông tin loại Sảnh thành công !");
+                try
+                {
+                    var LoaiSanh = DataProvider.Ins.DataBase.LOAISANHs.Where(x => x.MaLoaiSanh == SelectedItem2.MaLoaiSanh).SingleOrDefault();
+                    LoaiSanh.TenLoaiSanh = SelectedItem2.TenLoaiSanh;
+                    LoaiSanh.DonGiaBanToiThieu = SelectedItem2.DonGiaBanToiThieu;
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    SelectedItem2.TenLoaiSanh = TenLoaiSanh;
+                    SelectedItem2.DonGiaBanToiThieu = DonGiaBanToiThieu;
+                    MessageBox.Show("Sửa thông tin loại Sảnh thành công !");
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Sửa thông tin loại Sảnh không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+                
             });
 
             DeleteCommand = new RelayCommand<object>((p) =>
@@ -206,14 +238,22 @@ namespace QuanLyTiecCuoi.ViewModel
                     MessageBox.Show("Không thể xóa vì có tồn tại Tiệc Cưới đã đặt Sảnh này!");
                     return;
                 }
-                DataProvider.Ins.DataBase.SANHs.Remove(Sanh);
-                DataProvider.Ins.DataBase.SaveChanges();
-                ListSanh.Remove(Sanh);
-                MessageBox.Show("Xóa Sảnh thành công !");
-                //refresh nhap
-                TenSanh = "";
-                SoLuongBanToiDa = 0;
-                GhiChu = "";
+                try
+                {
+                    DataProvider.Ins.DataBase.SANHs.Remove(Sanh);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    ListSanh.Remove(Sanh);
+                    MessageBox.Show("Xóa Sảnh thành công !");
+                    //refresh nhap
+                    TenSanh = "";
+                    SoLuongBanToiDa = 0;
+                    GhiChu = "";
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Xóa Sảnh không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+                
             });
 
             DeleteLoaiSanhCommand = new RelayCommand<object>((p) =>
@@ -230,13 +270,21 @@ namespace QuanLyTiecCuoi.ViewModel
                     MessageBox.Show("Không thể xóa vì có tồn tại Sảnh thuộc loại Sảnh này!");
                     return;
                 }
-                DataProvider.Ins.DataBase.LOAISANHs.Remove(LoaiSanh);
-                DataProvider.Ins.DataBase.SaveChanges();
-                ListLoaiSanh.Remove(LoaiSanh);
-                MessageBox.Show("Xóa loại Sảnh thành công !");
-                //refresh nhap
-                TenLoaiSanh = "";
-                DonGiaBanToiThieu = 0;
+                try
+                {
+                    DataProvider.Ins.DataBase.LOAISANHs.Remove(LoaiSanh);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    ListLoaiSanh.Remove(LoaiSanh);
+                    MessageBox.Show("Xóa loại Sảnh thành công !");
+                    //refresh nhap
+                    TenLoaiSanh = "";
+                    DonGiaBanToiThieu = 0;
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Xóa loại Sảnh không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+                
             });
 
             RefreshSanhCommand = new RelayCommand<object>((p) =>

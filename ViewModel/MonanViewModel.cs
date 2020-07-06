@@ -99,6 +99,29 @@ namespace QuanLyTiecCuoi.ViewModel
                 // 
                 //
                 MessageBox.Show("Thêm món ăn thành công!");
+                try
+                {
+                    SelectedItem = new MONAN()
+                    {
+                        TenMonAn = TenMonAn,
+                        DonGia = DonGia,
+                        MoTa = MoTa,
+                        HinhAnh = HinhAnh,
+                        GhiChu = GhiChu
+                    };
+                    DataProvider.Ins.DataBase.MONANs.Add(SelectedItem);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    List.Add(SelectedItem);
+                    if (CT_PhieuDatBanViewModel.ListMonAn != null)
+                        CT_PhieuDatBanViewModel.ListMonAn.Add(SelectedItem);
+                    // 
+                    //
+                    MessageBox.Show("Thêm Món ăn thành công!");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Thêm Món ăn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
             });
 
             EditCommand = new RelayCommand<object>((p) =>
@@ -113,22 +136,29 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
-                var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn).SingleOrDefault();
-                
-                if (string.IsNullOrWhiteSpace(TenMonAn))
+                try
                 {
-                    MessageBox.Show("Chưa nhập tên món ăn");
-                    return;
-                }
-                
-                MonAn.TenMonAn = TenMonAn;
-                MonAn.DonGia = DonGia;
-                MonAn.MoTa = MoTa;
-                MonAn.GhiChu = GhiChu;
-                MonAn.HinhAnh = HinhAnh;
-                DataProvider.Ins.DataBase.SaveChanges();
+                    var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn).SingleOrDefault();
 
-                MessageBox.Show("Sửa thành công!");
+                    if (string.IsNullOrWhiteSpace(TenMonAn))
+                    {
+                        MessageBox.Show("Chưa nhập tên Món ăn");
+                        return;
+                    }
+
+                    MonAn.TenMonAn = TenMonAn;
+                    MonAn.DonGia = DonGia;
+                    MonAn.MoTa = MoTa;
+                    MonAn.GhiChu = GhiChu;
+                    MonAn.HinhAnh = HinhAnh;
+                    DataProvider.Ins.DataBase.SaveChanges();
+
+                    MessageBox.Show("Sửa thông tin Món ăn thành công!");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Sửa thông tin Món ăn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
             });
             DeleteCommand = new RelayCommand<object>((p) =>
             {
@@ -144,19 +174,24 @@ namespace QuanLyTiecCuoi.ViewModel
                     MessageBox.Show("Không thể xóa vì có tồn tại Món ăn này trong Chi tiết đặt bàn!");
                     return;
                 }
-                DataProvider.Ins.DataBase.MONANs.Remove(MonAn);
-                DataProvider.Ins.DataBase.SaveChanges();
-                List.Remove(MonAn);
-                if (CT_PhieuDatBanViewModel.ListMonAn != null)
-                    CT_PhieuDatBanViewModel.ListMonAn.Remove(MonAn);
-
-                TenMonAn = "";
-                DonGia = 0;
-                MoTa = "";
-                GhiChu = "";
-                HinhAnh = string.Empty;
-
-                MessageBox.Show("Xóa thành công!");
+                try
+                {
+                    DataProvider.Ins.DataBase.MONANs.Remove(MonAn);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    List.Remove(MonAn);
+                    MessageBox.Show("Xóa Món ăn thành công!");
+                    if (CT_PhieuDatBanViewModel.ListMonAn != null)
+                        CT_PhieuDatBanViewModel.ListMonAn.Remove(MonAn);
+                    TenMonAn = "";
+                    DonGia = 0;
+                    MoTa = "";
+                    GhiChu = "";
+                    HinhAnh = string.Empty;
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Xóa Món ăn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
             });
             AddImageCommand = new RelayCommand<Image>((p) =>
             {

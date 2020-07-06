@@ -76,21 +76,29 @@ namespace QuanLyTiecCuoi.ViewModel
 
             }, (p) =>
             {
-                var DichVu = new DICHVU()
+                try
                 {
-                    TenDichVu = TenDichVu,
-                    DonGia = DonGia,
-                    MoTa = MoTa,
-                    GhiChu = GhiChu,
-                    HinhAnh = HinhAnh
-                };
-                DataProvider.Ins.DataBase.DICHVUs.Add(DichVu);
-                DataProvider.Ins.DataBase.SaveChanges();
-                List.Add(DichVu);
-                if(PhieuDatDichVuViewModel.ListDichVu != null)
-                    PhieuDatDichVuViewModel.ListDichVu.Add(DichVu);
-                SelectedItem = DichVu;
-                MessageBox.Show("Thêm Dịch vụ thành công !");
+                    var DichVu = new DICHVU()
+                    {
+                        TenDichVu = TenDichVu,
+                        DonGia = DonGia,
+                        MoTa = MoTa,
+                        GhiChu = GhiChu,
+                        HinhAnh = HinhAnh
+                    };
+                    DataProvider.Ins.DataBase.DICHVUs.Add(DichVu);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    List.Add(DichVu);
+                    if (PhieuDatDichVuViewModel.ListDichVu != null)
+                        PhieuDatDichVuViewModel.ListDichVu.Add(DichVu);
+                    SelectedItem = DichVu;
+                    MessageBox.Show("Thêm Dịch vụ thành công !");
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Thêm Dịch vụ không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+                
             });
 
             EditCommand = new RelayCommand<object>((p) =>
@@ -109,19 +117,27 @@ namespace QuanLyTiecCuoi.ViewModel
                 return true;
             }, (p) =>
             {
-                var DichVu = DataProvider.Ins.DataBase.DICHVUs.Where(x => x.MaDichVu == SelectedItem.MaDichVu).SingleOrDefault();
-                DichVu.TenDichVu = SelectedItem.TenDichVu;
-                DichVu.DonGia = SelectedItem.DonGia;
-                DichVu.MoTa = SelectedItem.MoTa;
-                DichVu.GhiChu = SelectedItem.GhiChu;
-                DichVu.HinhAnh = SelectedItem.HinhAnh;
-                DataProvider.Ins.DataBase.SaveChanges();
-                MessageBox.Show("Sửa thông tin Dịch vụ thành công !");
-                SelectedItem.TenDichVu = TenDichVu;
-                SelectedItem.DonGia = DonGia;
-                SelectedItem.MoTa = MoTa;
-                SelectedItem.GhiChu = GhiChu;
-                SelectedItem.HinhAnh = HinhAnh;
+                try
+                {
+                    var DichVu = DataProvider.Ins.DataBase.DICHVUs.Where(x => x.MaDichVu == SelectedItem.MaDichVu).SingleOrDefault();
+                    DichVu.TenDichVu = SelectedItem.TenDichVu;
+                    DichVu.DonGia = SelectedItem.DonGia;
+                    DichVu.MoTa = SelectedItem.MoTa;
+                    DichVu.GhiChu = SelectedItem.GhiChu;
+                    DichVu.HinhAnh = SelectedItem.HinhAnh;
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    MessageBox.Show("Sửa thông tin Dịch vụ thành công !");
+                    SelectedItem.TenDichVu = TenDichVu;
+                    SelectedItem.DonGia = DonGia;
+                    SelectedItem.MoTa = MoTa;
+                    SelectedItem.GhiChu = GhiChu;
+                    SelectedItem.HinhAnh = HinhAnh;
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Sửa thông tin Dịch vụ không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
+                
             });
 
             DeleteCommand = new RelayCommand<object>((p) =>
@@ -138,18 +154,25 @@ namespace QuanLyTiecCuoi.ViewModel
                     MessageBox.Show("Không thể xóa vì có tồn tại Tiệc Cưới đặt Dịch Vụ này !");
                     return;
                 }
-                DataProvider.Ins.DataBase.DICHVUs.Remove(DichVu);
-                DataProvider.Ins.DataBase.SaveChanges();
-                List.Remove(DichVu);
-                if (PhieuDatDichVuViewModel.ListDichVu != null)
-                    PhieuDatDichVuViewModel.ListDichVu.Remove(DichVu);
-                MessageBox.Show("Xóa Dịch vụ thành công !");
-                //refresh nhap
-                TenDichVu = "";
-                MoTa = "";
-                GhiChu = "";
-                HinhAnh = "";
-                DonGia = 0;
+                try
+                {
+                    DataProvider.Ins.DataBase.DICHVUs.Remove(DichVu);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                    List.Remove(DichVu);
+                    if (PhieuDatDichVuViewModel.ListDichVu != null)
+                        PhieuDatDichVuViewModel.ListDichVu.Remove(DichVu);
+                    MessageBox.Show("Xóa Dịch vụ thành công !");
+                    //refresh nhap
+                    TenDichVu = "";
+                    MoTa = "";
+                    GhiChu = "";
+                    HinhAnh = "";
+                    DonGia = 0;
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Xóa Dịch vụ không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                }
             });
 
             ChonAnhCommmand = new RelayCommand<Image>((p) => { return true; }, (p) =>

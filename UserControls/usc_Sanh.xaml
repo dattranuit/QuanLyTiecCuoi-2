@@ -16,7 +16,7 @@
             <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
                 <controls:MetroTabItem Header="Quản lý Sảnh">
                     <DockPanel LastChildFill="True" >
-                        <TextBlock Text="Quản lý Sảnh" Foreground="#FF0E2291" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" DockPanel.Dock="Top"/>
+                        <TextBlock Text="Quản Lý Sảnh" Foreground="#FF0E2291" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" DockPanel.Dock="Top"/>
                         <Grid DockPanel.Dock="Bottom">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -159,7 +159,7 @@
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Grid.Column="0"  IsEnabled="{Binding IsEnable}"
                                     ToolTip="Xóa thông tin trong ô nhập liệu" Background="#FF0F5699" Foreground="White">
-                                            Làm mới ô nhập
+                                            Làm mới 
                                         </Button>
                                     </Grid>
                                 </DockPanel>
@@ -234,7 +234,7 @@
                                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                                     Grid.Column="0"  IsEnabled="{Binding IsEnable}"
                                     ToolTip="Xóa thông tin trong ô nhập liệu" Background="#FF0F5699" Foreground="White">
-                                        Làm mới ô nhập
+                                        Làm mới
                                     </Button>
                                 </Grid>
                             </Grid>
