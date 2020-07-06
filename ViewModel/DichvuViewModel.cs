@@ -87,6 +87,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.DICHVUs.Add(DichVu);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Add(DichVu);
+                if(PhieuDatDichVuViewModel.ListDichVu != null)
+                    PhieuDatDichVuViewModel.ListDichVu.Add(DichVu);
                 SelectedItem = DichVu;
                 MessageBox.Show("Thêm Dịch vụ thành công !");
             });
@@ -139,6 +141,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.DICHVUs.Remove(DichVu);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Remove(DichVu);
+                if (PhieuDatDichVuViewModel.ListDichVu != null)
+                    PhieuDatDichVuViewModel.ListDichVu.Remove(DichVu);
                 MessageBox.Show("Xóa Dịch vụ thành công !");
                 //refresh nhap
                 TenDichVu = "";

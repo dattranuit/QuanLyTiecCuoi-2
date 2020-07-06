@@ -94,6 +94,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.MONANs.Add(SelectedItem);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Add(SelectedItem);
+                if (CT_PhieuDatBanViewModel.ListMonAn != null)
+                    CT_PhieuDatBanViewModel.ListMonAn.Add(SelectedItem);
                 // 
                 //
                 MessageBox.Show("Thêm món ăn thành công!");
@@ -145,6 +147,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.MONANs.Remove(MonAn);
                 DataProvider.Ins.DataBase.SaveChanges();
                 List.Remove(MonAn);
+                if (CT_PhieuDatBanViewModel.ListMonAn != null)
+                    CT_PhieuDatBanViewModel.ListMonAn.Remove(MonAn);
 
                 TenMonAn = "";
                 DonGia = 0;
@@ -222,7 +226,7 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 if (!string.IsNullOrEmpty(_filterString))
                 {
-                    return data.TenMonAn.Contains(_filterString);
+                    return data.TenMonAn.ToLower().Contains(_filterString.ToLower());
                 }
                 return true;
             }
