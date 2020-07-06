@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Model;
 using System.Windows;
+using System.ComponentModel;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
@@ -58,8 +59,6 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
             }
         }
-        //private bool _IsClicked;
-        //public bool IsClicked { get => _IsClicked; set { _IsClicked = value; OnPropertyChanged(); } }
         private int _MaMonAn;
         public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
         private string _CTPDB_GhiChu;
@@ -103,8 +102,6 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        public ICommand LoadedWindowCommand { get; set; }
-        //public ICommand PopupCommand { get; set; }
         bool Addable()
         {
             if (SelectedMA == null)
@@ -215,24 +212,45 @@ namespace QuanLyTiecCuoi.ViewModel
                     MessageBox.Show("Xóa chi tiết phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
                 }
             });
-            LoadedWindowCommand = new RelayCommand<object>((p) =>
+
+        }
+        // Search DataGrid
+        private ICollectionView _dataGridCollection;
+        private string _filterString;
+        public ICollectionView DataGridCollection
+        {
+            get { return _dataGridCollection; }
+            set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
+        }
+        public string FilterString
+        {
+            get { return _filterString; }
+            set
             {
-                return true;
-            }, (p) =>
+                _filterString = value;
+                OnPropertyChanged("FilterString");
+                FilterCollection();
+            }
+        }
+        private void FilterCollection()
+        {
+            if (_dataGridCollection != null)
             {
-                IsReadOnly = !LoginViewModel.ThayDoiTiec;
-                if (IsReadOnly == false)
+                _dataGridCollection.Refresh();
+            }
+        }
+        public bool Filter(object obj)
+        {
+            var data = obj as MONAN;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(_filterString))
                 {
-                    var xx = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == CurrentMaPDB).SingleOrDefault();
-                    int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == xx.MaTiecCuoi).Count();
-                    if (temp > 0)
-                        IsReadOnly = true;
+                    return data.TenMonAn.Contains(_filterString);
                 }
-                SelectedCTPDB = null;
-                SelectedMA = null;
-                CTPDB_SoLuong = MA_SoLuong = 0;
-                CTPDB_GhiChu = MA_GhiChu = String.Empty;
-            });
+                return true;
+            }
+            return false;
         }
     }
 }

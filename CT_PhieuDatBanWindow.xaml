@@ -11,12 +11,6 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     Name="CT_PhieuDatBanWd"
     Title="Chi Tiết Phiếu Đặt Bàn" Height="662" Width="800">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" 
-                                   CommandParameter="{Binding ElementName=CT_PhieuDatBanWd}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
     <Grid Background="White" Name="grd_CTPhieuDatBan">
         <DockPanel LastChildFill="True" DataContext="{StaticResource CT_PhieuDatBanVM}" >
             <TextBlock Text="Chi Tiết Phiếu Đặt Bàn" HorizontalAlignment="Center"
@@ -41,7 +35,7 @@
                                         <ColumnDefinition Width="10*"/>
                                         <ColumnDefinition Width="160*"/>
                                     </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="Search" Width="32" Height="32" Margin="5,5,0,0"/>
+                                    <Image  Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
                                     <TextBox Grid.Column="1" x:Name="tb_TimKiem"
                                     Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
                                     controls:TextBoxHelper.Watermark="Tìm kiếm Món Ăn"

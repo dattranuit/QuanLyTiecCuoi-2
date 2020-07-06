@@ -12,6 +12,7 @@ using QuanLyTiecCuoi.Model;
 using System.Windows.Controls;
 using System.Data;
 using System.Security.AccessControl;
+using MaterialDesignThemes.Wpf;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
@@ -27,8 +28,9 @@ namespace QuanLyTiecCuoi.ViewModel
         public ObservableCollection<TIECCUOI> ListTiecCuoi { get => _ListTiecCuoi; set { _ListTiecCuoi = value; OnPropertyChanged(); } }
         private static ObservableCollection<CA> _ListCa;
         public static ObservableCollection<CA> ListCa { get => _ListCa; set { _ListCa = value; } }
-        private static ObservableCollection<SANH> _ListSanh;
-        public static ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value;} }
+        private ObservableCollection<SANH> _ListSanh;
+        public ObservableCollection<SANH> ListSanh { get => _ListSanh; set { _ListSanh = value; OnPropertyChanged(); } }
+
         private CA _SelectedCa;
         public CA SelectedCa { get => _SelectedCa; set { _SelectedCa = value; if(SelectedCa!= null) MaCa = _SelectedCa.MaCa; OnPropertyChanged(); } }
         private SANH _SelectedSanh;
@@ -53,11 +55,13 @@ namespace QuanLyTiecCuoi.ViewModel
                     GhiChu = SelectedTiecCuoi.GhiChu;
                     MaSanh = SelectedTiecCuoi.MaSanh;
                     MaCa = SelectedTiecCuoi.MaCa;
+                    SANH temp = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == MaSanh).SingleOrDefault();
+                    SelectedSanh = temp;
                 }
             }
         }
 
-      
+        private bool IsSelected = false;
         private int _MaTiecCuoi;
         public int MaTiecCuoi { get => _MaTiecCuoi; set { _MaTiecCuoi = value; OnPropertyChanged(); } }
         private int _TongSoBan;
@@ -102,6 +106,10 @@ namespace QuanLyTiecCuoi.ViewModel
                         OnPropertyChanged();
                         _NgayDaiTiec = value;
                     }
+                //int CountCa = DataProvider.Ins.DataBase.CAs.Count();
+                //ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs.Where(x => x.TIECCUOIs.Where(y => y.NgayDaiTiec == NgayDaiTiec && y.MaSanh == x.MaSanh).Count() != CountCa));
+                //if(!Enable())
+                //    SelectedSanh = null;
                 OnPropertyChanged(); 
             } 
         }
@@ -132,6 +140,9 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand ClearCommand { get; set; }
         public ICommand DatBanvaDichVuCommand { get; set; }
         public ICommand LapHoaDonCommand { get; set; }
+        public ICommand LoadPopupCommand { get; set; }
+        public ICommand SelectSanhCommand { get; set; }
+        public ICommand ClosePopupCommand { get; set; }
         bool Addable()
         {
             if (String.IsNullOrEmpty(TenChuRe))
@@ -189,7 +200,10 @@ namespace QuanLyTiecCuoi.ViewModel
            // MessageBox.Show(IsReadOnly + "");
             ListTiecCuoi = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs);
             ListCa = new ObservableCollection<CA>(DataProvider.Ins.DataBase.CAs);
-            ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs);
+
+            DataGridCollection = CollectionViewSource.GetDefaultView(ListTiecCuoi);
+            DataGridCollection.Filter = new Predicate<object>(Filter);
+
             AddCommand = new RelayCommand<object>((p) => Addable() , (p) =>
             {
                 SelectedTiecCuoi = new TIECCUOI()
@@ -301,14 +315,89 @@ namespace QuanLyTiecCuoi.ViewModel
                 PhieuDatDichVuViewModel.ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi));
                 PhieuDatBanViewModel.DonGiaBanToiThieu = SelectedSanh.LOAISANH.DonGiaBanToiThieu;
                 PhieuDatBanViewModel.CurrentMaTiecCuoi = SelectedTiecCuoi.MaTiecCuoi;
+                PhieuDatBanViewModel.SoLuongBanToiDa = SelectedSanh.SoLuongBanToiDa;
                 PhieuDatBanViewModel.ListPhieuDatBan = new ObservableCollection<PHIEUDATBAN>(DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi));
                 DatBanvaDichVuWindow wd = new DatBanvaDichVuWindow();
                 wd.ShowDialog();
             });
             LapHoaDonCommand = new RelayCommand<object>((p) => { return true; }, (p) => { HoaDon wd = new HoaDon(); wd.ShowDialog(); });
             ClearCommand = new RelayCommand<object>((p) => { return true; }, (p) => ClearAll());
+            LoadPopupCommand = new RelayCommand<object>((p) => 
+            {
+                if (SelectedCa == null)
+                    return false;
+                return true;
+            }, (p) => 
+            {
+                SelectedSanh = null;
+                IsSelected = false;
+                ListSanh = new ObservableCollection<SANH>(DataProvider.Ins.DataBase.SANHs.Where(x => x.TIECCUOIs.Where(y => y.NgayDaiTiec == NgayDaiTiec && y.MaSanh == x.MaSanh && y.MaCa == SelectedCa.MaCa).Count() == 0));
+            });
+            SelectSanhCommand = new RelayCommand<PopupBox>((p) =>
+            {
+                if (SelectedSanh == null)
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                IsSelected = true;
+                p.IsPopupOpen = false;
+            });
+            ClosePopupCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                if(IsSelected == false)
+                {
+                    if (SelectedTiecCuoi == null)
+                        SelectedSanh = null;
+                    else
+                    {
+                        SANH temp = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == SelectedTiecCuoi.MaSanh).SingleOrDefault();
+                        SelectedSanh = temp;
+                    }
+                }
+            });
+        }
+        //search
+        private ICollectionView _dataGridCollection;
+        private string _filterString;
+        public ICollectionView DataGridCollection
+        {
+            get { return _dataGridCollection; }
+            set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
+        }
+        public string FilterString
+        {
+            get { return _filterString; }
+            set
+            {
+                _filterString = value;
+                OnPropertyChanged("FilterString");
+                FilterCollection();
+            }
+        }
+        private void FilterCollection()
+        {
+            if (_dataGridCollection != null)
+            {
+                _dataGridCollection.Refresh();
+            }
+        }
+        public bool Filter(object obj)
+        {
+            var data = obj as TIECCUOI;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(_filterString))
+                {
+                    return data.TenChuRe.Contains(_filterString);
+                }
+                return true;
+            }
+            return false;
         }
 
-        
     }
 }

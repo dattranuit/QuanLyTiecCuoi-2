@@ -15,7 +15,7 @@ namespace QuanLyTiecCuoi.ViewModel
     {
 
         public string TenNguoiDung;
-
+        public static bool IsReload = false;
         private bool _XemSanh = false;
 
         private bool _XemTiec = false;
@@ -48,30 +48,17 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public bool XemPhanQuyen { get => _XemPhanQuyen; set { _XemPhanQuyen = value; OnPropertyChanged(); } }
 
-        public ICommand LogoutCommand { get; set; }
-        public ICommand LoadedWindowCommand { get; set; }
-
         public MainViewModel()
         {
-            LogoutCommand = new RelayCommand<Window>((p) => { return true; }, (p) => 
-           { 
-               Login wd = new Login();
-               p.Hide();
-               wd.ShowDialog();
-               p.Close();
-           });
-            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            {
-                TenNguoiDung = LoginViewModel.TenNguoiDung;
-                XemSanh = LoginViewModel.XemSanh;
-                XemTiec = LoginViewModel.XemTiec;
-                XemHoaDon = LoginViewModel.XemHoaDon;
-                XemDoanhThu = LoginViewModel.XemDoanhThu;
-                XemDichVu = LoginViewModel.XemDichVu;
-                XemMonAn = LoginViewModel.XemMonAn;
-                XemQuiDinh = LoginViewModel.XemQuiDinh;
-                XemPhanQuyen = LoginViewModel.XemPhanQuyen;
-            });
+            TenNguoiDung = LoginViewModel.TenNguoiDung;
+            XemSanh = LoginViewModel.XemSanh;
+            XemTiec = LoginViewModel.XemTiec;
+            XemHoaDon = LoginViewModel.XemHoaDon;
+            XemDoanhThu = LoginViewModel.XemDoanhThu;
+            XemDichVu = LoginViewModel.XemDichVu;
+            XemMonAn = LoginViewModel.XemMonAn;
+            XemQuiDinh = LoginViewModel.XemQuiDinh;
+            XemPhanQuyen = LoginViewModel.XemPhanQuyen;
         }
     }
 }

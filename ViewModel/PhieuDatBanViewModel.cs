@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.Office.Interop.Excel;
 using QuanLyTiecCuoi.Model;
@@ -21,10 +23,13 @@ namespace QuanLyTiecCuoi.ViewModel
         public bool IsReadOnly { get => _IsReadOnly; set { _IsReadOnly = value; IsEnable = !_IsReadOnly; OnPropertyChanged(); } }
         private static int _CurrentMaTiecCuoi;
         public static int CurrentMaTiecCuoi { get => _CurrentMaTiecCuoi; set { _CurrentMaTiecCuoi = value; } }
+
         private static ObservableCollection<PHIEUDATBAN> _ListPhieuDatBan;
         public static ObservableCollection<PHIEUDATBAN> ListPhieuDatBan { get => _ListPhieuDatBan; set => _ListPhieuDatBan = value; }
         private static decimal _DonGiaBanToiThieu;
         public static decimal DonGiaBanToiThieu { get => _DonGiaBanToiThieu; set { _DonGiaBanToiThieu = value; } }
+        private static int _SoLuongBanToiDa;
+        public static int SoLuongBanToiDa { get => _SoLuongBanToiDa; set { _SoLuongBanToiDa = value; } }
         private PHIEUDATBAN _SelectedPDB;
         public PHIEUDATBAN SelectedPDB
         {
@@ -50,9 +55,21 @@ namespace QuanLyTiecCuoi.ViewModel
         private decimal _DonGiaBan;
         private string _GhiChu;
         private string _LoaiBan;
+        private int _TongSoLuongBan = 0;
         public int MaPhieuDatBan { get => _MaPhieuDatBan; set { _MaPhieuDatBan = value; OnPropertyChanged(); } }
         public string LoaiBan { get => _LoaiBan; set { _LoaiBan = value; OnPropertyChanged(); } }
-        public int SoLuong { get => _SoLuong; set { _SoLuong = value; OnPropertyChanged(); } }
+        public int SoLuong { get => _SoLuong; 
+            set { 
+                if(value < 0)
+                {
+                    MessageBox.Show("Số lượng không được âm", "Lưu ý");
+                    _SoLuong = 0;
+                }
+                else
+                    _SoLuong = value;
+                OnPropertyChanged(); 
+            } }
+        public int TongSoLuongBan { get => _TongSoLuongBan; set { _TongSoLuongBan = value; OnPropertyChanged(); } }
         public int SoLuongDuTru { get => _SoLuongDuTru; set { _SoLuongDuTru = value; OnPropertyChanged(); } }
         public decimal DonGiaBan { get => _DonGiaBan; set { _DonGiaBan = value; OnPropertyChanged(); } }
         public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
@@ -60,7 +77,6 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand CT_PhieuDatBanCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        public ICommand LoadedWindowCommand { get; set; }
         bool Enable()
         {
             if (SelectedPDB == null)
@@ -85,6 +101,11 @@ namespace QuanLyTiecCuoi.ViewModel
         }
         public PhieuDatBanViewModel()
         {
+            var ccc = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Count();
+            if (ccc > 0)
+                TongSoLuongBan = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Sum(slb => slb.SoLuong);
+            else
+                TongSoLuongBan = 0;
             IsReadOnly = !LoginViewModel.ThayDoiTiec;
             if (IsReadOnly == false)
             {
@@ -92,6 +113,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 if (temp > 0)
                     IsReadOnly = true;
             }
+            DataGridCollection = CollectionViewSource.GetDefaultView(ListPhieuDatBan);
+            DataGridCollection.Filter = new Predicate<object>(Filter);
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return Addable();
@@ -99,7 +122,17 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 try
-                {
+                {  
+                    var temp = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Count();
+                    if (temp > 0)
+                        TongSoLuongBan = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Sum(slb => slb.SoLuong);
+                    else
+                        TongSoLuongBan = 0;
+                    if(TongSoLuongBan + SoLuong > SoLuongBanToiDa)
+                    {
+                        MessageBox.Show("Tổng số lượng bàn lớn hơn số lượng bàn tối đa", "Thông báo");
+                        return;
+                    }    
                     var PhieuDatBan = new PHIEUDATBAN()
                     {
                         MaTiecCuoi = CurrentMaTiecCuoi,
@@ -114,6 +147,7 @@ namespace QuanLyTiecCuoi.ViewModel
                     DataProvider.Ins.DataBase.SaveChanges();
                     ListPhieuDatBan.Add(PhieuDatBan);
                     SelectedPDB = PhieuDatBan;
+                    TongSoLuongBan += SoLuong;
                     MessageBox.Show("Thêm phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
                     
                 }
@@ -132,23 +166,33 @@ namespace QuanLyTiecCuoi.ViewModel
                 return Addable();
             }, (p) =>
             {
-                try
-                {
-                    var PhieuDatBan = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan).SingleOrDefault();
-                    PhieuDatBan.MaPhieuDatBan = SelectedPDB.MaPhieuDatBan;
-                    PhieuDatBan.MaTiecCuoi = CurrentMaTiecCuoi;
-                    PhieuDatBan.LoaiBan = SelectedPDB.LoaiBan;
-                    PhieuDatBan.SoLuong = SelectedPDB.SoLuong;
-                    PhieuDatBan.SoLuongDuTru = SelectedPDB.SoLuongDuTru;
-                    PhieuDatBan.DonGiaBan = SelectedPDB.DonGiaBan;
-                    PhieuDatBan.GhiChu = SelectedPDB.GhiChu;
-                    DataProvider.Ins.DataBase.SaveChanges();
-                    MessageBox.Show("Sửa phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Sửa phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
-                }
+                if (SoLuong == 0)
+                    MessageBox.Show("Số lượng phải lớn hơn 0", "Lưu ý");
+                else
+                    try
+                    {
+                        int temp = TongSoLuongBan + SoLuong - SelectedPDB.SoLuong;
+                        if (temp > SoLuongBanToiDa)
+                        {
+                            MessageBox.Show("Tổng số lượng bàn lớn hơn số lượng bàn tối đa", "Thông báo");
+                            return;
+                        }
+                        var PhieuDatBan = DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan).SingleOrDefault();
+                        PhieuDatBan.MaPhieuDatBan = SelectedPDB.MaPhieuDatBan;
+                        PhieuDatBan.MaTiecCuoi = CurrentMaTiecCuoi;
+                        PhieuDatBan.LoaiBan = LoaiBan;
+                        PhieuDatBan.SoLuong = SoLuong;
+                        PhieuDatBan.SoLuongDuTru = SoLuongDuTru;
+                        PhieuDatBan.DonGiaBan = DonGiaBan;
+                        PhieuDatBan.GhiChu = GhiChu;
+                        DataProvider.Ins.DataBase.SaveChanges();
+                        TongSoLuongBan = temp;
+                        MessageBox.Show("Sửa phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Sửa phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                    }
             });
             CT_PhieuDatBanCommand = new RelayCommand<object>((p) => { return Enable(); }, (p) => {
                 CT_PhieuDatBanViewModel.CurrentMaPDB = SelectedPDB.MaPhieuDatBan;
@@ -212,8 +256,10 @@ namespace QuanLyTiecCuoi.ViewModel
                 {
                     try
                     {
+                        
                         int count = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan).Count();
-                        for(int i =0; i< count; i++)
+                        int temptong = TongSoLuongBan - SelectedPDB.SoLuong;
+                        for (int i =0; i< count; i++)
                         {
                             CT_PHIEUDATBAN temp = DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Where(x => x.MaPhieuDatBan == SelectedPDB.MaPhieuDatBan).First();
                             DataProvider.Ins.DataBase.CT_PHIEUDATBAN.Remove(temp);
@@ -224,9 +270,10 @@ namespace QuanLyTiecCuoi.ViewModel
                         DataProvider.Ins.DataBase.SaveChanges();
                         ListPhieuDatBan.Remove(PhieuDatBan);
                         // Refresh
+                        TongSoLuongBan = temptong;
                         LoaiBan = GhiChu =  String.Empty;
                         SoLuong = SoLuongDuTru = 0;
-                        DonGiaBan = DonGiaBanToiThieu;                       
+                        DonGiaBan = DonGiaBanToiThieu;
                         MessageBox.Show("Xóa phiếu đặt bàn thành công", "Thông báo", MessageBoxButton.OK);
                     }
                     catch (Exception e)
@@ -236,22 +283,46 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
                 
             });
-            LoadedWindowCommand = new RelayCommand<object>((p) =>
+        }
+        private ICollectionView _dataGridCollection;
+        private string _filterString;
+        public ICollectionView DataGridCollection
+        {
+            get { return _dataGridCollection; }
+            set { OnPropertyChanged(); _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
+        }
+        public string FilterString
+        {
+            get { return _filterString; }
+            set
             {
-                return true;
-            }, (p) =>
+                if (value != _filterString)
+                    OnPropertyChanged("FilterString");
+                _filterString = value;
+                OnPropertyChanged("FilterString");
+                FilterCollection();
+            }
+        }
+        private void FilterCollection()
+        {
+            if (_dataGridCollection != null)
             {
-                IsReadOnly = !LoginViewModel.ThayDoiTiec;
-                if(IsReadOnly == false)
+                //   OnPropertyChanged();
+                _dataGridCollection.Refresh();
+            }
+        }
+        public bool Filter(object obj)
+        {
+            var data = obj as PHIEUDATBAN;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(_filterString))
                 {
-                    int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Count();
-                    if (temp > 0)
-                        IsReadOnly = true;
+                    return data.LoaiBan.ToLower().Contains(_filterString.ToLower());
                 }
-                SelectedPDB = null;
-                SoLuong = SoLuongDuTru = 0;
-                GhiChu = LoaiBan = String.Empty;
-            });
+                return true;
+            }
+            return false;
         }
 
     }

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              DataContext="{StaticResource TiecVM}"
              d:DesignHeight="662" d:DesignWidth="800">
@@ -136,8 +136,63 @@
                                     <DatePicker IsEnabled="{Binding IsEnable}" Name="dpk_NgayDaiTiec" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1" 
                                                 SelectedDate="{Binding NgayDaiTiec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=MM/dd/yyyy}" 
                                                 controls:TextBoxHelper.Watermark="Hãy chọn ngày" SelectedDateChanged="dpk_NgayDaiTiec_SelectedDateChanged"/>
-                                    <ComboBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.CA.TenCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedCa,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenCa"/>
-                                    <ComboBox IsReadOnly="{Binding IsReadOnly}" Grid.Row="2" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.SANH.TenSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenSanh"/>
+                                    <ComboBox IsEnabled="{Binding IsEnable}" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1" Text="{Binding SelectedTiecCuoi.CA.TenCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedCa,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ListCa, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenCa"/>
+                                    <TextBox Grid.Row="2" >
+                                        <TextBox.Template>
+                                            <ControlTemplate>
+                                                <Grid DataContext="{StaticResource TiecVM}">
+                                                    <TextBox IsReadOnly="True" Margin="2" BorderBrush="Black" BorderThickness="1" 
+                                                             Text="{Binding SelectedSanh.TenSanh}"></TextBox>
+                                                    <materialDesign:PopupBox  IsEnabled="{Binding IsEnable}" 
+                                                                              Name="popup"
+                                                                              DataContext="{StaticResource TiecVM}" 
+                                                                              HorizontalAlignment="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="True" PopupMode="Click">
+                                                        <materialDesign:PopupBox.ToggleContent>
+                                                            <materialDesign:PackIcon ToolTip="Hiện danh sách sảnh phù hợp" Margin="5,2" Kind="ChevronDoubleDown" Foreground="Crimson"/>
+                                                        </materialDesign:PopupBox.ToggleContent>
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="Opened">
+                                                                <i:InvokeCommandAction 
+                                                                    Command="{Binding LoadPopupCommand}"/>
+                                                            </i:EventTrigger>
+                                                            <i:EventTrigger EventName="Closed">
+                                                                <i:InvokeCommandAction 
+                                                                    Command="{Binding ClosePopupCommand}"/>
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
+                                                        
+                                                        <DockPanel Width="550" Height="500" LastChildFill="True">
+                                                            <Button
+                                                                DockPanel.Dock="Bottom"
+                                                                Command="{Binding SelectSanhCommand}"
+                                                                CommandParameter="{Binding ElementName=popup}"
+                                                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                                                Margin="10,2" Width="200" BorderThickness="0"
+                                                                ToolTip="Chọn sảnh cho tiệc cưới" Background="#FF0F5699" Foreground="White">
+                                                                Chọn Sảnh
+                                                            </Button>
+                                                            <GroupBox Header="Danh sách sảnh phù hợp" Margin="10">
+                                                                    <DataGrid x:Name="dtg_Sanh" IsReadOnly="True" 
+                                                                            SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
+                                                                            ItemsSource="{Binding ListSanh, UpdateSourceTrigger=PropertyChanged}"
+                                                                            CanUserSortColumns="True"
+                                                                            CanUserAddRows="False"
+                                                                            SelectionUnit="FullRow"
+                                                                            AutoGenerateColumns="False">
+                                                                        <DataGrid.Columns>
+                                                                            <DataGridTextColumn Header="Tên Sảnh" Binding="{Binding TenSanh}"></DataGridTextColumn>
+                                                                            <DataGridTextColumn Header="Số lượng bàn tối đa" Binding="{Binding SoLuongBanToiDa}"></DataGridTextColumn>
+                                                                            <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}"></DataGridTextColumn>
+                                                                            <DataGridTextColumn Width="*" Header="Đơn giá bàn tối thiểu" Binding="{Binding LOAISANH.DonGiaBanToiThieu}"></DataGridTextColumn>
+                                                                        </DataGrid.Columns>
+                                                                    </DataGrid>
+                                                                </GroupBox>
+                                                        </DockPanel>
+                                                    </materialDesign:PopupBox>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </TextBox.Template>
+                                    </TextBox>
                                     <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" Name="nbr_TienDatCoc" Grid.Row="3" Margin="2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left" Interval="100000" Value="{Binding TienDatCoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" ValueChanged="nbr_TienDatCoc_ValueChanged"/>
                                     <Button Grid.Row="4"
                                             Command="{Binding DatBanvaDichVuCommand}"
@@ -177,17 +232,20 @@
                     </Grid>
                     <GroupBox Header="Danh sách tiệc cưới" Margin="10,0,0,10" Grid.Column="0">
                         <DataGrid DataContext="{StaticResource TiecVM}" ItemsSource="{Binding ListTiecCuoi, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedTiecCuoi, Mode=TwoWay}" 
-                                          AutoGenerateColumns="False" CanUserAddRows="False" FontSize="12"
-                                          controls:DataGridHelper.ColumnHeaderPadding="10,0" TextElement.FontWeight="DemiBold">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Tên Chú Rể" Binding="{Binding TenChuRe}" IsReadOnly="True"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Tên Cô Dâu" Binding="{Binding TenCoDau}" IsReadOnly="True"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Điện thoại" Binding="{Binding SoDienThoai}" IsReadOnly="True"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Sảnh" Binding="{Binding SANH.TenSanh}" IsReadOnly="True"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Ngày Đãi Tiệc" Binding="{Binding NgayDaiTiec, StringFormat=MM/dd/yyyy}" IsReadOnly="True"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Ca" Binding="{Binding CA.TenCa}" IsReadOnly="True"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True" Width="*"></DataGridTextColumn>
-                            </DataGrid.Columns>
+                                AutoGenerateColumns="False" CanUserAddRows="False" FontSize="12"
+                                controls:DataGridHelper.ColumnHeaderPadding="10,0" TextElement.FontWeight="DemiBold"
+                                  ScrollViewer.CanContentScroll="True" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Tên Chú Rể" Binding="{Binding TenChuRe}" IsReadOnly="True"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Tên Cô Dâu" Binding="{Binding TenCoDau}" IsReadOnly="True"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Điện thoại" Binding="{Binding SoDienThoai}" IsReadOnly="True"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Sảnh" Binding="{Binding SANH.TenSanh}" IsReadOnly="True"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Ngày Đãi Tiệc" Binding="{Binding NgayDaiTiec, StringFormat=MM/dd/yyyy}" IsReadOnly="True"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Ca" Binding="{Binding CA.TenCa}" IsReadOnly="True"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" IsReadOnly="True" Width="*"></DataGridTextColumn>
+                                </DataGrid.Columns>
                         </DataGrid>
                     </GroupBox>
                 </DockPanel>

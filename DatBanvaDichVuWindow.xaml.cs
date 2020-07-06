@@ -34,7 +34,7 @@ namespace QuanLyTiecCuoi
             nbr_PDB_SoLuong.Value = nbr_PDB_SoLuongDuTru.Value = nbr_DV_SoLuong.Value = 0;
             tbx_PDB_LoaiBan.Text = tbx_PDB_GhiChu.Text = "";
             tbx_DV_ThanhTien.Text = "0";
-            tbx_PDB_DonGiaBan.Text = PhieuDatBanViewModel.DonGiaBanToiThieu+"";
+            lbl_DonGiaBan.Content = PhieuDatBanViewModel.DonGiaBanToiThieu+"";
         }
     }
 }

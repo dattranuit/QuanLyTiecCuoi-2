@@ -66,10 +66,6 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        public ICommand ClickCommand { get; set; }
-        public ICommand SaveCommand { get; set; }
-
-
         public PhanQuyenViewModel()
         {
             IsReadOnly = !LoginViewModel.ThayDoiPhanQuyen;

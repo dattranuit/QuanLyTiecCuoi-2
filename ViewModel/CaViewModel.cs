@@ -56,6 +56,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand DeleteCommand { get; set; }
         public ICommand RefreshCommand { get; set; }
         public ICommand EditQuiDinhCommand { get; set; }
+        
 
         //hàm được gọi mỗi khi bool ApDungQuiDinhPhat được set. Tạm bỏ
         public void ThayDoiApDungQuiDinh()
