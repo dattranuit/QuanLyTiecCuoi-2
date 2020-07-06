@@ -83,22 +83,6 @@ namespace QuanLyTiecCuoi.ViewModel
 
             }, (p) =>
             {
-                SelectedItem = new MONAN()
-                {
-                    TenMonAn = TenMonAn,
-                    DonGia = DonGia,
-                    MoTa = MoTa,
-                    HinhAnh = HinhAnh,
-                    GhiChu = GhiChu
-                };
-                DataProvider.Ins.DataBase.MONANs.Add(SelectedItem);
-                DataProvider.Ins.DataBase.SaveChanges();
-                List.Add(SelectedItem);
-                if (CT_PhieuDatBanViewModel.ListMonAn != null)
-                    CT_PhieuDatBanViewModel.ListMonAn.Add(SelectedItem);
-                // 
-                //
-                MessageBox.Show("Thêm món ăn thành công!");
                 try
                 {
                     SelectedItem = new MONAN()
