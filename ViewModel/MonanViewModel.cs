@@ -46,17 +46,17 @@ namespace QuanLyTiecCuoi.ViewModel
 
         //biến bên trang 
         private int _MaMonAn { get; set; }
-        public int MaMonAn { get => _MaMonAn; set { _MaMonAn = value; OnPropertyChanged(); } }
+        public int MaMonAn { get => _MaMonAn; set { OnPropertyChanged(); _MaMonAn = value; OnPropertyChanged(); } }
         private string _TenMonAn { get; set; }
-        public string TenMonAn { get => _TenMonAn; set { _TenMonAn = value; OnPropertyChanged(); } }
+        public string TenMonAn { get => _TenMonAn; set { OnPropertyChanged(); _TenMonAn = value; OnPropertyChanged(); } }
         private decimal _DonGia { get; set; }
-        public decimal DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
+        public decimal DonGia { get => _DonGia; set { OnPropertyChanged(); _DonGia = value; OnPropertyChanged(); } }
         private string _MoTa { get; set; }
-        public string MoTa { get => _MoTa; set { _MoTa = value; OnPropertyChanged(); } }
+        public string MoTa { get => _MoTa; set { OnPropertyChanged(); _MoTa = value; OnPropertyChanged(); } }
         private string _HinhAnh { get; set; }
-        public string HinhAnh { get => _HinhAnh; set { _HinhAnh = value; OnPropertyChanged(); } }
+        public string HinhAnh { get => _HinhAnh; set { OnPropertyChanged(); _HinhAnh = value; OnPropertyChanged(); } }
         private string _GhiChu { get; set; }
-        public string GhiChu { get => _GhiChu; set { _GhiChu = value; OnPropertyChanged(); } }
+        public string GhiChu { get => _GhiChu; set { OnPropertyChanged(); _GhiChu = value; OnPropertyChanged(); } }
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -76,7 +76,6 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 if (string.IsNullOrWhiteSpace(TenMonAn) ||
                     string.IsNullOrWhiteSpace(MoTa) ||
-                    string.IsNullOrWhiteSpace(GhiChu) ||
                     string.IsNullOrWhiteSpace(DonGia.ToString()))
                     return false;
                 return true;
@@ -110,7 +109,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null)
+                if (SelectedItem == null || String.IsNullOrEmpty(TenMonAn) || string.IsNullOrEmpty(MoTa))
                     return false;
                 if (SelectedItem.TenMonAn == TenMonAn &&
                 SelectedItem.MoTa == MoTa &&
@@ -123,13 +122,6 @@ namespace QuanLyTiecCuoi.ViewModel
                 try
                 {
                     var MonAn = DataProvider.Ins.DataBase.MONANs.Where(x => x.MaMonAn == SelectedItem.MaMonAn).SingleOrDefault();
-
-                    if (string.IsNullOrWhiteSpace(TenMonAn))
-                    {
-                        MessageBox.Show("Chưa nhập tên Món ăn");
-                        return;
-                    }
-
                     MonAn.TenMonAn = TenMonAn;
                     MonAn.DonGia = DonGia;
                     MonAn.MoTa = MoTa;

@@ -102,7 +102,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(TenSanh) || string.IsNullOrEmpty(SoLuongBanToiDa.ToString()) || SelectedLoaiSanh == null || string.IsNullOrEmpty(GhiChu))
+                if (string.IsNullOrEmpty(TenSanh) || string.IsNullOrEmpty(SoLuongBanToiDa.ToString()) || SelectedLoaiSanh == null || SoLuongBanToiDa == 0)
                     return false;
                 return true;
 
@@ -132,7 +132,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             AddCommandLoaiSanh = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(TenLoaiSanh) || string.IsNullOrEmpty(DonGiaBanToiThieu.ToString())  )
+                if (string.IsNullOrEmpty(TenLoaiSanh) || string.IsNullOrEmpty(DonGiaBanToiThieu.ToString()))
                     return false;
                 return true;
 
@@ -160,7 +160,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null)
+                if (SelectedItem == null || String.IsNullOrEmpty(TenSanh) || String.IsNullOrEmpty(TenLoaiSanh) || SoLuongBanToiDa == 0)
                     return false;
                 var displayList = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == SelectedItem.MaSanh);
                 if (displayList == null && displayList.Count() == 0)
@@ -196,7 +196,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             EditLoaiSanhCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem2 == null)
+                if (SelectedItem2 == null || String.IsNullOrEmpty(TenLoaiSanh))
                     return false;
                 var displayList = DataProvider.Ins.DataBase.LOAISANHs.Where(x => x.MaLoaiSanh == SelectedItem2.MaLoaiSanh);
                 if (displayList == null && displayList.Count() == 0)
