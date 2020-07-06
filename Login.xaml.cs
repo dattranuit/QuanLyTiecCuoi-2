@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,14 @@ namespace QuanLyTiecCuoi
     {
         public Login()
         {
+            //string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            //string SharedCachePath1 = path + @"\Database.mdf";
+            //string SharedCachePath2 = path + @"\Database_log.ldf";
+            //var fs = File.GetAccessControl(path);
+            //fs.SetAccessRuleProtection(true, true);
+            //File.SetAccessControl(SharedCachePath1, fs);
+            //File.SetAccessControl(SharedCachePath2, fs);
+            //MessageBox.Show(SharedCachePath);
             InitializeComponent();
             tbx_TenDangNhap.Text = Properties.Settings.Default.TenDangNhap;
             pwb_MatKhau.Password = Properties.Settings.Default.MatKhau;
