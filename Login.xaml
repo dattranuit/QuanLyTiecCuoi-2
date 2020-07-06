@@ -76,7 +76,7 @@
     </Window.Resources>
     <Border CornerRadius="15">
         <Border.Background>
-            <ImageBrush ImageSource="photos/bannerTV.png"/>
+            <ImageBrush ImageSource="photos/bg.png"/>
         </Border.Background>
         <Grid>
             <Grid.ColumnDefinitions>

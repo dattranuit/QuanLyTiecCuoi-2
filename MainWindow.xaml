@@ -37,18 +37,22 @@
                 </Grid>
             </DataTemplate>
         </Grid.Resources>
+        <Grid.Background>
+            <ImageBrush ImageSource="photos/mainbg.png" Stretch="Fill"/>
+        </Grid.Background>
         <controls:HamburgerMenu
-            OpenPaneLength="150"
-            x:Name="HamburgerMenuControl"
-            ItemTemplate="{StaticResource MenuItemTemplate}"
-            OptionsItemTemplate="{StaticResource MenuItemTemplate}"
-            Foreground="White"
-            PaneBackground="#FF0F5699"
-            DisplayMode="CompactInline"
-            ItemClick="HamburgerMenuControl_OnItemClick"
-            Grid.Column="0" Background="#FFB64660" Grid.Row="0" 
-            CompactPaneLength="32" HamburgerWidth="32" HamburgerHeight="32"
-            IsPaneOpen="True" PaneForeground="White" controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True">
+                DockPanel.Dock="Left"
+                OpenPaneLength="150"
+                x:Name="HamburgerMenuControl"
+                ItemTemplate="{StaticResource MenuItemTemplate}"
+                OptionsItemTemplate="{StaticResource MenuItemTemplate}"
+                Foreground="White"
+                PaneBackground="#FF0F5699"
+                DisplayMode="CompactInline"
+                ItemClick="HamburgerMenuControl_OnItemClick"
+                Grid.Column="0" Background="#FFB64660" Grid.Row="0" 
+                CompactPaneLength="32" HamburgerWidth="32" HamburgerHeight="32"
+                IsPaneOpen="True" PaneForeground="White" controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True">
             <controls:HamburgerMenu.ItemsSource>
                 <controls:HamburgerMenuItemCollection>
                     <controls:HamburgerMenuIconItem IsVisible="{Binding XemSanh}" x:Name="itm_Sanh" Label="Sảnh" Icon="photos/ic_hall1.png">
@@ -96,20 +100,6 @@
             <controls:HamburgerMenu.ContentTemplate>
                 <DataTemplate DataType="{x:Type controls:HamburgerMenuItem}">
                     <Grid x:Name="TheContentGrid">
-                        <!--
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="32" />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Border Grid.Row="0"
-                                Background="#FFAE2A49">
-                            <TextBlock x:Name="Header"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       FontSize="24"
-                                       Foreground="White"
-                                       Text="{Binding Label}" />
-                        </Border>-->
                         <ContentControl x:Name="TheContent"
                                         Grid.Row="1"
                                         Focusable="False"
@@ -117,7 +107,6 @@
                     </Grid>
                 </DataTemplate>
             </controls:HamburgerMenu.ContentTemplate>
-
         </controls:HamburgerMenu>
     </Grid>
 </controls:MetroWindow>

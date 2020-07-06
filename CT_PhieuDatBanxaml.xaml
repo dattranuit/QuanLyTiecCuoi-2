@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:QuanLyTiecCuoi"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="CT_PhieuDatBanxaml" Height="300" Width="400">
+        Title="Chi Tiết Phiếu Đặt Bàn" Height="300" Width="400">
     <Grid>
         <DataGrid DataContext="{StaticResource HoaDonVM}" ItemsSource="{Binding ListCT_PhieuDatBan}"    
                                     IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Background="{x:Null}" 

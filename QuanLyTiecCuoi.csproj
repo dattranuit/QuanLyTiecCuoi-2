@@ -349,9 +349,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="photos\bannerTV.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="photos\sdg.png" />
     <Resource Include="photos\sdr.png" />
   </ItemGroup>
@@ -374,11 +371,8 @@
     <Resource Include="photos\ic_us.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="photos\service_img.jpg" />
     <Resource Include="photos\ic_bill.png" />
     <Resource Include="photos\ic_rule.png" />
-    <Resource Include="photos\search_sanh_icon.png" />
-    <Resource Include="photos\wedding_hall.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -416,6 +410,8 @@
       <DependentUpon>Database.edmx</DependentUpon>
       <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
+    <Resource Include="photos\mainbg.png" />
+    <Resource Include="photos\bg.png" />
     <Resource Include="photos\search_32px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
