@@ -14,7 +14,6 @@ namespace QuanLyTiecCuoi.ViewModel
     class MainViewModel:BaseViewModel
     {
 
-        public string TenNguoiDung;
         public static bool IsReload = false;
         private bool _XemSanh = false;
 
@@ -50,7 +49,6 @@ namespace QuanLyTiecCuoi.ViewModel
 
         public MainViewModel()
         {
-            TenNguoiDung = LoginViewModel.TenNguoiDung;
             XemSanh = LoginViewModel.XemSanh;
             XemTiec = LoginViewModel.XemTiec;
             XemHoaDon = LoginViewModel.XemHoaDon;

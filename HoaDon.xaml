@@ -43,88 +43,98 @@
              xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="600" Background="White" Foreground="{x:Null}">
+             d:DesignHeight="600" d:DesignWidth="800" Background="White" Foreground="{x:Null}">
                     <DockPanel>
-                        <DockPanel Margin="0" DockPanel.Dock="Top" Background="#FFFFFF" Height="30">
-                            <Label FontSize="22" Content="HÓA ĐƠN THANH TOÁN" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" Foreground="#FF0E2291" BorderThickness="0" VerticalContentAlignment="Center" Padding="8,0,0,0" OpacityMask="#FF999999" BorderBrush="{x:Null}" Background="{x:Null}"></Label>
-                        </DockPanel>
+                        <Label FontSize="32" Content="HÓA ĐƠN THANH TOÁN" DockPanel.Dock="Top" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" Foreground="#FF0E2291"/>
+                        <materialDesign:Card Margin="10,5,10,5" DockPanel.Dock="Bottom">
+                            <Grid >
+                                <!--DataContext="{Binding List3,Mode=TwoWay}"-->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <GroupBox Margin="5" Header="Thanh toán">
+                                    <!--DataContext="{Binding List3,Mode=TwoWay}"-->
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock FontWeight="DemiBold" Text="Tổng tiền dịch vụ : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="3" Grid.Column="0" FontSize="14"/>
+                                            <TextBlock FontWeight="DemiBold" Text="Tổng tiền hóa đơn : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="3" Grid.Row="1" Grid.Column="0" FontSize="14"/>
+                                            <TextBlock FontWeight="DemiBold" Text="Tổng tiền đặt cọc : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="3" Grid.Row="2" Grid.Column="0" FontSize="14"/>
+                                            <TextBlock FontWeight="DemiBold" Text="Tổng tiền phạt :" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="3" Grid.Row="3" Grid.Column="0" FontSize="14"/>
+                                            <TextBlock x:Name="text_HoanTien" Text="Còn lại : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="3" Grid.Row="4" Grid.Column="0" FontWeight="Bold" FontSize="14"/>
 
-                        <DockPanel Height="200" DockPanel.Dock="Bottom" Background="#FFF1F1F1" Margin="0">
-                            <materialDesign:Card Margin="2">
-                                <GroupBox Header="Thanh toán">
-                                    <Grid >
-                                        <!--DataContext="{Binding List3,Mode=TwoWay}"-->
+                                            <TextBlock x:Name="tblock_Tiendichvu" Text="{Binding TongTienDichVu}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="3" Grid.Row="0"  Grid.Column="0" FontSize="14"/>
+                                            <TextBlock x:Name="tblock_Tienhoadon" Text="{Binding TongTienHoaDon}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="3" Grid.Row="1" Grid.Column="0" FontSize="14"/>
+                                            <TextBlock DataContext="{Binding ListTiecCuoi2}" x:Name="tblock_Tiencoc" Text="{Binding TienDatCoc}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="3" Grid.Row="2" Grid.Column="0" FontSize="14"/>
+                                            <TextBlock x:Name="tblock_Tienphat" Text="{Binding TienPhat, Mode=OneWay}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="3" Grid.Row="3" Grid.Column="0" FontSize="14"/>
+                                            <TextBlock x:Name="tblock_Tienconlai" Text="{Binding ConLai, Mode=OneWay}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="3" Grid.Row="4" Grid.Column="0" FontSize="14" FontWeight="Bold"/>
+                                        </Grid>
+                                </GroupBox >
+                                <GroupBox Grid.Column="1" Margin="5" Header="Quản lý ">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
+                                            <RowDefinition Height="0.4*"/>
                                             <RowDefinition/>
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="300"/>
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Text="Tổng tiền dịch vụ : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,0,0" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock Text="Tổng tiền hóa đơn : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,0,0" Grid.Row="1" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock Text="Tổng tiền đặt cọc : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,0,0" Grid.Row="2" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock Text="Tổng tiền phạt :" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,0,0" Grid.Row="3" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock x:Name="text_HoanTien" Text="Còn lại : " HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,0,0" Grid.Row="4" Grid.Column="0" FontWeight="Bold" FontSize="14"/>
-
-                                        <TextBlock x:Name="tblock_Tiendichvu" Text="{Binding TongTienDichVu}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="0"  Grid.Column="0" FontSize="14"/>
-                                        <TextBlock x:Name="tblock_Tienhoadon" Text="{Binding TongTienHoaDon}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="1" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock DataContext="{Binding ListTiecCuoi2}" x:Name="tblock_Tiencoc" Text="{Binding TienDatCoc}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="2" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock x:Name="tblock_Tienphat" Text="{Binding TienPhat, Mode=OneWay}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="3" Grid.Column="0" FontSize="14"/>
-                                        <TextBlock x:Name="tblock_Tienconlai" Text="{Binding ConLai, Mode=OneWay}"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF404040" Margin="4,0,8,0" Grid.Row="4" Grid.Column="0" FontSize="14" FontWeight="Bold"/>
-                                        <Grid Grid.Column="1" Grid.Row="2">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition></ColumnDefinition>
-                                                <ColumnDefinition></ColumnDefinition>
-                                                <ColumnDefinition></ColumnDefinition>
-                                                <ColumnDefinition></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid Grid.Column="0" x:Name="abc" DataContext="{StaticResource BaoCaoThangVM}">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Loaded">
-                                                        <i:InvokeCommandAction Command="{Binding GetBaoCaoThangVM , Source={StaticResource HoaDonVM}}" CommandParameter="{Binding ElementName=abc}"></i:InvokeCommandAction>
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </Grid>
-                                            <Button
-                                                IsEnabled="{Binding IsEnable}"
-                                                x:Name="btn_LuuHoaDon"
-                                              
-                                                Command="{Binding LuuHoaDon, Source={StaticResource HoaDonVM}}"
-                                Grid.Column="2"
-                                Background="#FF0F5699" Foreground="White"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                                    Margin="1"
-    Style="{StaticResource MaterialDesignRaisedButton}"
-                                                    Content="Lưu hóa đơn"
-    ToolTip="Thêm">
-                                            </Button>
-                                            <!--Click="Button_Click"-->
-                                            <Button
-                                                IsEnabled="{Binding IsEnable}"
-                                                Command="{Binding InHoaDon}"
-                                Grid.Column="3"
-                                Background="#FF0F5699" Foreground="White"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                                    Margin="1"
-    Style="{StaticResource MaterialDesignRaisedButton}"
-                                                    Content="In hóa đơn"
-    ToolTip="Thêm">
-                                            </Button>
+                                        <Grid x:Name="abc" DataContext="{StaticResource BaoCaoThangVM}">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Loaded">
+                                                    <i:InvokeCommandAction Command="{Binding GetBaoCaoThangVM , Source={StaticResource HoaDonVM}}" CommandParameter="{Binding ElementName=abc}"></i:InvokeCommandAction>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
                                         </Grid>
+                                        <Label Margin="27,0,0,0" FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Content="Ngày lập hóa đơn"/>
+                                        <Label Margin="27,0,0,0" FontWeight="Bold" VerticalAlignment="Center" Grid.Row="2" Content="Người lập hóa đơn"/>
+                                        <DatePicker Grid.Column="1" x:Name="DP_ngaylaphoadon" IsEnabled="{Binding IsEnable}" Text="{Binding NgayThanhToan, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="26" Grid.Row="1" Margin="0,7,10,7" BorderBrush="Black" BorderThickness="1"/>
+                                        <TextBox IsReadOnly="True"  Text="{Binding TongTienBan}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="0,7,10,7" Height="26" BorderBrush="Black" BorderThickness="1"/>
+                                        <Button
+                                        Width="140"
+                                        IsEnabled="{Binding IsEnable}"
+                                        x:Name="btn_LuuHoaDon"
+                                        Command="{Binding LuuHoaDon, Source={StaticResource HoaDonVM}}"
+                                        Grid.Column="1"
+                                        Grid.Row="3"
+                                        Background="#FF0F5699" Foreground="White"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Margin="5"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Content="Lưu hóa đơn">
+                                        </Button>
+                                        <!--Click="Button_Click"-->
+                                        <Button
+                                        Width="140"
+                                        Grid.Row="3"
+                                        IsEnabled="{Binding IsEnable}"
+                                        Command="{Binding InHoaDon}"
+                                        Grid.Column="0"
+                                        Background="#FF0F5699" Foreground="White"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Margin="5"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Content="In hóa đơn">
+                                        </Button>
                                     </Grid>
                                 </GroupBox>
-                            </materialDesign:Card>
-                        </DockPanel>
-                        <DockPanel LastChildFill="True" Background="#FFF1F1F1" DockPanel.Dock="Top" Height="125">
-                            <materialDesign:Card Margin="2">
-                                <GroupBox  Header="Thông tin hóa đơn">
+                            </Grid>
+                        </materialDesign:Card>
+                            <DockPanel LastChildFill="True" Background="White" DockPanel.Dock="Top" Height="125">
+                            <materialDesign:Card Margin="10,0,10,5">
+                                <GroupBox Margin="5" Header="Thông tin hóa đơn">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition></ColumnDefinition>
@@ -150,8 +160,8 @@
                                                         <RowDefinition/>
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
-                                                    <TextBox IsEnabled="False" DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenChuRe, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                                    <TextBox IsEnabled="False" DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenCoDau, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <TextBox IsReadOnly="True" DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenChuRe, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <TextBox IsReadOnly="True" DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenCoDau, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -175,8 +185,8 @@
                                                         <RowDefinition/>
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
-                                                    <TextBox IsEnabled="False"  Text="{Binding TongSoBan}" VerticalAlignment="Center" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                                    <TextBox  IsEnabled="False"  Text="{Binding TongTienBan}" VerticalAlignment="Center" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <TextBox IsReadOnly="True"  Text="{Binding TongSoBan}" VerticalAlignment="Center" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <TextBox IsReadOnly="True"  Text="{Binding TongTienBan}" VerticalAlignment="Center" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -192,15 +202,15 @@
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
                                                     <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="0" Content="Ngày đãi tiệc"/>
-                                                    <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Content="Ngày lập hóa đơn"/>
+                                                    <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Content="Số điện thoại"/>
                                                 </Grid>
                                                 <Grid Grid.Column="1">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition/>
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
-                                                    <DatePicker x:Name="DP_ngaythanhtoan" IsEnabled="False" Text="{Binding NgayDaiTiec, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged}" Height="25" Grid.Row="0" Margin="2" BorderBrush="Black" BorderThickness="1"/>
-                                                    <DatePicker  x:Name="DP_ngaylaphoadon" IsEnabled="{Binding IsEnable}" Text="{Binding NgayThanhToan, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="25" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <DatePicker IsEnabled="True" x:Name="DP_NgayDaiTiec" Text="{Binding NgayDaiTiec, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Margin="2,4" BorderBrush="Black" BorderThickness="1"/>
+                                                    <TextBox IsReadOnly="True" VerticalAlignment="Center" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -209,14 +219,14 @@
 
                             </materialDesign:Card>
                         </DockPanel>
-                        <materialDesign:Card Margin="2,0,2,0">
+                        <materialDesign:Card Margin="10,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Grid Grid.Column="0">
-                                    <GroupBox Header="Dịch vụ">
+                                    <GroupBox Margin="5" Header="Dịch vụ">
                                         <Grid Margin="0" Background="White">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="1*"/>
@@ -242,7 +252,7 @@
                                     </GroupBox>
                                 </Grid>
                                 <Grid Grid.Column="1">
-                                    <GroupBox Header="Phiếu đặt bàn">
+                                    <GroupBox Margin="5" Header="Phiếu đặt bàn">
                                         <Grid Margin="0" Background="White">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="1*"/>

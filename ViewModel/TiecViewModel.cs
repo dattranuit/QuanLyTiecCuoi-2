@@ -60,10 +60,6 @@ namespace QuanLyTiecCuoi.ViewModel
                     SANH temp = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == MaSanh).SingleOrDefault();
                     SelectedSanh = temp;
 
-                    IsReadOnly = false;
-                    var check = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi);
-                    if (check != null && check.Count() > 0)
-                        IsReadOnly = true;
                 }
             }
         }
@@ -231,10 +227,11 @@ namespace QuanLyTiecCuoi.ViewModel
                     DataProvider.Ins.DataBase.SaveChanges();
                     ListTiecCuoi.Add(SelectedTiecCuoi);
                     HoaDonViewModel.ListTiecCuoi.Add(SelectedTiecCuoi);
+                    MessageBox.Show("Thêm tiệc cưới thành công", "Thông báo", MessageBoxButton.OK);
                 }
                 catch (Exception e)
                 {
-                    throw e;
+                    MessageBox.Show("Thêm tiệc cưới không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
                 }
 
             });
@@ -249,17 +246,35 @@ namespace QuanLyTiecCuoi.ViewModel
                 return false;
             }, (p) =>
             {
-                var TiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi).SingleOrDefault();
-                TiecCuoi.TenChuRe = TenChuRe;
-                TiecCuoi.TenCoDau = TenCoDau;
-                TiecCuoi.SoDienThoai = SoDienThoai;
-                TiecCuoi.NgayDatTiec = NgayDatTiec;
-                TiecCuoi.NgayDaiTiec = NgayDaiTiec;
-                TiecCuoi.TienDatCoc = TienDatCoc;
-                TiecCuoi.GhiChu = GhiChu;
-                TiecCuoi.MaSanh = SelectedSanh.MaSanh;
-                TiecCuoi.MaCa = SelectedCa.MaCa;
-                DataProvider.Ins.DataBase.SaveChanges();
+                var check = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi);
+                if (check != null && check.Count() > 0)
+                {
+                    MessageBox.Show("Không thể chỉnh sửa vì Tiệc cưới này đã được lập hóa đơn", "Lưu ý");
+                        return;
+                }
+                else
+                {
+                    try
+                    {
+                        var TiecCuoi = DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == SelectedTiecCuoi.MaTiecCuoi).SingleOrDefault();
+                        TiecCuoi.TenChuRe = TenChuRe;
+                        TiecCuoi.TenCoDau = TenCoDau;
+                        TiecCuoi.SoDienThoai = SoDienThoai;
+                        TiecCuoi.NgayDatTiec = NgayDatTiec;
+                        TiecCuoi.NgayDaiTiec = NgayDaiTiec;
+                        TiecCuoi.TienDatCoc = TienDatCoc;
+                        TiecCuoi.GhiChu = GhiChu;
+                        TiecCuoi.MaSanh = SelectedSanh.MaSanh;
+                        TiecCuoi.MaCa = SelectedCa.MaCa;
+                        DataProvider.Ins.DataBase.SaveChanges();
+                        MessageBox.Show("Sửa tiệc cưới thành công", "Thông báo", MessageBoxButton.OK);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Sửa tiệc cưới không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                    }
+                }
+
             });
             DeleteCommand = new RelayCommand<object>((p) =>
             {
@@ -309,7 +324,7 @@ namespace QuanLyTiecCuoi.ViewModel
                         }
                         catch (Exception e)
                         {
-                            MessageBox.Show("Xóa phiếu đặt bàn không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
+                            MessageBox.Show("Xóa tiệc cưới không thành công\n" + e.ToString(), "Thông báo", MessageBoxButton.OK);
                         }
 
                     }

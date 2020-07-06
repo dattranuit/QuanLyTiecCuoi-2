@@ -13,7 +13,10 @@
             <Button HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Top" Click="Button_Click">
                 <materialDesign:PackIcon Kind="Printer"/>
             </Button>
-            <Button HorizontalAlignment="Right" Margin="10"  VerticalAlignment="Top" Click="Button_Click_thoat">
+            <Button
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Background="Crimson" Foreground="White"
+                HorizontalAlignment="Right" Margin="10"  VerticalAlignment="Top" Click="Button_Click_thoat">
                 Thoát
             </Button>
             <Grid x:Name="print">
