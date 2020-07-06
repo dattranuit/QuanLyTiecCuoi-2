@@ -207,7 +207,7 @@ namespace QuanLyTiecCuoi.ViewModel
             {
                 if (!string.IsNullOrEmpty(_filterString))
                 {
-                    return data.TenDichVu.Contains(_filterString);
+                    return data.TenDichVu.ToLower().Contains(_filterString.ToLower());
                 }
                 return true;
             }

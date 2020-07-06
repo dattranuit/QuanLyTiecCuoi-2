@@ -19,7 +19,7 @@
                         <DockPanel LastChildFill="True" Background="#FFFFFF" DockPanel.Dock="Top" Height="40">
                             <!--//-->
                             <TextBlock Text="Danh sách hóa đơn" HorizontalAlignment="Center"
-                                   VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
+                                   VerticalAlignment="Center" FontSize="32" Foreground="#FF0E2291"
                                    Margin="0,5,0,0" DockPanel.Dock="Top" FontWeight="Medium"/>
                         </DockPanel>
                         <Grid>
@@ -38,7 +38,7 @@
                                                 <ColumnDefinition Width="1.2*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <Grid Grid.Column="0">
-                                                <materialDesign:PackIcon Kind="Search" Width="32" Height="32" Margin="0,5,0,0"/>
+                                                <Image  Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
                                             </Grid>
                                             <Grid Grid.Column="1">
                                                 
