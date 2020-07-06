@@ -129,6 +129,16 @@ namespace QuanLyTiecCuoi.ViewModel
 
         private string _TenCoDau;
         public string TenCoDau { get => _TenCoDau; set { _TenCoDau = value; OnPropertyChanged(); } }
+        private string _SoDienThoai;
+        public string SoDienThoai
+        {
+            get => _SoDienThoai; set
+            {
+                if (value != _SoDienThoai) OnPropertyChanged(); _SoDienThoai = value; OnPropertyChanged();
+            }
+        }
+        private string _NguoiLapHoaDon;
+        public string NguoiLapHoaDon { get => _NguoiLapHoaDon; set { _NguoiLapHoaDon = value; OnPropertyChanged(); } }
 
         private System.DateTime _NgayDaiTiec;// = DateTime.Now;
         public System.DateTime NgayDaiTiec { get => _NgayDaiTiec; set { _NgayDaiTiec = value; OnPropertyChanged();  } }
@@ -345,55 +355,65 @@ namespace QuanLyTiecCuoi.ViewModel
         //function
         private void Loaddata()
         {
-            if (ListPhieuDatDichVu != null) ListPhieuDatDichVu.ToList().Clear();
-            ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == idTiecCuoi));
-            DataProvider.Ins.DataBase.SaveChanges();
-
-            if (ListPhieuDatDichVu == null || ListPhieuDatDichVu.Count() == 0) return;
-
-            if (ListPhieuDatDichVu != null)
+            try
             {
-                SoLuong = ListPhieuDatDichVu.FirstOrDefault().SoLuong;
-                DonGia = ListPhieuDatDichVu.FirstOrDefault().ThanhTien;
-                ThanhTien = SoLuong * DonGia;
-                TongTienDichVu = ListPhieuDatDichVu.Sum(x => x.ThanhTien);
-            }
+                if (ListPhieuDatDichVu != null) ListPhieuDatDichVu.ToList().Clear();
+                ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == idTiecCuoi));
+                DataProvider.Ins.DataBase.SaveChanges();
 
-            if (ListTiecCuoi2 != null) ListTiecCuoi2.ToList().Clear();
-            ListTiecCuoi2 = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == idTiecCuoi));
-            DataProvider.Ins.DataBase.SaveChanges();
-            if (ListTiecCuoi2 == null || ListTiecCuoi2.Count() == 0) return;
-            if (ListTiecCuoi2 != null)
-            {
-                TenChuRe = ListTiecCuoi2.SingleOrDefault().TenChuRe;
-                TenCoDau = ListTiecCuoi2.SingleOrDefault().TenCoDau;
-                NgayDaiTiec = ListTiecCuoi2.SingleOrDefault().NgayDaiTiec; //Ngay thanh toan trung ngay dai tiec, qua han tinh phat (Neu co)
-                TienDatCoc = Convert.ToString(ListTiecCuoi2.SingleOrDefault().TienDatCoc);
-                NgayThanhToan = DateTime.Now;
-            }
+                if (ListPhieuDatDichVu == null || ListPhieuDatDichVu.Count() == 0) return;
 
-            if (ListPhieuDatBan != null) ListPhieuDatBan.ToList().Clear();
-            ListPhieuDatBan = new ObservableCollection<PHIEUDATBAN>(DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == idTiecCuoi));
-            DataProvider.Ins.DataBase.SaveChanges();
-            if (ListPhieuDatBan == null || ListPhieuDatBan.Count() == 0) return;
-            if (ListPhieuDatBan != null)
-            {
-                TongTienBan = ListPhieuDatBan.Sum(x => x.DonGiaBan);
-                DonGiaBan = ListPhieuDatBan.FirstOrDefault().DonGiaBan;
-                TongSoBan = ListPhieuDatBan.Sum(x => x.SoLuong) + ListPhieuDatBan.Sum(x => x.SoLuongDuTru);
-            }
+                if (ListPhieuDatDichVu != null)
+                {
+                    SoLuong = ListPhieuDatDichVu.FirstOrDefault().SoLuong;
+                    DonGia = ListPhieuDatDichVu.FirstOrDefault().ThanhTien;
+                    ThanhTien = SoLuong * DonGia;
+                    TongTienDichVu = ListPhieuDatDichVu.Sum(x => x.ThanhTien);
+                }
 
-            if (ListThamSo != null) ListThamSo.ToList().Clear();
-            ListThamSo = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOes.ToList());
-            DataProvider.Ins.DataBase.SaveChanges();
-            
-            if (ListThamSo == null || ListThamSo.Count() == 0) return;
-            if (ListThamSo != null)
-            {
-                IsPhat = (int)ListThamSo[0].GiaTri;
-                TiLePhat = ListThamSo[1].GiaTri;
+                if (ListTiecCuoi2 != null) ListTiecCuoi2.ToList().Clear();
+                ListTiecCuoi2 = new ObservableCollection<TIECCUOI>(DataProvider.Ins.DataBase.TIECCUOIs.Where(x => x.MaTiecCuoi == idTiecCuoi));
+                DataProvider.Ins.DataBase.SaveChanges();
+                if (ListTiecCuoi2 == null || ListTiecCuoi2.Count() == 0) return;
+                if (ListTiecCuoi2 != null)
+                {
+                    TenChuRe = ListTiecCuoi2.SingleOrDefault().TenChuRe;
+                    TenCoDau = ListTiecCuoi2.SingleOrDefault().TenCoDau;
+                    NgayDaiTiec = ListTiecCuoi2.SingleOrDefault().NgayDaiTiec; //Ngay thanh toan trung ngay dai tiec, qua han tinh phat (Neu co)
+                    TienDatCoc = Convert.ToString(ListTiecCuoi2.SingleOrDefault().TienDatCoc);
+                    NgayThanhToan = DateTime.Now;
+                    SoDienThoai = ListTiecCuoi2.Single().SoDienThoai;
+                }
+
+                if (ListPhieuDatBan != null) ListPhieuDatBan.ToList().Clear();
+                ListPhieuDatBan = new ObservableCollection<PHIEUDATBAN>(DataProvider.Ins.DataBase.PHIEUDATBANs.Where(x => x.MaTiecCuoi == idTiecCuoi));
+                DataProvider.Ins.DataBase.SaveChanges();
+                if (ListPhieuDatBan == null || ListPhieuDatBan.Count() == 0) return;
+                if (ListPhieuDatBan != null)
+                {
+                    TongTienBan = ListPhieuDatBan.Sum(x => x.DonGiaBan);
+                    DonGiaBan = ListPhieuDatBan.FirstOrDefault().DonGiaBan;
+                    TongSoBan = ListPhieuDatBan.Sum(x => x.SoLuong) + ListPhieuDatBan.Sum(x => x.SoLuongDuTru);
+                }
+
+                if (ListThamSo != null) ListThamSo.ToList().Clear();
+                ListThamSo = new ObservableCollection<THAMSO>(DataProvider.Ins.DataBase.THAMSOes.ToList());
+                DataProvider.Ins.DataBase.SaveChanges();
+
+                if (ListThamSo == null || ListThamSo.Count() == 0) return;
+                if (ListThamSo != null)
+                {
+                    IsPhat = (int)ListThamSo[0].GiaTri;
+                    TiLePhat = ListThamSo[1].GiaTri;
+                }
+                TongTienHoaDon = TongTienBan + TongTienDichVu;
+
+                NguoiLapHoaDon = LoginViewModel.TenNguoiDung;
             }
-            TongTienHoaDon = TongTienBan + TongTienDichVu;          
+            catch(Exception e)
+            {
+                MessageBox.Show("Lỗi truy xuất dữ liệu!\n" + e.ToString());
+            }
         }
 
         public int getMaTiecCuoi_HoaDon(DataGrid dataGrid)
@@ -439,71 +459,91 @@ namespace QuanLyTiecCuoi.ViewModel
 
         private void TinhLaiBaoCaoThang()
         {
-            var BaoCaoThang = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.Thang == NgayDaiTiec.Month && x.Nam == NgayDaiTiec.Year).ToList();
-            if (BaoCaoThang.Count() != 0)
+            try
             {
-                BaoCaoThang[0].TongDoanhThu += TongTienHoaDon;
-                DataProvider.Ins.DataBase.SaveChanges();
-            }
-            else
-            {
-                var item = new BAOCAOTHANG()
+                var BaoCaoThang = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.Thang == NgayDaiTiec.Month && x.Nam == NgayDaiTiec.Year).ToList();
+                if (BaoCaoThang.Count() != 0)
                 {
-                    Thang = NgayDaiTiec.Month,
-                    Nam = NgayDaiTiec.Year,
-                    TongDoanhThu = TongTienHoaDon
-                };
-                DataProvider.Ins.DataBase.BAOCAOTHANGs.Add(item);
-                DataProvider.Ins.DataBase.SaveChanges();
+                    BaoCaoThang[0].TongDoanhThu += TongTienHoaDon;
+                    DataProvider.Ins.DataBase.SaveChanges();
+                }
+                else
+                {
+                    var item = new BAOCAOTHANG()
+                    {
+                        Thang = NgayDaiTiec.Month,
+                        Nam = NgayDaiTiec.Year,
+                        TongDoanhThu = TongTienHoaDon
+                    };
+                    DataProvider.Ins.DataBase.BAOCAOTHANGs.Add(item);
+                    DataProvider.Ins.DataBase.SaveChanges();
+                }
+                baoCaoThangViewModel.List = new ObservableCollection<BAOCAOTHANG>();
+                baoCaoThangViewModel.List = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
             }
-            baoCaoThangViewModel.List = new ObservableCollection<BAOCAOTHANG>();
-            baoCaoThangViewModel.List = new ObservableCollection<BAOCAOTHANG>(DataProvider.Ins.DataBase.BAOCAOTHANGs);
+            catch(Exception e)
+            {
+                MessageBox.Show("Lỗi tính báo cáo tháng!\n" + e.ToString());
+            }
         }
 
         private void TinhLaiBaoCaoNgay()
         {
-            var BaoCaoThang = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.Thang == NgayDaiTiec.Month && x.Nam == NgayDaiTiec.Year).ToList();
-            if (BaoCaoThang.Count() != 0)
+            try
             {
-                int id = BaoCaoThang[0].MaBaoCaoThang;
-                var BaoCaoNgay = DataProvider.Ins.DataBase.BAOCAONGAYs.Where(x => x.MaBaoCaoThang == id && x.Ngay == NgayDaiTiec.Day).ToList();
-                if (BaoCaoNgay.Count() != 0)
+                var BaoCaoThang = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.Thang == NgayDaiTiec.Month && x.Nam == NgayDaiTiec.Year).ToList();
+                if (BaoCaoThang.Count() != 0)
                 {
-                    BaoCaoNgay[0].SoLuongTiecCuoi += 1;
-                    BaoCaoNgay[0].DoanhThu += TongTienHoaDon;
-                    BaoCaoNgay[0].TiLe = Convert.ToDouble(BaoCaoNgay[0].DoanhThu) / Convert.ToDouble(BaoCaoThang[0].TongDoanhThu);
+                    int id = BaoCaoThang[0].MaBaoCaoThang;
+                    var BaoCaoNgay = DataProvider.Ins.DataBase.BAOCAONGAYs.Where(x => x.MaBaoCaoThang == id && x.Ngay == NgayDaiTiec.Day).ToList();
+                    if (BaoCaoNgay.Count() != 0)
+                    {
+                        BaoCaoNgay[0].SoLuongTiecCuoi += 1;
+                        BaoCaoNgay[0].DoanhThu += TongTienHoaDon;
+                        BaoCaoNgay[0].TiLe = Convert.ToDouble(BaoCaoNgay[0].DoanhThu) / Convert.ToDouble(BaoCaoThang[0].TongDoanhThu);
+                    }
+                    else
+                    {
+                        DataProvider.Ins.DataBase.BAOCAONGAYs.Add(new BAOCAONGAY()
+                        {
+                            MaBaoCaoThang = id,
+                            Ngay = NgayDaiTiec.Day,
+                            SoLuongTiecCuoi = 1,
+                            DoanhThu = TongTienHoaDon,
+                            TiLe = 1
+                        });
+                        DataProvider.Ins.DataBase.SaveChanges();
+                    }
                 }
                 else
-                {
-                    DataProvider.Ins.DataBase.BAOCAONGAYs.Add(new BAOCAONGAY()
-                    {
-                        MaBaoCaoThang = id,
-                        Ngay = NgayDaiTiec.Day,
-                        SoLuongTiecCuoi = 1,
-                        DoanhThu = TongTienHoaDon,
-                        TiLe = 1
-                    });
-                    DataProvider.Ins.DataBase.SaveChanges();
-                }
+                    return;
             }
-            else
-                return;
-
+            catch(Exception e)
+            {
+                MessageBox.Show("Lỗi tính báo cáo ngày\n" + e.ToString());
+            }
         }
         private void UpdateTiLe()
         {
-            var BaoCaoThang = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.Thang == NgayDaiTiec.Month && x.Nam == NgayDaiTiec.Year).ToList();           
-            if (BaoCaoThang.Count() != 0)
+            try
             {
-                int id = BaoCaoThang[0].MaBaoCaoThang;
-                var TongTienThang = BaoCaoThang[0].TongDoanhThu;
-                var ListBaoCaoNgay = DataProvider.Ins.DataBase.BAOCAONGAYs.Where(x => x.MaBaoCaoThang == id).ToList();
-                foreach( var item in ListBaoCaoNgay)
+                var BaoCaoThang = DataProvider.Ins.DataBase.BAOCAOTHANGs.Where(x => x.Thang == NgayDaiTiec.Month && x.Nam == NgayDaiTiec.Year).ToList();
+                if (BaoCaoThang.Count() != 0)
                 {
-                    item.TiLe = Convert.ToDouble(item.DoanhThu) / Convert.ToDouble(TongTienThang);
+                    int id = BaoCaoThang[0].MaBaoCaoThang;
+                    var TongTienThang = BaoCaoThang[0].TongDoanhThu;
+                    var ListBaoCaoNgay = DataProvider.Ins.DataBase.BAOCAONGAYs.Where(x => x.MaBaoCaoThang == id).ToList();
+                    foreach (var item in ListBaoCaoNgay)
+                    {
+                        item.TiLe = Convert.ToDouble(item.DoanhThu) / Convert.ToDouble(TongTienThang);
 
-                    DataProvider.Ins.DataBase.SaveChanges();
-                }               
+                        DataProvider.Ins.DataBase.SaveChanges();
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Lỗi cập nhật tỷ lệ!\n" + e.ToString());
             }
         }
     }

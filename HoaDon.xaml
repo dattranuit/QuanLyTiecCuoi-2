@@ -99,7 +99,7 @@
                                         <Label Margin="27,0,0,0" FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Content="Ngày lập hóa đơn"/>
                                         <Label Margin="27,0,0,0" FontWeight="Bold" VerticalAlignment="Center" Grid.Row="2" Content="Người lập hóa đơn"/>
                                         <DatePicker Grid.Column="1" x:Name="DP_ngaylaphoadon" IsEnabled="{Binding IsEnable}" Text="{Binding NgayThanhToan, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="26" Grid.Row="1" Margin="0,7,10,7" BorderBrush="Black" BorderThickness="1"/>
-                                        <TextBox IsReadOnly="True"  Text="{Binding TongTienBan}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="0,7,10,7" Height="26" BorderBrush="Black" BorderThickness="1"/>
+                                        <TextBox IsReadOnly="True"  Text="{Binding NguoiLapHoaDon}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="0,7,10,7" Height="26" BorderBrush="Black" BorderThickness="1"/>
                                         <Button
                                         Width="140"
                                         IsEnabled="{Binding IsEnable}"
@@ -210,7 +210,7 @@
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
                                                     <DatePicker IsEnabled="True" x:Name="DP_NgayDaiTiec" Text="{Binding NgayDaiTiec, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Margin="2,4" BorderBrush="Black" BorderThickness="1"/>
-                                                    <TextBox IsReadOnly="True" VerticalAlignment="Center" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
+                                                    <TextBox  DataContext="{Binding ListTiecCuoi2}" Text="{Binding SoDienThoai, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" VerticalAlignment="Center" Grid.Row="1" Margin="2" BorderBrush="Black" BorderThickness="1"/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>

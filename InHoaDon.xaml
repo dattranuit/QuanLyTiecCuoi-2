@@ -32,32 +32,46 @@
                 <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Margin="20">
                     <Grid HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.1*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="0.9*"/>
+                            <ColumnDefinition Width="1.25*"/>
+                            <ColumnDefinition Width="0.9*"/>
+                            <ColumnDefinition Width="1.25*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Margin="10">
                             <TextBlock HorizontalAlignment="Left" Width="155" Text="Họ và tên chú rể:" FontSize="17" Margin="5"/>
                             <TextBlock HorizontalAlignment="Left" Width="155" Text="Họ và tên cô dâu:" FontSize="17" Margin="5"/>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Ngày đãi tiệc:" FontSize="17" Margin="5"/>
-                                
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Tiền cọc:" FontSize="17" Margin="5"/>
-                                
-                                
                             </StackPanel>
+                            
                         </StackPanel>
                         <StackPanel Grid.Column="1" Margin="10">
-                            <TextBlock DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenChuRe, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="150"  FontSize="17" Margin="5" FontWeight="DemiBold"/>
-                            <TextBlock HorizontalAlignment="Left" Width="150" DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenCoDau, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" FontSize="17" Margin="5" FontWeight="DemiBold"/>
+                            <TextBlock DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenChuRe, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}"  FontSize="17" Margin="5" FontWeight="DemiBold"/>
+                            <TextBlock   DataContext="{Binding ListTiecCuoi2}" Text="{Binding TenCoDau, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" FontSize="17" Margin="5" FontWeight="DemiBold"/>
                             <TextBlock DataContext="{Binding ListTiecCuoi2}" Text="{Binding NgayDaiTiec, StringFormat='dd/MM/yyyy', Mode=OneTime, UpdateSourceTrigger=PropertyChanged}" FontSize="17" Margin="5" FontWeight="DemiBold"/>
                             <TextBlock DataContext="{Binding ListTiecCuoi2}" x:Name="tblock_Tiencoc" Text="{Binding TienDatCoc}" FontSize="17" Margin="5" FontWeight="DemiBold"/>
                         </StackPanel>
-                       
+
+                        <StackPanel Grid.Column="2" Margin="10">
+                            <TextBlock HorizontalAlignment="Left" Width="155" Text="Số điện thoại:" FontSize="17" Margin="5"/>
+                            <TextBlock HorizontalAlignment="Left" Width="155" Text="" FontSize="17" Margin="5"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Người lập:" FontSize="17" Margin="5"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="" FontSize="17" Margin="5"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="3" Margin="10">
+                            <TextBlock  Text="{Binding SoDienThoai}"  FontSize="17" Margin="5" FontWeight="DemiBold"/>
+                            <TextBlock  Text="" FontSize="17" Margin="5" FontWeight="DemiBold"/>
+                            <TextBlock Text="{Binding NguoiLapHoaDon}" FontSize="17" Margin="5" FontWeight="DemiBold"/>
+                            <TextBlock   Text="" FontSize="17" Margin="5" FontWeight="DemiBold"/>
+                        </StackPanel>
                     </Grid>
-
-
                     <Rectangle Fill="Black" Height="1" Margin="5 2" Opacity="0.5"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -65,37 +79,41 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
-                            <DataGrid Margin="5" ItemsSource="{Binding ListPhieuDatDichVu}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Dịch vụ" FontSize="14" Binding="{Binding DICHVU.TenDichVu}"/>
-                                    <DataGridTextColumn Header="Số lượng" FontSize="14" Binding="{Binding SoLuong}">
+                            <GroupBox Height="300" Margin="10" Header="Danh sách dịch vụ">
+                                <DataGrid Margin="5" ItemsSource="{Binding ListPhieuDatDichVu}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Dịch vụ" FontSize="14" Binding="{Binding DICHVU.TenDichVu}"/>
+                                        <DataGridTextColumn Header="Số lượng" FontSize="14" Binding="{Binding SoLuong}">
 
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Đơn giá" FontSize="14" Binding="{Binding DICHVU.DonGia}">
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Đơn giá" FontSize="14" Binding="{Binding DICHVU.DonGia}">
 
-                                    </DataGridTextColumn>
+                                        </DataGridTextColumn>
 
-                                    <DataGridTextColumn Header="Thành tiền" FontSize="14" Width="*" Binding="{Binding ThanhTien}">
+                                        <DataGridTextColumn Header="Thành tiền" FontSize="14" Width="*" Binding="{Binding ThanhTien}">
 
-                                    </DataGridTextColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                                        </DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </GroupBox>
                         </Grid>
                         <Grid Grid.Column="1">
-                            <DataGrid Margin="5" ItemsSource="{Binding ListPhieuDatBan}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
-                                <DataGrid.Columns>
+                            <GroupBox Margin="10" Header="Danh sách bàn đặt">
+                                <DataGrid Margin="5" ItemsSource="{Binding ListPhieuDatBan}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="None" HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" Grid.ColumnSpan="3">
+                                    <DataGrid.Columns>
 
-                                    <DataGridTextColumn Header="Loại bàn" FontSize="14" Binding="{Binding LoaiBan}">
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Số lượng" FontSize="14" Binding="{Binding SoLuong}">
-                                    </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Loại bàn" FontSize="14" Binding="{Binding LoaiBan}">
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Số lượng" FontSize="14" Binding="{Binding SoLuong}">
+                                        </DataGridTextColumn>
 
-                                    <DataGridTextColumn Header="Số lượng trữ" FontSize="14"  Binding="{Binding SoLuongDuTru}">
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Đơn giá" FontSize="14" Width="*" Binding="{Binding DonGiaBan}">
-                                    </DataGridTextColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                                        <DataGridTextColumn Header="Số lượng trữ" FontSize="14"  Binding="{Binding SoLuongDuTru}">
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Đơn giá" FontSize="14" Width="*" Binding="{Binding DonGiaBan}">
+                                        </DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </GroupBox>
                         </Grid>
                     </Grid>
 
