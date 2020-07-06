@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyTiecCuoi.UserControls"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
+             Name="MonAnWd"
              DataContext="{StaticResource MonAnVM}"
              d:DesignHeight="622" d:DesignWidth="800">
     <Grid Margin="0" Background="White">
@@ -36,7 +38,7 @@
                                 <ColumnDefinition Width="0.1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <materialDesign:PackIcon Kind="Search" Width="32" Height="32" Margin="0,5,0,0"/>
+                            <Image  Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
 
                             <TextBox Grid.Column="1" x:Name="tb_TimKiemMonAn"
                             Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
@@ -127,14 +129,14 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Column="0" Grid.Row="0" Content="Tên Món Ăn" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="12" Grid.ColumnSpan="2" />
-                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="tbx_TenMonAn" Grid.Column="1" Grid.Row="0" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3"/>
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="tbx_TenMonAn" Grid.Column="1" Grid.Row="0" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding TenMonAn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" FontSize="15"  FontWeight="SemiBold"/>
                                 <Label Grid.Column="0" Grid.Row="1" Content="Mô tả" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="12" />
-                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="tbx_MoTa" Grid.Column="1" Grid.Row="1" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3"/>
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="tbx_MoTa" Grid.Column="1" Grid.Row="1" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" FontSize="15"  FontWeight="SemiBold"/>
                                 <Label Grid.Column="0" Grid.Row="3" Content="Ghi chú" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="12" />
-                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="tbx_GhiChu" Grid.Column="1" Grid.Row="3" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3"/>
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="tbx_GhiChu" Grid.Column="1" Grid.Row="3" BorderBrush="#FF636363" BorderThickness="1" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="3" FontSize="15"  FontWeight="SemiBold"/>
                                 <Label Grid.Column="0" Grid.Row="2" Content="Đơn giá" FontWeight="SemiBold" Height="29" Margin="0" VerticalAlignment="Center" FontSize="12" />
                                 <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="ct_DonGia" Grid.Row="2" Grid.Column="1" Margin="3" 
-                                                        BorderBrush="#FF636363" BorderThickness="1" TextAlignment="Left" Interval="100000" Minimum="0"
+                                                        BorderBrush="#FF636363" BorderThickness="1" TextAlignment="Left" Interval="100000" Minimum="0"  FontSize="15"  FontWeight="SemiBold"
                                                         Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" ValueChanged="Ct_DonGia_ValueChanged"/>
                                 <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
                                         x:Name="btn_LamMoi"

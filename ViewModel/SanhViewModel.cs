@@ -49,7 +49,6 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand EditLoaiSanhCommand { get; set; }
         public ICommand DeleteLoaiSanhCommand { get; set; }
         public ICommand RefreshLoaiSanhCommand { get; set; }
-
         private LOAISANH _SelectedLoaiSanh;
         public LOAISANH SelectedLoaiSanh { get => _SelectedLoaiSanh;set { _SelectedLoaiSanh = value ; OnPropertyChanged(); } }
 
@@ -119,7 +118,6 @@ namespace QuanLyTiecCuoi.ViewModel
                 DataProvider.Ins.DataBase.SANHs.Add(Sanh);
                 DataProvider.Ins.DataBase.SaveChanges();
                 ListSanh.Add(Sanh);
-                TiecViewModel.ListSanh.Add(Sanh);
                 SelectedItem = Sanh;
                 MessageBox.Show("Thêm Sảnh thành công !");
             });

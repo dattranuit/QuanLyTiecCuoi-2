@@ -65,8 +65,7 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand DeleteImageCommand { get; set; }
         public ICommand ClickCommand { get; set; }
         public ICommand RefreshCommand { get; set; }
-
-
+        
         public MonanViewModel()
         {
             IsReadOnly = !LoginViewModel.ThayDoiMonAn;

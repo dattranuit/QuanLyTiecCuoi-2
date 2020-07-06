@@ -5,8 +5,9 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             
-             xmlns:local="clr-namespace:QuanLyTiecCuoi.UserControls"
+             Name="DichVuWd"
+             xmlns:local="clr-namespace:QuanLyTiecCuoi.UserControls" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              DataContext="{StaticResource DichVuVM}"
              d:DesignHeight="662" d:DesignWidth="800">
@@ -127,10 +128,10 @@
                                 <Label Content="Mô tả" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"></Label>
                                 <Label Content="Đơn giá" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"></Label>
                                 <Label Content="Ghi chú" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="SemiBold"></Label>
-                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_TenDichVu" Text="{Binding TenDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Margin="3" Grid.Row="0" FontSize="15"></TextBox>
-                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_MoTa" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1"  Grid.Column="1" Grid.Row="1" Margin="3" FontSize="15"></TextBox>
-                                <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="nud_DonGia" Minimum="0" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" TextAlignment="Left" Margin="3" FontSize="15" BorderBrush="Black" Interval="100000" Grid.Column="1" Grid.Row="2" ValueChanged="Nud_DonGia_ValueChanged"></controls:NumericUpDown>
-                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_GhiChu" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="3" Margin="3" FontSize="15"></TextBox>
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_TenDichVu" Text="{Binding TenDichVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Margin="3" Grid.Row="0" FontSize="15" FontWeight="SemiBold"></TextBox>
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_MoTa" Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1"  Grid.Column="1" Grid.Row="1" Margin="3" FontSize="15" FontWeight="SemiBold"></TextBox>
+                                <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="nud_DonGia" Minimum="0" Value="{Binding DonGia, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NumericInputMode="Numbers" TextAlignment="Left" Margin="3" FontSize="15" BorderBrush="Black" Interval="100000" Grid.Column="1" Grid.Row="2" ValueChanged="Nud_DonGia_ValueChanged" FontWeight="SemiBold"></controls:NumericUpDown>
+                                <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="txb_GhiChu" Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="3" Margin="3" FontSize="15" FontWeight="SemiBold"></TextBox>
                                 <Button Grid.Row="4" Grid.ColumnSpan="2"
                                         x:Name="btn_Refresh"
                                         IsEnabled="{Binding IsEnable}"
