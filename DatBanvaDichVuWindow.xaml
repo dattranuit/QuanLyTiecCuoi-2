@@ -12,19 +12,19 @@
         <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
             <controls:MetroTabItem Header="Thông tin đặt bàn">
                 <Grid DataContext="{StaticResource PhieuDatBanVM}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Loaded">
-                            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
                     <DockPanel LastChildFill="True">
                         <TextBlock Text="Phiếu Đặt Bàn" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
                                    Margin="0,5,0,0" FontWeight="SemiBold"
                                    DockPanel.Dock="Top"/>
                         <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Center">
-                            <Label Content="Đơn giá bàn tối thiểu" Foreground="Crimson"/>
+                            <Label Content="Đơn giá bàn tối thiểu:" Foreground="Crimson"/>
                             <Label BorderThickness="0" FontSize="15" Foreground="Crimson" VerticalAlignment="Center" Content="{Binding DonGiaBanToiThieu}"/>
+                            <Label Margin="30,0,0,0" Content="Số lượng bàn tối đa:" Foreground="Crimson"/>
+                            <Label BorderThickness="0" FontSize="15" Foreground="Crimson" VerticalAlignment="Center" Content="{Binding SoLuongBanToiDa}"/>
+                            <Label Margin="30,0,0,0" Content="Tổng số bàn:" FontSize="15" FontWeight="SemiBold" Foreground="Crimson" VerticalAlignment="Center"/>
+                            <Label FontSize="15" Foreground="Crimson" VerticalAlignment="Center"
+                                               Content="{Binding TongSoLuongBan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                         </DockPanel>
                         <Grid DockPanel.Dock="Bottom">
                             <Grid.ColumnDefinitions>
@@ -87,9 +87,11 @@
                                                             Value="{Binding SoLuong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                     <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="nbr_PDB_SoLuongDuTru" Grid.Row="2" Grid.Column="1" Margin="2,2,0,2" BorderBrush="Black" BorderThickness="1" TextAlignment="Left"
                                                             Value="{Binding SoLuongDuTru, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                                    <TextBox ToolTip="Đơn giá bàn sẽ được cập nhật sau khi đặt bàn và dịch vụ" 
-                                             x:Name="tbx_PDB_DonGiaBan" Grid.Row="0" Grid.Column="3" Margin="2" BorderBrush="Black" BorderThickness="0" TextAlignment="Left" IsReadOnly="True"
-                                                            Text="{Binding DonGiaBan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <Label Grid.Row="0" Grid.Column="3" ToolTip="Đơn giá bàn sẽ được cập nhật sau khi đặt bàn và dịch vụ" 
+                                            Margin="2" BorderBrush="Black" BorderThickness="0"
+                                            Name="lbl_DonGiaBan"
+                                            Content="{Binding DonGiaBan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        
                                     <TextBox IsReadOnly="{Binding IsReadOnly}" x:Name="tbx_PDB_GhiChu" Grid.Row="1" Grid.Column="3" Margin="2" BorderBrush="Black" BorderThickness="1"
                                              Text="{Binding GhiChu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                     <Button
@@ -115,7 +117,7 @@
                                             <ColumnDefinition Width="10*"/>
                                             <ColumnDefinition Width="160*"/>
                                         </Grid.ColumnDefinitions>
-                                        <materialDesign:PackIcon Kind="Search" Width="32" Height="32" Margin="5,5,0,0"/>
+                                        <Image  Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
                                         <TextBox Grid.Column="1" x:Name="tb_TimKiemLoaiBan"
                                                     Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
                                                     controls:TextBoxHelper.Watermark="Tìm kiếm Loại Bàn"
@@ -144,11 +146,6 @@
                 </Grid>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Thông tin đặt dịch vụ" DataContext="{StaticResource PhieuDatDichVuVM}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Loaded">
-                        <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
                 <DockPanel LastChildFill="True">
                     <TextBlock Text="Phiếu Đặt Dịch Vụ" HorizontalAlignment="Center"
                                    VerticalAlignment="Top" FontSize="32" Foreground="#FF0E2291"
@@ -172,8 +169,8 @@
                                                 <ColumnDefinition Width="10*"/>
                                                 <ColumnDefinition Width="160*"/>
                                             </Grid.ColumnDefinitions>
-                                            <materialDesign:PackIcon Kind="Search" Width="32" Height="32" Margin="5,5,0,0"/>
-                                            <TextBox Grid.Column="1" x:Name="tb_TimKiemDichVu"
+                                            <Image  Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
+                                            <TextBox DataContext="{StaticResource PhieuDatDichVuVM}" Grid.Column="1" x:Name="tb_TimKiemDichVu"
                                                     Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"
                                                     controls:TextBoxHelper.Watermark="Tìm kiếm Dịch Vụ"
                                                     BorderThickness="0,0,0,1"

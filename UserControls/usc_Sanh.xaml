@@ -5,8 +5,10 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:QuanLyTiecCuoi.UserControls"
+             xmlns:local="clr-namespace:QuanLyTiecCuoi.UserControls" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
+             Name="SanhWd"
              DataContext="{StaticResource SanhVM}"
              d:DesignHeight="662" d:DesignWidth="800">
     <Grid Background="White">
@@ -25,22 +27,24 @@
                         </Grid>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="353*" />
-                                <RowDefinition Height="239*"/>
+                                <RowDefinition />
+                                <RowDefinition Height="239"/>
                             </Grid.RowDefinitions>
                             <materialDesign:Card Margin="10,0,10,0" DockPanel.Dock="Top" Grid.Row="0">
                                 <DockPanel LastChildFill="True">
                                     <Grid DockPanel.Dock="Top" Margin="10,10,0,0">
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40"></ColumnDefinition>
                                             <ColumnDefinition/>
                                             <ColumnDefinition Width="0.5*"/>
                                         </Grid.ColumnDefinitions>
+                                        <Image Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
                                         <TextBox x:Name="tbx_TimKiemSanh" DockPanel.Dock="Top"
                                          Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                          controls:TextBoxHelper.Watermark="Tìm kiếm tên Sảnh"
                                          BorderThickness="0,0,0,1" Height="32"
                                          BorderBrush="Black"
-                                         FontSize="15" Grid.Column="0"
+                                         FontSize="15" Grid.Column="1"
                                          VerticalAlignment="Center">
                                         </TextBox>
                                     </Grid>
@@ -116,7 +120,7 @@
                                                                 <RowDefinition/>
                                                             </Grid.RowDefinitions>
                                                             <controls:NumericUpDown IsReadOnly="{Binding IsReadOnly}" x:Name="nud_SLBTD" Minimum="0" NumericInputMode="Numbers" Value="{Binding SoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Margin="6,15,4,15" BorderBrush="Black" Interval="100" FontSize="15" TextAlignment="Left" ValueChanged="Nud_SLBTD_ValueChanged"></controls:NumericUpDown>
-                                                            <ComboBox IsReadOnly="{Binding IsReadOnly}" x:Name="cbb_MaSanh" SelectedItem="{Binding SelectedLoaiSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            <ComboBox IsEnabled="{Binding IsEnable}" x:Name="cbb_MaSanh" SelectedItem="{Binding SelectedLoaiSanh,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                                   ItemsSource="{Binding ListLoaiSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" DisplayMemberPath="TenLoaiSanh"
                                                                   Text="{Binding SelectedItem.LOAISANH.TenLoaiSanh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
                                                                   BorderBrush="Black" BorderThickness="1" Margin="6,15,4,15" Grid.Row="0"></ComboBox>
@@ -169,8 +173,12 @@
                         <TextBlock Text="Quản lý Loại Sảnh" Foreground="#FF0E2291" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" DockPanel.Dock="Top"/>
 
                         <materialDesign:Card Margin="10" DockPanel.Dock="Bottom" Height="165">
-                            <DockPanel >
-                                <Grid DockPanel.Dock="Top">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="103*"/>
+                                    <RowDefinition Height="62*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
                                     <GroupBox Header="Thông Tin Loại Sảnh" Margin="10,10,10,10" DockPanel.Dock="Top" Height="80">
                                         <Grid Margin="0,0,0,0">
                                             <Grid.ColumnDefinitions>
@@ -197,7 +205,7 @@
                                         </Grid>
                                     </GroupBox>
                                 </Grid>
-                                <Grid Margin="0,0,0,0" >
+                                <Grid Margin="0,0,0,0" Grid.Row="1" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
@@ -229,22 +237,25 @@
                                         Làm mới ô nhập
                                     </Button>
                                 </Grid>
-                            </DockPanel>
+                            </Grid>
+
                         </materialDesign:Card>
-                        
+
                         <materialDesign:Card Margin="10" DockPanel.Dock="Top">
                             <DockPanel>
                                 <Grid DockPanel.Dock="Top" Margin="10,10,0,0">
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"></ColumnDefinition>
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="0.5*"/>
                                     </Grid.ColumnDefinitions>
+                                    <Image  Margin="0,5,0,0" Width="32" Height="32" Source="/QuanLyTiecCuoi;component/photos/search_32px.png"/>
                                     <TextBox x:Name="tbx_TimKiemLoaiSanh" DockPanel.Dock="Top"
                                          Text="{Binding FilterStringLoaiSanh, UpdateSourceTrigger=PropertyChanged}"
                                          controls:TextBoxHelper.Watermark="Tìm kiếm tên Loại Sảnh"
                                          BorderThickness="0,0,0,1" Height="32"
                                          BorderBrush="Black"
-                                         FontSize="15" Grid.Column="0"
+                                         FontSize="15" Grid.Column="1"
                                          VerticalAlignment="Center" Margin="0"/>
                                 </Grid>
                                 <GroupBox Header="Danh sách loại Sảnh" Margin="10,0,10,10">

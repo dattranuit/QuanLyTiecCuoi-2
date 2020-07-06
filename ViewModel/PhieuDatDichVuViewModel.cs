@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Data.Entity.Migrations.Model;
 using Microsoft.Office.Interop.Excel;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace QuanLyTiecCuoi.ViewModel
 {
@@ -103,7 +105,6 @@ namespace QuanLyTiecCuoi.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        public ICommand LoadedWindowCommand { get; set; }
         public PhieuDatDichVuViewModel()
         {
             IsReadOnly = !LoginViewModel.ThayDoiTiec;
@@ -115,6 +116,10 @@ namespace QuanLyTiecCuoi.ViewModel
             }
             ListDichVu = new ObservableCollection<DICHVU>(DataProvider.Ins.DataBase.DICHVUs);
             ListPhieuDatDichVu = new ObservableCollection<PHIEUDATDICHVU>(DataProvider.Ins.DataBase.PHIEUDATDICHVUs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi));
+
+            DataGridCollection = CollectionViewSource.GetDefaultView(ListDichVu);
+            DataGridCollection.Filter = new Predicate<object>(Filter);
+
             AddCommand = new RelayCommand<object>((p) =>
             {
                 if (SelectedDV == null)
@@ -196,23 +201,44 @@ namespace QuanLyTiecCuoi.ViewModel
                 }
                 //refresh nhap
             });
-            LoadedWindowCommand = new RelayCommand<object>((p) =>
+        }
+        //search
+        private ICollectionView _dataGridCollection;
+        private string _filterString;
+        public ICollectionView DataGridCollection
+        {
+            get { return _dataGridCollection; }
+            set { _dataGridCollection = value; OnPropertyChanged("DataGridCollection"); }
+        }
+        public string FilterString
+        {
+            get { return _filterString; }
+            set
             {
-                return true;
-            }, (p) =>
+                _filterString = value;
+                OnPropertyChanged("FilterString");
+                FilterCollection();
+            }
+        }
+        private void FilterCollection()
+        {
+            if (_dataGridCollection != null)
             {
-                IsReadOnly = !LoginViewModel.ThayDoiTiec;
-                if (IsReadOnly == false)
+                _dataGridCollection.Refresh();
+            }
+        }
+        public bool Filter(object obj)
+        {
+            var data = obj as DICHVU;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(_filterString))
                 {
-                    int temp = DataProvider.Ins.DataBase.HOADONs.Where(x => x.MaTiecCuoi == CurrentMaTiecCuoi).Count();
-                    if (temp > 0)
-                        IsReadOnly = true;
+                    return data.TenDichVu.ToLower().Contains(_filterString.ToLower());
                 }
-                SelectedDV = null;
-                SelectedPDDV = null;
-                DV_SoLuong = 0;
-                PDDV_GhiChu = DV_GhiChu = String.Empty;
-            });
+                return true;
+            }
+            return false;
         }
     }
 }
