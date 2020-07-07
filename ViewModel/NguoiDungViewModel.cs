@@ -82,6 +82,12 @@ namespace QuanLyTiecCuoi.ViewModel
             ListNhomNguoiDung = new ObservableCollection<NHOMNGUOIDUNG>(DataProvider.Ins.DataBase.NHOMNGUOIDUNGs);
             AddCommand = new RelayCommand<object>((p) => Addable(), (p) =>
             {
+                int check = DataProvider.Ins.DataBase.NGUOIDUNGs.Where(x => x.Username == Username).Count();
+                if(check > 0)
+                {
+                    MessageBox.Show("Tên đăng nhập đã tồn tại");
+                    return;
+                }
                 var NguoiDung = new NGUOIDUNG()
                 {
                     Username = Username,

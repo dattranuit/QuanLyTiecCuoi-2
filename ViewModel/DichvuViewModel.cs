@@ -178,7 +178,7 @@ namespace QuanLyTiecCuoi.ViewModel
             ChonAnhCommmand = new RelayCommand<Image>((p) => { return true; }, (p) =>
             {
                 OpenFileDialog open = new OpenFileDialog();
-                open.Filter = "Image Files(.jpg; *.png)|.jpg; *.png";
+                open.Filter = "Image Files(*.jpg; *.png)|*.jpg; *.png";
                 if (open.ShowDialog() == true)
                 {
                     HinhAnh = open.FileName;

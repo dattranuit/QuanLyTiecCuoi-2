@@ -175,7 +175,7 @@ namespace QuanLyTiecCuoi.ViewModel
             }, (p) =>
             {
                 OpenFileDialog open = new OpenFileDialog();
-                open.Filter = "Image Files(.jpg; *.png)|.jpg; *.png";
+                open.Filter = "Image Files(*.jpg; *.png)|*.jpg; *.png";
                 if (open.ShowDialog() == true)
                 {
                     HinhAnh = open.FileName;

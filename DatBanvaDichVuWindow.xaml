@@ -44,6 +44,8 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Grid.Column="1" Margin="10" Width="175"
                                 Command="{Binding AddCommand}"
+                                ToolTipService.ShowOnDisabled="True"
+                                ToolTip="Nếu Tiệc đã được lập hoá hoá đơn sẽ không nhấn được"
                                 Background="#FF0F5699" Foreground="White">
                                 Thêm Phiếu Đặt Bàn
                             </Button>
@@ -52,6 +54,8 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Grid.Column="3" Margin="10" Width="175"
                                 Command="{Binding DeleteCommand}"
+                                ToolTipService.ShowOnDisabled="True"
+                                ToolTip="Nếu Tiệc đã được lập hoá hoá đơn sẽ không nhấn được"
                                 Background="Crimson" Foreground="White">
                                 Xóa Phiếu Đặt Bàn
                             </Button>
@@ -60,6 +64,8 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Grid.Column="2" Margin="10" Width="175"
                                 Command="{Binding EditCommand}"
+                                ToolTipService.ShowOnDisabled="True"
+                                ToolTip="Nếu Tiệc đã được lập hoá hoá đơn sẽ không nhấn được"
                                 Background="Green" Foreground="White">
                                 Sửa Phiếu Đặt Bàn
                             </Button>
@@ -104,7 +110,8 @@
                                         Command="{Binding CT_PhieuDatBanCommand}"
                                         Style="{StaticResource MaterialDesignRaisedButton}"                      
                                         Grid.Column="3" Margin="2" Grid.Row="2"
-                                        ToolTip="Hiện chi tiết đặt món ăn" Background="Crimson" Foreground="White">
+                                        ToolTipService.ShowOnDisabled="True"
+                                        ToolTip="Hiện chi tiết đặt món ăn&#x0a;Phiếu đặt bàn phải tồn tại trong danh sách đặt bàn" Background="Crimson" Foreground="White">
                                         Mở Chi tiết Phiếu đặt bàn
                                     </Button>
                                 </Grid>
@@ -223,7 +230,7 @@
                                                 <ColumnDefinition Width="0.7*"/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
-                                            <Grid Margin="10,20,10,0" DataContext="{StaticResource PhieuDatDichVuVM}">
+                                            <Grid Margin="10,10,10,0" DataContext="{StaticResource PhieuDatDichVuVM}">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition/>
                                                     <RowDefinition/>
@@ -238,7 +245,7 @@
                                                 <Label Grid.Row="3" Margin="0,2,0,2" Content="Thành tiền" FontWeight="SemiBold"/>
                                                 <Label Grid.Row="4" Margin="0,2,0,2" Content="Ghi chú" FontWeight="SemiBold"/>
                                             </Grid>
-                                            <Grid Grid.Column="1" Margin="10,20,10,0" DataContext="{StaticResource PhieuDatDichVuVM}">
+                                            <Grid Grid.Column="1" Margin="10,10,10,0" DataContext="{StaticResource PhieuDatDichVuVM}">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition/>
                                                     <RowDefinition/>
@@ -256,7 +263,7 @@
                                                          IsEnabled="{Binding IsEnable}"
                                                          Style="{StaticResource MaterialDesignRaisedButton}" Margin="0"
                                                          Command="{Binding AddCommand}"
-                                                         ToolTip="Đặt dịch vụ cho tiệc cưới" Background="#FF0F5699" Foreground="White">
+                                                         ToolTip="Đặt dịch vụ cho tiệc cưới&#x0a;Nếu dịch vụ đã được đặt sẽ không nhấn được" Background="#FF0F5699" Foreground="White">
                                                          Đặt dịch vụ
                                                 </Button>
                                             </Grid>

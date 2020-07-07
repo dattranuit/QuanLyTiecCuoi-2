@@ -160,7 +160,7 @@ namespace QuanLyTiecCuoi.ViewModel
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null || String.IsNullOrEmpty(TenSanh) || String.IsNullOrEmpty(TenLoaiSanh) || SoLuongBanToiDa == 0)
+                if (SelectedItem == null || String.IsNullOrEmpty(TenSanh) || SelectedLoaiSanh == null || SoLuongBanToiDa == 0)
                     return false;
                 var displayList = DataProvider.Ins.DataBase.SANHs.Where(x => x.MaSanh == SelectedItem.MaSanh);
                 if (displayList == null && displayList.Count() == 0)

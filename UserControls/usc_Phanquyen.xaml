@@ -48,12 +48,14 @@
                             <DockPanel Grid.Column="1" LastChildFill="False" VerticalAlignment="Center">
                                 <Button Margin="4,15" DockPanel.Dock="Top" Foreground="White" Background="Green"
                                         Command="{Binding AddCommand}"
+                                        ToolTip="Thêm chức năng cho phân quyền"
                                         IsEnabled="{Binding IsEnabled}"
                                         Style="{StaticResource MaterialDesignRaisedButton}">
                                     <materialDesign:PackIcon Kind="ChevronDoubleRight" Height="24"/>
                                 </Button>
                                 <Button Margin="4,15" DockPanel.Dock="Bottom" Foreground="White" Background="Crimson"
                                         Command="{Binding DeleteCommand}"
+                                        ToolTip="Xóa chức năng của phân quyền"
                                         IsEnabled="{Binding IsEnabled}"
                                         Style="{StaticResource MaterialDesignRaisedButton}">
                                     <materialDesign:PackIcon Kind="ChevronDoubleLeft" Height="24"/>

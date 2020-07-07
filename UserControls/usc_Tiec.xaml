@@ -25,6 +25,7 @@
                     Style="{StaticResource MaterialDesignRaisedButton}"                      
                     Grid.Column="0" Margin="10"
                     Command="{Binding ClearCommand}"
+                    ToolTipService.ShowOnDisabled="True"
                     ToolTip="Làm mới vùng nhập" Background="#FF0F5699" Foreground="White">
                     Làm mới
                 </Button>
@@ -33,7 +34,8 @@
                     Command="{Binding AddCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Grid.Column="1" Margin="10"
-                    ToolTip="Thêm tiệc cưới" Background="#FF0F5699" Foreground="White">
+                    ToolTipService.ShowOnDisabled="True"
+                    ToolTip="Thêm tiệc cưới&#x0a;Nếu không tồn tại sảnh phù hợp sẽ không nhấn được" Background="#FF0F5699" Foreground="White">
                     Thêm tiệc cưới 
                 </Button>
                 <Button
@@ -41,11 +43,13 @@
                     Command="{Binding EditCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Grid.Column="2" Margin="10" 
-                    ToolTip="Sửa thông tin đặt Tiệc" Background="Green" Foreground="White">
+                    ToolTipService.ShowOnDisabled="True"
+                    ToolTip="Sửa thông tin đặt Tiệc&#x0a;Nếu Tiệc đã được lập hóa đơn sẽ không sửa được" Background="Green" Foreground="White">
                     Sửa tiệc cưới
                 </Button>
                 <Button
                     IsEnabled="{Binding IsEnable}"
+                    ToolTipService.ShowOnDisabled="True"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Grid.Column="3" Margin="10"
                     Command="{Binding DeleteCommand}"

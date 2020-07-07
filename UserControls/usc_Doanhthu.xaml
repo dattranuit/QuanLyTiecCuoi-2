@@ -78,7 +78,7 @@
                                                                                 Margin="0,2,2,2"
                                                                                 Content="Xuất Excel"
                                                                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                                                                ToolTip="Xuất ra file excel" HorizontalAlignment="Right" Width="100">
+                                                                                ToolTip="Xuất ra file excel" HorizontalAlignment="Center" Width="100">
                                                                             </Button>
                                                                         </DockPanel>
                                                                     </materialDesign:PopupBox>
