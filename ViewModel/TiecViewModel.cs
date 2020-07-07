@@ -63,8 +63,9 @@ namespace QuanLyTiecCuoi.ViewModel
                     TenChuRe = SelectedTiecCuoi.TenChuRe;
                     TenCoDau = SelectedTiecCuoi.TenCoDau;
                     SoDienThoai = SelectedTiecCuoi.SoDienThoai;
-                    NgayDatTiec = SelectedTiecCuoi.NgayDatTiec;
+                    NgayDatTiec = DateTime.MinValue;
                     NgayDaiTiec = SelectedTiecCuoi.NgayDaiTiec;
+                    NgayDatTiec = SelectedTiecCuoi.NgayDatTiec;
                     TienDatCoc = SelectedTiecCuoi.TienDatCoc;
                     GhiChu = SelectedTiecCuoi.GhiChu;
                     MaSanh = SelectedTiecCuoi.MaSanh;

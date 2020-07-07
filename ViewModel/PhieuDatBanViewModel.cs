@@ -124,7 +124,8 @@ namespace QuanLyTiecCuoi.ViewModel
                     {
                         MessageBox.Show("Tổng số lượng bàn lớn hơn số lượng bàn tối đa", "Thông báo");
                         return;
-                    }    
+                    }
+                    DonGiaBan = DonGiaBanToiThieu;
                     var PhieuDatBan = new PHIEUDATBAN()
                     {
                         MaTiecCuoi = CurrentMaTiecCuoi,

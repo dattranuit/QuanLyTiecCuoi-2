@@ -114,7 +114,8 @@ namespace QuanLyTiecCuoi.ViewModel
                 if (SelectedItem.TenMonAn == TenMonAn &&
                 SelectedItem.MoTa == MoTa &&
                 SelectedItem.GhiChu == GhiChu &&
-                SelectedItem.HinhAnh == HinhAnh)
+                SelectedItem.HinhAnh == HinhAnh
+                && SelectedItem.DonGia == DonGia)
                     return false;
                 return true;
             }, (p) =>
